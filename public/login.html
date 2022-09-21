@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>MoniToll - Bem-Vindo!</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <link rel="stylesheet" href="Login_v2/css/main.css"> 
+
+
+  <!-- =======================================================
+  * Template Name: MoniToll - v1.1.0
+  * Template URL: https://bootstrapmade.com/MoniToll-bootstrap-construction-website-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header2" class="header d-flex align-items-center">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1>MoniToll<span>.</span></h1>
+      </a>
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="cadastro.html">Cadastro</a></li>
+          <li><a href="login.html" class="active">Login</a></li>
+          <li><a href="contato.html">contato</a></li>
+        </ul>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- <main id="main"> -->
+   <!-- ======= Breadcrumbs ======= -->
+    <!-- <div class="breadcrumbs d-flex align-items-center" style="background-image: url('assets/img/breadcrumbs-bg.jpg');">
+      <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+
+        <h2>Services</h2>
+        <ol>
+          <li><a href="index.html">Início</a></li>
+          <li>Services</li>
+        </ol>
+
+      </div>
+    </div> -->
+    <!-- End Breadcrumbs -->
+  
+    <!-- ======= Services Section ======= -->
+  
+    
+
+    <div class="limiter">
+      <div class="container-login100">
+        <div class="wrap-login100">
+          <div class="login100-form validate-form">
+            <span class="login100-form-title p-b-26">
+              Bem-Vindo
+            </span>
+            <!-- <span class="login100-form-title p-b-48">
+              <i class="zmdi zmdi-font"> </i>
+            </span> -->
+             
+            <select id="perfil" class="perfil_login">
+              <option value="1">Administrador</option>
+              <option value="2">Usuario</option>
+              <option value="3">Desenvolvedor</option>
+            </select>
+
+            <div class="wrap-input100 validate-input">
+              <input class="input100"  id="email_input" type="text" name="email">
+              <span class="focus-input100"  data-placeholder="Email"></span>
+            </div>
+  
+            <div class="wrap-input100 validate-input">
+              <span class="btn-show-pass">
+                <i class="zmdi zmdi-eye"></i>
+              </span>
+              <input class="input100" id="senha_input" type="password" name="pass">
+              <span class="focus-input100"  data-placeholder="Senha"></span>
+            </div>
+  
+            <div class="container-login100-form-btn">
+              <div class="wrap-login100-form-btn">
+                <div class="login100-form-bgbtn"></div>
+                <button class="login100-form-btn" onclick="login()">
+                  Login
+                </button>
+              </div>
+            </div>
+  
+            <div class="text-center p-t-115">
+              <span class="txt1">
+                Não tem uma conta?
+              </span>
+  
+              <a class="txt2" href="cadastro.html">
+                Cadastre-se aqui!
+              </a>
+            </div>
+        </div>
+      </div>
+    </div>  
+
+
+     <div class="modal-containerL" id="modal_container">
+      <div class="modalL">
+          <h2 id="titulo_m"></h2>
+          <p id="p_msg"></p>
+      </div>
+      <button class="button1L" id="close">X</button>
+    </div> 
+    
+     <!--===============================================================================================-->
+ <script src="Cadastro/vendor/jquery/jquery-3.2.1.min.js"></script>
+ <!--===============================================================================================-->
+   <script src="Cadastro/vendor/animsition/js/animsition.min.js"></script>
+ <!--===============================================================================================-->
+   <script src="Cadastro/vendor/bootstrap/js/popper.js"></script>
+   <script src="Cadastro/vendor/bootstrap/js/bootstrap.min.js"></script>
+ <!--===============================================================================================-->
+   <script src="Cadastro/vendor/select2/select2.min.js"></script>
+ <!--===============================================================================================-->
+   <script src="Cadastro/vendor/daterangepicker/moment.min.js"></script>
+   <script src="Cadastro/vendor/daterangepicker/daterangepicker.js"></script>
+ <!--===============================================================================================-->
+   <script src="Cadastro/vendor/countdowntime/countdowntime.js"></script>
+ <!--===============================================================================================-->
+   <script src="Cadastro/js/main.js"></script>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <!-- <script src="assets/vendor/php-email-form/validate.js"></script> -->
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <script src="js/funcoes.js"></script>
+
+</body>
+
+</html>
+
+<script>  
+  
+
+   function login(){ 
+
+    const open = document.getElementById('open');
+    const modal_container = document.getElementById('modal_container');
+    const close = document.getElementById('close');
+
+    var emailVar = document.getElementById("email_input").value;
+    var senhaVar = document.getElementById("senha_input").value;
+    var perfilVar = Number(perfil.value);
+    
+    if(perfilVar == 1){
+            if (emailVar == "" || senhaVar == "") {
+            titulo_m.innerHTML = `<br>Preencha todos os campos para prosseguir.`
+            p_msg.innerHTML = ``
+
+
+            modal_container.classList.add('show');
+
+
+            close.addEventListener('click', () => {
+                modal_container.classList.remove('show');
+            });
+        }
+        else {
+            titulo_m.innerHTML = `<br>Login realizado com sucesso!`
+            p_msg.innerHTML = ``
+
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar,
+                fkPerfilServer: perfilVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.idUsuario;
+                    sessionStorage.fk_Perfil = json.fkPerfil;
+
+                    setTimeout(function () {
+                        window.location = "now-ui-dashboard-master/examples/dashboard.html"
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+
+
+            } else {
+                titulo_m.innerHTML = `<br>Login realizado com sucesso!`
+
+                modal_container.classList.add('show');
+
+
+                close.addEventListener('click', () => {
+                    modal_container.classList.remove('show');
+                });
+
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+        }
+
+    if(perfilVar == 3){
+      if(emailVar == "" || senhaVar == ""){
+
+        titulo_m.innerHTML = "Para prosseguir preencha todos os campos."
+        
+        modal_container.classList.add('show');
+
+
+        close.addEventListener('click', () => {
+            modal_container.classList.remove('show');
+        });
+      }
+
+    }else{ 
+      titulo_m.innerHTML = "Login realizado com sucesso!"
+
+      modal_container.classList.add('show');
+
+
+      close.addEventListener('click', () => {
+          modal_container.classList.remove('show');
+      });
+      
+    }
+    
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+        console.log("FORM PERFIL:", perfilVar);
+
+        fetch("/usuarios/autenticar",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              
+                emailServer: emailVar,
+                senhaServer: senhaVar,
+                fkPerfilServer: perfilVar
+
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.idUsuario;
+                    sessionStorage.fk_Perfil = json.fkPerfil;
+
+                    setTimeout(function () {
+                        window.location = "/telaDev.html"
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }    
+
+
+
+
+
+
+</script>

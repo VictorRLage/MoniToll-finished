@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>MoniToll - Bem-Vindo!</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="Cadastro/css/main.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: MoniToll - v1.1.0
+  * Template URL: https://bootstrapmade.com/MoniToll-bootstrap-construction-website-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header2" class="header d-flex align-items-center">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1>MoniToll<span>.</span></h1>
+      </a>
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="login.html">Sair</a></li>
+        </ul>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login100">
+        <div class="login100-form validate-form">
+          <span class="login100-form-title p-b-26">
+            Cadastrar Pedágio
+          </span>
+          <div class="wrap-input100 validate-input">
+            <input class="input100" type="number" id="idP_input" name="idP_input">
+            <span class="focus-input100" data-placeholder="ID do Pedágio"></span>
+          </div>
+
+          <div class="wrap-input100 validate-input">
+            <input class="input100" type="text" id="nomeP_input" name="nomeP_input">
+            <span class="focus-input100" data-placeholder="Nome do Pedágio"></span>
+          </div>
+
+          <div class="wrap-input100 validate-input">
+            <input class="input100" type="text" id="localP_input" name="localP_input">
+            <span class="focus-input100" data-placeholder="Localização do Pedágio"></span>
+          </div>
+
+          <div class="container-login100-form-btn">
+            <div class="wrap-login100-form-btn">
+              <div class="login100-form-bgbtn"></div>
+              <button class="login100-form-btn" onclick="cadastrarP()">
+                Cadastrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-containerL" id="modal_container">
+    <div class="modalL">
+      <h2 id="titulo_m"></h2>
+      <p id="p_msg"></p>
+    </div>
+    <button class="button1L" id="close">X</button>
+  </div>
+
+  <div class="modal-containerL2" id="modal_container2">
+    <div class="modalL2">
+      <button class="button2L" id="close2">X</button>
+      <h2 id="titulo_m2"></h2>
+      <p id="p_msg2"></p>
+      <br>
+      <div style="margin-top: 60px;" class="wrap-input100 validate-input">
+        <input class="input100" type="number" id="idA_input" name="idA_input">
+        <span class="focus-input100" data-placeholder="ID do Administrador"></span>
+        <br>
+      </div>
+      <div style="margin-top: 20px;" class="container-login100-form-btn">
+        <div class="wrap-login100-form-btn">
+          <div class="login100-form-bgbtn"></div>
+          <button class="login100-form-btn" onclick="atualizar()">
+            Atualizar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-containerL3" id="modal_container3">
+      <div class="modalL3">
+        <h2 id="titulo_m3"></h2>
+        <p id="p_msg3"></p>
+      </div>
+      <button class="button1L3" id="close3">X</button>
+    </div>
+</body>
+
+<!--===============================================================================================-->
+<script src="Cadastro/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="Cadastro/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+<script src="Cadastro/vendor/bootstrap/js/popper.js"></script>
+<script src="Cadastro/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="Cadastro/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="Cadastro/vendor/daterangepicker/moment.min.js"></script>
+<script src="Cadastro/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+<script src="Cadastro/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+<script src="Cadastro/js/main.js"></script>
+
+<!-- Vendor JS Files -->
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<!-- <script src="assets/vendor/php-email-form/validate.js"></script> -->
+
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
+<script src="js/funcoes.js"></script>
+
+<script>
+  function cadastrarP() {
+
+    const open = document.getElementById('open');
+    const modal_container = document.getElementById('modal_container');
+    const close = document.getElementById('close');
+    const close2 = document.getElementById('close2');
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var idPVar = document.getElementById('idP_input').value;
+    var nomePVar = document.getElementById('nomeP_input').value;
+    var localPVar = document.getElementById('localP_input').value;
+
+    if (idPVar == "" || nomePVar == "" || localPVar == "") {
+      titulo_m.innerHTML = `Preencha todos os campos para prosseguir.`
+
+      modal_container.classList.add('show');
+
+
+      close.addEventListener('click', () => {
+        modal_container.classList.remove('show');
+      });
+      return
+    }
+
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrarP", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        idPServer: idPVar,
+        nomePServer: nomePVar,
+        localPServer: localPVar
+      })
+    }).then(function () {
+
+      titulo_m2.innerHTML = `Cadastro realizado com sucesso! <br>`
+      p_msg2.innerHTML = `<br> Por favor atualize a permissão do usuário:`
+
+
+      modal_container2.classList.add('show');
+
+
+      close2.addEventListener('click', () => {
+        modal_container2.classList.remove('show');
+      });
+    })
+      .catch(function (errinho) {
+        console.error(errinho)
+      })
+
+    console.log()
+  }
+
+  function atualizar() {
+    const open = document.getElementById('open');
+    const modal_container = document.getElementById('modal_container');
+    const close = document.getElementById('close2');
+
+    var idPVar = document.getElementById('idP_input').value;
+    var idAVar = document.getElementById('idA_input').value;
+
+    fetch("/usuarios/atualizar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        idPServer: idPVar,
+        idAServer: idAVar
+      })
+    }).then(function () {
+
+      titulo_m3.innerHTML = `Permissão atualizada com sucesso! <br>`
+
+      modal_container3.classList.add('show');
+
+
+      close3.addEventListener('click', () => {
+        modal_container3.classList.remove('show');
+      });
+    })
+      .catch(function (errinho) {
+        console.error(errinho)
+      })
+
+    console.log()
+  }
+
+</script>
