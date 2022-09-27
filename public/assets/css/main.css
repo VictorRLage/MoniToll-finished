@@ -252,7 +252,7 @@ section {
   }
 }
 
-/* Login */ 
+/* Login */
 #header2 {
   z-index: 997;
   position: absolute;
@@ -602,11 +602,13 @@ section {
   content: "";
   position: absolute;
   display: block;
-  width: 60px;
+  width: 560px;
   height: 4px;
   background: var(--color-primary);
   left: 0;
   bottom: 0;
+  right: 0;
+  margin: auto;
 }
 
 .get-started .content p {
@@ -836,6 +838,7 @@ section {
 .services .service-item:hover h3 {
   border-color: var(--color-primary);
 }
+
 /*--------------------------------------------------------------
 # Features Section
 --------------------------------------------------------------*/
@@ -1125,7 +1128,7 @@ section {
 # Sobre Section
 --------------------------------------------------------------*/
 .Sobre h2 {
-  font-size: 48px;
+  font-size: 28px;
   font-weight: 700;
   font-family: var(--font-secondary);
   margin: 30px 0;
@@ -1143,9 +1146,14 @@ section {
   background-color: #f5f6f7;
 }
 
+.Sobre .esquerda {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
 @media (min-width: 991px) {
   .Sobre .our-story {
-    padding-right: 35%;
+    padding-right: 21%;
   }
 }
 
@@ -1202,18 +1210,38 @@ section {
 }
 
 .Sobre .Sobre-img {
-  min-height: 600px;
-  background-size: cover;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 570px;
+  width: 660px;
+  background-size: contain;
   background-position: center;
 }
 
-@media (min-width: 992px) {
+@media (max-width: 1200px) {
   .Sobre .Sobre-img {
-    position: absolute;
-    top: 0;
-    right: 0;
+    top: 60px;
+    left: 400px;
   }
 }
+
+
+@media (max-width: 992px) {
+  .Sobre .Sobre-img {
+    top: 0;
+    left: 0;
+    position: relative;
+  }
+}
+
+@media (max-width: 767px) {
+  .Sobre .Sobre-img {
+    height: 400px;
+    width: 400px;
+  }
+}
+
 
 /*--------------------------------------------------------------
 # Stats Counter Section
@@ -1623,25 +1651,28 @@ section {
   background: #fff;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.08);
   padding: 30px;
-} 
-.text_contate{
+}
+
+.text_contate {
   text-align: center;
   font-weight: 700;
   font-size: 24px;
   color: #6c757d;
 }
-.text_btn{
+
+.text_btn {
   color: white;
   text-decoration: none;
 }
-.text_btn:hover{
+
+.text_btn:hover {
   color: white;
   text-decoration: none;
   transition: 1s;
 }
 
-.text_p{
-  text-align:center;
+.text_p {
+  text-align: center;
   margin-top: 20px;
 }
 
@@ -1994,5 +2025,58 @@ section {
 }
 
 .footer .footer-legal .credits a {
+  color: var(--color-primary);
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ============================== NEW ============================== */
+.table2x3{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  justify-items: center;
+  margin-top: 3rem;
+}
+.recursos h1:after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--color-primary);
+  left: 0;
+  right: 0;
+  margin-left: 95px;
+}
+.recursos>p{
+  text-align: start;
+}
+
+.indexTexto{
+  padding: 40px;
+  background-color: #f5f6f7;
+}
+.indexImg{
+  width: 400px;
+  height: 400px;
+  background-size: cover;
+}
+.indexTexto ul {
+  list-style: none;
+  padding: 0;
+  font-size: 15px;
+}
+.indexTexto ul i {
+  font-size: 20px;
+  margin-right: 4px;
   color: var(--color-primary);
 }
