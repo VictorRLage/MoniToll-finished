@@ -1,0 +1,159 @@
+Passo a Passo de integração site/pipefy ao estourar alerta (em Python)
+-- -- --
+
+1º Passo: Instale o Requests no CMD (ou qualquer outro Shell)
+
+Abra o shell de sua preferencia (ou nao na vdd, vai pelo CMD pq esse eu garanto que vai funcionar), e execute o seguinte comando:
+
+python -m pip install requests
+
+Esse install vai ser necessário no futuro, quando estivermos na criação do script.
+-- -- --
+2º Passo: Criar um token
+
+O token será necessário para o Python fazer a ligação com o seu Pipefy, então, faça o seguinte:
+
+https://app.pipefy.com/tokens -- Entre nesse link, e clique em "Gerar um novo Token"
+
+Na descrição do token, de um nome qualquer (No meu, eu coloquei "CriarCard", pois é o proposito que ele foi criado)
+Em voce vai receber um "Valor do Token", que é uma sequência IMENSA de caracteres. GUARDE BEM ESSE CÓDIGO, ELE É SUPER IMPORTANTE.
+
+-- -- --
+
+3º Passo: Verificar seu Formulário no Pipefy
+
+Caso você não tenha, crie um pipe separado, especifico apenas para alertas da api (Então voce no fim terá 2 pipes, 1 para alertas do site, e outro para que o usuário tire outras dúvidas gerais)
+
+Depois de criar o pipe, vá no formulário, e faça questão de todos os campos serem de TEXTO(Eu não testei com outras categorias que tem lá, então evite usar Check Box ou outros que não sejam de digitar)
+
+-- -- -- 
+
+4º Passo: Criar o Script
+
+É o seguinte:
+
+<--------->
+import requests
+
+
+url = "https://api.pipefy.com/graphql"
+
+
+payload = {"query": "mutation{createCard(input:{ pipe_id: \"302621694\" fields_attributes:[{field_id: \"nome_da_empresa\", field_value: \"Brandão Pedágios\"}{field_id: \"descri_o_do_alerta\", field_value: \"Alerta Identificado na CPU da Torre 1!\"}{field_id: \"m_tricas\", field_value: \"Alerta - 85%\"}{field_id: \"mais_detalhes_sobre_o_alerta\", field_value: \"O Alerta foi emitido por conta de alto uso da CPU!\"}]}){clientMutationId card {id title}}}"}
+headers = {
+    "Authorization": "Bearer X",
+    "Content-Type": "application/json"
+}
+
+response = requests.request("POST", url, json=payload, headers=headers)
+
+print(response.text)
+
+<--------->
+ - O "url" é onde ele vai "executar" o código que você escreveu, é um local especifico do pipefy, onde ele faz diversas validações, que eu entrarei em detalhes em breve.
+
+ - O "payload" é de forma resumida, o que o codigo vai escrever na parte principal daquela URL. 
+ - O "pipe_id" pode ser obtido na tela de Kanban do seu pipe, lá na URL (https://app.pipefy.com/pipes/309625624) <--- esse ultimo número
+ - O "field_attributes" são basicamentes os atributos dos campos do seu pipe, que você configurará da seguinte forma:
+ 
+  o "field_id" é o mais complicado, pois você precisa acessar   diretamente o site deles e testar um outro trecho de código para   descobrir o ID dos campos do seu Kanban
+
+Você vai entrar nesse site:
+
+https://developers.pipefy.com/graphql
+
+Vão ter 3 blocos, um principal, um escrito "VARIABLES" e"HEADERS" e outro "RESPONSE". o principal é onde você vai inserir o seguinte código (como padrão, o principal vem com chaves, apenas apague elas e copie o código a seguir):
+
+<------->
+
+{
+  pipe(id: ID_DO_SEU_PIPE) {
+    start_form_fields {
+      id
+      label
+    }
+    phases {
+      name
+      fields {
+        id
+        label
+      }
+    }
+  }
+  cards(pipe_id: "")
+}
+
+<-------> 
+
+NÃO EXECUTE AINDA
+A seguir, clique no "HEADERS" e cole o seguinte código:
+
+<-------> 
+{
+    "accept": "application/json",
+    "content-type": "application/json",
+    "authorization": "Bearer X"
+}
+
+<-------> 
+
+o X no "authorization" é o Token, que você criou no 2º Passo. 
+
+Agora sim, execute o script no "Try It!" e no bloco "RESPONSE" aparecerá os dados que você precisa. (VOCÊ SO VAI PRECISAR DA PRIMEIRA PARTE, O RESTO NÃO IMPORTA MUITO)
+
+<-------> 
+
+{
+  "data": {
+    "pipe": {
+      "start_form_fields": [
+        {
+          "id": "nome_da_empresa",
+          "label": "Nome da Empresa"
+        },
+        {
+          "id": "descri_o_do_alerta",
+          "label": "Alerta"
+        },
+        {
+          "id": "m_tricas",
+          "label": "Metrica"
+        },
+        {
+          "id": "mais_detalhes_sobre_o_alerta",
+          "label": "Mais Detalhes"
+        }
+      ],
+
+<-------> 
+
+Deste JSON, pegue apenas o id de cada um dos campos, e substitua no código do python.
+
+  - O "field_value" é o que vai aparecer quando o Card for criado, então apenas chumbe uma resposta de acordo com os campos que você criou.
+
+VOLTANDO AO CÓDIGO DO PYTHON ---- 
+ - O "headers" ficou bem auto-explicativo depois dos últimos passos. Resumidamente, ele faz e aprova a conexão com o token do seu kanban e o tudo q você fez. 
+
+headers = {
+    "Authorization": "Bearer X",
+    "Content-Type": "application/json"
+}
+
+Apenas substitua o X pelo seu Token e deve ficar tranquilo pra continuar.
+
+ - Pra finalizar, esse "response" serve apenas pra garantir que o script foi executado com sucesso, e retorna uma mensagem na IDLE do python por exemplo
+Se tudo correu bem, você deve receber uma mensagem como essa:
+
+{"data":{"createCard":{"clientMutationId":null,"card":{"id":"582860180","title":"Brandão Pedágios"}}}}
+
+(ESSE É MEU EXEMPLO, VAI MUDAR DE ACORDO COM O QUE VOCES COLOCAREM AI)
+
+-- -- -- 
+
+Por enquanto é isso, o próximo passo é fazer o backend do seu site chamar o script em python quando um alerta for emitido.
+
+Tem bastante espaço para melhorias, como selecionar qual componente e qual máquina que fez o alerta acontecer, mas ja é um começo.
+
+
+
+
