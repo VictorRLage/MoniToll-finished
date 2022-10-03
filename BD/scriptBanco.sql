@@ -43,7 +43,7 @@ diskPercent decimal(5,2),
 diskEmUsoGB decimal (5,2),
 dataHora datetime, 
 fkMaquina int,
-foreign key (fkMaquina) references maquina (idMaquina)
+foreign key (fkMaquina) references Maquina (idMaquina)
 );
 
 insert into Perfil values (1, "Usuario"),
