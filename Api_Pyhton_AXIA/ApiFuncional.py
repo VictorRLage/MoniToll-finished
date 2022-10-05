@@ -29,10 +29,10 @@ while True:
         
 
         config = {
-            'user': 'root',
-            'password': 'Urubu100',
+            'user': 'Grupo7',
+            'password': 'Grupo7',
             'host': 'localhost',
-            'database': 'Argos',
+            'database': 'MoniToll',
             'raise_on_warnings': True
         }
 
