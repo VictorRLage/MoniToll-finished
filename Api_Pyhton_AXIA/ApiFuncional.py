@@ -47,8 +47,8 @@ while True:
             print("Conectado ao banco de dados:", linha)
         
         cursor = cnx.cursor()
-        sql = ("INSERT INTO Leitura (DataHora, PorcentCPU, QtdProcesadores, RamTotal, RamUsada, PorcentUsoRam, DiscoRTotal, UsoDiscoR, LivreDiscoR, PercentDiscoR, PacotesEnv, PacotesRec,  PorcentPerd, fkTorre) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)")
-        values = (datahora, PorcentCPU, QtdProcesadores, RamTotal, RamUso, PorcentUsoRam, DiscoRTotal, UsoDiscoR, LivreDiscoR, PorcentDiscoR, PacotesEnv, PacotesRec,  PorcPctperdidos, 1)
+        sql = ("INSERT INTO Leituraa (DataHora, PorcentCPU, QtdProcesadores, RamTotal, RamUsada, PorcentUsoRam, DiscoRTotal, UsoDiscoR, LivreDiscoR, PercentDiscoR, PacotesEnv, PacotesRec,  PorcentPerd) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)")
+        values = (datahora, PorcentCPU, QtdProcesadores, RamTotal, RamUso, PorcentUsoRam, DiscoRTotal, UsoDiscoR, LivreDiscoR, PorcentDiscoR, PacotesEnv, PacotesRec,  PorcPctperdidos)
 
 
         try:
