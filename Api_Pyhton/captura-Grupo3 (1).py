@@ -11,7 +11,7 @@ while True:
 
     try:
         db_connection = mysql.connector.connect(
-            host='localhost', user='root', password='siqueira300', database='MoniToll')
+            host='localhost', user='root', password='rootroot', database='apiCp')
         print("Conectei no banco!")
     except mysql.connector.Error as error:
         if error.errno == errorcode.ER_BAD_DB_ERROR:
