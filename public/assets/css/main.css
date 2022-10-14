@@ -1647,10 +1647,15 @@ section {
 }
 
 .contato .back {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   width: 100%;
   background: #fff;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.08);
   padding: 30px;
+  flex-direction: column;
+  align-content: space-around;
 }
 
 .text_contate {
