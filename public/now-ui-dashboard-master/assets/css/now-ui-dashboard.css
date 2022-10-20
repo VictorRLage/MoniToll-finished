@@ -2499,7 +2499,7 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
 }
 
 .navbar.navbar-transparent {
-  background-color: transparent !important;
+  background: linear-gradient(to right, #414141 0%, #666666 60%, #868686 100%) !important;
   box-shadow: none;
   color: #FFFFFF;
 }
