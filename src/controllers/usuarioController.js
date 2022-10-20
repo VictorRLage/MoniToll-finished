@@ -22,22 +22,19 @@ function listar(req, res) {
                 res.status(500).json(erro.sqlMessage);
             }
             );
-        }
+}
         
-        function entrar(req, res) {
+function entrar(req, res) {
             var email = req.body.emailServer;
             var senha = req.body.senhaServer;
-            var fkPerfil = req.body.fkPerfilServer
             
             if(email == undefined) {
                 res.status(400).send("Seu email está undefined!");
             } else if (senha == undefined) {
                 res.status(400).send("Sua senha está indefinida!");
-            }else if (fkPerfil == undefined) {
-                res.status(400).send("Seu perfil está indefinido!");
             } else {
                 
-        usuarioModel.entrar(email, senha, fkPerfil)
+        usuarioModel.entrar(email, senha)
             .then(
                 function (resultado) {
                     console.log(`\nResultados encontrados: ${resultado.length}`);
@@ -66,7 +63,7 @@ function listar(req, res) {
 function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nome = req.body.nomeServer;
-    var cnpj = req.body.cnpjServer;
+    var cpf = req.body.cpfServer;
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
     var perfil = req.body.fkPerfilServer;
@@ -74,10 +71,10 @@ function cadastrar(req, res) {
     // Faça as validações dos valores
     if (nome == undefined) {
         res.status(400).send("Seu nome está undefined!");
-    } else if (cnpj == undefined) {
-        res.status(400).send("Seu email está undefined!");
+    } else if (cpf == undefined) {
+        res.status(400).send("Seu cpf está undefined!");
     } else if (email == undefined) {
-        res.status(400).send("Sua senha está undefined!");
+        res.status(400).send("Sua email está undefined!");
     } else if (senha == undefined) {
         res.status(400).send("Seu senha está undefined!");
     } else if (perfil == undefined) {
@@ -85,7 +82,7 @@ function cadastrar(req, res) {
     } else {
         
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, cnpj, email, senha, perfil)
+        usuarioModel.cadastrar(nome, cpf, email, senha, perfil)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -103,23 +100,29 @@ function cadastrar(req, res) {
     }
 }
 
-function cadastrarP(req, res) {
+function cadastrarEmp(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
-    var idP = req.body.idPServer;
-    var nomeP = req.body.nomePServer;
-    var localP = req.body.localPServer;
+    var idEmp = req.body.idEmpServer;
+    var nomeEmp = req.body.nomeEmpServer;
+    var plano = req.body.planoServer;
+    var cnpjEmp = req.body.cnpjEmpServer;
+    var emailEmp = req.body.emailEmpServer;
 
     // Faça as validações dos valores
-    if (idP == undefined) {
-        res.status(400).send("Seu idP está undefined!");
-    } else if (nomeP == undefined) {
-        res.status(400).send("Seu nomeP está undefined!");
-    } else if (localP == undefined) {
-        res.status(400).send("Seu localP está undefined!");
-    } else {
+    if (idEmp == undefined) {
+        res.status(400).send("Seu idEmp está undefined!");
+    } else if (nomeEmp == undefined) {
+        res.status(400).send("Seu nomeEmp está undefined!");
+    }else if (plano == undefined) {
+        res.status(400).send("Seu plano está undefined!");
+    }else if (cnpjEmp == undefined) {
+        res.status(400).send("Seu cnpjEmp está undefined!");
+    }else if (emailEmp == undefined) {
+        res.status(400).send("Seu emailEmp está undefined!");
+    }else {
         
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrarP(idP, nomeP, localP)
+        usuarioModel.cadastrarEmp(idEmp, nomeEmp, plano, cnpjEmp, emailEmp)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -137,20 +140,20 @@ function cadastrarP(req, res) {
     }
 }
 
-function atualizar(req, res) {
+function atualizarAdm(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
-    var idP = req.body.idPServer;
-    var idA = req.body.idAServer;
+    var idEmp = req.body.idEmpServer;
+    var EmailAdm = req.body.EmailAdmServer;
 
     // Faça as validações dos valores
-    if (idP == undefined) {
-        res.status(400).send("Seu idP está undefined!");
-    } else if (idA == undefined) {
-        res.status(400).send("Seu idA está undefined!");
+    if (idEmp == undefined) {
+        res.status(400).send("Seu idEmp está undefined!");
+    } else if (EmailAdm == undefined) {
+        res.status(400).send("Seu EmailAdm está undefined!");
     } else {
         
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.atualizar(idP, idA)
+        usuarioModel.atualizarAdm(idEmp, EmailAdm)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -166,6 +169,36 @@ function atualizar(req, res) {
                 }
             );
     }
+}
+function verificarTorres(req, res) {
+    var fkEmpresa = req.body.fkEmpresaServer;
+    
+    if(fkEmpresa == undefined) {
+        res.status(400).send("Seu email está undefined!");
+    }else {
+        
+usuarioModel.verificarTorres(fkEmpresa)
+    .then(
+        function (resultado) {
+            console.log(`\nResultados encontrados: ${resultado.length}`);
+            console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
+
+            if (resultado.length != 0) {
+                console.log(resultado);
+                res.json(resultado);
+            } else if (resultado.length == 0) {
+                res.status(403).send("Não tem torre");
+            }
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+
 }
 
 module.exports = {
@@ -173,6 +206,7 @@ module.exports = {
     cadastrar,
     listar,
     testar,
-    cadastrarP,
-    atualizar
+    cadastrarEmp,
+    atualizarAdm,
+    verificarTorres
 }

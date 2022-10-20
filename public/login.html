@@ -99,12 +99,6 @@
               <i class="zmdi zmdi-font"> </i>
             </span> -->
 
-          <select id="perfil" class="perfil_login">
-            <option value="1">Administrador</option>
-            <option value="2">Usuario</option>
-            <option value="3">Desenvolvedor</option>
-          </select>
-
           <div class="wrap-input100 validate-input">
             <input class="input100" id="email_input" type="text" name="email">
             <span class="focus-input100" data-placeholder="Email"></span>
@@ -126,7 +120,7 @@
               </button>
             </div>
           </div>
-
+          <br>
           <div class="text-center p-t-115">
             <span class="txt1">
               Não tem uma conta?
@@ -143,7 +137,7 @@
 
     <div class="modal-containerL" id="modal_container">
       <div class="modalL">
-        <h2 id="titulo_m"></h2>
+        <h3 id="titulo_m"></h3>
         <p id="p_msg"></p>
       </div>
       <button class="button1L" id="close">X</button>
@@ -201,20 +195,16 @@
 
 
   function login() {
-
     const open = document.getElementById('open');
     const modal_container = document.getElementById('modal_container');
     const close = document.getElementById('close');
 
-    var emailVar = document.getElementById("email_input").value;
-    var senhaVar = document.getElementById("senha_input").value;
-    var perfilVar = Number(perfil.value);
+    var emailVar = email_input.value;
+    var senhaVar = senha_input.value;
 
-    if (perfilVar == 1) {
-      if (emailVar == "" || senhaVar == "") {
-        titulo_m.innerHTML = `<br>Preencha todos os campos para prosseguir.`
+    if (emailVar == "" || senhaVar == "") {
+        titulo_m.innerHTML = `Preencha todos os campos para prosseguir.`
         p_msg.innerHTML = ``
-
 
         modal_container.classList.add('show');
 
@@ -224,11 +214,6 @@
         });
       }
       else {
-        titulo_m.innerHTML = `<br>Login realizado com sucesso!`
-        p_msg.innerHTML = ``
-
-      }
-
       console.log("FORM LOGIN: ", emailVar);
       console.log("FORM SENHA: ", senhaVar);
 
@@ -240,7 +225,6 @@
         body: JSON.stringify({
           emailServer: emailVar,
           senhaServer: senhaVar,
-          fkPerfilServer: perfilVar
         })
       }).then(function (resposta) {
         console.log("ESTOU NO THEN DO entrar()!")
@@ -252,115 +236,84 @@
             console.log(json);
             console.log(JSON.stringify(json));
 
-            sessionStorage.EMAIL_USUARIO = json.email;
-            sessionStorage.NOME_USUARIO = json.nome;
+            sessionStorage.EMAIL_USUARIO = json.Email;
+            sessionStorage.NOME_USUARIO = json.Nome;
             sessionStorage.ID_USUARIO = json.idUsuario;
-            sessionStorage.fk_Perfil = json.fkPerfil;
+            sessionStorage.FK_PERFIL = json.fkPerfil;
+            sessionStorage.FK_EMPRESA = json.fkEmpresa;            
 
-            setTimeout(function () {
-              window.location = "now-ui-dashboard-master/examples/dashboard.html"
+            titulo_m.innerHTML = `Login realizado com sucesso!`
+
+            modal_container.classList.add('show');
+
+
+            close.addEventListener('click', () => {
+            modal_container.classList.remove('show');
+            });
+
+            if(sessionStorage.FK_PERFIL == 1){
+              setTimeout(function () {
+              window.location = "telaDev.html"
             }, 1000); // apenas para exibir o loading
+            }
+            else if(sessionStorage.FK_EMPRESA == 'null'){
+              setTimeout(function () {
+              window.location = "index.html"
+            }, 1000); // apenas para exibir o loading
+            }
+            else if(sessionStorage.FK_PERFIL == 3 || sessionStorage.FK_PERFIL == 2){
+              fetch("/usuarios/verificarTorres", {
+              method: "POST",
+              headers: {
+              "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                fkEmpresaServer: sessionStorage.FK_EMPRESA,
+              })
+              }).then(function (resposta) {
+                console.log("ESTOU NO THEN DO entrar()!")
+
+                if (resposta.ok) {
+                  console.log(resposta);
+
+                  resposta.json().then(json => {
+                  console.log(json);
+                  console.log(JSON.stringify(json));
+
+
+                  setTimeout(function () {
+                  window.location = "now-ui-dashboard-master/examples/dashboard.html"
+                  }, 1000); // apenas para exibir o loading
+
+                  });
+                }else{
+                  setTimeout(function () {
+                  window.location = "plano.html"
+                  }, 1000); // apenas para exibir o loading
+                }
+            }).catch(function (erro) {
+              console.log("ERRO: "+erro);
+            })
+            }
 
           });
-
-
-
-        } else {
-          titulo_m.innerHTML = `<br>Login realizado com sucesso!`
+        }else{
+          titulo_m.innerHTML = `Falha ao realizar login!<br><br>Por favor verifique o Email e senha.`
 
           modal_container.classList.add('show');
 
 
           close.addEventListener('click', () => {
-            modal_container.classList.remove('show');
+          modal_container.classList.remove('show');
           });
-
         }
 
       }).catch(function (erro) {
-        console.log(erro);
+        console.log("ERRO: "+erro);
       })
 
       return false;
-    }
-
-    if (perfilVar == 3) {
-      if (emailVar == "" || senhaVar == "") {
-
-        titulo_m.innerHTML = "Para prosseguir preencha todos os campos."
-
-        modal_container.classList.add('show');
-
-
-        close.addEventListener('click', () => {
-          modal_container.classList.remove('show');
-        });
-      }
-
-    } else {
-      titulo_m.innerHTML = "Login realizado com sucesso!"
-
-      modal_container.classList.add('show');
-
-
-      close.addEventListener('click', () => {
-        modal_container.classList.remove('show');
-      });
-
-    }
-
-
-    console.log("FORM LOGIN: ", emailVar);
-    console.log("FORM SENHA: ", senhaVar);
-    console.log("FORM PERFIL:", perfilVar);
-
-    fetch("/usuarios/autenticar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-
-        emailServer: emailVar,
-        senhaServer: senhaVar,
-        fkPerfilServer: perfilVar
-
-      })
-    }).then(function (resposta) {
-      console.log("ESTOU NO THEN DO entrar()!")
-
-      if (resposta.ok) {
-        console.log(resposta);
-
-        resposta.json().then(json => {
-          console.log(json);
-          console.log(JSON.stringify(json));
-
-          sessionStorage.EMAIL_USUARIO = json.email;
-          sessionStorage.NOME_USUARIO = json.nome;
-          sessionStorage.ID_USUARIO = json.idUsuario;
-          sessionStorage.fk_Perfil = json.fkPerfil;
-
-          setTimeout(function () {
-            window.location = "/telaDev.html"
-          }, 1000); // apenas para exibir o loading
-
-        });
-
-      } else {
-
-        console.log("Houve um erro ao tentar realizar o login!");
-
-        resposta.text().then(texto => {
-          console.error(texto);
-        });
-      }
-
-    }).catch(function (erro) {
-      console.log(erro);
-    })
-
-    return false;
+  }
   }
 
 

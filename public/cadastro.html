@@ -81,8 +81,8 @@
           </div>
 
           <div class="wrap-input100 validate-input">
-            <input class="input100" maxlength="14" id="cnpj_input" name="cnpj_input">
-            <span class="focus-input100" data-placeholder="CNPJ"></span>
+            <input class="input100" maxlength="14" id="cpf_input" name="cpf_input">
+            <span class="focus-input100" data-placeholder="CPF"></span>
           </div>
 
           <div class="wrap-input100 validate-input">
@@ -179,15 +179,15 @@
     const modal_container = document.getElementById('modal_container');
     const close = document.getElementById('close');
 
-    var nomeVar = document.getElementById('nome_input').value;
-    var cnpjVar = document.getElementById('cnpj_input').value;
-    var emailVar = document.getElementById('email_input').value;
-    var senhaVar = document.getElementById('senha_input').value;
+    var nomeVar = nome_input.value;
+    var cpfVar = cpf_input.value;
+    var emailVar = email_input.value;
+    var senhaVar = senha_input.value;
     var length = senhaVar.length
-    var lengthCnjp = cnpjVar.length
-    var perfilVar = 1
+    var lengthCpf = cpfVar.length
+    var perfilVar = 3
 
-    if (nomeVar == "" || cnpjVar == "" || emailVar == "" || senhaVar == "") {
+    if (nomeVar == "" || cpfVar == "" || emailVar == "" || senhaVar == "") {
 
       titulo_m.innerHTML = ("Preencha todos os campos para prosseguir")
 
@@ -196,54 +196,31 @@
       close.addEventListener('click', () => {
         modal_container.classList.remove('show');
       });
-      return false
-    } else {
-      titulo_m.innerHTML = ("Cadastro realizado com sucesso. Bem-vindo")
+      return
+    }
+
+    if (lengthCpf < 11) {
+      titulo_m.innerHTML = ("Atenção! O CPF deve conter 11 dígitos.")
+
       modal_container.classList.add('show');
 
       close.addEventListener('click', () => {
         modal_container.classList.remove('show');
       });
-
+      return
     }
 
     if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1) {
 
-      titulo_m.innerHTML = ("E-mail inválido. Verifique e tente novamente.")
+    titulo_m.innerHTML = ("E-mail inválido. Verifique e tente novamente.")
 
-      modal_container.classList.add('show');
+    modal_container.classList.add('show');
 
-      close.addEventListener('click', () => {
-        modal_container.classList.remove('show');
-      });
-      return false
-    }
-
-    if (lengthCnjp < 14) {
-      titulo_m.innerHTML = ("Atenção! O CNPJ deve conter 14 dígitos.")
-
-      modal_container.classList.add('show');
-
-      close.addEventListener('click', () => {
-        modal_container.classList.remove('show');
-      });
-      return false
-    }
-
-
-    if (length > 15) {
-
-      titulo_m.innerHTML = ("Atenção! A senha deve conter 15 caracteres.")
-
-      modal_container.classList.add('show');
-
-      close.addEventListener('click', () => {
-        modal_container.classList.remove('show');
-      });
-      return false
-
-    }
-
+    close.addEventListener('click', () => {
+      modal_container.classList.remove('show');
+    });
+    return
+   }
 
     fetch("/usuarios/cadastrar", {
       method: "POST",
@@ -254,7 +231,7 @@
         // crie um atributo que recebe o valor recuperado aqui
         // Agora vá para o arquivo routes/usuario.js
         nomeServer: nomeVar,
-        cnpjServer: cnpjVar,
+        cpfServer: cpfVar,
         emailServer: emailVar,
         senhaServer: senhaVar,
         fkPerfilServer: perfilVar
@@ -265,8 +242,16 @@
 
       if (resposta.ok) {
         setTimeout(() => {
+
+          titulo_m.innerHTML = ("Cadastro realizado com sucesso. Bem-vindo")
+          modal_container.classList.add('show');
+
+          close.addEventListener('click', () => {
+          modal_container.classList.remove('show');
+          });
+
           window.location = "../login.html";
-        }, "1000")
+        }, 3000)
 
         // limparFormulario();
         // finalizarAguardar();

@@ -16,16 +16,20 @@ router.post("/cadastrar", function (req, res) {
     usuarioController.cadastrar(req, res);
 })
 
-router.post("/cadastrarP", function (req, res) {
-    usuarioController.cadastrarP(req, res);
+router.post("/cadastrarEmp", function (req, res) {
+    usuarioController.cadastrarEmp(req, res);
 })
 
-router.post("/atualizar", function (req, res) {
-    usuarioController.atualizar(req, res);
+router.post("/atualizarAdm", function (req, res) {
+    usuarioController.atualizarAdm(req, res);
 })
 
 router.post("/autenticar", function (req, res) {
     usuarioController.entrar(req, res);
+});
+
+router.post("/verificarTorres", function (req, res) {
+    usuarioController.verificarTorres(req, res);
 });
 
 module.exports = router;

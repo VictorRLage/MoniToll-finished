@@ -66,30 +66,44 @@
 
   <div class="limiter">
     <div class="container-login100">
-      <div class="wrap-login100">
+      <div class="wrap-login100" style="height: 630px;">
         <div class="login100-form validate-form">
           <span class="login100-form-title p-b-26">
-            Cadastrar Pedágio
+            Cadastrar Empresa
           </span>
           <div class="wrap-input100 validate-input">
-            <input class="input100" type="number" id="idP_input" name="idP_input">
-            <span class="focus-input100" data-placeholder="ID do Pedágio"></span>
+            <input class="input100" id="inp_idEmp">
+            <span class="focus-input100" data-placeholder="ID da Empresa"></span>
           </div>
 
           <div class="wrap-input100 validate-input">
-            <input class="input100" type="text" id="nomeP_input" name="nomeP_input">
-            <span class="focus-input100" data-placeholder="Nome do Pedágio"></span>
+            <input class="input100" id="inp_nomeEmp">
+            <span class="focus-input100" data-placeholder="Nome da Empresa"></span>
           </div>
 
           <div class="wrap-input100 validate-input">
-            <input class="input100" type="text" id="localP_input" name="localP_input">
-            <span class="focus-input100" data-placeholder="Localização do Pedágio"></span>
+            <select class="input100" id="sel_plano">
+              <option value="">Plano contratado</option>
+              <option value="Plano 1">Plano 1</option>
+              <option value="Plano 2">Plano 2</option>
+              <option value="Plano 3">Plano 3</option>
+            </select>
+          </div>
+
+          <div class="wrap-input100 validate-input">
+            <input class="input100" id="inp_cnpjEmp">
+            <span class="focus-input100" data-placeholder="CNPJ"></span>
+          </div>
+
+          <div class="wrap-input100 validate-input">
+            <input class="input100" id="inp_emailEmp">
+            <span class="focus-input100" data-placeholder="Email"></span>
           </div>
 
           <div class="container-login100-form-btn">
             <div class="wrap-login100-form-btn">
               <div class="login100-form-bgbtn"></div>
-              <button class="login100-form-btn" onclick="cadastrarP()">
+              <button class="login100-form-btn" onclick="cadastrarEmp()">
                 Cadastrar
               </button>
             </div>
@@ -114,14 +128,14 @@
       <p id="p_msg2"></p>
       <br>
       <div style="margin-top: 60px;" class="wrap-input100 validate-input">
-        <input class="input100" type="number" id="idA_input" name="idA_input">
-        <span class="focus-input100" data-placeholder="ID do Administrador"></span>
+        <input class="input100" id="inp_EmailAdm">
+        <span class="focus-input100" data-placeholder="Email do Administrador"></span>
         <br>
       </div>
       <div style="margin-top: 20px;" class="container-login100-form-btn">
         <div class="wrap-login100-form-btn">
           <div class="login100-form-bgbtn"></div>
-          <button class="login100-form-btn" onclick="atualizar()">
+          <button class="login100-form-btn" onclick="atualizarAdm()">
             Atualizar
           </button>
         </div>
@@ -185,7 +199,7 @@
 <script src="assets/js/main.js"></script>
 
 <script>
-  function cadastrarP() {
+  function cadastrarEmp() {
 
     const open = document.getElementById('open');
     const modal_container = document.getElementById('modal_container');
@@ -193,15 +207,35 @@
     const close2 = document.getElementById('close2');
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
-    var idPVar = document.getElementById('idP_input').value;
-    var nomePVar = document.getElementById('nomeP_input').value;
-    var localPVar = document.getElementById('localP_input').value;
+    var idEmpVar = inp_idEmp.value;
+    var nomeEmpVar = inp_nomeEmp.value;
+    var planoVar = sel_plano.value;
+    var cnpjEmpVar = inp_cnpjEmp.value;
+    var emailEmpVar = inp_emailEmp.value;
+    var lengthCnpj = cnpjEmpVar.length
 
-    if (idPVar == "" || nomePVar == "" || localPVar == "") {
+    if (idEmpVar == "" || nomeEmpVar == "" || planoVar == "" || cnpjEmpVar == "" || emailEmpVar == "") {
       titulo_m.innerHTML = `Preencha todos os campos para prosseguir.`
 
       modal_container.classList.add('show');
 
+      close.addEventListener('click', () => {
+        modal_container.classList.remove('show');
+      });
+      return
+    } else if (lengthCnpj != 14) {
+      titulo_m.innerHTML = `O CNPJ deve ter 14 digitos.`
+
+      modal_container.classList.add('show');
+
+      close.addEventListener('click', () => {
+        modal_container.classList.remove('show');
+      });
+      return
+    }else if (emailEmpVar.indexOf("@") == -1 || emailEmpVar.indexOf(".com") == -1) {
+      titulo_m.innerHTML = "E-mail inválido. Verifique e tente novamente."
+
+      modal_container.classList.add('show');
 
       close.addEventListener('click', () => {
         modal_container.classList.remove('show');
@@ -211,7 +245,7 @@
 
 
     // Enviando o valor da nova input
-    fetch("/usuarios/cadastrarP", {
+    fetch("/usuarios/cadastrarEmp", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -219,39 +253,50 @@
       body: JSON.stringify({
         // crie um atributo que recebe o valor recuperado aqui
         // Agora vá para o arquivo routes/usuario.js
-        idPServer: idPVar,
-        nomePServer: nomePVar,
-        localPServer: localPVar
+        idEmpServer: idEmpVar,
+        nomeEmpServer: nomeEmpVar,
+        planoServer: planoVar,
+        cnpjEmpServer: cnpjEmpVar,
+        emailEmpServer: emailEmpVar
       })
-    }).then(function () {
+    }).then(function (resposta) {
+      if (resposta.ok) {
+          sessionStorage.ID_EMPRESA = idEmpVar; 
 
-      titulo_m2.innerHTML = `Cadastro realizado com sucesso! <br>`
-      p_msg2.innerHTML = `<br> Por favor atualize a permissão do usuário:`
+          titulo_m2.innerHTML = `Cadastro realizado com sucesso! <br>`
+          p_msg2.innerHTML = `<br> Por favor atualize a permissão do usuário:`
 
 
-      modal_container2.classList.add('show');
+          modal_container2.classList.add('show');
 
 
-      close2.addEventListener('click', () => {
-        modal_container2.classList.remove('show');
-      });
-    })
-      .catch(function (errinho) {
-        console.error(errinho)
-      })
+          close2.addEventListener('click', () => {
+          modal_container2.classList.remove('show');
+          });
+      } else {
+        titulo_m.innerHTML = `Houve um erro ao tentar realizar o cadastro!`
 
-    console.log()
+        modal_container.classList.add('show');
+
+        close.addEventListener('click', () => {
+        modal_container.classList.remove('show');
+        });
+        throw ("Houve um erro ao tentar realizar o cadastro!");
+      }
+    }).catch(function (resposta) {
+      console.log(`#ERRO: ${resposta}`);
+    });
+
+    return false;
   }
-
-  function atualizar() {
+    function atualizarAdm() {
     const open = document.getElementById('open');
     const modal_container = document.getElementById('modal_container');
     const close = document.getElementById('close2');
 
-    var idPVar = document.getElementById('idP_input').value;
-    var idAVar = document.getElementById('idA_input').value;
+    var EmailAdmVar = inp_EmailAdm.value;
 
-    fetch("/usuarios/atualizar", {
+    fetch("/usuarios/atualizarAdm", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -259,25 +304,36 @@
       body: JSON.stringify({
         // crie um atributo que recebe o valor recuperado aqui
         // Agora vá para o arquivo routes/usuario.js
-        idPServer: idPVar,
-        idAServer: idAVar
+        idEmpServer: sessionStorage.ID_EMPRESA,
+        EmailAdmServer: EmailAdmVar
       })
-    }).then(function () {
+    }).then(function (resposta) {
+      if (resposta.ok) {
+          titulo_m3.innerHTML = `Permissão atualizada com sucesso! <br>`
 
-      titulo_m3.innerHTML = `Permissão atualizada com sucesso! <br>`
-
-      modal_container3.classList.add('show');
+          modal_container3.classList.add('show');
 
 
-      close3.addEventListener('click', () => {
+          close3.addEventListener('click', () => {
+          modal_container3.classList.remove('show');
+          });
+      } else {
+        titulo_m3.innerHTML = `Falha ao atualizar permissão! <br>`
+
+        modal_container3.classList.add('show');
+
+
+        close3.addEventListener('click', () => {
         modal_container3.classList.remove('show');
-      });
-    })
-      .catch(function (errinho) {
-        console.error(errinho)
-      })
+        });
+        throw ("Houve um erro ao tentar atualizar o perfil!");
+      }
+    }).catch(function (resposta) {
+      console.log(`#ERRO: ${resposta}`);
+    });
 
-    console.log()
-  }
+    return false;
+}
+
 
 </script>

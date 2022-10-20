@@ -2,28 +2,27 @@ var mysql = require("mysql2");
 var sql = require('mssql');
 
 // CONEXÃO DO SQL SERVER - AZURE (NUVEM)
-// var sqlServerConfig = {
-//     user: "XXXXX",
-//     password: "XXXXX",
-//     database: "XXXXX",
-//     server: "XXXXX",
-//     pool: {
-//         max: 10,
-//         min: 0,
-//         idleTimeoutMillis: 30000
-//     },
-//     options: {
-//         encrypt: true, // for azure
-//     }
-// }
-
+var sqlServerConfig = {
+    user: "Monitoll",
+    password: "Grupo7@123",
+    database: "Monitoll",
+    server: "montioll.database.windows.net",
+    pool: {
+        max: 10,
+        min: 0,
+        idleTimeoutMillis: 30000
+    },
+    options: {
+        encrypt: true, // for azure
+    }
+}
 // CONEXÃO DO MYSQL WORKBENCH (LOCAL)
-var mySqlConfig = {
-    host: "localhost",
-    user: "root",
-    database: "MoniToll",
-    password: "#Gf15533155708",
-};
+// var mySqlConfig = {
+//     host: "localhost",
+//     user: "root",
+//     database: "Monitoll",
+//     password: "#Gf15533155708",
+// };
 
 function executar(instrucao) {
     // VERIFICA A VARIÁVEL DE AMBIENTE SETADA EM app.js

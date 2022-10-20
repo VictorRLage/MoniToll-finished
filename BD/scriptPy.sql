@@ -7,11 +7,12 @@ Permissoes CHAR(3)
 );
 
 CREATE TABLE Empresa(
-idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
+idEmpresa INT PRIMARY KEY,
 Nome VARCHAR(45),
+Plano VARCHAR(45),
 CNPJ CHAR(14),
 Email VARCHAR(40)
-)AUTO_INCREMENT = 1;
+);
 
 CREATE TABLE Usuario(
 idUsuario INT PRIMARY KEY AUTO_INCREMENT,
@@ -32,7 +33,7 @@ SO VARCHAR(45),
 Maquina VARCHAR(45),
 Processador VARCHAR(45),
 Disco VARCHAR(45),
-VelocidadeRam VARCHAR(10),
+Ram VARCHAR(45),
 fkEmpresa Int,
 FOREIGN KEY (fkEmpresa) REFERENCES Empresa(idEmpresa)
 );
@@ -41,7 +42,7 @@ CREATE TABLE Componente(
 idComponente INT PRIMARY KEY,
 Nome VARCHAR(45),
 Codigo VARCHAR(100)
-)AUTO_INCREMENT = 1;
+);
 
 CREATE TABLE Torre_Componente(
 fkTorre INT,
@@ -66,20 +67,21 @@ FOREIGN KEY (fkComponente) REFERENCES Componente(idComponente)
 INSERT INTO Perfil VALUES (1, 'Dev'),
 						  (2, 'Adm'),
                           (3, 'Fun');
-INSERT INTO Empresa VALUES (null, 'EmpTeste', '99999999999999', 'empteste123@gmail.com');
+INSERT INTO Empresa VALUES (null, 'EmpTeste','Plano 1', '99999999999999', 'empteste123@gmail.com');
+INSERT INTO Empresa VALUES (null, 'EmpTesteSemTorre','Plano 2', '99999999999999', 'emptestesemtorre@gmail.com');
 INSERT INTO Usuario VALUES (null,"Pedro Neto",null,"pedro.cordeironeto@sptech.school","123",1,NULL),
-                                  (null,"Victor Lage",null,"victorlage3000@gmail.com","123",1,NULL),
+                                  (null,"Victor Lage",null,"victor.lage@sptech.school","123",1,NULL),
                                   (null,"Renato Tierno",null,"renato.tierno@sptech.school","123",1,NULL),
                                   (null,"Emerson Santos",null,"emerson.santos@sptech.school","123",1,NULL),
                                   (null,"Gabriela Romanini",null,"gabriela.silva@sptech.school","123",1,NULL),
                                   (null,"Luigi Ceolin",null,"luigi.ceolin@sptech.school","123",1,NULL),
                                   (null, "Adm EmpTeste",null, "admempteste@gmail.com",'123', 2, 1),
                                   (null, "Fun EmpTeste",null, "funempteste@gmail.com",'123', 3, 1);
-INSERT INTO Torre (idTorre, fkEmpresa) values  (101,1),
-                                               (102,1),
-                                               (103,1),
-                                               (104,1),
-                                               (105,1);
+INSERT INTO Torre values  (101,'','','','','','',1),
+						  (102,'','','','','','',1),
+                          (103,'','','','','','',1),
+                          (104,'','','','','','',1),
+                          (105,'','','','','','',1);
 INSERT INTO Componente VALUES (0, null, null),
 							   (1, 'processadores_qtd','psutil.cpu_count(logical=True)'),
                                (2, 'processadores_nucleo_porcentagem','psutil.cpu_percent(interval = 1, percpu = True)'),
@@ -116,12 +118,15 @@ INSERT INTO Torre_Componente (fkTorre,fkComponente) values  (101, 2),
                                                               (105, 1),
                                                               (105, 2);
 -- INSERT INTO TORRE_COMPONENTES VALUES ();
+select * from Usuario;
+select * from Empresa;
 select * from Torre;
 select * from Torre_Componente;
 select * from Leitura;
 -- UPDATE Torre  SET SerialID = 'WERWTDS2' WHERE idTorre = 101;
 
-CREATE USER 'tecnico'@'localhost' IDENTIFIED BY 'urubu100';
-GRANT ALL ON Monitoll.* TO 'tecnico'@'localhost';
+-- CREATE USER 'tecnico'@'localhost' IDENTIFIED BY 'urubu100';
+-- GRANT ALL ON Monitoll.* TO 'tecnico'@'localhost';
+-- DROP DATABASE MONITOLL;
 
-
+-- update usuario set fkEmpresa = 2 where idUsuario = 9;
