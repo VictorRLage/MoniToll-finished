@@ -69,11 +69,41 @@ function verificarTorres(fkEmpresa) {
     return database.executar(instrucao);
 }
 
+function cadastrart1(cep, select1t1, select2t1) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", fkEmpresa)
+    var instrucao = `
+    INSERT INTO Componentes (Cep, Componente1, Componente2) VALUES ('${cep}','${select1t1}','${select2t1}');
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function cadastrart2(cep, select1t2, select2t2) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", fkEmpresa)
+    var instrucao = `
+    INSERT INTO Componentes (Cep, Componente1, Componente2) VALUES ('${cep}','${select1t2}','${select2t2}');
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function cadastrart3(cep, select1t3, select2t3) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", fkEmpresa)
+    var instrucao = `
+    INSERT INTO Componentes (Cep, Componente1, Componente2) VALUES ('${cep}','${select1t3}','${select2t3}');
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 module.exports = {
     entrar,
     cadastrar,
     listar,
     cadastrarEmp,
     atualizarAdm,
-    verificarTorres
+    verificarTorres,
+    cadastrart1,
+    cadastrart2,
+    cadastrart3
 };

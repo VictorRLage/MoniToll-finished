@@ -201,6 +201,108 @@ usuarioModel.verificarTorres(fkEmpresa)
 
 }
 
+function cadastrart1(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var cep = req.body.cepServer;
+    var select1t1 = req.body.select1t1Server;
+    var select2t1 = req.body.select2t1Server;
+
+    // Faça as validações dos valores
+    if (cep == undefined) {
+        res.status(400).send("Seu cep está undefined!");
+    } else if (select1t1 == undefined) {
+        res.status(400).send("Seu select1t1 está undefined!");
+    } else if (select2t1 == undefined) {
+        res.status(400).send("Sua select2t1 está undefined!");
+    } else {
+        
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.cadastrart1(cep, select1t1, select2t1)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+function cadastrart2(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var cep = req.body.cepServer;
+    var select1t2 = req.body.select1t2Server;
+    var select2t2 = req.body.select2t2Server;
+
+    // Faça as validações dos valores
+    if (cep == undefined) {
+        res.status(400).send("Seu cep está undefined!");
+    } else if (select1t2 == undefined) {
+        res.status(400).send("Seu select1t2 está undefined!");
+    } else if (select2t2 == undefined) {
+        res.status(400).send("Sua select2t2 está undefined!");
+    } else {
+        
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.cadastrart1(cep, select1t2, select2t2)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+function cadastrart3(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var cep = req.body.cepServer;
+    var select1t3 = req.body.select1t3Server;
+    var select2t3 = req.body.select2t3Server;
+
+    // Faça as validações dos valores
+    if (cep == undefined) {
+        res.status(400).send("Seu cep está undefined!");
+    } else if (select1t3 == undefined) {
+        res.status(400).send("Seu select1t3 está undefined!");
+    } else if (select2t3 == undefined) {
+        res.status(400).send("Sua select2t3 está undefined!");
+    } else {
+        
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.cadastrart1(cep, select1t3, select2t3)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 module.exports = {
     entrar,
     cadastrar,
@@ -208,5 +310,8 @@ module.exports = {
     testar,
     cadastrarEmp,
     atualizarAdm,
-    verificarTorres
+    verificarTorres,
+    cadastrart1,
+    cadastrart2,
+    cadastrart3
 }

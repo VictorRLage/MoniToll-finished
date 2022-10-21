@@ -142,14 +142,14 @@
             Torre 1
           </span>
           <div class="wrap-input100 validate-input">
-            <input class="input100" type="text" id="nome_input" name="nome_input" maxlength="8">
+            <input class="input100" type="text" id="cep_input1" name="cep_input" maxlength="8">
             <span class="focus-input100" data-placeholder="CEP"></span>
           </div>
 
           <div class="wrap-input200 validate-input">
             <legend class="input200">Componente 1</legend>
             <div class="custom-select" style="width:200px;">
-              <select>
+              <select id="select1t1">
                 <option value="0">Selecione:</option>
                 <option value="1">CPU</option>
                 <option value="2">Memória RAM</option>
@@ -163,7 +163,7 @@
           <div class="wrap-input200 validate-input">
             <legend class="input200">Componente 2</legend>
             <div class="custom-select" style="width:200px;">
-              <select>
+              <select value="select2t1">
                 <option value="0">Selecione:</option>
                 <option value="1">CPU</option>
                 <option value="2">Memória RAM</option>
@@ -174,23 +174,11 @@
             </div>
             
           </div>
-          <!-- <legend class="input200">Componente</legend>
-          <input type="checkbox"  class="" maxlength="" id="componente_cb" name="cpu_cb">
-          <label for="componente_cb">CPU</label> <br>
-          <input type="checkbox"  class="" maxlength="" id="componente_cb" name="ram_cb">
-          <label for="componente_cb">Memória RAM</label> <br>
-          <input type="checkbox"  class="" maxlength="" id="componente_cb" name="disco_cb">
-          <label for="componente_cb">Disco Rígido</label> <br>
-          <input type="checkbox"  class="" maxlength="" id="componente_cb" name="internet_cb">
-          <label for="componente_cb">Internet</label> <br>             -->
-          
-
-  
 
           <div class="container-login100-form-btn">
             <div class="wrap-login100-form-btn">
               <div class="login100-form-bgbtn"></div>
-              <button class="login100-form-btn" onclick="cadastrar()">
+              <button class="login100-form-btn" onclick="cadastrar1()">
                 Cadastrar
               </button>
             </div>
@@ -212,13 +200,13 @@
             Torre 2
           </span>
           <div class="wrap-input100 validate-input">
-            <input class="input100" type="text" id="nome_input" name="nome_input" maxlength="8">
+            <input class="input100" type="text" value="cep_input2" name="cep_input" maxlength="8">
             <span class="focus-input100" data-placeholder="CEP"></span>
           </div>
           <div class="wrap-input200 validate-input">
             <legend class="input200">Componente 1</legend>
             <div class="custom-select" style="width:200px;">
-              <select>
+              <select value="select1t2">
                 <option value="0">Selecione:</option>
                 <option value="1">CPU</option>
                 <option value="2">Memória RAM</option>
@@ -232,7 +220,7 @@
           <div class="wrap-input200 validate-input">
             <legend class="input200">Componente 2</legend>
             <div class="custom-select" style="width:200px;">
-              <select>
+              <select value="select2t2">
                 <option value="0">Selecione:</option>
                 <option value="1">CPU</option>
                 <option value="2">Memória RAM</option>
@@ -244,22 +232,11 @@
             
           </div>
         </div>
-        <!-- <div class="wrap-input100 validate-input">
-          <input type="checkbox"  class="" maxlength="" id="componente_cb2" name="cpu_cb">
-          <label for="componente_cb">CPU</label> <br>
-          <input type="checkbox"  class="" maxlength="" id="componente_cb2" name="ram_cb">
-          <label for="componente_cb">Memória RAM</label> <br>
-          <input type="checkbox"  class="" maxlength="" id="componente_cb2" name="disco_cb">
-          <label for="componente_cb">Disco Rígido</label> <br>
-          <input type="checkbox"  class="" maxlength="" id="componente_cb2" name="internet_cb">
-          <label for="componente_cb">Internet</label> <br>             -->
-        
-
 
           <div class="container-login100-form-btn">
             <div class="wrap-login100-form-btn">
               <div class="login100-form-bgbtn"></div>
-              <button class="login100-form-btn" onclick="cadastrar()">
+              <button class="login100-form-btn" onclick="cadastrar2()">
                 Cadastrar
               </button>
             </div>
@@ -281,7 +258,7 @@
             Torre 3
           </span>
           <div class="wrap-input100 validate-input">
-            <input class="input100" type="text" id="nome_input" name="nome_input" maxlength="8">
+            <input class="input100" type="text" id="cep_input3" name="cep_input" maxlength="8">
             <span class="focus-input100" data-placeholder="CEP"></span>
           </div>
 
@@ -289,12 +266,12 @@
             <div class="wrap-input200 validate-input">
               <legend class="input200">Componente 1</legend>
               <div class="custom-select" style="width:200px;">
-                <select>
+                <select id="select1t3">
                   <option value="0">Selecione:</option>
-                  <option value="1">CPU</option>
-                  <option value="2">Memória RAM</option>
-                  <option value="3">Disco Rígido</option>
-                  <option value="4">Internet</option>
+                  <option id="1">CPU</option>
+                  <option id="2">Memória RAM</option>
+                  <option id="3">Disco Rígido</option>
+                  <option id="4">Internet</option>
                   
                 </select>
               </div>
@@ -303,26 +280,23 @@
             <div class="wrap-input200 validate-input">
               <legend class="input200">Componente 2</legend>
               <div class="custom-select" style="width:200px;">
-                <select>
+                <select id="select2t3">
                   <option value="0">Selecione:</option>
-                  <option value="1">CPU</option>
-                  <option value="2">Memória RAM</option>
-                  <option value="3">Disco Rígido</option>
-                  <option value="4">Internet</option>
+                  <option id="1">CPU</option>
+                  <option id="2">Memória RAM</option>
+                  <option id="3">Disco Rígido</option>
+                  <option id="4">Internet</option>
                   
                 </select>
               </div>
               
             </div>       
           </div>
-          
-
-
 
           <div class="container-login100-form-btn">
             <div class="wrap-login100-form-btn">
               <div class="login100-form-bgbtn"></div>
-              <button class="login100-form-btn" onclick="cadastrar()">
+              <button class="login100-form-btn" onclick="cadastrar3()">
                 Cadastrar
               </button>
             </div>
@@ -395,23 +369,21 @@
 </html>
 <script>
 
-  function cadastrar() {
+  function cadastrar1() {
 
     const open = document.getElementById('open');
     const modal_container = document.getElementById('modal_container');
     const close = document.getElementById('close');
 
-    var nomeVar = nome_input.value;
-    var cpfVar = cpf_input.value;
-    var emailVar = email_input.value;
-    var senhaVar = senha_input.value;
-    var length = senhaVar.length
-    var lengthCpf = cpfVar.length
-    var perfilVar = 3
+    var cepVar = cep_input1.value;
+    var select1t1Var = select1t1.value;
+    var select2t1Var = select2t1.value;
 
-    if (nomeVar == "" || cpfVar == "" || emailVar == "" || senhaVar == "") {
+    if (cpeVar == "" && cepVar.length < 8) {
 
-      titulo_m.innerHTML = ("Preencha todos os campos para prosseguir")
+      titulo_m.innerHTML = ("Preencha todos o campos para prosseguir")
+      
+      titulo_m.innerHTML += ("Coloque o Número correto de Caracteres")
 
       modal_container.classList.add('show');
 
@@ -421,30 +393,7 @@
       return
     }
 
-    if (lengthCpf < 11) {
-      titulo_m.innerHTML = ("Atenção! O CPF deve conter 11 dígitos.")
-
-      modal_container.classList.add('show');
-
-      close.addEventListener('click', () => {
-        modal_container.classList.remove('show');
-      });
-      return
-    }
-
-    if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1) {
-
-    titulo_m.innerHTML = ("E-mail inválido. Verifique e tente novamente.")
-
-    modal_container.classList.add('show');
-
-    close.addEventListener('click', () => {
-      modal_container.classList.remove('show');
-    });
-    return
-   }
-
-    fetch("/usuarios/cadastrar", {
+    fetch("/usuarios/cadastrart1", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -452,11 +401,9 @@
       body: JSON.stringify({
         // crie um atributo que recebe o valor recuperado aqui
         // Agora vá para o arquivo routes/usuario.js
-        nomeServer: nomeVar,
-        cpfServer: cpfVar,
-        emailServer: emailVar,
-        senhaServer: senhaVar,
-        fkPerfilServer: perfilVar
+        cepServer: cepVar,
+        select1t1Server: select1t1Var,
+        select2t1Server: select2t1Var
       })
     }).then(function (resposta) {
 
@@ -474,7 +421,6 @@
 
           window.location = "../login.html";
         }, 3000)
-
         // limparFormulario();
         // finalizarAguardar();
       } else {
@@ -485,90 +431,219 @@
     });
 
     return false;
+  }
+  // Fim Função 1
 
+    function cadastrar2() {
 
+  const open = document.getElementById('open');
+  const modal_container = document.getElementById('modal_container');
+  const close = document.getElementById('close');
+
+  var cepVar = cep_input2.value;
+  var select1t2Var = select1t2.value;
+  var select2t2Var = select2t2.value;
+
+  if (cpeVar == "" && cepVar.length < 8) {
+
+    titulo_m.innerHTML = ("Preencha todos o campos para prosseguir")
+    
+    titulo_m.innerHTML += ("Coloque o Número correto de Caracteres")
+
+    modal_container.classList.add('show');
+
+    close.addEventListener('click', () => {
+      modal_container.classList.remove('show');
+    });
+    return
   }
 
+  fetch("/usuarios/cadastrart2", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      // crie um atributo que recebe o valor recuperado aqui
+      // Agora vá para o arquivo routes/usuario.js
+      cepServer: cepVar,
+      select1t2Server: select1t2Var,
+      select2t2Server: select2t2Var
+    })
+  }).then(function (resposta) {
+
+    console.log("resposta: ", resposta);
+
+    if (resposta.ok) {
+      setTimeout(() => {
+
+        titulo_m.innerHTML = ("Cadastro realizado com sucesso. Bem-vindo")
+        modal_container.classList.add('show');
+
+        close.addEventListener('click', () => {
+        modal_container.classList.remove('show');
+        });
+
+        window.location = "../login.html";
+      }, 3000)
+      // limparFormulario();
+      // finalizarAguardar();
+    } else {
+      throw ("Houve um erro ao tentar realizar o cadastro!");
+    }
+  }).catch(function (resposta) {
+    console.log(`#ERRO: ${resposta}`);
+  });
+
+  return false;
+
+  }
+  // Fim Função 2 
+
+    function cadastrar3() {
+
+  const open = document.getElementById('open');
+  const modal_container = document.getElementById('modal_container');
+  const close = document.getElementById('close');
+
+  var cepVar = cep_input3.value;
+  var select1t3Var = select1t3.value;
+  var select2t3Var = select2t3.value;
+
+  if (cpeVar == "" && cepVar.length < 8) {
+
+    titulo_m.innerHTML = ("Preencha todos o campos para prosseguir")
+    
+    titulo_m.innerHTML += ("Coloque o Número correto de Caracteres")
+
+    modal_container.classList.add('show');
+
+    close.addEventListener('click', () => {
+      modal_container.classList.remove('show');
+    });
+    return
+  }
+
+  fetch("/usuarios/cadastrart3", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      // crie um atributo que recebe o valor recuperado aqui
+      // Agora vá para o arquivo routes/usuario.js
+      cepServer: cepVar,
+      select1t3Server: select1t3Var,
+      select2t3Server: select2t3Var
+    })
+  }).then(function (resposta) {
+
+    console.log("resposta: ", resposta);
+
+    if (resposta.ok) {
+      setTimeout(() => {
+
+        titulo_m.innerHTML = ("Cadastro realizado com sucesso. Bem-vindo")
+        modal_container.classList.add('show');
+
+        close.addEventListener('click', () => {
+        modal_container.classList.remove('show');
+        });
+
+        window.location = "../login.html";
+      }, 3000)
+      // limparFormulario();
+      // finalizarAguardar();
+    } else {
+      throw ("Houve um erro ao tentar realizar o cadastro!");
+    }
+  }).catch(function (resposta) {
+    console.log(`#ERRO: ${resposta}`);
+  });
+
+  return false;
+  }
 
 </script>
 
 <script>
-  var x, i, j, l, ll, selElmnt, a, b, c;
-/*look for any elements with the class "custom-select":*/
-x = document.getElementsByClassName("custom-select");
-l = x.length;
-for (i = 0; i < l; i++) {
-  selElmnt = x[i].getElementsByTagName("select")[0];
-  ll = selElmnt.length;
-  /*for each element, create a new DIV that will act as the selected item:*/
-  a = document.createElement("DIV");
-  a.setAttribute("class", "select-selected");
-  a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
-  x[i].appendChild(a);
-  /*for each element, create a new DIV that will contain the option list:*/
-  b = document.createElement("DIV");
-  b.setAttribute("class", "select-items select-hide");
-  for (j = 1; j < ll; j++) {
-    /*for each option in the original select element,
-    create a new DIV that will act as an option item:*/
-    c = document.createElement("DIV");
-    c.innerHTML = selElmnt.options[j].innerHTML;
-    c.addEventListener("click", function(e) {
-        /*when an item is clicked, update the original select box,
-        and the selected item:*/
-        var y, i, k, s, h, sl, yl;
-        s = this.parentNode.parentNode.getElementsByTagName("select")[0];
-        sl = s.length;
-        h = this.parentNode.previousSibling;
-        for (i = 0; i < sl; i++) {
-          if (s.options[i].innerHTML == this.innerHTML) {
-            s.selectedIndex = i;
-            h.innerHTML = this.innerHTML;
-            y = this.parentNode.getElementsByClassName("same-as-selected");
-            yl = y.length;
-            for (k = 0; k < yl; k++) {
-              y[k].removeAttribute("class");
+      var x, i, j, l, ll, selElmnt, a, b, c;
+    /*look for any elements with the class "custom-select":*/
+    x = document.getElementsByClassName("custom-select");
+    l = x.length;
+    for (i = 0; i < l; i++) {
+      selElmnt = x[i].getElementsByTagName("select")[0];
+      ll = selElmnt.length;
+      /*for each element, create a new DIV that will act as the selected item:*/
+      a = document.createElement("DIV");
+      a.setAttribute("class", "select-selected");
+      a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+      x[i].appendChild(a);
+      /*for each element, create a new DIV that will contain the option list:*/
+      b = document.createElement("DIV");
+      b.setAttribute("class", "select-items select-hide");
+      for (j = 1; j < ll; j++) {
+        /*for each option in the original select element,
+        create a new DIV that will act as an option item:*/
+        c = document.createElement("DIV");
+        c.innerHTML = selElmnt.options[j].innerHTML;
+        c.addEventListener("click", function(e) {
+            /*when an item is clicked, update the original select box,
+            and the selected item:*/
+            var y, i, k, s, h, sl, yl;
+            s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+            sl = s.length;
+            h = this.parentNode.previousSibling;
+            for (i = 0; i < sl; i++) {
+              if (s.options[i].innerHTML == this.innerHTML) {
+                s.selectedIndex = i;
+                h.innerHTML = this.innerHTML;
+                y = this.parentNode.getElementsByClassName("same-as-selected");
+                yl = y.length;
+                for (k = 0; k < yl; k++) {
+                  y[k].removeAttribute("class");
+                }
+                this.setAttribute("class", "same-as-selected");
+                break;
+              }
             }
-            this.setAttribute("class", "same-as-selected");
-            break;
-          }
+            h.click();
+        });
+        b.appendChild(c);
+      }
+      x[i].appendChild(b);
+      a.addEventListener("click", function(e) {
+          /*when the select box is clicked, close any other select boxes,
+          and open/close the current select box:*/
+          e.stopPropagation();
+          closeAllSelect(this);
+          this.nextSibling.classList.toggle("select-hide");
+          this.classList.toggle("select-arrow-active");
+        });
+    }
+    function closeAllSelect(elmnt) {
+      /*a function that will close all select boxes in the document,
+      except the current select box:*/
+      var x, y, i, xl, yl, arrNo = [];
+      x = document.getElementsByClassName("select-items");
+      y = document.getElementsByClassName("select-selected");
+      xl = x.length;
+      yl = y.length;
+      for (i = 0; i < yl; i++) {
+        if (elmnt == y[i]) {
+          arrNo.push(i)
+        } else {
+          y[i].classList.remove("select-arrow-active");
         }
-        h.click();
-    });
-    b.appendChild(c);
-  }
-  x[i].appendChild(b);
-  a.addEventListener("click", function(e) {
-      /*when the select box is clicked, close any other select boxes,
-      and open/close the current select box:*/
-      e.stopPropagation();
-      closeAllSelect(this);
-      this.nextSibling.classList.toggle("select-hide");
-      this.classList.toggle("select-arrow-active");
-    });
-}
-function closeAllSelect(elmnt) {
-  /*a function that will close all select boxes in the document,
-  except the current select box:*/
-  var x, y, i, xl, yl, arrNo = [];
-  x = document.getElementsByClassName("select-items");
-  y = document.getElementsByClassName("select-selected");
-  xl = x.length;
-  yl = y.length;
-  for (i = 0; i < yl; i++) {
-    if (elmnt == y[i]) {
-      arrNo.push(i)
-    } else {
-      y[i].classList.remove("select-arrow-active");
+      }
+      for (i = 0; i < xl; i++) {
+        if (arrNo.indexOf(i)) {
+          x[i].classList.add("select-hide");
+        }
+      }
     }
-  }
-  for (i = 0; i < xl; i++) {
-    if (arrNo.indexOf(i)) {
-      x[i].classList.add("select-hide");
-    }
-  }
-}
-/*if the user clicks anywhere outside the select box,
-then close all select boxes:*/
-document.addEventListener("click", closeAllSelect);
+    /*if the user clicks anywhere outside the select box,
+    then close all select boxes:*/
+    document.addEventListener("click", closeAllSelect);
+
 </script>
