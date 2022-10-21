@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+ 
+  <style>
+    /*the container must be positioned relative:*/
+    .custom-select {
+      position: relative;
+      font-family: Arial;
+    }
+    
+    .custom-select select {
+      display: none; /*hide original SELECT element:*/
+    }
+    
+    .select-selected {
+      background-color: #adadad;
+    }
+    
+    /*style the arrow inside the select element:*/
+    .select-selected:after {
+      position: absolute;
+      content: "";
+      top: 14px;
+      right: 10px;
+      width: 0;
+      height: 0;
+      border: 6px solid transparent;
+      border-color: #fff transparent transparent transparent;
+    }
+    
+    /*point the arrow upwards when the select box is open (active):*/
+    .select-selected.select-arrow-active:after {
+      border-color: transparent transparent #fff transparent;
+      top: 7px;
+    }
+    
+    /*style the items (options), including the selected item:*/
+    .select-items div,.select-selected {
+      color: #ffffff;
+      padding: 8px 16px;
+      border: 1px solid transparent;
+      border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+      cursor: pointer;
+      user-select: none;
+    }
+    
+    /*style items (options):*/
+    .select-items {
+      position: absolute;
+      background-color: #adadad;
+      top: 100%;
+      left: 0;
+      right: 0;
+      z-index: 99;
+    }
+    
+    /*hide the items when the select box is closed:*/
+    .select-hide {
+      display: none;
+    }
+    
+    .select-items div:hover, .same-as-selected {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+    </style>
+
+  <title>MoniToll - Bem-Vindo!</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="Cadastro/css/main.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: MoniToll - v1.1.0
+  * Template URL: https://bootstrapmade.com/MoniToll-bootstrap-construction-website-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header2" class="header d-flex align-items-center">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1>MoniToll<span>.</span></h1>
+      </a>
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="servicos.html">Serviços</a></li>
+          <li><a href="contato.html">Contato</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="cadastro.html" class="active">Cadastro</a></li>
+        </ul>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+<!-- Início do Bloco de Cadastro -->
+
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login300">
+        <div class="login200-form validate-form">
+          <span class="login100-form-title p-b-26">
+            Torre 1
+          </span>
+          <div class="wrap-input100 validate-input">
+            <input class="input100" type="text" id="nome_input" name="nome_input" maxlength="8">
+            <span class="focus-input100" data-placeholder="CEP"></span>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 1</legend>
+            <div class="custom-select" style="width:200px;">
+              <select>
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+                
+              </select>
+            </div>
+            
+          </div>
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 2</legend>
+            <div class="custom-select" style="width:200px;">
+              <select>
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+                
+              </select>
+            </div>
+            
+          </div>
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 3</legend>
+            <div class="custom-select" style="width:200px;">
+              <select>
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+                
+              </select>
+            </div>
+            
+          </div>
+           
+          <div class="container-login100-form-btn">
+            <div class="wrap-login100-form-btn">
+              <div class="login100-form-bgbtn"></div>
+              <button class="login100-form-btn" onclick="cadastrar()">
+                Cadastrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fim do Bloco de Cadastro -->
+
+  <!-- Início do Bloco de Cadastro -->
+
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login300">
+        <div class="login200-form validate-form">
+          <span class="login100-form-title p-b-26">
+            Torre 2
+          </span>
+          <div class="wrap-input100 validate-input">
+            <input class="input100" type="text" id="nome_input" name="nome_input" maxlength="8">
+            <span class="focus-input100" data-placeholder="CEP"></span>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 1</legend>
+            <div class="custom-select" style="width:200px;">
+              <select>
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+                
+              </select>
+            </div>
+            
+          </div>
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 2</legend>
+            <div class="custom-select" style="width:200px;">
+              <select>
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+                
+              </select>
+            </div>
+            
+          </div>
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 3</legend>
+            <div class="custom-select" style="width:200px;">
+              <select>
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+                
+              </select>
+            </div>
+            
+          </div>
+           
+          <div class="container-login100-form-btn">
+            <div class="wrap-login100-form-btn">
+              <div class="login100-form-bgbtn"></div>
+              <button class="login100-form-btn" onclick="cadastrar()">
+                Cadastrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fim do Bloco de Cadastro -->
+
+ <!-- Início do Bloco de Cadastro -->
+
+ <div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login300">
+      <div class="login200-form validate-form">
+        <span class="login100-form-title p-b-26">
+          Torre 3
+        </span>
+        <div class="wrap-input100 validate-input">
+          <input class="input100" type="text" id="nome_input" name="nome_input" maxlength="8">
+          <span class="focus-input100" data-placeholder="CEP"></span>
+        </div>
+
+        <div class="wrap-input200 validate-input">
+          <legend class="input200">Componente 1</legend>
+          <div class="custom-select" style="width:200px;">
+            <select>
+              <option value="0">Selecione:</option>
+              <option value="1">CPU</option>
+              <option value="2">Memória RAM</option>
+              <option value="3">Disco Rígido</option>
+              <option value="4">Internet</option>
+              
+            </select>
+          </div>
+          
+        </div>
+        <div class="wrap-input200 validate-input">
+          <legend class="input200">Componente 2</legend>
+          <div class="custom-select" style="width:200px;">
+            <select>
+              <option value="0">Selecione:</option>
+              <option value="1">CPU</option>
+              <option value="2">Memória RAM</option>
+              <option value="3">Disco Rígido</option>
+              <option value="4">Internet</option>
+              
+            </select>
+          </div>
+          
+        </div>
+        <div class="wrap-input200 validate-input">
+          <legend class="input200">Componente 3</legend>
+          <div class="custom-select" style="width:200px;">
+            <select>
+              <option value="0">Selecione:</option>
+              <option value="1">CPU</option>
+              <option value="2">Memória RAM</option>
+              <option value="3">Disco Rígido</option>
+              <option value="4">Internet</option>
+              
+            </select>
+          </div>
+          
+        </div>
+         
+        <div class="container-login100-form-btn">
+          <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <button class="login100-form-btn" onclick="cadastrar()">
+              Cadastrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Fim do Bloco de Cadastro -->
+<!-- Início do Bloco de Cadastro -->
+
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login300">
+      <div class="login200-form validate-form">
+        <span class="login100-form-title p-b-26">
+          Torre 4
+        </span>
+        <div class="wrap-input100 validate-input">
+          <input class="input100" type="text" id="nome_input" name="nome_input" maxlength="8">
+          <span class="focus-input100" data-placeholder="CEP"></span>
+        </div>
+
+        <div class="wrap-input200 validate-input">
+          <legend class="input200">Componente 1</legend>
+          <div class="custom-select" style="width:200px;">
+            <select>
+              <option value="0">Selecione:</option>
+              <option value="1">CPU</option>
+              <option value="2">Memória RAM</option>
+              <option value="3">Disco Rígido</option>
+              <option value="4">Internet</option>
+              
+            </select>
+          </div>
+          
+        </div>
+        <div class="wrap-input200 validate-input">
+          <legend class="input200">Componente 2</legend>
+          <div class="custom-select" style="width:200px;">
+            <select>
+              <option value="0">Selecione:</option>
+              <option value="1">CPU</option>
+              <option value="2">Memória RAM</option>
+              <option value="3">Disco Rígido</option>
+              <option value="4">Internet</option>
+              
+            </select>
+          </div>
+          
+        </div>
+        <div class="wrap-input200 validate-input">
+          <legend class="input200">Componente 3</legend>
+          <div class="custom-select" style="width:200px;">
+            <select>
+              <option value="0">Selecione:</option>
+              <option value="1">CPU</option>
+              <option value="2">Memória RAM</option>
+              <option value="3">Disco Rígido</option>
+              <option value="4">Internet</option>
+              
+            </select>
+          </div>
+          
+        </div>
+         
+        <div class="container-login100-form-btn">
+          <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <button class="login100-form-btn" onclick="cadastrar()">
+              Cadastrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Fim do Bloco de Cadastro -->
+
+<!-- Início do Bloco de Cadastro -->
+
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login300">
+      <div class="login200-form validate-form">
+        <span class="login100-form-title p-b-26">
+          Torre 5
+        </span>
+        <div class="wrap-input100 validate-input">
+          <input class="input100" type="text" id="nome_input" name="nome_input" maxlength="8">
+          <span class="focus-input100" data-placeholder="CEP"></span>
+        </div>
+
+        <div class="wrap-input200 validate-input">
+          <legend class="input200">Componente 1</legend>
+          <div class="custom-select" style="width:200px;">
+            <select>
+              <option value="0">Selecione:</option>
+              <option value="1">CPU</option>
+              <option value="2">Memória RAM</option>
+              <option value="3">Disco Rígido</option>
+              <option value="4">Internet</option>
+              
+            </select>
+          </div>
+          
+        </div>
+        <div class="wrap-input200 validate-input">
+          <legend class="input200">Componente 2</legend>
+          <div class="custom-select" style="width:200px;">
+            <select>
+              <option value="0">Selecione:</option>
+              <option value="1">CPU</option>
+              <option value="2">Memória RAM</option>
+              <option value="3">Disco Rígido</option>
+              <option value="4">Internet</option>
+              
+            </select>
+          </div>
+          
+        </div>
+        <div class="wrap-input200 validate-input">
+          <legend class="input200">Componente 3</legend>
+          <div class="custom-select" style="width:200px;">
+            <select>
+              <option value="0">Selecione:</option>
+              <option value="1">CPU</option>
+              <option value="2">Memória RAM</option>
+              <option value="3">Disco Rígido</option>
+              <option value="4">Internet</option>
+              
+            </select>
+          </div>
+          
+        </div>
+         
+        <div class="container-login100-form-btn">
+          <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <button class="login100-form-btn" onclick="cadastrar()">
+              Cadastrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Fim do Bloco de Cadastro -->
+
+<!-- Início do Bloco de Cadastro -->
+
+<div class="limiter">
+<div class="container-login100">
+  <div class="wrap-login300">
+    <div class="login200-form validate-form">
+      <span class="login100-form-title p-b-26">
+        Torre 6
+      </span>
+      <div class="wrap-input100 validate-input">
+        <input class="input100" type="text" id="nome_input" name="nome_input" maxlength="8">
+        <span class="focus-input100" data-placeholder="CEP"></span>
+      </div>
+
+      <div class="wrap-input200 validate-input">
+        <legend class="input200">Componente 1</legend>
+        <div class="custom-select" style="width:200px;">
+          <select>
+            <option value="0">Selecione:</option>
+            <option value="1">CPU</option>
+            <option value="2">Memória RAM</option>
+            <option value="3">Disco Rígido</option>
+            <option value="4">Internet</option>
+            
+          </select>
+        </div>
+        
+      </div>
+      <div class="wrap-input200 validate-input">
+        <legend class="input200">Componente 2</legend>
+        <div class="custom-select" style="width:200px;">
+          <select>
+            <option value="0">Selecione:</option>
+            <option value="1">CPU</option>
+            <option value="2">Memória RAM</option>
+            <option value="3">Disco Rígido</option>
+            <option value="4">Internet</option>
+            
+          </select>
+        </div>
+        
+      </div>
+      <div class="wrap-input200 validate-input">
+        <legend class="input200">Componente 3</legend>
+        <div class="custom-select" style="width:200px;">
+          <select>
+            <option value="0">Selecione:</option>
+            <option value="1">CPU</option>
+            <option value="2">Memória RAM</option>
+            <option value="3">Disco Rígido</option>
+            <option value="4">Internet</option>
+            
+          </select>
+        </div>
+        
+      </div>
+       
+      <div class="container-login100-form-btn">
+        <div class="wrap-login100-form-btn">
+          <div class="login100-form-bgbtn"></div>
+          <button class="login100-form-btn" onclick="cadastrar()">
+            Cadastrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Fim do Bloco de Cadastro -->
+
+  <div class="modal-containerL" id="modal_container">
+    <div class="modalL">
+      <h2 id="titulo_m"></h2>
+      <p id="p_msg"></p>
+    </div>
+    <button class="button1L" id="close">X</button>
+  </div>
+
+  <div id="preloader"></div>
+
+</body>
+
+
+
+<!--===============================================================================================-->
+<script src="Cadastro/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="Cadastro/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+<script src="Cadastro/vendor/bootstrap/js/popper.js"></script>
+<script src="Cadastro/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="Cadastro/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="Cadastro/vendor/daterangepicker/moment.min.js"></script>
+<script src="Cadastro/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+<script src="Cadastro/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+<script src="Cadastro/js/main.js"></script>
+
+<!-- Vendor JS Files -->
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<!-- <script src="assets/vendor/php-email-form/validate.js"></script> -->
+
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
+<script src="js/funcoes.js"></script>
+<!-- Vendor JS Files -->
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
+
+
+</body>
+
+</html>
+<script>
+
+  function cadastrar() {
+
+    const open = document.getElementById('open');
+    const modal_container = document.getElementById('modal_container');
+    const close = document.getElementById('close');
+
+    var nomeVar = nome_input.value;
+    var cpfVar = cpf_input.value;
+    var emailVar = email_input.value;
+    var senhaVar = senha_input.value;
+    var length = senhaVar.length
+    var lengthCpf = cpfVar.length
+    var perfilVar = 3
+
+    if (nomeVar == "" || cpfVar == "" || emailVar == "" || senhaVar == "") {
+
+      titulo_m.innerHTML = ("Preencha todos os campos para prosseguir")
+
+      modal_container.classList.add('show');
+
+      close.addEventListener('click', () => {
+        modal_container.classList.remove('show');
+      });
+      return
+    }
+
+    if (lengthCpf < 11) {
+      titulo_m.innerHTML = ("Atenção! O CPF deve conter 11 dígitos.")
+
+      modal_container.classList.add('show');
+
+      close.addEventListener('click', () => {
+        modal_container.classList.remove('show');
+      });
+      return
+    }
+
+    if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1) {
+
+    titulo_m.innerHTML = ("E-mail inválido. Verifique e tente novamente.")
+
+    modal_container.classList.add('show');
+
+    close.addEventListener('click', () => {
+      modal_container.classList.remove('show');
+    });
+    return
+   }
+
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        cpfServer: cpfVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+        fkPerfilServer: perfilVar
+      })
+    }).then(function (resposta) {
+
+      console.log("resposta: ", resposta);
+
+      if (resposta.ok) {
+        setTimeout(() => {
+
+          titulo_m.innerHTML = ("Cadastro realizado com sucesso. Bem-vindo")
+          modal_container.classList.add('show');
+
+          close.addEventListener('click', () => {
+          modal_container.classList.remove('show');
+          });
+
+          window.location = "../login.html";
+        }, 3000)
+
+        // limparFormulario();
+        // finalizarAguardar();
+      } else {
+        throw ("Houve um erro ao tentar realizar o cadastro!");
+      }
+    }).catch(function (resposta) {
+      console.log(`#ERRO: ${resposta}`);
+    });
+
+    return false;
+
+
+  }
+
+
+</script>
+
+<script>
+  var x, i, j, l, ll, selElmnt, a, b, c;
+/*look for any elements with the class "custom-select":*/
+x = document.getElementsByClassName("custom-select");
+l = x.length;
+for (i = 0; i < l; i++) {
+  selElmnt = x[i].getElementsByTagName("select")[0];
+  ll = selElmnt.length;
+  /*for each element, create a new DIV that will act as the selected item:*/
+  a = document.createElement("DIV");
+  a.setAttribute("class", "select-selected");
+  a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+  x[i].appendChild(a);
+  /*for each element, create a new DIV that will contain the option list:*/
+  b = document.createElement("DIV");
+  b.setAttribute("class", "select-items select-hide");
+  for (j = 1; j < ll; j++) {
+    /*for each option in the original select element,
+    create a new DIV that will act as an option item:*/
+    c = document.createElement("DIV");
+    c.innerHTML = selElmnt.options[j].innerHTML;
+    c.addEventListener("click", function(e) {
+        /*when an item is clicked, update the original select box,
+        and the selected item:*/
+        var y, i, k, s, h, sl, yl;
+        s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+        sl = s.length;
+        h = this.parentNode.previousSibling;
+        for (i = 0; i < sl; i++) {
+          if (s.options[i].innerHTML == this.innerHTML) {
+            s.selectedIndex = i;
+            h.innerHTML = this.innerHTML;
+            y = this.parentNode.getElementsByClassName("same-as-selected");
+            yl = y.length;
+            for (k = 0; k < yl; k++) {
+              y[k].removeAttribute("class");
+            }
+            this.setAttribute("class", "same-as-selected");
+            break;
+          }
+        }
+        h.click();
+    });
+    b.appendChild(c);
+  }
+  x[i].appendChild(b);
+  a.addEventListener("click", function(e) {
+      /*when the select box is clicked, close any other select boxes,
+      and open/close the current select box:*/
+      e.stopPropagation();
+      closeAllSelect(this);
+      this.nextSibling.classList.toggle("select-hide");
+      this.classList.toggle("select-arrow-active");
+    });
+}
+function closeAllSelect(elmnt) {
+  /*a function that will close all select boxes in the document,
+  except the current select box:*/
+  var x, y, i, xl, yl, arrNo = [];
+  x = document.getElementsByClassName("select-items");
+  y = document.getElementsByClassName("select-selected");
+  xl = x.length;
+  yl = y.length;
+  for (i = 0; i < yl; i++) {
+    if (elmnt == y[i]) {
+      arrNo.push(i)
+    } else {
+      y[i].classList.remove("select-arrow-active");
+    }
+  }
+  for (i = 0; i < xl; i++) {
+    if (arrNo.indexOf(i)) {
+      x[i].classList.add("select-hide");
+    }
+  }
+}
+/*if the user clicks anywhere outside the select box,
+then close all select boxes:*/
+document.addEventListener("click", closeAllSelect);
+</script>
