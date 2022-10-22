@@ -69,6 +69,14 @@ function verificarTorres(fkEmpresa) {
     return database.executar(instrucao);
 }
 
+function verificarPlano(fkEmpresa) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", fkEmpresa)
+    var instrucao = `
+    SELECT Plano FROM Empresa WHERE idEmpresa = '${fkEmpresa}';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
 module.exports = {
     entrar,
     cadastrar,
@@ -76,5 +84,6 @@ module.exports = {
     cadastrarEmp,
     atualizarAdm,
     verificarTorres,
+    verificarPlano
     
 };
