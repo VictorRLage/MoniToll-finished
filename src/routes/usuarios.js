@@ -44,4 +44,8 @@ router.post("/CadastrarComponente", function (req, res) {
     usuarioController.CadastrarComponente(req, res);
 });
 
+router.post("/UltimaTorre", function (req, res) {
+    usuarioController.UltimaTorre(req, res);
+});
+
 module.exports = router;

@@ -130,27 +130,18 @@ function cadastrar(req, res) {
 }
 function CadastrarTorre(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
-    var nome = req.body.nomeServer;
-    var cpf = req.body.cpfServer;
-    var email = req.body.emailServer;
-    var senha = req.body.senhaServer;
-    var perfil = req.body.fkPerfilServer;
+    var fkEmpresa = req.body.fkEmpresaServer;
+    var loc = req.body.locServer;
 
     // Faça as validações dos valores
-    if (nome == undefined) {
-        res.status(400).send("Seu nome está undefined!");
-    } else if (cpf == undefined) {
-        res.status(400).send("Seu cpf está undefined!");
-    } else if (email == undefined) {
-        res.status(400).send("Sua email está undefined!");
-    } else if (senha == undefined) {
-        res.status(400).send("Seu senha está undefined!");
-    } else if (perfil == undefined) {
-        res.status(400).send("Seu perfil está undefined!");
+    if (fkEmpresa == undefined) {
+        res.status(400).send("Seu fkEmpresa está undefined!");
+    } else if (loc == undefined) {
+        res.status(400).send("Seu loc está undefined!");
     } else {
         
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, cpf, email, senha, perfil)
+        usuarioModel.CadastrarTorre(loc,fkEmpresa)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -159,7 +150,39 @@ function CadastrarTorre(req, res) {
                 function (erro) {
                     console.log(erro);
                     console.log(
-                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        "\nHouve um erro ao realizar o cadastro da torre! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+
+function CadastrarComponente(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var fkTorre = req.body.fkTorreServer;
+    var fkComponente = req.body.fkComponenteServer;
+
+    // Faça as validações dos valores
+    if (fkTorre == undefined) {
+        res.status(400).send("Seu fkTorre está undefined!");
+    } else if (fkComponente == undefined) {
+        res.status(400).send("Seu fkComponente está undefined!");
+    } else {
+        
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.CadastrarComponente(fkTorre,fkComponente)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro da torre! Erro: ",
                         erro.sqlMessage
                     );
                     res.status(500).json(erro.sqlMessage);
@@ -236,8 +259,7 @@ function atualizarAdm(req, res) {
                     res.status(500).json(erro.sqlMessage);
                 }
             );
-    }
-}
+    }}
 function verificarTorres(req, res) {
     var fkEmpresa = req.body.fkEmpresaServer;
     
@@ -265,9 +287,37 @@ usuarioModel.verificarTorres(fkEmpresa)
             res.status(500).json(erro.sqlMessage);
         }
     );
-}
+}}
 
-}
+
+function UltimaTorre(req, res) {
+    var fkEmpresa = req.body.fkEmpresaServer;
+    
+    if(fkEmpresa == undefined) {
+        res.status(400).send("Seu fkEmpresa está undefined!");
+    }else {
+        
+usuarioModel.UltimaTorre(fkEmpresa)
+    .then(
+        function (resultado) {
+            console.log(`\nResultados encontrados: ${resultado.length}`);
+            console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
+
+            if (resultado.length != 0) {
+                console.log(resultado);
+                res.json(resultado[resultado.length - 1]);
+            } else if (resultado.length == 0) {
+                res.status(403).send("Não tem torre");
+            }
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}}
 
 
 
@@ -279,5 +329,8 @@ module.exports = {
     cadastrarEmp,
     atualizarAdm,
     verificarTorres,
-    verificarPlano
+    verificarPlano,
+    CadastrarTorre,
+    UltimaTorre,
+    CadastrarComponente
 }

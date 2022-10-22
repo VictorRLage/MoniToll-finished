@@ -77,6 +77,43 @@ function verificarPlano(fkEmpresa) {
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
+
+function CadastrarTorre(loc,fkEmpresa) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarP():",loc, fkEmpresa);
+
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+    INSERT INTO Torre(Localização,SerialID,SO,Maquina,Processador,Disco,Ram,fkEmpresa) values  ('${loc}','','','','','','', '${fkEmpresa}');
+    `;
+    
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function UltimaTorre(fkEmpresa) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", fkEmpresa)
+    var instrucao = `
+    SELECT * FROM Torre WHERE fkEmpresa = '${fkEmpresa}';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function CadastrarComponente(fkTorre,fkComponente) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarP():",fkTorre,fkComponente);
+
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+    INSERT INTO Torre_Componente values  ('${fkTorre}','${fkComponente}');
+    `;
+    
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
 module.exports = {
     entrar,
     cadastrar,
@@ -84,6 +121,9 @@ module.exports = {
     cadastrarEmp,
     atualizarAdm,
     verificarTorres,
-    verificarPlano
+    verificarPlano,
+    CadastrarTorre,
+    UltimaTorre,
+    CadastrarComponente
     
 };

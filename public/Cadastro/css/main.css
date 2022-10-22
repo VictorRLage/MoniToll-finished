@@ -551,6 +551,7 @@ iframe {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
+  z-index: 2;
 }
 
 .modal-containerL.show {
@@ -625,6 +626,15 @@ iframe {
   background-color: white;
   width: 500px;
   height: 490px;
+  max-width: 100%;
+  padding: 30px 60px;
+  border-radius: 15px;
+  text-align: center;
+}
+.modalL2-servidor {
+  background-color: white;
+  width: 500px;
+  height: 300px;
   max-width: 100%;
   padding: 30px 60px;
   border-radius: 15px;
