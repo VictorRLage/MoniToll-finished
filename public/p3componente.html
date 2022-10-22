@@ -5,22 +5,23 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
- 
+
   <style>
     /*the container must be positioned relative:*/
     .custom-select {
       position: relative;
       font-family: Arial;
     }
-    
+
     .custom-select select {
-      display: none; /*hide original SELECT element:*/
+      display: none;
+      /*hide original SELECT element:*/
     }
-    
+
     .select-selected {
       background-color: #adadad;
     }
-    
+
     /*style the arrow inside the select element:*/
     .select-selected:after {
       position: absolute;
@@ -32,15 +33,16 @@
       border: 6px solid transparent;
       border-color: #fff transparent transparent transparent;
     }
-    
+
     /*point the arrow upwards when the select box is open (active):*/
     .select-selected.select-arrow-active:after {
       border-color: transparent transparent #fff transparent;
       top: 7px;
     }
-    
+
     /*style the items (options), including the selected item:*/
-    .select-items div,.select-selected {
+    .select-items div,
+    .select-selected {
       color: #ffffff;
       padding: 8px 16px;
       border: 1px solid transparent;
@@ -48,7 +50,7 @@
       cursor: pointer;
       user-select: none;
     }
-    
+
     /*style items (options):*/
     .select-items {
       position: absolute;
@@ -58,18 +60,19 @@
       right: 0;
       z-index: 99;
     }
-    
+
     /*hide the items when the select box is closed:*/
     .select-hide {
       display: none;
     }
-    
-    .select-items div:hover, .same-as-selected {
+
+    .select-items div:hover,
+    .same-as-selected {
       background-color: rgba(0, 0, 0, 0.1);
     }
-    </style>
+  </style>
 
-  <title>MoniToll - Bem-Vindo!</title>
+  <title>MoniToll - Cadastro Servidor Plano 2</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -132,40 +135,6 @@
     </div>
   </header><!-- End Header -->
 
-<!-- Início do Bloco de Cadastro -->
-
-  <div class="limiter">
-    <div class="container-login100">
-      <div class="wrap-login400">
-        <div class="login200-form validate-form">
-          <span class="login100-form-title p-b-26">
-            Torre 1
-          </span>
-          <div class="wrap-input100 validate-input">
-            <input class="input100" type="text" id="nome_input" name="nome_input" maxlength="8">
-            <span class="focus-input100" data-placeholder="CEP"></span>
-          </div>
-
-          <div class="wrap-input100 validate-input">
-            <input type="checkbox"  class="" maxlength="" id="desbloqueados" name="desbloqueados" checked disabled>
-            <label for="componente_cb">Todos os Componentes Ativos!</label> <br>
-            </div>
-           
-          <div class="container-login100-form-btn">
-            <div class="wrap-login100-form-btn">
-              <div class="login100-form-bgbtn"></div>
-              <button class="login100-form-btn" onclick="cadastrar()">
-                Cadastrar
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Fim do Bloco de Cadastro -->
-
   <!-- Início do Bloco de Cadastro -->
 
   <div class="limiter">
@@ -173,22 +142,70 @@
       <div class="wrap-login400">
         <div class="login200-form validate-form">
           <span class="login100-form-title p-b-26">
-            Torre 2
+            Servidor 1
           </span>
           <div class="wrap-input100 validate-input">
-            <input class="input100" type="text" id="nome_input" name="nome_input" maxlength="8">
-            <span class="focus-input100" data-placeholder="CEP"></span>
+            <input class="input100" type="text" id="loc1_input">
+            <span class="focus-input100" data-placeholder="Localização do servidor"></span>
           </div>
 
-          <div class="wrap-input100 validate-input">
-            <input type="checkbox"  class="" maxlength="" id="desbloqueados" name="desbloqueados" checked disabled>
-            <label for="componente_cb">Todos os Componentes Ativos!</label> <br>
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 1</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select1t1">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
           </div>
-           
+
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 2</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select2t1">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 3</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select3t1">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 4</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select4t1">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
           <div class="container-login100-form-btn">
             <div class="wrap-login100-form-btn">
               <div class="login100-form-bgbtn"></div>
-              <button class="login100-form-btn" onclick="cadastrar()">
+              <button class="login100-form-btn" onclick="Servidor1()">
                 Cadastrar
               </button>
             </div>
@@ -198,351 +215,963 @@
     </div>
   </div>
 
-  <!-- Fim do Bloco de Cadastro -->
 
- <!-- Início do Bloco de Cadastro -->
 
- <div class="limiter">
-  <div class="container-login100">
-    <div class="wrap-login400">
-      <div class="login200-form validate-form">
-        <span class="login100-form-title p-b-26">
-          Torre 3
-        </span>
-        <div class="wrap-input100 validate-input">
-          <input class="input100" type="text" id="nome_input" name="nome_input" maxlength="8">
-          <span class="focus-input100" data-placeholder="CEP"></span>
-        </div>
 
-        <div class="wrap-input100 validate-input">
-          <input type="checkbox"  class="" maxlength="" id="desbloqueados" name="desbloqueados" checked disabled>
-          <label for="componente_cb">Todos os Componentes Ativos!</label> <br>
-        </div>
-         
-        <div class="container-login100-form-btn">
-          <div class="wrap-login100-form-btn">
-            <div class="login100-form-bgbtn"></div>
-            <button class="login100-form-btn" onclick="cadastrar()">
-              Cadastrar
-            </button>
+
+
+
+
+
+
+
+  <!-------------------------------------------------------- Servidor 2 ------------------------------------------------------------->
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login400">
+        <div class="login200-form validate-form">
+          <span class="login100-form-title p-b-26">
+            Servidor 2
+          </span>
+          <div class="wrap-input100 validate-input">
+            <input class="input100" type="text" id="loc2_input">
+            <span class="focus-input100" data-placeholder="Localização do servidor"></span>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 1</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select1t2">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 2</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select2t2">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 3</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select3t2">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 4</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select4t2">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="container-login100-form-btn">
+            <div class="wrap-login100-form-btn">
+              <div class="login100-form-bgbtn"></div>
+              <button class="login100-form-btn" onclick="Servidor2()">
+                Cadastrar
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Fim do Bloco de Cadastro -->
-<!-- Início do Bloco de Cadastro -->
 
-<div class="limiter">
-  <div class="container-login100">
-    <div class="wrap-login400">
-      <div class="login200-form validate-form">
-        <span class="login100-form-title p-b-26">
-          Torre 4
-        </span>
-        <div class="wrap-input100 validate-input">
-          <input class="input100" type="text" id="nome_input" name="nome_input" maxlength="8">
-          <span class="focus-input100" data-placeholder="CEP"></span>
-        </div>
 
-        <div class="wrap-input100 validate-input">
-          <input type="checkbox"  class="" maxlength="" id="desbloqueados" name="desbloqueados" checked disabled>
-          <label for="componente_cb">Todos os Componentes Ativos!</label> <br>
-        </div>
-         
-        <div class="container-login100-form-btn">
-          <div class="wrap-login100-form-btn">
-            <div class="login100-form-bgbtn"></div>
-            <button class="login100-form-btn" onclick="cadastrar()">
-              Cadastrar
-            </button>
+
+
+
+
+
+  <!-------------------------------------------------------- Servidor 3 ------------------------------------------------------------->
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login400">
+        <div class="login200-form validate-form">
+          <span class="login100-form-title p-b-26">
+            Servidor 3
+          </span>
+          <div class="wrap-input100 validate-input">
+            <input class="input100" type="text" id="loc3_input">
+            <span class="focus-input100" data-placeholder="Localização do servidor"></span>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 1</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select1t3">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 2</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select2t3">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 3</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select3t3">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 4</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select4t3">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="container-login100-form-btn">
+            <div class="wrap-login100-form-btn">
+              <div class="login100-form-bgbtn"></div>
+              <button class="login100-form-btn" onclick="Servidor3()">
+                Cadastrar
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Fim do Bloco de Cadastro -->
 
-<!-- Início do Bloco de Cadastro -->
 
-<div class="limiter">
-  <div class="container-login100">
-    <div class="wrap-login400">
-      <div class="login200-form validate-form">
-        <span class="login100-form-title p-b-26">
-          Torre 5
-        </span>
-        <div class="wrap-input100 validate-input">
-          <input class="input100" type="text" id="nome_input" name="nome_input" maxlength="8">
-          <span class="focus-input100" data-placeholder="CEP"></span>
-        </div>
 
-        <div class="wrap-input100 validate-input">
-          <input type="checkbox"  class="" maxlength="" id="desbloqueados" name="desbloqueados" checked disabled>
-          <label for="componente_cb">Todos os Componentes Ativos!</label> <br>
-        </div>
-         
-        <div class="container-login100-form-btn">
-          <div class="wrap-login100-form-btn">
-            <div class="login100-form-bgbtn"></div>
-            <button class="login100-form-btn" onclick="cadastrar()">
-              Cadastrar
-            </button>
+
+
+
+
+
+
+  <!-------------------------------------------------------- Servidor 4 ------------------------------------------------------------->
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login400">
+        <div class="login200-form validate-form">
+          <span class="login100-form-title p-b-26">
+            Servidor 4
+          </span>
+          <div class="wrap-input100 validate-input">
+            <input class="input100" type="text" id="loc4_input">
+            <span class="focus-input100" data-placeholder="Localização do servidor"></span>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 1</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select1t4">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 2</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select2t4">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 3</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select3t4">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 4</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select4t4">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="container-login100-form-btn">
+            <div class="wrap-login100-form-btn">
+              <div class="login100-form-bgbtn"></div>
+              <button class="login100-form-btn" onclick="Servidor4()">
+                Cadastrar
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Fim do Bloco de Cadastro -->
 
-<!-- Início do Bloco de Cadastro -->
 
-<div class="limiter">
-<div class="container-login100">
-  <div class="wrap-login400">
-    <div class="login200-form validate-form">
-      <span class="login100-form-title p-b-26">
-        Torre 6
-      </span>
-      <div class="wrap-input100 validate-input">
-        <input class="input100" type="text" id="nome_input" name="nome_input" maxlength="8">
-        <span class="focus-input100" data-placeholder="CEP"></span>
-      </div>
 
-      <div class="wrap-input100 validate-input">
-        <input type="checkbox"  class="" maxlength="" id="desbloqueados" name="desbloqueados" checked disabled>
-        <label for="componente_cb">Todos os Componentes Ativos!</label> <br>
-      </div>
 
-      <div class="container-login100-form-btn">
-        <div class="wrap-login100-form-btn">
-          <div class="login100-form-bgbtn"></div>
-          <button class="login100-form-btn" onclick="cadastrar()">
-            Cadastrar
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
 
-<!-- Fim do Bloco de Cadastro -->
-<!-- Início do Bloco de Cadastro -->
 
-<div class="limiter">
-  <div class="container-login100">
-    <div class="wrap-login400">
-      <div class="login200-form validate-form">
-        <span class="login100-form-title p-b-26">
-          Torre 7
-        </span>
-        <div class="wrap-input100 validate-input">
-          <input class="input100" type="text" id="nome_input" name="nome_input" maxlength="8">
-          <span class="focus-input100" data-placeholder="CEP"></span>
-        </div>
 
-        <div class="wrap-input100 validate-input">
-          <input type="checkbox"  class="" maxlength="" id="desbloqueados" name="desbloqueados" checked disabled>
-          <label for="componente_cb">Todos os Componentes Ativos!</label> <br>
-        </div>
-         
-        <div class="container-login100-form-btn">
-          <div class="wrap-login100-form-btn">
-            <div class="login100-form-bgbtn"></div>
-            <button class="login100-form-btn" onclick="cadastrar()">
-              Cadastrar
-            </button>
+  <!-------------------------------------------------------- Servidor 5 ------------------------------------------------------------->
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login400">
+        <div class="login200-form validate-form">
+          <span class="login100-form-title p-b-26">
+            Servidor 5
+          </span>
+          <div class="wrap-input100 validate-input">
+            <input class="input100" type="text" id="loc5_input">
+            <span class="focus-input100" data-placeholder="Localização do servidor"></span>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 1</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select1t5">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 2</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select2t5">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 3</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select3t5">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 4</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select4t5">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="container-login100-form-btn">
+            <div class="wrap-login100-form-btn">
+              <div class="login100-form-bgbtn"></div>
+              <button class="login100-form-btn" onclick="Servidor5()">
+                Cadastrar
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Fim do Bloco de Cadastro -->
 
-<!-- Início do Bloco de Cadastro -->
 
-<div class="limiter">
-  <div class="container-login100">
-    <div class="wrap-login400">
-      <div class="login200-form validate-form">
-        <span class="login100-form-title p-b-26">
-          Torre 8
-        </span>
-        <div class="wrap-input100 validate-input">
-          <input class="input100" type="text" id="nome_input" name="nome_input" maxlength="8">
-          <span class="focus-input100" data-placeholder="CEP"></span>
-        </div>
 
-        <div class="wrap-input100 validate-input">
-          <input type="checkbox"  class="" maxlength="" id="desbloqueados" name="desbloqueados" checked disabled>
-          <label for="componente_cb">Todos os Componentes Ativos!</label> <br>
-        </div>
-         
-        <div class="container-login100-form-btn">
-          <div class="wrap-login100-form-btn">
-            <div class="login100-form-bgbtn"></div>
-            <button class="login100-form-btn" onclick="cadastrar()">
-              Cadastrar
-            </button>
+
+
+
+
+
+
+  <!-------------------------------------------------------- Servidor 6 ------------------------------------------------------------->
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login400">
+        <div class="login200-form validate-form">
+          <span class="login100-form-title p-b-26">
+            Servidor 6
+          </span>
+          <div class="wrap-input100 validate-input">
+            <input class="input100" type="text" id="loc6_input">
+            <span class="focus-input100" data-placeholder="Localização do servidor"></span>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 1</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select1t6">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 2</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select2t6">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 3</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select3t6">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 4</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select4t6">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="container-login100-form-btn">
+            <div class="wrap-login100-form-btn">
+              <div class="login100-form-bgbtn"></div>
+              <button class="login100-form-btn" onclick="Servidor6()">
+                Cadastrar
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Fim do Bloco de Cadastro -->
 
-<!-- Início do Bloco de Cadastro -->
+  <!-------------------------------------------------------- Servidor 7 ------------------------------------------------------------->
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login400">
+        <div class="login200-form validate-form">
+          <span class="login100-form-title p-b-26">
+            Servidor 7
+          </span>
+          <div class="wrap-input100 validate-input">
+            <input class="input100" type="text" id="loc7_input">
+            <span class="focus-input100" data-placeholder="Localização do servidor"></span>
+          </div>
 
-<div class="limiter">
-<div class="container-login100">
-  <div class="wrap-login400">
-    <div class="login200-form validate-form">
-      <span class="login100-form-title p-b-26">
-        Torre 9
-      </span>
-      <div class="wrap-input100 validate-input">
-        <input class="input100" type="text" id="nome_input" name="nome_input" maxlength="8">
-        <span class="focus-input100" data-placeholder="CEP"></span>
-      </div>
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 1</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select1t7">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
 
-      <div class="wrap-input100 validate-input">
-        <input type="checkbox"  class="" maxlength="" id="desbloqueados" name="desbloqueados" checked disabled>
-        <label for="componente_cb">Todos os Componentes Ativos!</label> <br>
-      </div>
-       
-      <div class="container-login100-form-btn">
-        <div class="wrap-login100-form-btn">
-          <div class="login100-form-bgbtn"></div>
-          <button class="login100-form-btn" onclick="cadastrar()">
-            Cadastrar
-          </button>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 2</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select2t7">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 3</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select3t7">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 4</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select4t7">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="container-login100-form-btn">
+            <div class="wrap-login100-form-btn">
+              <div class="login100-form-bgbtn"></div>
+              <button class="login100-form-btn" onclick="Servidor7()">
+                Cadastrar
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-</div>
 
-<!-- Fim do Bloco de Cadastro -->
-<!-- Início do Bloco de Cadastro -->
 
-<div class="limiter">
-<div class="container-login100">
-  <div class="wrap-login400">
-    <div class="login200-form validate-form">
-      <span class="login100-form-title p-b-26">
-        Torre 10
-      </span>
-      <div class="wrap-input100 validate-input">
-        <input class="input100" type="text" id="nome_input" name="nome_input" maxlength="8">
-        <span class="focus-input100" data-placeholder="CEP"></span>
-      </div>
 
-      <div class="wrap-input100 validate-input">
-        <input type="checkbox"  class="" maxlength="" id="desbloqueados" name="desbloqueados" checked disabled>
-        <label for="componente_cb">Todos os Componentes Ativos!</label> <br>
-      </div>
 
-      <div class="container-login100-form-btn">
-        <div class="wrap-login100-form-btn">
-          <div class="login100-form-bgbtn"></div>
-          <button class="login100-form-btn" onclick="cadastrar()">
-            Cadastrar
-          </button>
+
+
+
+  <!-------------------------------------------------------- Servidor 8 ------------------------------------------------------------->
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login400">
+        <div class="login200-form validate-form">
+          <span class="login100-form-title p-b-26">
+            Servidor 8
+          </span>
+          <div class="wrap-input100 validate-input">
+            <input class="input100" type="text" id="loc8_input">
+            <span class="focus-input100" data-placeholder="Localização do servidor"></span>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 1</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select1t8">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 2</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select2t8">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 3</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select3t8">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 4</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select4t8">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="container-login100-form-btn">
+            <div class="wrap-login100-form-btn">
+              <div class="login100-form-bgbtn"></div>
+              <button class="login100-form-btn" onclick="Servidor8()">
+                Cadastrar
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-</div>
 
-<!-- Fim do Bloco de Cadastro -->
 
-<!-- Início do Bloco de Cadastro -->
 
-<div class="limiter">
-<div class="container-login100">
-  <div class="wrap-login400">
-    <div class="login200-form validate-form">
-      <span class="login100-form-title p-b-26">
-        Torre 11
-      </span>
-      <div class="wrap-input100 validate-input">
-        <input class="input100" type="text" id="nome_input" name="nome_input" maxlength="8">
-        <span class="focus-input100" data-placeholder="CEP"></span>
-      </div>
 
-      <div class="wrap-input100 validate-input">
-        <input type="checkbox"  class="" maxlength="" id="desbloqueados" name="desbloqueados" checked disabled>
-        <label for="componente_cb">Todos os Componentes Ativos!</label> <br>
-      </div>
-       
-      <div class="container-login100-form-btn">
-        <div class="wrap-login100-form-btn">
-          <div class="login100-form-bgbtn"></div>
-          <button class="login100-form-btn" onclick="cadastrar()">
-            Cadastrar
-          </button>
+
+  <!-------------------------------------------------------- Servidor 9 ------------------------------------------------------------->
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login400">
+        <div class="login200-form validate-form">
+          <span class="login100-form-title p-b-26">
+            Servidor 9
+          </span>
+          <div class="wrap-input100 validate-input">
+            <input class="input100" type="text" id="loc9_input">
+            <span class="focus-input100" data-placeholder="Localização do servidor"></span>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 1</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select1t9">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 2</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select2t9">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 3</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select3t9">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 4</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select4t9">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="container-login100-form-btn">
+            <div class="wrap-login100-form-btn">
+              <div class="login100-form-bgbtn"></div>
+              <button class="login100-form-btn" onclick="Servidor9()">
+                Cadastrar
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-</div>
 
-<!-- Fim do Bloco de Cadastro -->
 
-<!-- Início do Bloco de Cadastro -->
 
-<div class="limiter">
-<div class="container-login100">
-<div class="wrap-login400">
-  <div class="login200-form validate-form">
-    <span class="login100-form-title p-b-26">
-      Torre 12
-    </span>
-    <div class="wrap-input100 validate-input">
-      <input class="input100" type="text" id="nome_input" name="nome_input" maxlength="8">
-      <span class="focus-input100" data-placeholder="CEP"></span>
-    </div>
 
-    <div class="wrap-input100 validate-input">
-      <input type="checkbox"  class="" maxlength="" id="desbloqueados" name="desbloqueados" checked disabled>
-      <label for="componente_cb">Todos os Componentes Ativos!</label> <br>
-      </div>
-     
-    <div class="container-login100-form-btn">
-      <div class="wrap-login100-form-btn">
-        <div class="login100-form-bgbtn"></div>
-        <button class="login100-form-btn" onclick="cadastrar()">
-          Cadastrar
-        </button>
+
+
+
+
+  <!-------------------------------------------------------- Servidor 10 ------------------------------------------------------------->
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login400">
+        <div class="login200-form validate-form">
+          <span class="login100-form-title p-b-26">
+            Servidor 10
+          </span>
+          <div class="wrap-input100 validate-input">
+            <input class="input100" type="text" id="loc10_input">
+            <span class="focus-input100" data-placeholder="Localização do servidor"></span>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 1</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select1t10">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 2</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select2t10">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 3</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select3t10">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 4</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select4t10">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="container-login100-form-btn">
+            <div class="wrap-login100-form-btn">
+              <div class="login100-form-bgbtn"></div>
+              <button class="login100-form-btn" onclick="Servidor10()">
+                Cadastrar
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-</div>
-</div>
 
-<!-- Fim do Bloco de Cadastro -->
 
-  <div class="modal-containerL" id="modal_container">
+
+
+
+
+
+
+
+  <!-------------------------------------------------------- Servidor 11 ------------------------------------------------------------->
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login400">
+        <div class="login200-form validate-form">
+          <span class="login100-form-title p-b-26">
+            Servidor 11
+          </span>
+          <div class="wrap-input100 validate-input">
+            <input class="input100" type="text" id="loc11_input">
+            <span class="focus-input100" data-placeholder="Localização do servidor"></span>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 1</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select1t11">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 2</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select2t11">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 3</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select3t11">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 4</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select4t11">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="container-login100-form-btn">
+            <div class="wrap-login100-form-btn">
+              <div class="login100-form-bgbtn"></div>
+              <button class="login100-form-btn" onclick="Servidor11()">
+                Cadastrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <!-------------------------------------------------------- Servidor 12 ------------------------------------------------------------->
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login400">
+        <div class="login200-form validate-form">
+          <span class="login100-form-title p-b-26">
+            Servidor 12
+          </span>
+          <div class="wrap-input100 validate-input">
+            <input class="input100" type="text" id="loc12_input">
+            <span class="focus-input100" data-placeholder="Localização do servidor"></span>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 1</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select1t12">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 2</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select2t12">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 3</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select3t12">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Componente 4</legend>
+            <div class="custom-select" style="width:200px;">
+              <select id="select4t12">
+                <option value="0">Selecione:</option>
+                <option value="1">CPU</option>
+                <option value="2">Memória RAM</option>
+                <option value="3">Disco Rígido</option>
+                <option value="4">Internet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="container-login100-form-btn">
+            <div class="wrap-login100-form-btn">
+              <div class="login100-form-bgbtn"></div>
+              <button class="login100-form-btn" onclick="Servidor12()">
+                Cadastrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="modal-containerL" id="modal1">
     <div class="modalL">
-      <h2 id="titulo_m"></h2>
-      <p id="p_msg"></p>
+      <h2 id="titulo1"></h2>
+      <p id="p1"></p>
     </div>
-    <button class="button1L" id="close">X</button>
+    <button class="button1L" id="close1">X</button>
   </div>
 
   <div id="preloader"></div>
@@ -597,126 +1226,456 @@
 
 </html>
 <script>
+  var vetor_componenteSel1 = []
+  var vetor_componenteSel2 = []
+  var vetor_componenteSel3 = []
+  var vetor_componenteSel4 = []
+  var fkEmpresaVar = sessionStorage.FK_EMPRESA
+  var inseriuComponentes = false
 
-  function cadastrar() {
+  // servidor 1 
+  function Servidor1() {
+    var loc = loc1_input.value
+    var comp1 = select1t1.value
+    var comp2 = select2t1.value
+    var comp3 = select3t1.value
+    var comp4 = select4t1.value
+    ValidarSelect(loc, comp1, comp2, comp3, comp4)
+  }
 
+
+  // servidor 2
+  function Servidor2() {
+    var loc = loc2_input.value
+    var comp1 = select1t2.value
+    var comp2 = select2t2.value
+    var comp3 = select3t2.value
+    var comp4 = select4t2.value
+    ValidarSelect(loc, comp1, comp2, comp3, comp4)
+  }
+
+
+  // servidor 3
+  function Servidor3() {
+    var loc = loc3_input.value
+    var comp1 = select1t3.value
+    var comp2 = select2t3.value
+    var comp3 = select3t3.value
+    var comp4 = select4t3.value
+    ValidarSelect(loc, comp1, comp2, comp3, comp4)
+  }
+
+  // servidor 4
+  function Servidor4() {
+    var loc = loc4_input.value
+    var comp1 = select1t4.value
+    var comp2 = select2t4.value
+    var comp3 = select3t4.value
+    var comp4 = select4t4.value
+    ValidarSelect(loc, comp1, comp2, comp3, comp4)
+  }
+
+  // servidor 5
+  function Servidor5() {
+    var loc = loc5_input.value
+    var comp1 = select1t5.value
+    var comp2 = select2t5.value
+    var comp3 = select3t5.value
+    var comp4 = select4t5.value
+    ValidarSelect(loc, comp1, comp2, comp3, comp4)
+  }
+
+
+  // servidor 6
+  function Servidor6() {
+    var loc = loc6_input.value
+    var comp1 = select1t6.value
+    var comp2 = select2t6.value
+    var comp3 = select3t6.value
+    var comp4 = select4t6.value
+    ValidarSelect(loc, comp1, comp2, comp3, comp4)
+  }
+
+
+  // servidor 7
+  function Servidor7() {
+    var loc = loc7_input.value
+    var comp1 = select1t7.value
+    var comp2 = select2t7.value
+    var comp3 = select3t7.value
+    var comp4 = select4t7.value
+    ValidarSelect(loc, comp1, comp2, comp3, comp4)
+  }
+
+
+  // servidor 8
+  function Servidor8() {
+    var loc = loc8_input.value
+    var comp1 = select1t8.value
+    var comp2 = select2t8.value
+    var comp3 = select3t8.value
+    var comp4 = select4t8.value
+    ValidarSelect(loc, comp1, comp2, comp3, comp4)
+  }
+
+
+
+  // servidor 9
+  function Servidor9() {
+    var loc = loc9_input.value
+    var comp1 = select1t9.value
+    var comp2 = select2t9.value
+    var comp3 = select3t9.value
+    var comp4 = select4t9.value
+    ValidarSelect(loc, comp1, comp2, comp3, comp4)
+  }
+
+
+  // servidor 10
+  function Servidor10() {
+    var loc = loc10_input.value
+    var comp1 = select1t10.value
+    var comp2 = select2t10.value
+    var comp3 = select3t10.value
+    var comp4 = select4t10.value
+    ValidarSelect(loc, comp1, comp2, comp3, comp4)
+  }
+
+  // servidor 11
+  function Servidor11() {
+    var loc = loc11_input.value
+    var comp1 = select1t11.value
+    var comp2 = select2t11.value
+    var comp3 = select3t11.value
+    var comp4 = select4t11.value
+    ValidarSelect(loc, comp1, comp2, comp3, comp4)
+  }
+
+
+  // servidor 12
+  function Servidor12() {
+    var loc = loc12_input.value
+    var comp1 = select1t12.value
+    var comp2 = select2t12.value
+    var comp3 = select3t12.value
+    var comp4 = select4t12.value
+    ValidarSelect(loc, comp1, comp2, comp3, comp4)
+  }
+
+
+
+
+
+
+
+  function ValidarSelect(loc, comp1, comp2, comp3, comp4) {
     const open = document.getElementById('open');
-    const modal_container = document.getElementById('modal_container');
-    const close = document.getElementById('close');
+    const modal_container = document.getElementById('modal1');
+    const close = document.getElementById('close1');
+    var locVar = loc
+    var comp1Var = comp1
+    var comp2Var = comp2
+    var comp3Var = comp3
+    var comp4Var = comp4
 
-    var nomeVar = nome_input.value;
-    var cpfVar = cpf_input.value;
-    var emailVar = email_input.value;
-    var senhaVar = senha_input.value;
-    var length = senhaVar.length
-    var lengthCpf = cpfVar.length
-    var perfilVar = 3
 
-    if (nomeVar == "" || cpfVar == "" || emailVar == "" || senhaVar == "") {
 
-      titulo_m.innerHTML = ("Preencha todos os campos para prosseguir")
-
-      modal_container.classList.add('show');
-
-      close.addEventListener('click', () => {
-        modal_container.classList.remove('show');
-      });
-      return
-    }
-
-    if (lengthCpf < 11) {
-      titulo_m.innerHTML = ("Atenção! O CPF deve conter 11 dígitos.")
+    if (locVar == "") {
+      titulo1.innerHTML = `Informe localização e os selecione os componentes para prosseguir.`
+      p1.innerHTML = ``
 
       modal_container.classList.add('show');
 
       close.addEventListener('click', () => {
         modal_container.classList.remove('show');
       });
-      return
+    } else {
+      CadastrarServidor(locVar, comp1Var, comp2Var, comp3Var, comp4Var)
+    }
+  }
+
+
+  function CadastrarServidor(loc, comp1, comp2, comp3, comp4) {
+    const open = document.getElementById('open');
+    const modal_container = document.getElementById('modal1');
+    const closeC = document.getElementById('close1');
+    var locVar = loc
+    var comp1Var = comp1
+    var comp2Var = comp2
+    var comp3Var = comp3
+    var comp4Var = comp4
+
+
+    // grupo de componentes 1
+    if (comp1Var == 1) {
+      vetor_componenteSel1.push(1, 2)
+    } else if (comp1Var == 2) {
+      vetor_componenteSel1.push(3, 4, 5)
+    } else if (comp1Var == 3) {
+      vetor_componenteSel1.push(6, 7, 8, 9)
+    } else if (comp1Var == 4) {
+      vetor_componenteSel1.push(10, 11, 12)
+    }
+    // grupo de componentes 2
+    if (comp2Var == 1) {
+      vetor_componenteSel2.push(1, 2)
+    } else if (comp2Var == 2) {
+      vetor_componenteSel2.push(3, 4, 5)
+    } else if (comp2Var == 3) {
+      vetor_componenteSel2.push(6, 7, 8, 9)
+    } else if (comp2Var == 4) {
+      vetor_componenteSel2.push(10, 11, 12)
     }
 
-    if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1) {
+    // grupo de componentes 3
+    if (comp3Var == 1) {
+      vetor_componenteSel3.push(1, 2)
+    } else if (comp3Var == 2) {
+      vetor_componenteSel3.push(3, 4, 5)
+    } else if (comp3Var == 3) {
+      vetor_componenteSel3.push(6, 7, 8, 9)
+    } else if (comp3Var == 4) {
+      vetor_componenteSel3.push(10, 11, 12)
+    }
 
-    titulo_m.innerHTML = ("E-mail inválido. Verifique e tente novamente.")
+    // grupo de componentes 4
+    if (comp4Var == 1) {
+      vetor_componenteSel4.push(1, 2)
+    } else if (comp4Var == 2) {
+      vetor_componenteSel4.push(3, 4, 5)
+    } else if (comp4Var == 3) {
+      vetor_componenteSel4.push(6, 7, 8, 9)
+    } else if (comp4Var == 4) {
+      vetor_componenteSel4.push(10, 11, 12)
+    }
 
-    modal_container.classList.add('show');
-
-    close.addEventListener('click', () => {
-      modal_container.classList.remove('show');
-    });
-    return
-   }
-
-    fetch("/usuarios/cadastrar", {
+    // --------------------------------- inserir torre
+    fetch("/usuarios/CadastrarTorre", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        nomeServer: nomeVar,
-        cpfServer: cpfVar,
-        emailServer: emailVar,
-        senhaServer: senhaVar,
-        fkPerfilServer: perfilVar
+        fkEmpresaServer: fkEmpresaVar,
+        locServer: locVar,
       })
     }).then(function (resposta) {
 
       console.log("resposta: ", resposta);
 
       if (resposta.ok) {
-        setTimeout(() => {
-
-          titulo_m.innerHTML = ("Cadastro realizado com sucesso. Bem-vindo")
-          modal_container.classList.add('show');
-
-          close.addEventListener('click', () => {
-          modal_container.classList.remove('show');
-          });
-
-          window.location = "../login.html";
-        }, 3000)
-
-        // limparFormulario();
-        // finalizarAguardar();
+        setTimeout(function () {
+          CadastrarComponente()
+        }, 4000);
       } else {
-        throw ("Houve um erro ao tentar realizar o cadastro!");
+        alert('Houve um erro ao tentar realizar o cadastro da torre!')
+        throw ("Houve um erro ao tentar realizar o cadastro da torre!");
       }
     }).catch(function (resposta) {
       console.log(`#ERRO: ${resposta}`);
     });
 
-    return false;
 
+    setTimeout(function () {
 
+      // ------------------------ pegar ultima torre
+      fetch("/usuarios/UltimaTorre", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          fkEmpresaServer: fkEmpresaVar,
+        })
+      }).then(function (resposta) {
+
+        if (resposta.ok) {
+          console.log(resposta);
+
+          resposta.json().then(json => {
+            console.log(json);
+            console.log(JSON.stringify(json));
+            sessionStorage.IDTORRE_ULTIMA_TORRE = json.idTorre;
+            idTorreVar = sessionStorage.IDTORRE_ULTIMA_TORRE
+            console.log("Pegou a ultima torre com sucesso: " + json.idTorre);
+
+          });
+        } else {
+          alert('Erro ao selecionar ultima torre!')
+          throw ("Houve um Erro ao selecionar ultima torre!");
+        }
+      }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    }, 3000);
   }
 
 
+  function CadastrarComponente() {
+    const open = document.getElementById('open');
+    const modal_container = document.getElementById('modal1');
+    const close = document.getElementById('close1');
+    // inserir componentes 1 select
+    vetor_componenteSel1.forEach(element => {
+      fetch("/usuarios/CadastrarComponente", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          fkTorreServer: idTorreVar,
+          fkComponenteServer: element,
+        })
+      }).then(function (resposta) {
+
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          console.log("Inseriu um componente do 1 select");
+          inseriuComponentes = true
+        } else {
+          throw ("Houve um erro ao tentar realizar o cadastro da torre!");
+        }
+      }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    });
+
+    // inserir componentes 2 select
+    vetor_componenteSel2.forEach(element => {
+      fetch("/usuarios/CadastrarComponente", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          fkTorreServer: idTorreVar,
+          fkComponenteServer: element,
+        })
+      }).then(function (resposta) {
+
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          inseriuComponentes = true
+          console.log("Inseriu um componente do 2 select");
+        } else {
+          throw ("Houve um erro ao tentar realizar o cadastro da torre!");
+        }
+      }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    });
+
+    // inserir componentes 3 select
+    vetor_componenteSel3.forEach(element => {
+      fetch("/usuarios/CadastrarComponente", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          fkTorreServer: idTorreVar,
+          fkComponenteServer: element,
+        })
+      }).then(function (resposta) {
+
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          inseriuComponentes = true
+          console.log("Inseriu um componente do 2 select");
+        } else {
+          throw ("Houve um erro ao tentar realizar o cadastro da torre!");
+        }
+      }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    });
+
+    // inserir componentes 4 select
+    vetor_componenteSel4.forEach(element => {
+      fetch("/usuarios/CadastrarComponente", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          fkTorreServer: idTorreVar,
+          fkComponenteServer: element,
+        })
+      }).then(function (resposta) {
+
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          inseriuComponentes = true
+          console.log("Inseriu um componente do 2 select");
+        } else {
+          throw ("Houve um erro ao tentar realizar o cadastro da torre!");
+        }
+      }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    });
+
+    setTimeout(function () {
+      if (inseriuComponentes) {
+        titulo1.innerHTML = `Componentes cadastrados com sucesso!`
+        p1.innerHTML = ``
+
+        modal_container.classList.add('show');
+
+        close.addEventListener('click', () => {
+          modal_container.classList.remove('show');
+        });
+      } else {
+        alert('Componentes não cadastrados')
+      }
+      vetor_componenteSel1 = []
+      vetor_componenteSel2 = []
+      vetor_componenteSel3 = []
+      vetor_componenteSel4 = []
+    }, 3000);
+  }
 </script>
+
+
+
+
+
+
+
+
+
 
 <script>
   var x, i, j, l, ll, selElmnt, a, b, c;
-/*look for any elements with the class "custom-select":*/
-x = document.getElementsByClassName("custom-select");
-l = x.length;
-for (i = 0; i < l; i++) {
-  selElmnt = x[i].getElementsByTagName("select")[0];
-  ll = selElmnt.length;
-  /*for each element, create a new DIV that will act as the selected item:*/
-  a = document.createElement("DIV");
-  a.setAttribute("class", "select-selected");
-  a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
-  x[i].appendChild(a);
-  /*for each element, create a new DIV that will contain the option list:*/
-  b = document.createElement("DIV");
-  b.setAttribute("class", "select-items select-hide");
-  for (j = 1; j < ll; j++) {
-    /*for each option in the original select element,
-    create a new DIV that will act as an option item:*/
-    c = document.createElement("DIV");
-    c.innerHTML = selElmnt.options[j].innerHTML;
-    c.addEventListener("click", function(e) {
+  /*look for any elements with the class "custom-select":*/
+  x = document.getElementsByClassName("custom-select");
+  l = x.length;
+  for (i = 0; i < l; i++) {
+    selElmnt = x[i].getElementsByTagName("select")[0];
+    ll = selElmnt.length;
+    /*for each element, create a new DIV that will act as the selected item:*/
+    a = document.createElement("DIV");
+    a.setAttribute("class", "select-selected");
+    a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+    x[i].appendChild(a);
+    /*for each element, create a new DIV that will contain the option list:*/
+    b = document.createElement("DIV");
+    b.setAttribute("class", "select-items select-hide");
+    for (j = 1; j < ll; j++) {
+      /*for each option in the original select element,
+      create a new DIV that will act as an option item:*/
+      c = document.createElement("DIV");
+      c.innerHTML = selElmnt.options[j].innerHTML;
+      c.addEventListener("click", function (e) {
         /*when an item is clicked, update the original select box,
         and the selected item:*/
         var y, i, k, s, h, sl, yl;
@@ -737,11 +1696,11 @@ for (i = 0; i < l; i++) {
           }
         }
         h.click();
-    });
-    b.appendChild(c);
-  }
-  x[i].appendChild(b);
-  a.addEventListener("click", function(e) {
+      });
+      b.appendChild(c);
+    }
+    x[i].appendChild(b);
+    a.addEventListener("click", function (e) {
       /*when the select box is clicked, close any other select boxes,
       and open/close the current select box:*/
       e.stopPropagation();
@@ -749,29 +1708,30 @@ for (i = 0; i < l; i++) {
       this.nextSibling.classList.toggle("select-hide");
       this.classList.toggle("select-arrow-active");
     });
-}
-function closeAllSelect(elmnt) {
-  /*a function that will close all select boxes in the document,
-  except the current select box:*/
-  var x, y, i, xl, yl, arrNo = [];
-  x = document.getElementsByClassName("select-items");
-  y = document.getElementsByClassName("select-selected");
-  xl = x.length;
-  yl = y.length;
-  for (i = 0; i < yl; i++) {
-    if (elmnt == y[i]) {
-      arrNo.push(i)
-    } else {
-      y[i].classList.remove("select-arrow-active");
+  }
+  function closeAllSelect(elmnt) {
+    /*a function that will close all select boxes in the document,
+    except the current select box:*/
+    var x, y, i, xl, yl, arrNo = [];
+    x = document.getElementsByClassName("select-items");
+    y = document.getElementsByClassName("select-selected");
+    xl = x.length;
+    yl = y.length;
+    for (i = 0; i < yl; i++) {
+      if (elmnt == y[i]) {
+        arrNo.push(i)
+      } else {
+        y[i].classList.remove("select-arrow-active");
+      }
+    }
+    for (i = 0; i < xl; i++) {
+      if (arrNo.indexOf(i)) {
+        x[i].classList.add("select-hide");
+      }
     }
   }
-  for (i = 0; i < xl; i++) {
-    if (arrNo.indexOf(i)) {
-      x[i].classList.add("select-hide");
-    }
-  }
-}
-/*if the user clicks anywhere outside the select box,
-then close all select boxes:*/
-document.addEventListener("click", closeAllSelect);
+  /*if the user clicks anywhere outside the select box,
+  then close all select boxes:*/
+  document.addEventListener("click", closeAllSelect);
+
 </script>
