@@ -32,4 +32,16 @@ router.post("/verificarTorres", function (req, res) {
     usuarioController.verificarTorres(req, res);
 });
 
+router.post("/verificarPlano", function (req, res) {
+    usuarioController.verificarPlano(req, res);
+});
+
+router.post("/CadastrarTorre", function (req, res) {
+    usuarioController.CadastrarTorre(req, res);
+});
+
+router.post("/CadastrarComponente", function (req, res) {
+    usuarioController.CadastrarComponente(req, res);
+});
+
 module.exports = router;

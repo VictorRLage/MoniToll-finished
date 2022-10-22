@@ -260,7 +260,7 @@
             else if(sessionStorage.FK_EMPRESA == 'null'){
               setTimeout(function () {
               window.location = "index.html"
-            }, 1000); // apenas para exibir o loading
+            }, 20000); // apenas para exibir o loading
             }
             else if(sessionStorage.FK_PERFIL == 3 || sessionStorage.FK_PERFIL == 2){
               fetch("/usuarios/verificarTorres", {
@@ -288,14 +288,52 @@
 
                   });
                 }else{
-                  // aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa verificar plano e mandar pra tela de plano 
+                    // ---------------------------------  verificar plano e mandar pra tela de plano 
+                    fetch("/usuarios/verificarPlano", {
+                    method: "POST",
+                    headers: {
+                    "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                    fkEmpresaServer: sessionStorage.FK_EMPRESA,
+                    })
+                    }).then(function (resposta) {
+                      console.log("ESTOU NO THEN DO entrar()!")
+
+                      if (resposta.ok) {
+                          console.log(resposta);
+
+                        resposta.json().then(json => {
+                          console.log(json);
+                          console.log(JSON.stringify(json));
+                          sessionStorage.PLANO_EMPRESA  = json.Plano;
+
+                          if(sessionStorage.PLANO_EMPRESA == "Plano 1"){
+                            setTimeout(function () {
+                            window.location = "p1componente.html"
+                            }, 1000); // apenas para exibir o loading
+                          }else if(sessionStorage.PLANO_EMPRESA == "Plano 2"){
+                            setTimeout(function () {
+                            window.location = "p2componente.html"
+                            }, 1000); // apenas para exibir o loading
+                          }else if(sessionStorage.PLANO_EMPRESA == "Plano 3"){
+                            setTimeout(function () {
+                            window.location = "p3componente.html"
+                            }, 1000); // apenas para exibir o loading
+                          }
+                        else{
+                          setTimeout(function () {
+                            alert('Deveria ir pra dash vazia')
+                            window.location = "plano.html"
+                            }, 4000); // apenas para exibir o loading
+                        }
 
 
-
-
-
-
+                  });
                 }
+                }).catch(function (erro) {
+                console.log("ERRO: "+erro);
+                })}
             }).catch(function (erro) {
               console.log("ERRO: "+erro);
             })
