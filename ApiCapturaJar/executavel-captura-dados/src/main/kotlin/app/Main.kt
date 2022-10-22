@@ -116,7 +116,7 @@ open class Main {
 
                             // Pegando serial id
                             val serialIdCmd = ProcessBuilder(
-                                "cmd.exe", "/c", "cd \"C:\\Users\\victo\" && wmic bios get serialnumber"
+                                "cmd.exe", "/c", "cd \"C:\\Users\" && wmic bios get serialnumber"
                             )
                             serialIdCmd.redirectErrorStream(true)
                             val serialIdCmd_start = serialIdCmd.start()
@@ -131,7 +131,7 @@ open class Main {
 
                             // Pegando modelo maquina
                             val maquinaCmd = ProcessBuilder(
-                                "cmd.exe", "/c", "cd \"C:\\Users\\victo\" && wmic computersystem get model"
+                                "cmd.exe", "/c", "cd \"C:\\Users\" && wmic computersystem get model"
                             )
                             maquinaCmd.redirectErrorStream(true)
                             val maquinaCmd_start = maquinaCmd.start()
@@ -151,7 +151,7 @@ open class Main {
 
                             // Pegando ram
                             val ramCmd = ProcessBuilder(
-                                "cmd.exe", "/c", "cd \"C:\\Users\\victo\" &&wmic memorychip get devicelocator"
+                                "cmd.exe", "/c", "cd \"C:\\Users\" &&wmic memorychip get devicelocator"
                             )
                             ramCmd.redirectErrorStream(true)
                             val ramCmd_start = ramCmd.start()
