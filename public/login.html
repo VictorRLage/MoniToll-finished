@@ -260,7 +260,7 @@
             else if(sessionStorage.FK_EMPRESA == 'null'){
               setTimeout(function () {
               window.location = "index.html"
-            }, 20000); // apenas para exibir o loading
+            }, 2000); // apenas para exibir o loading
             }
             else if(sessionStorage.FK_PERFIL == 3 || sessionStorage.FK_PERFIL == 2){
               fetch("/usuarios/verificarTorres", {

@@ -200,7 +200,7 @@
       return
     }
 
-    if (lengthCpf < 11) {
+    if (lengthCpf != 11) {
       titulo_m.innerHTML = ("Atenção! O CPF deve conter 11 dígitos.")
 
       modal_container.classList.add('show');

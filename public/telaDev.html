@@ -97,7 +97,7 @@
 
           <div class="wrap-input100 validate-input">
             <input class="input100" id="inp_emailEmp">
-            <span class="focus-input100" data-placeholder="Email"></span>
+            <span class="focus-input100" data-placeholder="Email da empresa"></span>
           </div>
 
           <div class="container-login100-form-btn">
@@ -276,6 +276,8 @@
           });
       } else {
         titulo_m.innerHTML = `Houve um erro ao tentar realizar o cadastro!`
+        p_msg.innerHTML = `Uma empresa com esse id já existe!`
+
 
         modal_container.classList.add('show');
 
@@ -320,7 +322,7 @@
           });
       } else {
         titulo_m3.innerHTML = `Falha ao atualizar permissão! <br>`
-
+        p_msg3.innerHTML = `<br>Email não consta em nosso sistema!`
         modal_container3.classList.add('show');
 
 

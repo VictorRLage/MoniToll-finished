@@ -247,7 +247,7 @@ function atualizarAdm(req, res) {
         usuarioModel.atualizarAdm(idEmp, EmailAdm)
             .then(
                 function (resultado) {
-                    res.json(resultado);
+                        res.json(resultado);
                 }
             ).catch(
                 function (erro) {
