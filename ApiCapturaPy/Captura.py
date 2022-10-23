@@ -166,7 +166,7 @@ def teste():
         exec(strNome + " = " + strCodigo, globals())
         var_leitura = globals()[strNome]
         if strNome == 'processadores_nucleo_porcentagem':
-            print('var_leitura')
+            print(var_leitura)
             
         elif strNome == 'pacotes_perdidos_porcentagem':
             print('caiu no elif 1')
