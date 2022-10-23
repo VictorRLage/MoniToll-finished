@@ -166,13 +166,8 @@ def teste():
         exec(strNome + " = " + strCodigo, globals())
         var_leitura = globals()[strNome]
         if strNome == 'processadores_nucleo_porcentagem':
-            print('caiu no if')
-            soma = 0
-            for x in var_leitura:
-                soma = soma + x
-                PorcentCPU = (round(soma/processadores_qtd, 1))
-            print(PorcentCPU)
-            var_leitura2 = PorcentCPU
+            print('var_leitura')
+            
         elif strNome == 'pacotes_perdidos_porcentagem':
             print('caiu no elif 1')
             var_leitura2 = round((((pacotes_perdidos_porcentagem[1] - pacotes_perdidos_porcentagem[0])/pacotes_perdidos_porcentagem[1])*100), 1)
