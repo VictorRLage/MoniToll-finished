@@ -23,7 +23,7 @@
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    MoniToll - Dashboard
+    Now UI Dashboard by Creative Tim
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
     name='viewport' />
@@ -57,47 +57,38 @@
           <li class="active ">
             <a href="./dashboard.html">
               <i class="now-ui-icons design_app"></i>
-              <p>Dashboard Geral</p>
+              <p class="maior">Dashboard</p>
             </a>
           </li>
           <li>
             <a href="./tables.html">
               <i class="now-ui-icons design_bullet-list-67"></i>
-              <p>Historioco de leituras</p>
+              <p class="maior">Registros</p>
             </a>
           </li>
-          <!-- <li>
-            <a href="./icons.html">
-              <i class="now-ui-icons education_atom"></i>
-              <p>Ícones</p>
-            </a>
-          </li>
-          <li>
-            <a href="./map.html">
-              <i class="now-ui-icons location_map-big"></i>
-              <p>Mapa</p>
-            </a>
-          </li> -->
           <li>
             <a href="./notifications.html">
               <i class="now-ui-icons ui-1_bell-53"></i>
-              <p>Notificações</p>
+              <p class="maior">Notificações</p>
             </a>
           </li>
-          <!-- <li>
-            <a href="./user.html">
-              <i class="now-ui-icons users_single-02"></i>
-              <p>Perfil do Usuário</p>
+          <li>
+            <a href="">
+              <i class="now-ui-icons travel_info"></i>
+              <p class="maior">Contato</p>
             </a>
-          </li> -->
-          <!-- <li>
-            <a href="./typography.html">
-              <i class="now-ui-icons text_caps-small"></i>
-              <p>Tipografia</p>
+          </li>
+          <li>
+            <a href="">
+              <i class="now-ui-icons business_badge"></i>
+              <p class="maior">Adionar Usuario</p>
             </a>
-          </li> -->
+          </li>
           <li class="active-pro">
-            <a href="../../login.html"> <i class="now-ui-icons sport_user-run"></i>SAIR</a>
+            <a href="../../login.html">
+              <i class="now-ui-icons sport_user-run"></i>
+              <p class="maior">Sair</p>
+            </a>
           </li>
         </ul>
       </div>
@@ -114,7 +105,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Dashboard</a>
+            <a class="navbar-brand maior">Dashboard</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
             aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -123,22 +114,12 @@
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end" id="navigation">
-            <!-- <form>
-              <div class="input-group no-border">
-                <input type="text" value="" class="form-control" placeholder="Search...">
-                <div class="input-group-append">
-                  <div class="input-group-text">
-                    <i class="now-ui-icons ui-1_zoom-bold"></i>
-                  </div>
-                </div>
-              </div>
-            </form> -->
             <ul class="navbar-nav">
               <li class="nav-item" style="text-align: end; margin-right: 10px;">
-                <span class="">Bem vindo, Brands. <br> Adm</span>
+                <span id="BemVindo">Bem vindo, Brands.<br> Adm</span>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#pablo">
+                <a class="nav-link">
                   <i class="now-ui-icons users_single-02"></i>
                 </a>
               </li>
@@ -164,456 +145,244 @@
         </div>
       </nav>
       <!-- End Navbar -->
-      <div class="" style="height: 500px;">
-        <div style="height: 120px; background: linear-gradient(to right, #414141 0%, #666666 60%, #868686 100%); display: flex; flex-direction: column-reverse;">
-          <p>Dashboard Torre 1 - </p>
-        </div>
-        <div class="panel-header panel-header-lg">
-          <canvas id="bigDashboardChart"></canvas>
+      <div class="panel-header panel-header-sm">
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="cardResponsivo card">
+              <div class="card-header">
+                <h4 class="card-title">
+                  <h2>Servidores</h2>
+                </h4>
+              </div>
+              <div class="lista">
+                <div id="open" class="CardDash">
+                  <h3>Castelo branco</h3>
+                  <img src="https://i.imgur.com/4OtEiKT.png" class="imgCardDash">
+                </div>
+                <div class="CardDash">
+                  <h3>Avenida brasil</h3>
+                  <img src="https://i.imgur.com/SKGlITE.png" class="imgCardDash">
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <!-- <div class="content">
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="card card-chart">
-              <div class="card-header">
-                <h5 class="card-category">Dashboard 2</h5>
-                <h4 class="card-title">Uso da CPU (em %)</h4>
-                <div class="dropdown">
-                  <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
-                    <i class="now-ui-icons loader_gear"></i>
-                  </button>
-                  <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#">Últimas 4 semanas</a>
-                    <a class="dropdown-item" href="#">Última semana</a>
-                    <a class="dropdown-item" href="#">Últimas 24 horas</a>
-                    <a class="dropdown-item text-danger" href="#">Remover Dados</a>
-                  </div>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="chart-area">
-                  <canvas id="lineChartExample"></canvas>
-                </div>
-              </div>
-              <div class="card-footer">
-                <div class="stats">
-                  <i class="now-ui-icons arrows-1_refresh-69"></i> Atualizar Gráficos
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="card card-chart">
-              <div class="card-header">
-                <h5 class="card-category">Dashboard 3</h5>
-                <h4 class="card-title">Uso Disco Rígido (GB)</h4>
-                <div class="dropdown">
-                  <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
-                    <i class="now-ui-icons loader_gear"></i>
-                  </button>
-                  <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#">Últimas 4 semanas</a>
-                    <a class="dropdown-item" href="#">Última semana</a>
-                    <a class="dropdown-item" href="#">Últimas 24 horas</a>
-                    <a class="dropdown-item text-danger" href="#">Remover Dados</a>
-                  </div>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="chart-area">
-                  <canvas id="lineChartExampleWithNumbersAndGrid"></canvas>
-                </div>
-              </div>
-              <div class="card-footer">
-                <div class="stats">
-                  <i class="now-ui-icons ui-2_time-alarm"></i> Últimas 24 horas
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="card card-chart">
-              <div class="card-header">
-                <h5 class="card-category">Dashboard 4</h5>
-                <h4 class="card-title">Uso Memória RAM (GB)</h4>
-              </div>
-              <div class="card-body">
-                <div class="chart-area">
-                  <canvas id="barChartSimpleGradientsNumbers"></canvas>
-                </div>
-              </div>
-              <div class="card-footer">
-                <div class="stats">
-                  <i class="now-ui-icons arrows-1_refresh-69"></i> Atualizar Gráfico
-                </div>
-              </div>
-            </div>
+      <footer class="footer">
+        <div class=" container-fluid ">
+          <nav>
+            <ul>
+              <li>
+                <a href="../../index.html">
+                  MoniToll
+                </a>
+              </li>
+              <li>
+                <a href="../../sobre.html">
+                  Sobre
+                </a>
+              </li>
+              <li>
+                <a href="../../contato.html">
+                  Contato
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div class="copyright" id="copyright">
+            &copy; Copyright <a href="../../index.html">MoniToll.</a> Todos os direitos reservados
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="card  card-tasks">
-              <div class="card-header ">
-                <h5 class="card-category">Sistema de Avaliação</h5>
-                <h4 class="card-title">Marque se...</h4>
-              </div>
-              <div class="card-body ">
-                <div class="table-full-width table-responsive">
-                  <table class="table">
-                    <tbody>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" checked>
-                              <span class="form-check-sign"></span>
-                            </label>
-                          </div>
-                        </td>
-                        <td class="text-left">Este pedágio continua ativo</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                            <i class="now-ui-icons ui-2_settings-90"></i>
-                          </button>
-                          <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox">
-                              <span class="form-check-sign"></span>
-                            </label>
-                          </div>
-                        </td>
-                        <td class="text-left">Os dados estão oscilando demais</td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                            <i class="now-ui-icons ui-2_settings-90"></i>
-                          </button>
-                          <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" checked>
-                              <span class="form-check-sign"></span>
-                            </label>
-                          </div>
-                        </td>
-                        <td class="text-left">Está tudo de acordo com o que foi pedido
-                        </td>
-                        <td class="td-actions text-right">
-                          <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                            <i class="now-ui-icons ui-2_settings-90"></i>
-                          </button>
-                          <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="card-footer ">
-                <hr>
-                <div class="stats">
-                  <i class="now-ui-icons loader_refresh spin"></i> Próxima avaliação em 72 horas
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card">
-              <div class="card-header">
-                <h5 class="card-category">Lista de Visualização</h5>
-                <h4 class="card-title">Status dos Colaboradores</h4>
-              </div>
-              <div class="card-body">
-                <div class="table-responsi">
-                  <table class="table">
-                    <thead class=" text-primary">
-                      <th>
-                        Nome
-                      </th>
-                      <th>
-                        Cargo
-                      </th>
-                      <th>
-                        Cidade
-                      </th>
-                      <th class="text-right">
-                        Salário
-                      </th>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          Alex Barreira
-                        </td>
-                        <td>
-                          DBA Sênior
-                        </td>
-                        <td>
-                          São Paulo
-                        </td>
-                        <td class="text-right">
-                          $63.542
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Leonardo Marques
-                        </td>
-                        <td>
-                          Coordenador TI
-                        </td>
-                        <td>
-                          São Paulo
-                        </td>
-                        <td class="text-right">
-                          R$56.142 
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Marise Miranda
-                        </td>
-                        <td>
-                          Engenheira de Tudo
-                        </td>
-                        <td>
-                          São Paulo
-                        </td>
-                        <td class="text-right">
-                          R$78.615
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Rafael Rodrigues
-                        </td>
-                        <td>
-                          DBA Pleno
-                        </td>
-                        <td>
-                          São Paulo
-                        </td>
-                        <td class="text-right">
-                          R$36.738 
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          Taiza Marques
-                        </td>
-                        <td>
-                          Dev Front-End
-                        </td>
-                        <td>
-                          São Paulo
-                        </td>
-                        <td class="text-right">
-                          R$23.789 
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
-        <div class="col-md-4">
-          <button class="btn btn-primary btn-block" onclick="nowuiDashboard.showNotification('top','right')">Botão
-            Alerta</button>
-        </div> -->
-        <div class="col-md-12">
-          <div class="card">
-            <div class="card-header">
-              <h4 class="card-title"> Simple Table</h4>
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table">
-                  <thead class=" text-primary">
-                    <th>
-                      Name
-                    </th>
-                    <th>
-                      Country
-                    </th>
-                    <th>
-                      City
-                    </th>
-                    <th class="text-right">
-                      Salary
-                    </th>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        Dakota Rice
-                      </td>
-                      <td>
-                        Niger
-                      </td>
-                      <td>
-                        Oud-Turnhout
-                      </td>
-                      <td class="text-right">
-                        $36,738
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        Minerva Hooper
-                      </td>
-                      <td>
-                        Curaçao
-                      </td>
-                      <td>
-                        Sinaai-Waas
-                      </td>
-                      <td class="text-right">
-                        $23,789
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        Sage Rodriguez
-                      </td>
-                      <td>
-                        Netherlands
-                      </td>
-                      <td>
-                        Baileux
-                      </td>
-                      <td class="text-right">
-                        $56,142
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        Philip Chaney
-                      </td>
-                      <td>
-                        Korea, South
-                      </td>
-                      <td>
-                        Overland Park
-                      </td>
-                      <td class="text-right">
-                        $38,735
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        Doris Greene
-                      </td>
-                      <td>
-                        Malawi
-                      </td>
-                      <td>
-                        Feldkirchen in Kärnten
-                      </td>
-                      <td class="text-right">
-                        $63,542
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        Mason Porter
-                      </td>
-                      <td>
-                        Chile
-                      </td>
-                      <td>
-                        Gloucester
-                      </td>
-                      <td class="text-right">
-                        $78,615
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        Jon Porter
-                      </td>
-                      <td>
-                        Portugal
-                      </td>
-                      <td>
-                        Gloucester
-                      </td>
-                      <td class="text-right">
-                        $98,615
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-        <footer class="footer">
-          <div class=" container-fluid ">
-            <nav>
-              <ul>
-                <li>
-                  <a href="../../public/index.html">
-                    MoniToll
-                  </a>
-                </li>
-                <li>
-                  <a href="../../public/sobre.html">
-                    Sobre nós
-                  </a>
-                </li>
-                <li>
-                  <a href="../../public/index.html">
-                    Site
-                  </a>
-                </li>
-              </ul>
-            </nav>
-            <div class="copyright" id="copyright">
-            &copy; <script>
-              document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
-            </script>, Designed by <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
-          </div>
-          </div>
-        </footer>
-      </div>
+      </footer>
     </div>
-    <!--   Core JS Files   -->
-    <script src="../assets/js/core/jquery.min.js"></script>
-    <script src="../assets/js/core/popper.min.js"></script>
-    <script src="../assets/js/core/bootstrap.min.js"></script>
-    <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-    <!--  Google Maps Plugin    -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-    <!-- Chart JS -->
-    <script src="../assets/js/plugins/chartjs.min.js"></script>
-    <!--  Notifications Plugin    -->
-    <script src="../assets/js/plugins/bootstrap-notify.js"></script>
-    <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script>
-    <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
-    <script src="../assets/demo/demo.js"></script>
-    <script>
-      $(document).ready(function () {
-        // Javascript method's body can be found in assets/js/demos.js
-        demo.initDashboardPageCharts();
+  </div>
 
-      });
-    </script>
+
+  <!-- modal grafico 1 -->
+  <div class="modal-container" id="modal_container">
+    <div class="modal-dash">
+      <div class="modal-titulo">
+        <h1>Castelo branco</h1>
+      </div>
+      <div class="modal-grafico">
+        <canvas></canvas>
+      </div>
+      <button class="modal-close" id="close"><i class="now-ui-icons ui-1_simple-remove"></i></button>
+    </div>
+  </div>
+
 </body>
 
 </html>
+<body>
+  <!--   Core JS Files   -->
+<script src="../assets/js/core/jquery.min.js"></script>
+<script src="../assets/js/core/popper.min.js"></script>
+<script src="../assets/js/core/bootstrap.min.js"></script>
+<script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!--  Google Maps Plugin    -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!-- Chart JS -->
+<script src="../assets/js/plugins/chartjs.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="../assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script>
+<!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+<script src="../assets/demo/demo.js"></script>
+</body>
+
+<script>
+  const open = document.getElementById('open')
+  const modal_container = document.getElementById('modal_container')
+  const close = document.getElementById('close')
+  
+  open.addEventListener('click',()=>{modal_container.classList.add('show')});
+  close.addEventListener('click',()=>{modal_container.classList.remove('show')});
+</script>
+<script>
+  obterDadosGrafico(1)
+      function obterDadosGrafico(idAquario) {
+
+        if (proximaAtualizacao != undefined) {
+            clearTimeout(proximaAtualizacao);
+        }
+
+        fetch(`/medidas/ultimas/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    plotarGrafico(resposta, idAquario);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+    // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
+    // A função *plotarGrafico* também invoca a função *atualizarGrafico*
+    function plotarGrafico(resposta, idAquario) {
+        console.log('iniciando plotagem do gráfico...');
+
+        // Criando estrutura para plotar gráfico - labels
+        let labels = [];
+        
+        // Criando estrutura para plotar gráfico - dados
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: 'Umidade',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            },
+            {
+                label: 'Temperatura',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(199, 52, 52)',
+                tension: 0.1
+            }]
+        };
+        
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+        
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            labels.push(registro.momento_grafico);
+            dados.datasets[0].data.push(registro.umidade);
+            dados.datasets[1].data.push(registro.temperatura);
+        }
+        
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+        
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'line',
+            data: dados,
+        };
+
+        // Adicionando gráfico criado em div na tela
+        let myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+
+        setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
+    }
+
+
+    // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
+    // buscando a última medida inserida em tabela contendo as capturas, 
+
+    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+    //     Para ajustar o "select", ajuste o comando sql em src/models
+    function atualizarGrafico(idAquario, dados, myChart) {
+
+        fetch(`/medidas/tempo-real/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro) {
+
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log(`Dados atuais do gráfico:`);
+                    console.log(dados);
+
+                    document.getElementById("avisoCaptura").innerHTML = ""
+
+                    if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
+                        console.log("---------------------------------------------------------------")
+                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                        document.getElementById("avisoCaptura").innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
+                        console.log("Horário do novo dado capturado:")
+                        console.log(novoRegistro[0].momento_grafico)
+                        console.log("Horário do último dado capturado:")
+                        console.log(dados.labels[dados.labels.length - 1])
+                        console.log("---------------------------------------------------------------")
+                    } else {
+                        // tirando e colocando valores no gráfico
+                        dados.labels.shift(); // apagar o primeiro
+                        dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
+
+                        dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+                        dados.datasets[0].data.push(novoRegistro[0].umidade); // incluir uma nova medida de umidade
+
+                        dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
+                        dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
+
+                        myChart.update();
+                    }
+
+                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                    proximaAtualizacao = setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                proximaAtualizacao = setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+    }
+</script>
