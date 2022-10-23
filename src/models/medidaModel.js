@@ -56,7 +56,41 @@ function buscarMedidasEmTempoReal(fkVoto) {
 }
 
 
+function buscarPorcentagemRAM(fkTorre) {
+    
+    instrucaoSql = ''
+    
+    instrucaoSql = `select top 7 Leitura as 'PorcentagemUsoRam' from Leitura where fkTorre = ${fkTorre} and fkComponente = 5 ORDER BY idLeitura DESC`;
+        
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarPorcentagemPercaPacotes(fkTorre) {
+    
+    instrucaoSql = ''
+    
+    instrucaoSql = `select top 7 Leitura as 'PorcentagemPercaPacotes' from Leitura where fkTorre = ${fkTorre} and fkComponente = 12 ORDER BY idLeitura DESC`;
+        
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarDataHora(fkTorre) {
+    
+    instrucaoSql = ''
+    
+    instrucaoSql = `select top 7 DataHora from Leitura where fkTorre = ${fkTorre} ORDER BY idLeitura DESC`;
+        
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
 module.exports = {
     buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
+    buscarMedidasEmTempoReal,
+    buscarPorcentagemRAM,
+    buscarPorcentagemPercaPacotes,
+    buscarDataHora
 }

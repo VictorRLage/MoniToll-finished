@@ -11,8 +11,16 @@ router.get("/tempo-real/:idAquario", function (req, res) {
     medidaController.buscarMedidasEmTempoReal(req, res);
 })
 
-router.get("/tempo-real/PorcentagemCPU/:fkTorre", function (req, res) {
-    medidaController.buscarPorcentagemCPU(req, res);
+router.get("/PorcentagemRAM/:fkTorre", function (req, res) {
+    medidaController.buscarPorcentagemRAM(req, res);
+})
+
+router.get("/PorcentagemPercaPacotes/:fkTorre", function (req, res) {
+    medidaController.buscarPorcentagemPercaPacotes(req, res);
+})
+
+router.get("/DataHora/:fkTorre", function (req, res) {
+    medidaController.buscarDataHora(req, res);
 })
 
 

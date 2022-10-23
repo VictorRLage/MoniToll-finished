@@ -1,29 +1,13 @@
-<!--
-
-=========================================================
-* Now UI Dashboard - v1.5.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard
-* Copyright 2019 Creative Tim (http://www.creative-tim.com)
-
-* Designed by www.invisionapp.com Coded by www.creative-tim.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
--->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Now UI Dashboard by Creative Tim
+    Monitoll - Dashboard
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
     name='viewport' />
@@ -32,10 +16,8 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <!-- CSS Files -->
-  <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="../assets/css/now-ui-dashboard.css?v=1.5.0" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="../assets/demo/demo.css" rel="stylesheet" />
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/css/now-ui-dashboard.css" rel="stylesheet" />
 </head>
 
 <body class="">
@@ -170,6 +152,10 @@
           </div>
         </div>
       </div>
+      <button onclick="ObterDataHora(101)">DataHora</button>
+      <button onclick="ObterPorcentagemRAM(101)">Porcentagem uso ram</button>
+      <button onclick="ObterPorcentagemPercaPacotes(101)">Porcentagem perca pacotes</button>
+      <button onclick="PlotarGrafico(Leitura1,101)">Plotar Grafico</button>
       <footer class="footer">
         <div class=" container-fluid ">
           <nav>
@@ -204,10 +190,10 @@
   <div class="modal-container" id="modal_container">
     <div class="modal-dash">
       <div class="modal-titulo">
-        <h1>Castelo branco</h1>
+        <h2>Castelo branco</h2>
       </div>
       <div class="modal-grafico">
-        <canvas></canvas>
+        <canvas style="width: 1230px; display: block; height: 495px;" id="myChart"></canvas>
       </div>
       <button class="modal-close" id="close"><i class="now-ui-icons ui-1_simple-remove"></i></button>
     </div>
@@ -219,20 +205,18 @@
 
 <body>
   <!--   Core JS Files   -->
-  <script src="../assets/js/core/jquery.min.js"></script>
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+  <script src="assets/js/core/jquery.min.js"></script>
+  <script src="assets/js/core/popper.min.js"></script>
+  <script src="assets/js/core/bootstrap.min.js"></script>
+  <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <!-- Chart JS -->
-  <script src="../assets/js/plugins/chartjs.min.js"></script>
+  <script src="assets/js/plugins/chartjs.min.js"></script>
   <!--  Notifications Plugin    -->
-  <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+  <script src="assets/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script>
+  <script src="assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script>
   <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
-  <script src="../assets/demo/demo.js"></script>
+  <script src="assets/demo/demo.js"></script>
 </body>
 
 <script>
@@ -245,15 +229,18 @@
 </script>
 
 <script>
-  function ObterPorcentagemCPU(fkTorre) {
+  var Leitura1 = []
+  var vetor_leituras = []
 
-    fetch(`/tempo-real/PorcentagemCPU/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
+  function ObterDataHora(fkTorre) {
+    fetch(`/medidas/DataHora/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          console.log(resposta)
           resposta.reverse();
-
-          plotarGrafico(resposta, idAquario);
+          Leitura1.push(resposta[0].DataHora.slice(11))
+          // PlotarGrafico(resposta, fkTorre);
         });
       } else {
         console.error('Nenhum dado encontrado ou erro na API');
@@ -263,36 +250,113 @@
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
       });
   }
-  
-  function PlotarGrafico() {
+
+  function ObterPorcentagemRAM(fkTorre) {
+    fetch(`/medidas/PorcentagemRAM/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          console.log(resposta)
+          resposta.reverse();
+          Leitura1.push(resposta[0].PorcentagemUsoRam)
+          // PlotarGrafico(resposta, fkTorre);
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+  }
+
+
+  function ObterPorcentagemPercaPacotes(fkTorre) {
+    fetch(`/medidas/PorcentagemPercaPacotes/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+          console.log(resposta)
+          Leitura1.push(resposta[0].PorcentagemPercaPacotes)
+          // PlotarGrafico(resposta, fkTorre);
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+  }
+
+
+  function PlotarGrafico(Leitura1, fkTorre) {
+    vetor_leituras.push({DataHora: Leitura1[0], PorcentagemUsoRam: Leitura1[1], PorcentagemPercaPacotes: Leitura1[2]})
+
+    console.log('iniciando plotagem do gráfico...');
+
+    // Criando estrutura para plotar gráfico - labels
+    let labels = [];
+
+    // Criando estrutura para plotar gráfico - dados
+    let dados = {
+      labels: labels,
+      datasets: [{
+        label: 'Porcentagem uso RAM',
+        data: [],
+        fill: false,
+        borderColor: 'rgb(75, 192, 192)',
+        tension: 0.1
+      }, 
+      {
+        label: 'Porcentagem perca pacotes',
+        data: [],
+        fill: false,
+        borderColor: 'rgb(199, 52, 52)',
+        tension: 0.1
+      }]
+    };
+
+    console.log('----------------------------------------------')
+    console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+    console.log(vetor_leituras)
+
+    // Inserindo valores recebidos em estrutura para plotar o gráfico
+    for (i = 0; i < vetor_leituras.length; i++) {
+      var registro = vetor_leituras[i];
+      labels.push(registro.DataHora);
+      dados.datasets[0].data.push(registro.PorcentagemUsoRam);
+      dados.datasets[1].data.push(registro.PorcentagemPercaPacotes);
+    }
+
+    console.log('----------------------------------------------')
+    console.log('O gráfico será plotado com os respectivos valores:')
+    console.log('Labels:')
+    console.log(labels)
+    console.log('Dados:')
+    console.log(dados.datasets)
+    console.log('----------------------------------------------')
+
+    // Criando estrutura para plotar gráfico - config
+    const config = {
+      type: 'line',
+      data: dados,
+    };
+
+    // Adicionando gráfico criado em div na tela
+    let myChart = new Chart(
+      document.getElementById('myChart'),
+      config
+    );
+
+    // setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
+
 
   }
 </script>
 
-<script>
-  obterDadosGrafico(1)
-  function obterDadosGrafico(idAquario) {
-
-    if (proximaAtualizacao != undefined) {
-      clearTimeout(proximaAtualizacao);
-    }
-
-    fetch(`/medidas/ultimas/${idAquario}`, { cache: 'no-store' }).then(function (response) {
-      if (response.ok) {
-        response.json().then(function (resposta) {
-          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-          resposta.reverse();
-
-          plotarGrafico(resposta, idAquario);
-        });
-      } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-      }
-    })
-      .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-      });
-  }
+<!-- <script>
 
   // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
   // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
@@ -412,4 +476,4 @@
       });
 
   }
-</script>
+</script> -->

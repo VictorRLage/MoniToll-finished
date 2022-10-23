@@ -60,8 +60,68 @@ function buscarMedidasEmTempoReal(req, res) {
     });
 }
 
+function buscarPorcentagemRAM(req, res) {
+
+    var fkTorre = req.params.fkTorre;
+
+    console.log(`Recuperando medidas em tempo real`);
+
+    medidaModel.buscarPorcentagemRAM(fkTorre).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar porcentagem RAM.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function buscarPorcentagemPercaPacotes(req, res) {
+
+    var fkTorre = req.params.fkTorre;
+
+    console.log(`Recuperando medidas em tempo real`);
+
+    medidaModel.buscarPorcentagemPercaPacotes(fkTorre).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar porcentagem perca pacotes.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function buscarDataHora(req, res) {
+
+    var fkTorre = req.params.fkTorre;
+
+    console.log(`Recuperando medidas em tempo real`);
+
+    medidaModel.buscarDataHora(fkTorre).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar DataHora.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 module.exports = {
     buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
+    buscarMedidasEmTempoReal,
+    buscarPorcentagemRAM,
+    buscarPorcentagemPercaPacotes,
+    buscarDataHora
 
 }
