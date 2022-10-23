@@ -43,4 +43,3 @@ def Bibliotecas(psutil, pyodbc, numpy, textwrap3):
         
 
 Bibliotecas(verificacao_psutil, verificacao_pyodbc, verificacao_numpy, verificacao_textwrap3)
-exec(open('Captura.py').read())
