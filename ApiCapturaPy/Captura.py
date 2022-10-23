@@ -292,7 +292,7 @@ def InserirDadosMaquina(SerialID, OS, Maquina, Processador, Disco, RamSpeed):
     
     try:
         crsr.execute('''
-    UPDATE Torre  SET SerialID = ?,  SO = ?, Maquina = ?, Processador = ?, Disco = ?, VelocidadeRam = ?,  fkEmpresa = ? WHERE idTorre = ?
+    UPDATE Torre  SET SerialID = ?,  SO = ?, Maquina = ?, Processador = ?, Disco = ?, Ram = ?,  fkEmpresa = ? WHERE idTorre = ?
     ''', SerialID, OS, Maquina, Processador, Disco, RamSpeed, int_fkEmpresa, idTorre)
     # Executando comando SQL
     # Commit de mudanças no banco de dados
