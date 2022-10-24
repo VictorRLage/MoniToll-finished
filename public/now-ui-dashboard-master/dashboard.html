@@ -3,8 +3,8 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
     Monitoll - Dashboard
@@ -18,9 +18,11 @@
   <!-- CSS Files -->
   <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="assets/css/now-ui-dashboard.css" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="assets/demo/demo.css" rel="stylesheet" />
 </head>
 
-<body onload="ObterComponentes(101)" class="">
+<body onload="ObterDados(sessionStorage.ID_TORRE)" class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="orange">
       <!--
@@ -55,21 +57,18 @@
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="https://app.pipefy.com/public/form/JuN9i3P6">
               <i class="now-ui-icons travel_info"></i>
-              <p class="maior">Contato</p>
+              <p class="maior">Suporte</p>
             </a>
           </li>
-          <li>
-            <a href="">
-              <i class="now-ui-icons business_badge"></i>
-              <p class="maior">Adionar Usuario</p>
-            </a>
+          <li id="AddUsuario">
+
           </li>
           <li class="active-pro">
             <a href="../../login.html">
               <i class="now-ui-icons sport_user-run"></i>
-              <p class="maior">Sair</p>
+              <p class="maior" onclick="Logout()">Sair</p>
             </a>
           </li>
         </ul>
@@ -98,7 +97,7 @@
           <div class="collapse navbar-collapse justify-content-end" id="navigation">
             <ul class="navbar-nav">
               <li class="nav-item" style="text-align: end; margin-right: 10px;">
-                <span id="BemVindo">Bem vindo, Brands.<br> Adm</span>
+                <span id="BemVindo"></span>
               </li>
               <li class="nav-item">
                 <a class="nav-link">
@@ -134,8 +133,7 @@
           <div class="col-md-12">
             <div class="cardResponsivo card">
               <div class="card-header">
-                <h4 class="card-title">
-                  <h2>Castelo Branco</h2>
+                <h4 id="h4_titulo" class="card-title">
                 </h4>
               </div>
               <div id="lista" class="lista">
@@ -176,17 +174,35 @@
 
 
   <!-- modal grafico 1 -->
-  <!-- <div class="modal-container" id="modal_container">
+  <div class="modal-container" id="modal_container">
     <div class="modal-dash">
       <div class="modal-titulo">
-        <h2>Castelo branco</h2>
-      </div>
-      <div class="modal-grafico">
-        <canvas style="width: 1230px; display: block; height: 495px;" id="myChart"></canvas>
+        <br>
+        <br>
+        <h2 class="negrito">Cadastrar usuario</h2>
+        <div class="inp">
+          <input placeholder="Nome" id="nome_inp">
+        </div>
+        <div class="inp">
+          <input placeholder="Email" id="email_inp">
+        </div>
+        <div class="inp">
+          <input placeholder="Senha" id="senha_inp">
+        </div>
+        <button class="btn-cadastrar" onclick="CadastrarUsuario()">Cadastrar</button>
       </div>
       <button class="modal-close" id="close"><i class="now-ui-icons ui-1_simple-remove"></i></button>
     </div>
-  </div> -->
+  </div>
+
+  <!-- modal aviso -->
+  <div class="modal-container-aviso" id="modal_container_aviso">
+    <div class="modal-dash-aviso">
+      <div id="modal_titulo_aviso" class="modal-titulo-aviso">
+      </div>
+      <button class="modal-close-aviso" id="close_aviso"><i class="now-ui-icons ui-1_simple-remove"></i></button>
+    </div>
+  </div>
 
 </body>
 
@@ -208,18 +224,94 @@
   <script src="assets/demo/demo.js"></script>
 </body>
 
-<!-- <script>
-  const open = document.getElementById('open')
+<script>
+  const open = document.getElementById('AddUsuario')
   const modal_container = document.getElementById('modal_container')
   const close = document.getElementById('close')
 
+
   open.addEventListener('click', () => { modal_container.classList.add('show') });
   close.addEventListener('click', () => { modal_container.classList.remove('show') });
-</script> -->
+
+  const modal_container_aviso = document.getElementById('modal_container_aviso')
+  const close_aviso = document.getElementById('close_aviso')
+  close_aviso.addEventListener('click', () => { modal_container_aviso.classList.remove('show') });
+</script>
+
+<script>
+  function CadastrarUsuario() {
+
+    var nomeVar = nome_inp.value;
+    var emailVar = email_inp.value;
+    var senhaVar = senha_inp.value;
+    var perfilVar = 3
+    var fkEmpresa = sessionStorage.FK_EMPRESA
+
+    if (nomeVar == "" || emailVar == "" || senhaVar == "") {
+
+      modal_titulo_aviso.innerHTML = `<h2>Preencha todos os campos para prosseguir</h2>`
+      modal_container_aviso.classList.add('show');
+      return
+    }
+    if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1) {
+
+      modal_titulo_aviso.innerHTML = `<h2>Esse email não é valido</h2>`
+      modal_container_aviso.classList.add('show');
+      return
+    }
+
+    fetch("/usuarios/cadastrarUsuario", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+        fkPerfilServer: perfilVar,
+        fkEmpresaServer: fkEmpresa
+      })
+    }).then(function (resposta) {
+
+      console.log("resposta: ", resposta);
+
+      if (resposta.ok) {
+          modal_titulo_aviso.innerHTML = `<h2>Cadastro realizado com sucesso!</h2>`
+          modal_container_aviso.classList.add('show');
+      } else {
+        modal_titulo_aviso.innerHTML = `<h2>Falha ao realizar cadastro</h2>`
+        modal_container_aviso.classList.add('show');
+      }
+    }).catch(function (resposta) {
+      console.log(`#ERRO: ${resposta}`);
+    });
+
+    return false;
+
+
+
+  }
+</script>
 
 <script>
   var vetor_Componentes = []
-  function ObterComponentes(fkTorre) {
+  function ObterDados(fkTorre) {
+    var nome = sessionStorage.NOME_USUARIO
+    var perfil;
+    if (sessionStorage.FK_PERFIL == 2) {
+      perfil = 'Adm'
+      AddUsuario.innerHTML = `<a><i class="now-ui-icons business_badge"></i><p class="maior">Adicionar Usuario</p></a>`
+    } else {
+      perfil = 'Fun'
+    }
+    BemVindo.innerHTML = `Bem vindo, ${nome}.<br> ${perfil}`
+    h4_titulo.innerHTML = `<h3>${sessionStorage.LOCALIZACAO}</h3>`
+
+
+
     // ---------------------------------  Obter Componentes
     fetch("/usuarios/ObterComponentes", {
       method: "POST",
@@ -248,31 +340,31 @@
       console.log("ERRO: " + erro);
     })
     setTimeout(() =>
-      ObterDataHora(101),
-      ObterPorcentagemRAM(101),
-      ObterPorcentagemPercaPacotes(101),
-      ObterPorcentagemCPU(101),
-      ObterPorcentagemDisco(101)
+      ObterDataHora(sessionStorage.ID_TORRE),
+      ObterPorcentagemRAM(sessionStorage.ID_TORRE),
+      ObterPorcentagemPercaPacotes(sessionStorage.ID_TORRE),
+      ObterPorcentagemCPU(sessionStorage.ID_TORRE),
+      ObterPorcentagemDisco(sessionStorage.ID_TORRE)
       , 2000);
-    setTimeout(() => AparecerGraficos(vetor_Componentes), 3000);
+    setTimeout(() => AparecerGraficos(vetor_Componentes, fkTorre), 3000);
 
   }
 
 
-  function AparecerGraficos(vetor_Componentes) {
+  function AparecerGraficos(vetor_Componentes, fkTorre) {
     vetor_Componentes.forEach(element => {
       if (element == 2) {
         lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem uso CPU</h4><canvas style="width: 100%; display: block;" id="myChartPUC"></canvas></div>`
-        setTimeout(() => PlotarGrafico(vetor_PorcentagemUsoCPU, 101, 'myChartPUC', 'Porcentagem uso CPU'), 2000);
+        setTimeout(() => PlotarGrafico(vetor_PorcentagemUsoCPU, sessionStorage.ID_TORRE, 'myChartPUC', 'Porcentagem uso CPU'), 2000);
       } else if (element == 5) {
         lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem uso Ram</h4><canvas style="width: 100%; display: block;" id="myChartPUR"></canvas></div>`
-        setTimeout(() => PlotarGrafico(vetor_PorcentagemUsoRam, 101, 'myChartPUR', 'Porcentagem uso Ram'), 2000);
+        setTimeout(() => PlotarGrafico(vetor_PorcentagemUsoRam, sessionStorage.ID_TORRE, 'myChartPUR', 'Porcentagem uso Ram'), 2000);
       } else if (element == 9) {
         lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem uso Disco</h4><canvas style="width: 100%; display: block;" id="myChartPUD"></canvas></div>`
-        setTimeout(() => PlotarGrafico(vetor_PorcentagemUsoDisco, 101, 'myChartPUD', 'Porcentagem uso Disco'), 2000);
+        setTimeout(() => PlotarGrafico(vetor_PorcentagemUsoDisco, sessionStorage.ID_TORRE, 'myChartPUD', 'Porcentagem uso Disco'), 2000);
       } else if (element == 12) {
         lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem pacotes perdidos</h4><canvas style="width: 100%; display: block;" id="myChartPUP"></canvas></div>`
-        setTimeout(() => PlotarGrafico(vetor_PorcentagemPercaPacotes, 101, 'myChartPUP', 'Porcentagem pacotes perdidos'), 2000);
+        setTimeout(() => PlotarGrafico(vetor_PorcentagemPercaPacotes, sessionStorage.ID_TORRE, 'myChartPUP', 'Porcentagem pacotes perdidos'), 2000);
       }
     });
   }
@@ -514,8 +606,13 @@
       .catch(function (error) {
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
       });
+  }
 
 
+</script>
+<script>
+  function Logout() {
+    sessionStorage.clear();
   }
 </script>
 

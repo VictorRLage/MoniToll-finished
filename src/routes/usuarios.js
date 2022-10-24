@@ -52,4 +52,11 @@ router.post("/ObterComponentes", function (req, res) {
     usuarioController.ObterComponentes(req, res);
 });
 
+router.post("/cadastrarUsuario", function (req, res) {
+    usuarioController.CadastrarUsuario(req, res);
+});
+
+router.post("/ObterDadosTorre", function (req, res) {
+    usuarioController.ObterDadosTorre(req, res);
+});
 module.exports = router;

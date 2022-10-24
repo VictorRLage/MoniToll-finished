@@ -110,7 +110,6 @@ function CadastrarComponente(fkTorre,fkComponente) {
     INSERT INTO Torre_Componente values  ('${fkTorre}','${fkComponente}');
     `;
     
-
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
@@ -121,6 +120,32 @@ function ObterComponentes(fkTorre) {
     var instrucao = `
     select fkComponente from Torre_Componente where fktorre = ${fkTorre};
     `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function CadastrarUsuario(nome, email, senha, fkPerfil, fkEmpresa) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarP():",nome, email, senha, fkPerfil, fkEmpresa);
+
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+    INSERT INTO Usuario values  ('${nome}', '' ,'${email}','${senha}','${fkPerfil}','${fkEmpresa}');
+    `;
+    
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function ObterDadosTorre(idTorre) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarP():",idTorre);
+
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+    select Localização from Torre where idTorre = ${idTorre};
+    `;
+    
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
@@ -135,6 +160,8 @@ module.exports = {
     CadastrarTorre,
     UltimaTorre,
     CadastrarComponente,
-    ObterComponentes
+    ObterComponentes,
+    CadastrarUsuario,
+    ObterDadosTorre
     
 };

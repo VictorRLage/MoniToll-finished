@@ -204,17 +204,17 @@
     var senhaVar = senha_input.value;
 
     if (emailVar == "" || senhaVar == "") {
-        titulo_m.innerHTML = `Preencha todos os campos para prosseguir.`
-        p_msg.innerHTML = ``
+      titulo_m.innerHTML = `Preencha todos os campos para prosseguir.`
+      p_msg.innerHTML = ``
 
-        modal_container.classList.add('show');
+      modal_container.classList.add('show');
 
 
-        close.addEventListener('click', () => {
-          modal_container.classList.remove('show');
-        });
-      }
-      else {
+      close.addEventListener('click', () => {
+        modal_container.classList.remove('show');
+      });
+    }
+    else {
       console.log("FORM LOGIN: ", emailVar);
       console.log("FORM SENHA: ", senhaVar);
 
@@ -241,7 +241,7 @@
             sessionStorage.NOME_USUARIO = json.Nome;
             sessionStorage.ID_USUARIO = json.idUsuario;
             sessionStorage.FK_PERFIL = json.fkPerfil;
-            sessionStorage.FK_EMPRESA = json.fkEmpresa;            
+            sessionStorage.FK_EMPRESA = json.fkEmpresa;
 
             titulo_m.innerHTML = `Login realizado com sucesso!`
 
@@ -249,28 +249,28 @@
 
 
             close.addEventListener('click', () => {
-            modal_container.classList.remove('show');
+              modal_container.classList.remove('show');
             });
 
-            if(sessionStorage.FK_PERFIL == 1){
+            if (sessionStorage.FK_PERFIL == 1) {
               setTimeout(function () {
-              window.location = "telaDev.html"
-            }, 1000); // apenas para exibir o loading
+                window.location = "telaDev.html"
+              }, 1000); // apenas para exibir o loading
             }
-            else if(sessionStorage.FK_EMPRESA == 'null'){
+            else if (sessionStorage.FK_EMPRESA == 'null') {
               setTimeout(function () {
-              window.location = "index.html"
-            }, 2000); // apenas para exibir o loading
+                window.location = "now-ui-dashboard-master/dashboardVAZIA.html"
+              }, 2000); // apenas para exibir o loading
             }
-            else if(sessionStorage.FK_PERFIL == 3 || sessionStorage.FK_PERFIL == 2){
+            else if (sessionStorage.FK_PERFIL == 3 || sessionStorage.FK_PERFIL == 2) {
               fetch("/usuarios/verificarTorres", {
-              method: "POST",
-              headers: {
-              "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                fkEmpresaServer: sessionStorage.FK_EMPRESA,
-              })
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                  fkEmpresaServer: sessionStorage.FK_EMPRESA,
+                })
               }).then(function (resposta) {
                 console.log("ESTOU NO THEN DO entrar()!")
 
@@ -278,85 +278,85 @@
                   console.log(resposta);
 
                   resposta.json().then(json => {
-                  console.log(json);
-                  console.log(JSON.stringify(json));
+                    console.log(json);
+                    console.log(JSON.stringify(json));
 
 
-                  setTimeout(function () {
-                  window.location = "now-ui-dashboard-master/dashboard.html"
-                  }, 1000); // apenas para exibir o loading
-
+                    setTimeout(function () {
+                      window.location = "now-ui-dashboard-master/dashboardServidores.html"
+                    }, 1000); // apenas para exibir o loading
                   });
-                }else{
+                } else {
+                  if (sessionStorage.FK_PERFIL == 3) {
+                    sessionStorage.SEM_TORRE = 1;
+                    setTimeout(function () {
+                      window.location = "now-ui-dashboard-master/dashboardVAZIA.html"
+                    }, 1000); // apenas para exibir o loading
+                  } else {
+
                     // ---------------------------------  verificar plano e mandar pra tela de plano 
                     fetch("/usuarios/verificarPlano", {
-                    method: "POST",
-                    headers: {
-                    "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                    fkEmpresaServer: sessionStorage.FK_EMPRESA,
-                    })
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json"
+                      },
+                      body: JSON.stringify({
+                        fkEmpresaServer: sessionStorage.FK_EMPRESA,
+                      })
                     }).then(function (resposta) {
                       console.log("ESTOU NO THEN DO entrar()!")
 
                       if (resposta.ok) {
-                          console.log(resposta);
+                        console.log(resposta);
 
                         resposta.json().then(json => {
                           console.log(json);
                           console.log(JSON.stringify(json));
-                          sessionStorage.PLANO_EMPRESA  = json.Plano;
+                          sessionStorage.PLANO_EMPRESA = json.Plano;
 
-                          if(sessionStorage.PLANO_EMPRESA == "Plano 1"){
+                          if (sessionStorage.PLANO_EMPRESA == "Plano 1") {
                             setTimeout(function () {
-                            window.location = "p1componente.html"
+                              window.location = "p1componente.html"
                             }, 1000); // apenas para exibir o loading
-                          }else if(sessionStorage.PLANO_EMPRESA == "Plano 2"){
+                          } else if (sessionStorage.PLANO_EMPRESA == "Plano 2") {
                             setTimeout(function () {
-                            window.location = "p2componente.html"
+                              window.location = "p2componente.html"
                             }, 1000); // apenas para exibir o loading
-                          }else if(sessionStorage.PLANO_EMPRESA == "Plano 3"){
+                          } else if (sessionStorage.PLANO_EMPRESA == "Plano 3") {
                             setTimeout(function () {
-                            window.location = "p3componente.html"
+                              window.location = "p3componente.html"
                             }, 1000); // apenas para exibir o loading
                           }
-                        else{
-                          setTimeout(function () {
-                            alert('Deveria ir pra dash vazia')
-                            window.location = "plano.html"
-                            }, 4000); // apenas para exibir o loading
-                        }
-
-
-                  });
+                        });
+                      }
+                    }).catch(function (erro) {
+                      console.log("ERRO: " + erro);
+                    })
+                  }
                 }
-                }).catch(function (erro) {
-                console.log("ERRO: "+erro);
-                })}
-            }).catch(function (erro) {
-              console.log("ERRO: "+erro);
-            })
+              }).catch(function (erro) {
+                console.log("ERRO: " + erro);
+              })
             }
 
           });
-        }else{
+        } else {
           titulo_m.innerHTML = `Falha ao realizar login!<br><br>Por favor verifique o Email e senha.`
 
           modal_container.classList.add('show');
 
 
           close.addEventListener('click', () => {
-          modal_container.classList.remove('show');
+            modal_container.classList.remove('show');
           });
         }
 
       }).catch(function (erro) {
-        console.log("ERRO: "+erro);
+        console.log("ERRO: " + erro);
       })
 
       return false;
-  }
+    }
   }
 
 
