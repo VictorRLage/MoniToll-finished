@@ -114,6 +114,16 @@ function CadastrarComponente(fkTorre,fkComponente) {
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
+
+
+function ObterComponentes(fkTorre) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", fkTorre)
+    var instrucao = `
+    select fkComponente from Torre_Componente where fktorre = ${fkTorre};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
 module.exports = {
     entrar,
     cadastrar,
@@ -124,6 +134,7 @@ module.exports = {
     verificarPlano,
     CadastrarTorre,
     UltimaTorre,
-    CadastrarComponente
+    CadastrarComponente,
+    ObterComponentes
     
 };

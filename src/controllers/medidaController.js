@@ -21,14 +21,15 @@ function buscarUltimasMedidas(req, res) {
     });
 }
 
-
 function buscarMedidasEmTempoReal(req, res) {
 
-    var idAquario = req.params.idAquario;
+    var fkTorre = req.params.fkTorre;
+    var fkComponente = req.params.fkComponente;
+
 
     console.log(`Recuperando medidas em tempo real`);
 
-    medidaModel.buscarMedidasEmTempoReal(idAquario).then(function (resultado) {
+    medidaModel.buscarMedidasEmTempoReal(fkTorre,fkComponente).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -37,63 +38,6 @@ function buscarMedidasEmTempoReal(req, res) {
     }).catch(function (erro) {
         console.log(erro);
         console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
-        res.status(500).json(erro.sqlMessage);
-    });
-}
-
-function buscarMedidasEmTempoReal(req, res) {
-
-    var idAquario = req.params.idAquario;
-
-    console.log(`Recuperando medidas em tempo real`);
-
-    medidaModel.buscarMedidasEmTempoReal(idAquario).then(function (resultado) {
-        if (resultado.length > 0) {
-            res.status(200).json(resultado);
-        } else {
-            res.status(204).send("Nenhum resultado encontrado!")
-        }
-    }).catch(function (erro) {
-        console.log(erro);
-        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
-        res.status(500).json(erro.sqlMessage);
-    });
-}
-
-function buscarPorcentagemRAM(req, res) {
-
-    var fkTorre = req.params.fkTorre;
-
-    console.log(`Recuperando medidas em tempo real`);
-
-    medidaModel.buscarPorcentagemRAM(fkTorre).then(function (resultado) {
-        if (resultado.length > 0) {
-            res.status(200).json(resultado);
-        } else {
-            res.status(204).send("Nenhum resultado encontrado!")
-        }
-    }).catch(function (erro) {
-        console.log(erro);
-        console.log("Houve um erro ao buscar porcentagem RAM.", erro.sqlMessage);
-        res.status(500).json(erro.sqlMessage);
-    });
-}
-
-function buscarPorcentagemPercaPacotes(req, res) {
-
-    var fkTorre = req.params.fkTorre;
-
-    console.log(`Recuperando medidas em tempo real`);
-
-    medidaModel.buscarPorcentagemPercaPacotes(fkTorre).then(function (resultado) {
-        if (resultado.length > 0) {
-            res.status(200).json(resultado);
-        } else {
-            res.status(204).send("Nenhum resultado encontrado!")
-        }
-    }).catch(function (erro) {
-        console.log(erro);
-        console.log("Houve um erro ao buscar porcentagem perca pacotes.", erro.sqlMessage);
         res.status(500).json(erro.sqlMessage);
     });
 }
@@ -117,10 +61,91 @@ function buscarDataHora(req, res) {
     });
 }
 
+function buscarPorcentagemCPU(req, res) {
+
+    var fkTorre = req.params.fkTorre;
+
+    console.log(`Recuperando medidas em tempo real`);
+
+    medidaModel.buscarPorcentagemCPU(fkTorre).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar porcentagem perca pacotes.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function buscarPorcentagemRAM(req, res) {
+
+    var fkTorre = req.params.fkTorre;
+
+    console.log(`Recuperando medidas em tempo real`);
+
+    medidaModel.buscarPorcentagemRAM(fkTorre).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar porcentagem RAM.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function buscarPorcentagemDisco(req, res) {
+
+    var fkTorre = req.params.fkTorre;
+
+    console.log(`Recuperando medidas em tempo real`);
+
+    medidaModel.buscarPorcentagemDisco(fkTorre).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar porcentagem perca pacotes.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function buscarPorcentagemPercaPacotes(req, res) {
+
+    var fkTorre = req.params.fkTorre;
+
+    console.log(`Recuperando medidas em tempo real`);
+
+    medidaModel.buscarPorcentagemPercaPacotes(fkTorre).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar porcentagem perca pacotes.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
+    buscarPorcentagemCPU,
     buscarPorcentagemRAM,
+    buscarPorcentagemDisco,
     buscarPorcentagemPercaPacotes,
     buscarDataHora
 

@@ -6011,8 +6011,24 @@ Created using IcoMoon - icomoon.io
   width: 94%;
   margin: 0 auto;
   gap: 1.8rem;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 }
+.CardGrafico{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2px;
+  background-color: #DDDDDD;
+  height: 300px;
+  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.17);
+}
+.cardResponsivo{
+  height: 750px;
+}
+
+
+
+
 .CardDash{
   display: flex;
   justify-content: center;
@@ -6026,9 +6042,8 @@ Created using IcoMoon - icomoon.io
 .imgCardDash{
   height: 200px;
 }
-.cardResponsivo{
-  height: 1150px;
-}
+
+
 
 
 

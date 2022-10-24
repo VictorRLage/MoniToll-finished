@@ -48,4 +48,8 @@ router.post("/UltimaTorre", function (req, res) {
     usuarioController.UltimaTorre(req, res);
 });
 
+router.post("/ObterComponentes", function (req, res) {
+    usuarioController.ObterComponentes(req, res);
+});
+
 module.exports = router;

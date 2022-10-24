@@ -304,4 +304,4 @@ Conexao()
 ValidacaoLogin()
 while True:
     VerificarDadosMaquina(idTorre)
-    time.sleep(30)
+    time.sleep(5)

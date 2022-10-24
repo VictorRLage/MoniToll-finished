@@ -321,6 +321,40 @@ usuarioModel.UltimaTorre(fkEmpresa)
 
 
 
+
+
+function ObterComponentes(req, res) {
+    var fkTorre = req.body.fkTorreServer;
+    
+    if(fkTorre == undefined) {
+        res.status(400).send("Seu fkTorre está undefined!");
+    }else {
+        
+usuarioModel.ObterComponentes(fkTorre)
+    .then(
+        function (resultado) {
+            console.log(`\nResultados encontrados: ${resultado.length}`);
+            console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
+
+            if (resultado.length != 0) {
+                console.log(resultado);
+                res.json(resultado);
+            } else if (resultado.length == 0) {
+                res.status(403).send("Não tem componentes");
+            }
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log("\nHouve um erro ao verificar plano! Erro: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+}
+
+
+
 module.exports = {
     entrar,
     cadastrar,
@@ -332,5 +366,6 @@ module.exports = {
     verificarPlano,
     CadastrarTorre,
     UltimaTorre,
-    CadastrarComponente
+    CadastrarComponente,
+    ObterComponentes
 }
