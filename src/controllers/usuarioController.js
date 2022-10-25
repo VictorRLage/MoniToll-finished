@@ -359,6 +359,37 @@ usuarioModel.ObterDadosTorre(idTorre)
     );
 }}
 
+
+function ObterNomeEmp(req, res) {
+    var fkEmpresa = req.body.fkEmpresaServer;
+    
+    if(fkEmpresa == undefined) {
+        res.status(400).send("Seu fkEmpresa está undefined!");
+    }else {
+        
+usuarioModel.ObterNomeEmp(fkEmpresa)
+    .then(
+        function (resultado) {
+            console.log(`\nResultados encontrados: ${resultado.length}`);
+            console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
+
+            if (resultado.length != 0) {
+                console.log(resultado);
+                res.json(resultado);
+            } else if (resultado.length == 0) {
+                res.status(403).send("Não tem torre");
+            }
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log("\nHouve um erro ao realizar o encontrar nome emp! Erro: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}}
+
+
 function UltimaTorre(req, res) {
     var fkEmpresa = req.body.fkEmpresaServer;
     
@@ -438,5 +469,6 @@ module.exports = {
     CadastrarComponente,
     ObterComponentes,
     CadastrarUsuario,
-    ObterDadosTorre
+    ObterDadosTorre,
+    ObterNomeEmp
 }
