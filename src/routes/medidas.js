@@ -32,5 +32,9 @@ router.get("/DataHora/:fkTorre", function (req, res) {
     medidaController.buscarDataHora(req, res);
 })
 
+router.get("/Registro/:fkTorre/:nmrComponentes", function (req, res) {
+    medidaController.buscarRegistro(req, res);
+})
+
 
 module.exports = router;

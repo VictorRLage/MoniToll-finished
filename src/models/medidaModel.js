@@ -92,6 +92,17 @@ function buscarPorcentagemPercaPacotes(fkTorre) {
     return database.executar(instrucaoSql);
 }
 
+function buscarRegistro(fkTorre, nmrComponentes) {
+    
+    instrucaoSql = ''
+    
+    instrucaoSql = `select top ${nmrComponentes} * from Leitura where fkTorre = ${fkTorre} ORDER BY idLeitura DESC`;
+        
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
 
 
 
@@ -102,6 +113,7 @@ module.exports = {
     buscarPorcentagemRAM,
     buscarPorcentagemDisco,
     buscarPorcentagemPercaPacotes,
-    buscarDataHora
+    buscarDataHora,
+    buscarRegistro
     
 }

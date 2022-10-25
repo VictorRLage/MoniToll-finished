@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Monitoll - Dashboard
+    Monitoll - Registros
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
     name='viewport' />
@@ -131,12 +131,35 @@
       <div class="content">
         <div class="row">
           <div class="col-md-12">
-            <div class="cardResponsivo card">
+            <div class="card">
               <div class="card-header">
-                <h4 id="h4_titulo" class="card-title">
-                </h4>
+                <h4 class="card-title">Histórico de registros</h4>
               </div>
-              <div id="lista" class="lista">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class=" text-primary">
+                      <th>
+                        idLeitura
+                      </th>
+                      <th>
+                        Leitura
+                      </th>
+                      <th>
+                        Data/Hora
+                      </th>
+                      <th>
+                        Servidor
+                      </th>
+                      <th class="text-right">
+                        Componente
+                      </th>
+                    </thead>
+                    <tbody id="tabela_registro">
+
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
@@ -279,8 +302,8 @@
       console.log("resposta: ", resposta);
 
       if (resposta.ok) {
-          modal_titulo_aviso.innerHTML = `<h2>Cadastro realizado com sucesso!</h2>`
-          modal_container_aviso.classList.add('show');
+        modal_titulo_aviso.innerHTML = `<h2>Cadastro realizado com sucesso!</h2>`
+        modal_container_aviso.classList.add('show');
       } else {
         modal_titulo_aviso.innerHTML = `<h2>Falha ao realizar cadastro</h2>`
         modal_container_aviso.classList.add('show');
@@ -308,11 +331,24 @@
       perfil = 'Fun'
     }
     BemVindo.innerHTML = `Bem vindo, ${nome}.<br> ${perfil}`
-    h4_titulo.innerHTML = `<h3>${sessionStorage.LOCALIZACAO}</h3>`
+
+    setTimeout(() => ObterRegistros(fkTorre), 3000);
+
+  }
 
 
+</script>
 
-    // ---------------------------------  Obter Componentes
+<script>
+  function Logout() {
+    sessionStorage.clear();
+  }
+</script>
+
+<script>
+  var vetor_Componentes = []
+  var componente;
+  function ObterRegistros(fkTorre) {
     fetch("/usuarios/ObterComponentes", {
       method: "POST",
       headers: {
@@ -339,354 +375,72 @@
     }).catch(function (erro) {
       console.log("ERRO: " + erro);
     })
-    setTimeout(() =>
-      ObterDataHora(sessionStorage.ID_TORRE),
-      ObterPorcentagemRAM(sessionStorage.ID_TORRE),
-      ObterPorcentagemPercaPacotes(sessionStorage.ID_TORRE),
-      ObterPorcentagemCPU(sessionStorage.ID_TORRE),
-      ObterPorcentagemDisco(sessionStorage.ID_TORRE)
-      , 2000);
-    setTimeout(() => AparecerGraficos(vetor_Componentes, fkTorre), 3000);
+
+    setTimeout(() => PlotarRegistro(fkTorre), 3000);
 
   }
 
-
-  function AparecerGraficos(vetor_Componentes, fkTorre) {
-    vetor_Componentes.forEach(element => {
-      if (element == 2) {
-        lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem uso CPU</h4><canvas style="width: 100%; display: block;" id="myChartPUC"></canvas></div>`
-        setTimeout(() => PlotarGrafico(vetor_PorcentagemUsoCPU, sessionStorage.ID_TORRE, 'myChartPUC', 'Porcentagem uso CPU'), 2000);
-      } else if (element == 5) {
-        lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem uso Ram</h4><canvas style="width: 100%; display: block;" id="myChartPUR"></canvas></div>`
-        setTimeout(() => PlotarGrafico(vetor_PorcentagemUsoRam, sessionStorage.ID_TORRE, 'myChartPUR', 'Porcentagem uso Ram'), 2000);
-      } else if (element == 9) {
-        lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem uso Disco</h4><canvas style="width: 100%; display: block;" id="myChartPUD"></canvas></div>`
-        setTimeout(() => PlotarGrafico(vetor_PorcentagemUsoDisco, sessionStorage.ID_TORRE, 'myChartPUD', 'Porcentagem uso Disco'), 2000);
-      } else if (element == 12) {
-        lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem pacotes perdidos</h4><canvas style="width: 100%; display: block;" id="myChartPUP"></canvas></div>`
-        setTimeout(() => PlotarGrafico(vetor_PorcentagemPercaPacotes, sessionStorage.ID_TORRE, 'myChartPUP', 'Porcentagem pacotes perdidos'), 2000);
-      }
-    });
-  }
-</script>
-
-<script>
-  var vetor_DataHora = []
-  var vetor_PorcentagemUsoCPU = []
-  var vetor_PorcentagemUsoRam = []
-  var vetor_PorcentagemUsoDisco = []
-  var vetor_PorcentagemPercaPacotes = []
-  var vetor_leituras = []
-
-  function ObterDataHora(fkTorre) {
-    fetch(`/medidas/DataHora/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
+  function PlotarRegistro(fkTorre) {
+    fetch(`/medidas/Registro/${fkTorre}/${vetor_Componentes.length}`, { cache: 'no-store' }).then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
           console.log(resposta)
           resposta.reverse();
           resposta.forEach(element => {
-            vetor_DataHora.push(element.DataHora.slice(11))
-          });
-          // PlotarGrafico(resposta, fkTorre);
-        });
-      } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-      }
-    })
-      .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-      });
-  }
-
-  function ObterPorcentagemCPU(fkTorre) {
-    fetch(`/medidas/PorcentagemCPU/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
-      if (response.ok) {
-        response.json().then(function (resposta) {
-          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-          console.log(resposta)
-          resposta.reverse();
-          resposta.forEach(element => {
-            vetor_PorcentagemUsoCPU.push(element.PorcentagemUsoCPU)
-          });
-          // PlotarGrafico(resposta, fkTorre);
-        });
-      } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-      }
-    })
-      .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-      });
-  }
-
-  function ObterPorcentagemRAM(fkTorre) {
-    fetch(`/medidas/PorcentagemRAM/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
-      if (response.ok) {
-        response.json().then(function (resposta) {
-          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-          console.log(resposta)
-          resposta.reverse();
-          resposta.forEach(element => {
-            vetor_PorcentagemUsoRam.push(element.PorcentagemUsoRam)
-          });
-          // PlotarGrafico(resposta, fkTorre);
-        });
-      } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-      }
-    })
-      .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-      });
-  }
-
-  function ObterPorcentagemDisco(fkTorre) {
-    fetch(`/medidas/PorcentagemDisco/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
-      if (response.ok) {
-        response.json().then(function (resposta) {
-          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-          console.log(resposta)
-          resposta.reverse();
-          resposta.forEach(element => {
-            vetor_PorcentagemUsoDisco.push(element.PorcentagemUsoDisco)
-          });
-          // PlotarGrafico(resposta, fkTorre);
-        });
-      } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-      }
-    })
-      .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-      });
-  }
-
-
-  function ObterPorcentagemPercaPacotes(fkTorre) {
-    fetch(`/medidas/PorcentagemPercaPacotes/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
-      if (response.ok) {
-        response.json().then(function (resposta) {
-          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-          resposta.reverse();
-          console.log(resposta)
-          resposta.forEach(element => {
-            vetor_PorcentagemPercaPacotes.push(element.PorcentagemPercaPacotes)
-          });
-          // PlotarGrafico(resposta, fkTorre);
-        });
-      } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-      }
-    })
-      .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-      });
-  }
-
-
-  function PlotarGrafico(vetor, fkTorre, idCanva, label) {
-    var fkComponenteVar = 0
-    if (idCanva == 'myChartPUC') {
-      fkComponenteVar = 2
-    } else if (idCanva == 'myChartPUR') {
-      fkComponenteVar = 5
-    } else if (idCanva == 'myChartPUD') {
-      fkComponenteVar = 9
-    } else if (idCanva == 'myChartPUP') {
-      fkComponenteVar = 12
-    }
-
-    for (i = 0; i < vetor.length; i++) {
-      vetor_leituras.push({ DataHora: vetor_DataHora[i], Leitura: vetor[i] })
-    }
-
-    console.log('iniciando plotagem do gráfico...');
-
-    // Criando estrutura para plotar gráfico - labels
-    let labels = [];
-
-    // Criando estrutura para plotar gráfico - dados
-    let dados = {
-      labels: labels,
-      datasets: [{
-        label: label,
-        data: [],
-        fill: false,
-        borderColor: '#ffc107',
-        tension: 0.1
-      },]
-    };
-
-    console.log('----------------------------------------------')
-    console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-    console.log(vetor_leituras)
-
-    // Inserindo valores recebidos em estrutura para plotar o gráfico
-    for (i = 0; i < vetor_leituras.length; i++) {
-      var registro = vetor_leituras[i];
-      labels.push(registro.DataHora);
-      dados.datasets[0].data.push(registro.Leitura);
-    }
-
-    console.log('----------------------------------------------')
-    console.log('O gráfico será plotado com os respectivos valores:')
-    console.log('Labels:')
-    console.log(labels)
-    console.log('Dados:')
-    console.log(dados.datasets)
-    console.log('----------------------------------------------')
-
-    // Criando estrutura para plotar gráfico - config
-    const config = {
-      type: 'line',
-      data: dados,
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              suggestedMin: 0,
-              suggestedMax: 100
+            if (element.fkComponente == 1){
+              componente = "Quantidade de processadores"
+            } else if (element.fkComponente == 2){
+              componente = "% uso processadores"
+            } else if (element.fkComponente == 3){
+              componente = "Memória Ram Total"
+            } else if (element.fkComponente == 4){
+              componente = "Memória Ram em uso"
+            } else if (element.fkComponente == 5){
+              componente = "% uso da memória Ram"
+            } else if (element.fkComponente == 6){
+              componente = "Memória do disco total"
+            } else if (element.fkComponente == 7){
+              componente = "Memória do disco em uso"
+            } else if (element.fkComponente == 8){
+              componente = "Memória do disco livre"
+            } else if (element.fkComponente == 9){
+              componente = "% uso memória disco"
+            } else if (element.fkComponente == 10){
+              componente = "Pacotes enviados"
+            }else if (element.fkComponente == 11){
+              componente = "Pacotes recebidos"
+            }else if (element.fkComponente == 12){
+              componente = "% pacotes perdidos"
             }
-          }]
-        }
-      }
-    };
 
-    // Adicionando gráfico criado em div na tela
-    let myChart = new Chart(
-      document.getElementById(idCanva),
-      config
-    );
-    vetor_leituras = []
-    setTimeout(() => atualizarGrafico(fkTorre, fkComponenteVar, dados, myChart), 5000);
-
-  }
-
-
-  function atualizarGrafico(fkTorre, fkComponente, dados, myChart) {
-    fetch(`/medidas/tempo-real/${fkTorre}/${fkComponente}`, { cache: 'no-store' }).then(function (response) {
-      if (response.ok) {
-        response.json().then(function (novoRegistro) {
-
-          console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-          console.log(`Dados atuais do gráfico:`);
-          console.log(dados);
-
-
-          if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
-            console.log("---------------------------------------------------------------")
-            console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-            console.log("Horário do novo dado capturado:")
-            console.log(novoRegistro[0].momento_grafico)
-            console.log("Horário do último dado capturado:")
-            console.log(dados.labels[dados.labels.length - 1])
-            console.log("---------------------------------------------------------------")
-          } else {
-            // tirando e colocando valores no gráfico
-            dados.labels.shift(); // apagar o primeiro
-            dados.labels.push(novoRegistro[0].momento_grafico.slice(11)); // incluir um novo momento
-
-            dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-            dados.datasets[0].data.push(novoRegistro[0].Leitura); // incluir uma nova medida de umidade
-
-
-            myChart.update();
-          }
-
-          // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-          proximaAtualizacao = setTimeout(() => atualizarGrafico(fkTorre, fkComponente, dados, myChart), 5000);
+            tabela_registro.innerHTML += `
+                       <tr>
+                        <td>
+                          ${element.idLeitura}
+                        </td>
+                        <td>
+                          ${element.Leitura}
+                        </td>
+                        <td>
+                          ${element.DataHora}
+                        </td>
+                        <td>
+                          ${sessionStorage.LOCALIZACAO}
+                        </td>
+                        <td class="text-right">
+                          ${componente}
+                        </td>
+                      </tr>`
+          });
+          // PlotarGrafico(resposta, fkTorre);
         });
       } else {
         console.error('Nenhum dado encontrado ou erro na API');
-        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-        proximaAtualizacao = setTimeout(() => atualizarGrafico(fkTorre, fkComponente, dados, myChart), 5000);
       }
     })
       .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        console.error(`Erro na obtenção dos dados p/ registro: ${error.message}`);
       });
   }
-
-
 </script>
-<script>
-  function Logout() {
-    sessionStorage.clear();
-  }
-</script>
-
-<!-- <script>
-  dados.labels.shift(); // apagar o primeiro
-  dados.labels.push('sla'); // incluir um novo momento
-
-  dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-  dados.datasets[0].data.push(50); // incluir uma nova medida de umidade
-
-  dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
-  dados.datasets[1].data.push(60); // incluir uma nova medida de temperatura
-
-  myChart.update();
-
-  setTimeout(() => atualizarGrafico(fkTorre, dados, myChart), 30000);
-
-
-
-
-
-
-  // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
-  // buscando a última medida inserida em tabela contendo as capturas, 
-
-  //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-  //     Para ajustar o "select", ajuste o comando sql em src/models
-  function atualizarGrafico(fkTorre, dados, myChart) {
-
-    fetch(`/medidas/tempo-real/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
-      if (response.ok) {
-        response.json().then(function (novoRegistro) {
-
-          console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-          console.log(`Dados atuais do gráfico:`);
-          console.log(dados);
-
-          document.getElementById("avisoCaptura").innerHTML = ""
-
-          if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
-            console.log("---------------------------------------------------------------")
-            console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-            document.getElementById("avisoCaptura").innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
-            console.log("Horário do novo dado capturado:")
-            console.log(novoRegistro[0].momento_grafico)
-            console.log("Horário do último dado capturado:")
-            console.log(dados.labels[dados.labels.length - 1])
-            console.log("---------------------------------------------------------------")
-          } else {
-            // tirando e colocando valores no gráfico
-            dados.labels.shift(); // apagar o primeiro
-            dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
-
-            dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-            dados.datasets[0].data.push(novoRegistro[0].umidade); // incluir uma nova medida de umidade
-
-            dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
-            dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
-
-            myChart.update();
-          }
-
-          // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-          proximaAtualizacao = setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
-        });
-      } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-        proximaAtualizacao = setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
-      }
-    })
-      .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-      });
-
-  }
-</script> -->

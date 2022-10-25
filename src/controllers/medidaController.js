@@ -29,7 +29,7 @@ function buscarMedidasEmTempoReal(req, res) {
 
     console.log(`Recuperando medidas em tempo real`);
 
-    medidaModel.buscarMedidasEmTempoReal(fkTorre,fkComponente).then(function (resultado) {
+    medidaModel.buscarMedidasEmTempoReal(fkTorre, fkComponente).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -137,6 +137,26 @@ function buscarPorcentagemPercaPacotes(req, res) {
     });
 }
 
+function buscarRegistro(req, res) {
+
+    var fkTorre = req.params.fkTorre;
+    var nmrComponentes = req.params.nmrComponentes;
+
+    console.log(`Recuperando medidas em tempo real`);
+
+    medidaModel.buscarRegistro(fkTorre, nmrComponentes).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar registros.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 
 
 
@@ -147,6 +167,7 @@ module.exports = {
     buscarPorcentagemRAM,
     buscarPorcentagemDisco,
     buscarPorcentagemPercaPacotes,
-    buscarDataHora
+    buscarDataHora,
+    buscarRegistro
 
 }
