@@ -298,8 +298,9 @@
 
 <script>
   var vetor_Componentes = []
+  var nome = sessionStorage.NOME_USUARIO
   function ObterDados(fkTorre) {
-    var nome = sessionStorage.NOME_USUARIO
+    
     var perfil;
     if (sessionStorage.FK_PERFIL == 2) {
       perfil = 'Adm'
@@ -369,7 +370,6 @@
     });
   }
 </script>
-
 <script>
   var vetor_DataHora = []
   var vetor_PorcentagemUsoCPU = []
@@ -400,6 +400,7 @@
   }
 
   function ObterPorcentagemCPU(fkTorre) {
+    metrica = 50
     fetch(`/medidas/PorcentagemCPU/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
@@ -408,7 +409,9 @@
           resposta.reverse();
           resposta.forEach(element => {
             vetor_PorcentagemUsoCPU.push(element.PorcentagemUsoCPU)
+           
           });
+         
           // PlotarGrafico(resposta, fkTorre);
         });
       } else {
@@ -422,6 +425,7 @@
 
   function ObterPorcentagemRAM(fkTorre) {
     fetch(`/medidas/PorcentagemRAM/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
+      metrica = 85
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -430,6 +434,7 @@
           resposta.forEach(element => {
             vetor_PorcentagemUsoRam.push(element.PorcentagemUsoRam)
           });
+       
           // PlotarGrafico(resposta, fkTorre);
         });
       } else {
@@ -465,6 +470,7 @@
 
   function ObterPorcentagemPercaPacotes(fkTorre) {
     fetch(`/medidas/PorcentagemPercaPacotes/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
+      metrica = 15
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -473,6 +479,7 @@
           resposta.forEach(element => {
             vetor_PorcentagemPercaPacotes.push(element.PorcentagemPercaPacotes)
           });
+       
           // PlotarGrafico(resposta, fkTorre);
         });
       } else {
@@ -590,9 +597,28 @@
             dados.datasets[0].data.shift();  // apagar o primeiro de umidade
             dados.datasets[0].data.push(novoRegistro[0].Leitura); // incluir uma nova medida de umidade
 
+            let metrica = novoRegistro[0].Leitura
 
             myChart.update();
+
+            if (fkComponente == 2) {
+              verificarCpu(metrica) 
+            }
+            
+            if (fkComponente == 5) {
+              verificarRam(metrica)
+            }
+
+            if (fkComponente == 9) {
+              verificarDisco(metrica)
+            }
+            
+            if (fkComponente == 12) {
+              verificarInternet(metrica)
+            }
+            
           }
+          
 
           // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
           proximaAtualizacao = setTimeout(() => atualizarGrafico(fkTorre, fkComponente, dados, myChart), 5000);
@@ -614,6 +640,79 @@
   function Logout() {
     sessionStorage.clear();
   }
+</script>
+<script>
+  function alertas(nome, componente, metrica, frase){
+    
+const options = {  
+method: 'POST',  
+headers: {  
+accept: 'application/json',  
+Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjozMDIwOTE4NzAsImVtYWlsIjoicmVuYXRvLnRpZXJub0BzcHRlY2guc2Nob29sIiwiYXBwbGljYXRpb24iOjMwMDIwMDc5OX19.u1OD3vfD6im7FYV9owyD6kVPdstkeU3_1tX-WJdZz0Pf5VM8QZ2VEO6vEye9ht82VD7t2bnBqMwtuWywW0rjEg',  
+'content-type': 'application/json'  
+},  
+body: JSON.stringify({  
+query: `mutation {           createCard(input: {             pipe_id:302621694,             title: "Card",             fields_attributes:[               {field_id: "nome_da_empresa", field_value: "${nome}"},{field_id: "descri_o_do_alerta", field_value: "${componente}"},{field_id: "m_tricas", field_value: " ${frase}${metrica}"}             ],           }) {               card {                 title               }             }           }`  
+})  
+};  
+fetch('https://api.pipefy.com/graphql', options)  
+.then(response => response.json())  
+.then(response => console.log(response))  
+.catch(err => console.error(err));  
+}  
+
+function verificarInternet(metrica){  
+var frase= ""  
+// incluir uma nova medida de temperatura  
+if(metrica>15 && metrica <30){  
+frase = "Alerta: Alguns pacotes estão sendo perdidos! Porcentagem de perda de pacotes: "  
+console.log('Cheguei aqui')  
+alertas(nome,"Pacotes",metrica, frase)  
+} else if(metrica >30){  
+frase = "Perigo: Muitos Pacotes Perdidos! Porcentagem de perda de pacotes: "  
+alertas(nome, "Pacotes", metrica, frase)  
+}  
+}  
+
+function verificarRam(metrica){  
+var frase= ""  
+// incluir uma nova medida de temperatura  
+if(metrica > 5 && metrica <100){  
+frase = "Alerta: RAM sobrecarregando! Porcentagem de uso: "  
+console.log('Cheguei aqui')  
+alertas(nome,"RAM",metrica, frase)  
+} else if(metrica == 100){  
+frase = "Perigo: RAM está sobrecarregada! Porcentagem de uso: "  
+alertas(nome, "RAM", metrica, frase)  
+}  
+}  
+
+function verificarCpu(metrica){  
+var frase= ""  
+// incluir uma nova medida de temperatura  
+if(metrica>50 && metrica < 75){  
+frase = "Alerta: CPU sobrecarregando! Porcentagem de uso: "  
+console.log('Cheguei aqui')  
+alertas(nome,"CPU",metrica, frase)  
+} else if(metrica >=75){  
+frase = "Perigo: CPU sobrecarregada! Porcentagem de uso: "  
+alertas(nome, "CPU", metrica, frase)  
+}  
+}
+
+function verificarDisco(metrica){  
+var frase= ""  
+// incluir uma nova medida de temperatura  
+if(metrica > 60 && metrica <= 80){  
+frase = "Alerta: Disco sobrecarregando! Porcentagem de uso: "  
+console.log('Cheguei aqui')  
+alertas(nome,"Disco",metrica, frase)  
+} else if(metrica > 80){  
+frase = "Perigo: Disco sobrecarregado! Porcentagem de uso: "  
+alertas(nome, "Disco", metrica, frase)  
+}  
+}
+
 </script>
 
 <!-- <script>
