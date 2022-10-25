@@ -3012,7 +3012,7 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
 }
 
 .alert.alert-warning {
-  background-color: #ffbc50;
+  background-color: rgba(4, 199, 88, 0.813);
 }
 
 .alert.alert-info {
@@ -3020,7 +3020,7 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
 }
 
 .alert.alert-primary {
-  background-color: #fa764b;
+  background-color: rgb(254, 201, 8);
 }
 
 .alert i.fa,
