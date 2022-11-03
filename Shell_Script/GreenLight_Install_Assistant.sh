@@ -5,7 +5,7 @@ echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7) Olá sou seu assistente de
 sleep 1.5
 echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7) Após a compra dos serviços da MoniToll, precisamos instalar algumas aplicações e bibliotecas no seu sistema."
 sleep 1.5
-echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7) Python3, Python3-PIP, ODBC Driver SQL, Java, Kotlin."
+echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7) Python3, Python3-PIP, ODBC Driver SQL, Java."
 sleep 1.5
 echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7) Vamos atualizar seu sistema antes verificar se temos algumas das aplicações instalada."
 sudo apt update && sudo apt upgrade -y
