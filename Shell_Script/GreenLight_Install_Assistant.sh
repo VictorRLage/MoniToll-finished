@@ -12,7 +12,6 @@ sudo apt update && sudo apt upgrade -y
 echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7) Sistema atualizado com sucesso :)"
 sleep 1.5
 
-VERSAO2=11
 echo  "$(tput setaf 10)[Bot assistant]:$(tput setaf 7)  Verificando aqui se você possui o Java instalado...;"
 sleep 1.5
 java -version
@@ -36,45 +35,15 @@ if [ $? -eq 0 ]
 			sleep 2
 			sudo apt update -y
 			clear
-			if [ $VERSAO2 -eq 11 ]
+			if [ $VERSAO -eq 18 ]
 				then
-					echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7) Preparando para instalar a versão 11 do Java."
-					sudo apt install default-jre ; apt install openjdk-11-jre-headless; -y
+					echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7) Preparando para instalar a versão 18 do Java."
+					sudo apt install default-jre ; apt install openjdk-18-jre-headless; -y
 					clear
 					echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7) Java instalado com sucesso!"
 				fi
 		else 	
 		echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7)  Você optou por não instalar o Java por enquanto, até a próxima então!"
-	fi
-fi
-sleep 1.5
-
-echo  "$(tput setaf 10)[Bot assistant]:$(tput setaf 7)  Verificando aqui se você possui o Kotlin instalado...;"
-sleep 1.5
-snap info kotlin
-if [ $? -eq 0 ]
-	then
-		echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7) : Você já tem o kotlin instalado!!!"
-		sleep 1.5
-	else
-		echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7)  Opa! Não identifiquei nenhuma versão do kotlin instalado, mas sem problemas, irei resolver isso agora!"
-		echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7)  Confirme para mim se realmente deseja instalar o Kotlin (S/N)?"
-		sleep 1.5
-	read inst
-	if [ \"$inst\" == \"S\" ]
-		then
-			echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7)  Ok! Você escolheu instalar o Kotlin ;D"
-			echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7)  Adicionando o repositório !"
-			sleep 2
-			curl -s https://get.sdkman.io | bash
-            sdk install kotlin
-			clear
-			echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7)  Atualizando! Quase lá."
-			sleep 2
-			sudo apt update -y
-			clear
-		else 	
-		echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7)  Você optou por não instalar o Kotlin por enquanto, até a próxima então!"
 	fi
 fi
 sleep 1.5
