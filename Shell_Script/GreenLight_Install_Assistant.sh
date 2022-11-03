@@ -81,8 +81,8 @@ sleep 1.5
 
 echo  "$(tput setaf 10)[Bot assistant]:$(tput setaf 7)  Verificando aqui se você possui o ODBC instalado...;"
 sleep 1.5
-apt-cache search msodbc
-if [ $? -eq "msodbcsql18 - ODBC Driver for Microsoft(R SQL Server(R)" ]
+odbcinst -q -d -n
+if [ $? -eq 0 ]
 	then
 		echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7) : Você já tem o ODBC instalado!!!"
 		sleep 1.5
