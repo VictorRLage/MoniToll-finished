@@ -99,7 +99,7 @@ sleep 1.5
 PURPLE='0;35'
 NC='\033[0m' 
 
-echo  "$(tput setaf 10)[Bot assistant]:$(tput setaf 7)  Verificando aqui se você possui o Python3 e o PIP instalado...;"
+echo  "$(tput setaf 10)[Bot assistant]:$(tput setaf 7)  Verificando aqui se você possui o Python3 instalado...;"
 sleep 2
 
 python3 --version
@@ -125,6 +125,44 @@ if [ $? -eq 0 ]
 			sudo apt update -y
 			clear
 			echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7) Python3 instalado com sucesso!"
+		else 	
+		echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7)  Você optou por não instalar o Python3 e o PIP por enquanto, até a próxima então!"
+	fi
+fi
+
+echo  "$(tput setaf 10)[Bot assistant]:$(tput setaf 7)  Verificando aqui se você possui o PIP instalado...;"
+sleep 2
+
+pip --version
+if [ $? -eq 0 ]
+	then
+		echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7) : Você já tem o PIP instalado!!!"
+		sleep 1.5
+	else
+		echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7)  Opa! Não identifiquei nenhuma versão do PIP instalado, mas sem problemas, irei resolver isso agora!"
+		echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7)  Confirme para mim se realmente deseja instalar o PIP e as Bibliotecas (S/N)?"
+		sleep 1.5
+	read inst
+	if [ \"$inst\" == \"S\" ]
+		then
+			echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7)  Ok! Você escolheu instalar o PIP ;D"
+			echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7)  Adicionando o repositório !"
+			sleep 2
+			sudo apt install python3-pip
+			clear
+			echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7)  Atualizando! Quase lá."
+			sleep 2
+			sudo apt update -y
+			clear
+			echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7) PIP instalado com sucesso!"
+			sleep 1.5
+			echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7)  Adicionando Bibliotecas !"
+			sleep 2
+			pip install psutil
+			pip install numpy
+			pip install -U textwrap3
+			pip install pyodbc
+			clear			
 		else 	
 		echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7)  Você optou por não instalar o Python3 e o PIP por enquanto, até a próxima então!"
 	fi
