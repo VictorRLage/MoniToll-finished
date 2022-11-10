@@ -162,6 +162,7 @@ if [ $? -eq 0 ]
 			pip install numpy
 			pip install -U textwrap3
 			pip install pyodbc
+			pip install mysql-connector-python
 			clear			
 		else 	
 		echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7)  Você optou por não instalar o Python3 e o PIP por enquanto, até a próxima então!"
