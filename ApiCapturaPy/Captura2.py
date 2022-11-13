@@ -363,7 +363,7 @@ def InserirLocal():
 
     try: 
         cursor.execute('''
-        INSERT INTO Leitura VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO Leitura VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? , ?, ?)
         ''',cpuPercent, ramTotal, ramUso, ramUsoPercent, discoTotal, discoUso, discoLivre, discoPercent, pacoEnv, pacoRec ,pacoPerd)  
     except Error as e:
         print("Error while connecting to MySQL", e)
