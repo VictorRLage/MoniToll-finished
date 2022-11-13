@@ -12,10 +12,10 @@ while True:
     RamTotal = round((psutil.virtual_memory() [0] / 10**9), 4)
     RamUso = round((psutil.virtual_memory() [3] / 10**9), 4)
     PorcentUsoRam = round((psutil.virtual_memory() [2]), 1)
-    DiscoRTotal = round((psutil.disk_usage("\\")[0] / 10**12), 3)
-    UsoDiscoR = round((psutil.disk_usage("\\")[1] / 10**12), 3)
-    LivreDiscoR = round((psutil.disk_usage("\\")[2] / 10**12), 3)
-    PorcentDiscoR = psutil.disk_usage("\\")[3]
+    DiscoRTotal = round((psutil.disk_usage("/")[0] / 10**12), 3)
+    UsoDiscoR = round((psutil.disk_usage("/")[1] / 10**12), 3)
+    LivreDiscoR = round((psutil.disk_usage("/")[2] / 10**12), 3)
+    PorcentDiscoR = psutil.disk_usage("/")[3]
     PacotesEnv = round((psutil.net_io_counters(pernic=False, nowrap=True) [2] / 1024), 2)
     PacotesRec = round((psutil.net_io_counters(pernic=False, nowrap=True) [3] / 1024), 2)
     soma = 0
