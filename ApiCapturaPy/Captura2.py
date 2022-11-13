@@ -18,8 +18,8 @@ def Conexao2():
     try:
         connection = mysql.connector.connect(host='localhost',
                                             database='MoniToll',
-                                            user='aluno',
-                                            password='sptech')
+                                            user='root',
+                                            password='urubu100')
         if connection.is_connected():
             db_Info = connection.get_server_info()
             print("Connected to MySQL Server version ", db_Info)
