@@ -40,7 +40,7 @@ def captura(cont, conn):
         def leitura(conn):
             cursor = conn.cursor()
 
-            cursor.execute("INSERT INTO Leitura VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+            cursor.execute("INSERT INTO Leitura (cpuPercent, ramTotal, ramUso, ramUsoPercent, discoTotal, discoUso, discoLivre, discoPercent, pacoEnv, pacoRec ,pacoPerd) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
                            (PorcentCPU, RamTotal, RamUso, PorcentUsoRam, DiscoRTotal, UsoDiscoR, LivreDiscoR,
                             PorcentDiscoR, PacotesEnv, PacotesRec, PorcPctperdidos))
             conn.commit()
@@ -57,8 +57,8 @@ def captura(cont, conn):
 try:
     conn = mysql.connector.connect(
         host='localhost',
-        user='MoniToll',
-        password='123',
+        user='root',
+        password='urubu100',
         database='MoniToll'
     )
     print("Conexão com o Banco de Dados MySQL efetuada com sucesso!")
