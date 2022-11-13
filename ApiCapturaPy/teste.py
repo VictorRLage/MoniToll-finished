@@ -44,11 +44,13 @@ pacoPerd = [pacoEnv, pacoRec]
 def InserirLocal():
 
     try: 
-        insertquery = "INSERT INTO Leitura VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-        values = [cpuPercent, ramTotal, ramUso, ramUsoPercent, discoTotal, discoUso, discoLivre, discoPercent, pacoEnv, pacoRec ,pacoPerd]
-        cursor.execute(insertquery, values)
+        sql = ("INSERT INTO Leitura VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)")
+        values = (cpuPercent, ramTotal, ramUso, ramUsoPercent, discoTotal, discoUso, discoLivre, discoPercent, pacoEnv, pacoRec ,pacoPerd)
+        cursor.execute(sql, values)
+        cursor.commit()
         print("Inserindo")
     except Error as e:
+        cursor.rollback()
         print("Error while connecting to MySQL", e)
 
          
