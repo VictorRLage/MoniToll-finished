@@ -118,7 +118,6 @@ if [ $? -eq 0 ]
 			echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7)  Adicionando o repositório !"
 			sleep 2
 			sudo apt install python-is-python3
-			sudo apt install python3-pip
 			clear
 			echo "$(tput setaf 10)[Bot assistant]:$(tput setaf 7)  Atualizando! Quase lá."
 			sleep 2
