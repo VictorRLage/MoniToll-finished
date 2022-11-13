@@ -57,8 +57,8 @@ def captura(cont, conn):
 try:
     conn = mysql.connector.connect(
         host='localhost',
-        user='root',
-        password='urubu100',
+        user='MoniToll',
+        password='123',
         database='MoniToll'
     )
     print("Conexão com o Banco de Dados MySQL efetuada com sucesso!")
