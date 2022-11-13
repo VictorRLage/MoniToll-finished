@@ -52,7 +52,7 @@ def captura(cont, conn):
         else:
             cont += 1
 
-        leitura(conn, coxn)
+        leitura(conn)
 
 try:
     conn = mysql.connector.connect(
