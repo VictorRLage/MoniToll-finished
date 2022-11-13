@@ -51,7 +51,7 @@ while True:
             values = (cpu_percent, RamTotal, RamUso, PorcentUsoRam, DiscoRTotal, UsoDiscoR, LivreDiscoR, PorcentDiscoR, PacotesEnv, PacotesRec, PorcPctperdidos)
 
                 # Executing the SQL command
-            cursor.execute(sql, values)
+            cursor.execute(sql, (values,))
 
                 # Commit your changes in the database
             cnx.commit()
