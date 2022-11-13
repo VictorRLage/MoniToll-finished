@@ -2,14 +2,13 @@ import datetime
 import time
 import mysql.connector
 import psutil
-import pyodbc
 from asyncio import sleep
 from errno import errorcode
 from json import loads
 from mysql.connector import errorcode
 
 
-def captura(cont, conn, coxn):
+def captura(cont, conn):
     while True:
         CpuPercent = psutil.cpu_percent(interval=1, percpu=True)
         QtdProcessadores = psutil.cpu_count(logical=True)
@@ -38,19 +37,13 @@ def captura(cont, conn, coxn):
 
         t = time.sleep(5)
 
-        def leitura(conn, coxn):
+        def leitura(conn):
             cursor = conn.cursor()
-            cursor_sql = coxn.cursor()
 
-            cursor.execute("INSERT INTO Leitura (DataHora, PorcentCPU, QtdProcessadores, RamTotal, RamUsada, PorcentUsoRam, DiscoRTotal, UsoDiscoR, LivreDiscoR, PercentDiscoR, PacotesEnv, PacotesRec, PorcentPerd, vMem, BytesRec, BytesEnv, fkTorre) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
-                           (datahora, PorcentCPU, QtdProcessadores, RamTotal, RamUso, PorcentUsoRam, DiscoRTotal, UsoDiscoR, LivreDiscoR,
-                            PorcentDiscoR, PacotesEnv, PacotesRec, PorcPctperdidos, vmem, BytesRec, BytesEnv, 1))
+            cursor.execute("INSERT INTO Leitura VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+                           (PorcentCPU, RamTotal, RamUso, PorcentUsoRam, DiscoRTotal, UsoDiscoR, LivreDiscoR,
+                            PorcentDiscoR, PacotesEnv, PacotesRec, PorcPctperdidos))
             conn.commit()
-
-            cursor_sql.execute("INSERT INTO Leitura (DataHora, PorcentCPU, QtdProcessadores, RamTotal, RamUsada, PorcentUsoRam, DiscoRTotal, UsoDiscoR, LivreDiscoR, PercentDiscoR, PacotesEnv, PacotesRec, PorcentPerd, vMem, BytesRec, BytesEnv, fkTorre) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-                               (datahora, PorcentCPU, QtdProcessadores, RamTotal, RamUso, PorcentUsoRam, DiscoRTotal, UsoDiscoR, LivreDiscoR,
-                                PorcentDiscoR, PacotesEnv, PacotesRec, PorcPctperdidos, vmem, BytesRec, BytesEnv, 1))
-            coxn.commit()
 
             print("Inserindo dados no banco de dados!")
 
@@ -70,16 +63,8 @@ try:
     )
     print("Conexão com o Banco de Dados MySQL efetuada com sucesso!")
 
-    server = 'montioll.database.windows.net'
-    database = 'Monitoll'
-    username = 'MoniToll'
-    password = 'Grupo7@123'
-    coxn = pyodbc.connect('DRIVER={ODBC Driver 18 for SQL Server};SERVER='+server +
-                          ';DATABASE='+database+';ENCRYPT=yes;UID='+username+';PWD=' + password)
-
-    print("Conexão com o Banco de Dados SQL Server Azure efetuada com sucesso!")
     cont = 0
-    captura(cont, conn, coxn)
+    captura(cont, conn)
 
 # Validações de Erro:
 except mysql.connector.Error as err:
