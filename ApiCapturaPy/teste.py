@@ -44,7 +44,7 @@ pacoPerd = [pacoEnv, pacoRec]
 def InserirLocal():
 
     try: 
-        sql = ("INSERT INTO Leitura VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)")
+        sql = f""" INSERT INTO Leitura VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
         values = (cpuPercent, ramTotal, ramUso, ramUsoPercent, discoTotal, discoUso, discoLivre, discoPercent, pacoEnv, pacoRec ,pacoPerd)
         cursor.execute(sql, values)
         cursor.commit()
