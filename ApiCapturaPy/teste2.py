@@ -18,10 +18,6 @@ while True:
     PorcentDiscoR = psutil.disk_usage("/")[3]
     PacotesEnv = round((psutil.net_io_counters(pernic=False, nowrap=True) [2] / 1024), 2)
     PacotesRec = round((psutil.net_io_counters(pernic=False, nowrap=True) [3] / 1024), 2)
-    soma = 0
-    for x in cpu_percent:
-            soma = soma + x
-            PorcentCPU = (round(soma/8, 1))
     vetor = [PacotesEnv, PacotesRec]
     PorcPctperdidos = round((((vetor[1] - vetor[0])/vetor[1])*100), 1)
     datahora = datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')
@@ -52,7 +48,7 @@ while True:
             
         try:
             sql = ("INSERT INTO Leitura (cpuPercent, ramTotal, ramUso, ramUsoPercent, discoTotal, discoUso, discoLivre, discoPercent, pacoEnv, pacoRec ,pacoPerd) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,)")
-            values = (PorcentCPU, RamTotal, RamUso, PorcentUsoRam, DiscoRTotal, UsoDiscoR, LivreDiscoR, PorcentDiscoR, PacotesEnv, PacotesRec, PorcPctperdidos)
+            values = (cpu_percent, RamTotal, RamUso, PorcentUsoRam, DiscoRTotal, UsoDiscoR, LivreDiscoR, PorcentDiscoR, PacotesEnv, PacotesRec, PorcPctperdidos)
 
                 # Executing the SQL command
             cursor.execute(sql, values)
