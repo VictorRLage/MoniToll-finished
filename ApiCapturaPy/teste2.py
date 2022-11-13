@@ -51,7 +51,7 @@ while True:
         cursor = cnx.cursor() 
             
         try:
-            sql = ("INSERT INTO Leitura VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,)")
+            sql = ("INSERT INTO Leitura (cpuPercent, ramTotal, ramUso, ramUsoPercent, discoTotal, discoUso, discoLivre, discoPercent, pacoEnv, pacoRec ,pacoPerd) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,)")
             values = (PorcentCPU, RamTotal, RamUso, PorcentUsoRam, DiscoRTotal, UsoDiscoR, LivreDiscoR, PorcentDiscoR, PacotesEnv, PacotesRec, PorcPctperdidos)
 
                 # Executing the SQL command
