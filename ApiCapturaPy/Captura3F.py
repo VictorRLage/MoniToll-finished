@@ -151,6 +151,8 @@ def ValidacaoLogin():
         # Executando comando SQL
         print("Fazendo login...")
         usuario = crsr.fetchone()
+        print(crsr.fetchone())
+        print(usuario)
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
