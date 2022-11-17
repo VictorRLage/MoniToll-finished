@@ -97,6 +97,7 @@ def ValidacaoLogin():
     ''',records, records2)
         # Executando comando SQL
         print("Fazendo login...")
+        global usuario
         usuario = crsr.fetchone()
 
     except pyodbc.Error as err:
