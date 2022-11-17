@@ -157,7 +157,7 @@ def ValidacaoLogin():
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
     
-    if usuario is not None:
+    if True:
         def convertTuple(tup):
             str = ''
             for item in tup:
