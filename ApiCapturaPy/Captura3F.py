@@ -137,7 +137,6 @@ def Conexao1():
 
 
 def ValidacaoLogin():
-print("tentando............")print("tentando............")print("tentando............")print("tentando............")print("tentando............")print("tentando............")print("tentando............")print("tentando............")print("tentando............")print("tentando............")print("tentando............")print("tentando............")print("tentando............")print("tentando............")print("tentando............")
     records = u_email = input('Seu e-mail: ')
     records2 = u_senha = input('Sua senha: ')
                     
@@ -145,8 +144,7 @@ print("tentando............")print("tentando............")print("tentando.......
         print("tentando............")
         print(records)
         print(records2)
-        print(records)
-        print(records2)
+
         crsr.execute('''
     SELECT Nome FROM Usuario WHERE Email = ? and Senha = ?
     ''',records, records2)
