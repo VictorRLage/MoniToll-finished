@@ -165,6 +165,14 @@ def Conexao1():
         global crsr
         crsr = cnxn.cursor()
         print("Conectado ao banco de dados da Nuvem:")
+        try:
+                crsr.execute('''
+            SELECT * FROM Torre
+            ''')                    
+                # Executando comando SQL)
+        except pyodbc.Error as err:
+            print("Something went wrong: {}".format(err))
+
         cnxn.close()
         ValidacaoLogin()
         VerificarDadosMaquina(idTorre)
@@ -172,7 +180,6 @@ def Conexao1():
     except pyodbc.Error as ex:
         print("{c} não conexão com o banco".format(c=connection_string))    
         Conexao2(cont, conn)
-
 
 
 
