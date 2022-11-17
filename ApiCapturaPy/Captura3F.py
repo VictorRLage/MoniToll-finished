@@ -85,7 +85,27 @@ except mysql.connector.Error as err:
         print(err)
         time.sleep(10)
 
+def VerificarDadosMaquina(idTorre):
+                    
+    try:
+        crsr.execute('''
+    SELECT SerialID FROM Torre WHERE idTorre = ?
+    ''',idTorre)
+        # Executando comando SQL
+        print("Verificando dados da torre...")
+        SerialIdBanco = crsr.fetchone()
 
+    except pyodbc.Error as err:
+        print("Something went wrong: {}".format(err))
+    
+    if SerialIdBanco[0] != '':
+        print("A torre possui dados cadastrados")
+        print("Cadastrando leituras...")
+        InserindoLeitura()
+    else:
+        print("A torre não possui dados")
+        InserirDadosMaquina(strip_SerialIdAtual, strip3_OsAtual, strip3_MaquinaAtual, strip2_ProcessadorAtual, strip2_DiscoAtual, strip2_RamAtual)
+        
 def Conexao1():
 
     try:
@@ -350,29 +370,6 @@ def InserindoLeitura():
                 print("Nome componente ",y,":", strNome)
                 print(strNome + " = " + strCodigo)
                 teste()
-
-
-
-def VerificarDadosMaquina(idTorre):
-                    
-    try:
-        crsr.execute('''
-    SELECT SerialID FROM Torre WHERE idTorre = ?
-    ''',idTorre)
-        # Executando comando SQL
-        print("Verificando dados da torre...")
-        SerialIdBanco = crsr.fetchone()
-
-    except pyodbc.Error as err:
-        print("Something went wrong: {}".format(err))
-    
-    if SerialIdBanco[0] != '':
-        print("A torre possui dados cadastrados")
-        print("Cadastrando leituras...")
-        InserindoLeitura()
-    else:
-        print("A torre não possui dados")
-        InserirDadosMaquina(strip_SerialIdAtual, strip3_OsAtual, strip3_MaquinaAtual, strip2_ProcessadorAtual, strip2_DiscoAtual, strip2_RamAtual)
 
 
 
