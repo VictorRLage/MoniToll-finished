@@ -41,7 +41,7 @@ def Conexao2(cont, conn):
         vetor = [PorcentCPU, QtdProcessadores, RamTotal, RamUso, PorcentUsoRam,
                  DiscoRTotal, UsoDiscoR, LivreDiscoR, PorcentDiscoR, PacotesEnv, PacotesRec, vmem, BytesRec, BytesEnv]
         PorcPctperdidos = round((((vetor[10] - vetor[9])/vetor[10])*100), 1)
-        datahora = datetime.datetime.now().strftime('%Y/%m/%d H:%M:%S')
+        datahora = datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S')
 
         t = time.sleep(5)
 
