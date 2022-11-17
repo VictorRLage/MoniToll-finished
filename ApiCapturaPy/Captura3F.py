@@ -119,14 +119,6 @@ def Conexao1():
         global crsr
         crsr = cnxn.cursor()
         print("Conectado ao banco de dados da Nuvem:")
-        try:
-                crsr.execute('''
-            SELECT * FROM Torre
-            ''')                    
-                # Executando comando SQL)
-        except pyodbc.Error as err:
-            print("Something went wrong: {}".format(err))
-
         cnxn.close()
         ValidacaoLogin()
 
@@ -136,29 +128,29 @@ def Conexao1():
 
 
 def ValidacaoLogin():
-    records = u_email = input('Seu e-mail: ')
-    records2 = u_senha = input('Sua senha: ')
+    u_email = input('Seu e-mail: ')
+    u_senha = input('Sua senha: ')
                     
     try:
         print("tentando............")
-        print(records)
-        print(records2)
+        print(u_email)
+        print(u_senha)
 
         crsr.execute('''
         SELECT Nome FROM Usuario WHERE Email = ? and Senha = ?
-        ''',records, records2)
+        ''',u_email, u_senha)
         # Executando comando SQL
         print("Fazendo login...")
         global usuario
         usuario = crsr.fetchone()
         print(crsr.fetchone())
         print(usuario)
-        teste(usuario)
+        teste2(usuario)
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
     
-def teste(usuario):
+def teste2(usuario):
 
     if usuario is not None:
         def convertTuple(tup):
