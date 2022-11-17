@@ -85,27 +85,7 @@ except mysql.connector.Error as err:
         print(err)
         time.sleep(10)
 
-def VerificarDadosMaquina(idTorre):
-                    
-    try:
-        crsr.execute('''
-    SELECT SerialID FROM Torre WHERE idTorre = ?
-    ''',idTorre)
-        # Executando comando SQL
-        print("Verificando dados da torre...")
-        SerialIdBanco = crsr.fetchone()
 
-    except pyodbc.Error as err:
-        print("Something went wrong: {}".format(err))
-    
-    if SerialIdBanco[0] != '':
-        print("A torre possui dados cadastrados")
-        print("Cadastrando leituras...")
-        InserindoLeitura()
-    else:
-        print("A torre não possui dados")
-        InserirDadosMaquina(strip_SerialIdAtual, strip3_OsAtual, strip3_MaquinaAtual, strip2_ProcessadorAtual, strip2_DiscoAtual, strip2_RamAtual)
-        
 def Conexao1():
 
     try:
@@ -149,7 +129,6 @@ def Conexao1():
 
         cnxn.close()
         ValidacaoLogin()
-        VerificarDadosMaquina(idTorre)
 
     except pyodbc.Error as ex:
         print("{c} não conexão com o banco".format(c=connection_string))    
@@ -216,6 +195,7 @@ def EscolherTorres(idTorres):
     print('Maquinas:', maquinas)
     global idTorre
     idTorre = input('Qual é esta maquina?')
+    VerificarDadosMaquina(idTorre)
 
 def SelectIdTorres(fkEmpresa):
 
@@ -373,6 +353,29 @@ def InserindoLeitura():
 
 
 
+def VerificarDadosMaquina(idTorre):
+                    
+    try:
+        crsr.execute('''
+    SELECT SerialID FROM Torre WHERE idTorre = ?
+    ''',idTorre)
+        # Executando comando SQL
+        print("Verificando dados da torre...")
+        SerialIdBanco = crsr.fetchone()
+
+    except pyodbc.Error as err:
+        print("Something went wrong: {}".format(err))
+    
+    if SerialIdBanco[0] != '':
+        print("A torre possui dados cadastrados")
+        print("Cadastrando leituras...")
+        InserindoLeitura()
+    else:
+        print("A torre não possui dados")
+        InserirDadosMaquina(strip_SerialIdAtual, strip3_OsAtual, strip3_MaquinaAtual, strip2_ProcessadorAtual, strip2_DiscoAtual, strip2_RamAtual)
+
+
+
 
 def InserirDadosMaquina(SerialID, OS, Maquina, Processador, Disco, RamSpeed):
     
@@ -391,5 +394,4 @@ def InserirDadosMaquina(SerialID, OS, Maquina, Processador, Disco, RamSpeed):
 
 while True:
     Conexao1()
-    ValidacaoLogin()
     time.sleep(5)
