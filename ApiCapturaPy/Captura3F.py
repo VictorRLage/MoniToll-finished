@@ -86,53 +86,6 @@ except mysql.connector.Error as err:
         time.sleep(10)
 
 
-def ValidacaoLogin():
-
-    records = u_email = input('Seu e-mail: ')
-    records2 = u_senha = input('Sua senha: ')
-                    
-    try:
-        crsr.execute('''
-    SELECT Nome FROM Usuario WHERE Email = ? and Senha = ?
-    ''',records, records2)
-        # Executando comando SQL
-        print("Fazendo login...")
-        global usuario
-        usuario = crsr.fetchone()
-
-    except pyodbc.Error as err:
-        print("Something went wrong: {}".format(err))
-    
-    if usuario is not None:
-        def convertTuple(tup):
-            str = ''
-            for item in tup:
-                str = str + item
-            return str
-        str_usuario = convertTuple(usuario)
-        print('Olá,',str_usuario,'!')
-                    
-        try:
-            crsr.execute('''
-        SELECT fkEmpresa FROM Usuario WHERE Email = ? and Senha = ?
-        ''',u_email, u_senha)
-            # Executando comando SQL
-            global fkEmpresa
-            fkEmpresa = crsr.fetchone()
-            global int_fkEmpresa
-            int_fkEmpresa = sum(fkEmpresa)
-            print('fkEmpresa:', fkEmpresa)
-
-        except pyodbc.Error as err:
-            print("Something went wrong: {}".format(err))
-
-        SelectIdTorres(fkEmpresa)
-
-    else:
-        print('Email ou senha incoretos')
-        ValidacaoLogin()
-
-
 def Conexao1():
 
     try:
@@ -182,6 +135,52 @@ def Conexao1():
         print("{c} não conexão com o banco".format(c=connection_string))    
         Conexao2(cont, conn)
 
+
+def ValidacaoLogin():
+
+    records = u_email = input('Seu e-mail: ')
+    records2 = u_senha = input('Sua senha: ')
+                    
+    try:
+        crsr.execute('''
+    SELECT Nome FROM Usuario WHERE Email = ? and Senha = ?
+    ''',records, records2)
+        # Executando comando SQL
+        print("Fazendo login...")
+        global usuario
+        usuario = crsr.fetchone()
+
+    except pyodbc.Error as err:
+        print("Something went wrong: {}".format(err))
+    
+    if usuario is not None:
+        def convertTuple(tup):
+            str = ''
+            for item in tup:
+                str = str + item
+            return str
+        str_usuario = convertTuple(usuario)
+        print('Olá,',str_usuario,'!')
+                    
+        try:
+            crsr.execute('''
+        SELECT fkEmpresa FROM Usuario WHERE Email = ? and Senha = ?
+        ''',u_email, u_senha)
+            # Executando comando SQL
+            global fkEmpresa
+            fkEmpresa = crsr.fetchone()
+            global int_fkEmpresa
+            int_fkEmpresa = sum(fkEmpresa)
+            print('fkEmpresa:', fkEmpresa)
+
+        except pyodbc.Error as err:
+            print("Something went wrong: {}".format(err))
+
+        SelectIdTorres(fkEmpresa)
+
+    else:
+        print('Email ou senha incoretos')
+        ValidacaoLogin()
 
 
 def EscolherTorres(idTorres):
