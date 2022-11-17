@@ -200,47 +200,34 @@ def SelectIdTorres(fkEmpresa):
 
 
 # Bloco pegar serial id
-byte_SerialIdAtual = subprocess.check_output('''sudo dmidecode -s system-serial-number''', shell=True)
-str_SerialIdAtual = byte_SerialIdAtual.decode('UTF-8')
+byte_SerialIdAtual = "c26d"
 global strip_SerialIdAtual
-strip_SerialIdAtual = str_SerialIdAtual.strip('\n')
+strip_SerialIdAtual = byte_SerialIdAtual
 
 # Bloco pegar sistema operacional
-byte_OsAtual = subprocess.check_output('''lsb_release -d''', shell=True)
-str_OsAtual = byte_OsAtual.decode('UTF-8')
-strip_OsAtual = str_OsAtual.strip('Description:')
-strip2_OsAtual = strip_OsAtual.strip('\t')
+byte_OsAtual = "Ubuntu 20.04"
 global strip3_OsAtual
-strip3_OsAtual = strip2_OsAtual.strip('\n')
+strip3_OsAtual = byte_OsAtual
 
 # Bloco pegar modelo maquina
-byte_MaquinaAtual = subprocess.check_output('''sudo dmidecode -t 1 | grep 'Product Name' | uniq''', shell=True)
-str_MaquinaAtual = byte_MaquinaAtual.decode('UTF-8')
-strip_MaquinaAtual = str_MaquinaAtual.strip('\tProduct')
-strip2_MaquinaAtual = strip_MaquinaAtual.strip(' Name: ')
+byte_MaquinaAtual = "docker"
 global strip3_MaquinaAtual
-strip3_MaquinaAtual = strip2_MaquinaAtual.strip('\n')
+strip3_MaquinaAtual = byte_MaquinaAtual
 
 # Bloco pegar processador
-byte_ProcessadorAtual = subprocess.check_output('''lscpu | grep 'Model name:' | uniq''', shell=True)
-str_ProcessadorAtual = byte_ProcessadorAtual.decode('UTF-8')
-strip_ProcessadorAtual = str_ProcessadorAtual.strip('Model name:')
+byte_ProcessadorAtual = "Quad.Core"
 global strip2_ProcessadorAtual
-strip2_ProcessadorAtual = strip_ProcessadorAtual.strip('\n')
+strip2_ProcessadorAtual = byte_ProcessadorAtual
 
 # Bloco pegar disco 
-byte_DiscoAtual = subprocess.check_output('''sudo lshw -class disk -class storage | grep -B1 'vendor' | head -1''', shell=True)
-str_DiscoAtual = byte_DiscoAtual.decode('UTF-8')
-strip_DiscoAtual = str_DiscoAtual.strip('\tproduct: ')
+byte_DiscoAtual = 1000000
 global strip2_DiscoAtual
-strip2_DiscoAtual = strip_DiscoAtual.strip('\n')
+strip2_DiscoAtual = byte_DiscoAtual
 
 # Bloco pegar velocidade da ram
-byte_RamAtual = subprocess.check_output('''sudo dmidecode --type memory | grep -B1 'Type Detail: ' | head -1''', shell=True)
-str_RamAtual = byte_RamAtual.decode('UTF-8')
-strip_RamAtual = str_RamAtual.strip('\tType: ')
+byte_RamAtual = 1000
 global strip2_RamAtual
-strip2_RamAtual = strip_RamAtual.strip('\n')
+strip2_RamAtual = byte_RamAtual
 
 
 
