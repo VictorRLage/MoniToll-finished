@@ -150,14 +150,18 @@ def ValidacaoLogin():
         ''',records, records2)
         # Executando comando SQL
         print("Fazendo login...")
+        global usuario
         usuario = crsr.fetchone()
         print(crsr.fetchone())
         print(usuario)
+        teste(usuario)
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
     
-    if True:
+def teste(usuario):
+
+    if usuario is not None:
         def convertTuple(tup):
             str = ''
             for item in tup:
@@ -168,8 +172,8 @@ def ValidacaoLogin():
                     
         try:
             crsr.execute('''
-        SELECT fkEmpresa FROM Usuario WHERE Email = ? and Senha = ?
-        ''',u_email, u_senha)
+            SELECT fkEmpresa FROM Usuario WHERE Email = ? and Senha = ?
+            ''',u_email, u_senha)
             # Executando comando SQL
             global fkEmpresa
             fkEmpresa = crsr.fetchone()
