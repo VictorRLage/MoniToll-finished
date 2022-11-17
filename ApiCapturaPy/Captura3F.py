@@ -146,8 +146,8 @@ def ValidacaoLogin():
         print(records2)
 
         crsr.execute('''
-    SELECT Nome FROM Usuario WHERE Email = ? and Senha = ?
-    ''',records, records2)
+        SELECT Nome FROM Usuario WHERE Email = ? and Senha = ?
+        ''',records, records2)
         # Executando comando SQL
         print("Fazendo login...")
         usuario = crsr.fetchone()
