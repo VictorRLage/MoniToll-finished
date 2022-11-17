@@ -142,12 +142,12 @@ def ValidacaoLogin():
     records2 = u_senha = input('Sua senha: ')
                     
     try:
+        print("tentando............")
         crsr.execute('''
     SELECT Nome FROM Usuario WHERE Email = ? and Senha = ?
     ''',records, records2)
         # Executando comando SQL
         print("Fazendo login...")
-        global usuario
         usuario = crsr.fetchone()
 
     except pyodbc.Error as err:
