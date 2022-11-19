@@ -16,6 +16,14 @@ from errno import errorcode
 from json import loads
 
 
+def Login():
+    print("Bem vindo ao Grenn Light!")
+    print("Login")
+    u_email = input('Seu e-mail: ')
+    u_senha = input('Sua senha: ')
+    ValidarLogin(u_email,u_senha)
+
+
 # estabelecer conexao com Azure
 def ConectarBancoAzure():
 
@@ -121,6 +129,22 @@ def LeituraLocal(conn):
         conn.commit()
 
         print("Inserindo leitura no banco de dados local!")
+
+def ValidarLogin(email,senha):
+    try:
+        crsr.execute('''
+        SELECT Nome FROM Usuario WHERE Email = ? and Senha = ?
+        ''',email, senha)
+        # Executando comando SQL
+        print("Fazendo login...")
+        global usuario
+        usuario = crsr.fetchone()
+        print("Login efetuado com sucesso")
+        print(usuario)
+
+    except pyodbc.Error as err:
+        print("Something went wrong: {}".format(err))
+        print("Falha ao realizar login por favor tente novamente")
 
 
 ConectarBancoAzure()
