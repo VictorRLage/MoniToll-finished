@@ -66,8 +66,9 @@ def ConectarBancoAzure():
         global conectado
         conectado = True
 
+
     except pyodbc.Error as ex:
-        print("NÃO CONECTOU COM A AZURE")
+        print("Conexão com a Azure perdida")
         print("{c} não conexão com o banco".format(c=connection_string))
         print(ex)
         ConectarBancoLocal()
@@ -157,3 +158,4 @@ ConectarBancoAzure()
 Login()
 while True:
     ConectarBancoAzure()
+    time.sleep(10)
