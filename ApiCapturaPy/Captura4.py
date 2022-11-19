@@ -6,7 +6,7 @@ import numpy
 import datetime
 import functools
 import operator
-import pyodbc 
+import pyodbc
 from pyodbc import Error
 import textwrap
 import mysql.connector
@@ -15,7 +15,36 @@ from asyncio import sleep
 from errno import errorcode
 from json import loads
 
-def Conexao2(cont, conn):
+
+
+# Estabelecer conexao com banco de dados local no docker
+def ConectarBancoLocal():
+    try:
+        conn = mysql.connector.connect(
+            host='172.17.0.2',
+            user='root',
+            password='123',
+            database='MoniToll'
+        )
+        print("Conexão com o Banco de Dados MySQL efetuada com sucesso!")
+        LeituraLocal(conn)
+
+    # Validações de Erro:
+    except mysql.connector.Error as err:
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            print("Algo está errado com o Usuário do Banco ou a Senha.")
+            time.sleep(10)
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            print("O banco de dados direcionado não existe.")
+            time.sleep(10)
+        else:
+            print(err)
+            time.sleep(10)
+
+
+
+# Inserir leituras Banco local
+def LeituraLocal(conn):
     while True:
         CpuPercent = psutil.cpu_percent(interval=1, percpu=True)
         QtdProcessadores = psutil.cpu_count(logical=True)
@@ -42,44 +71,15 @@ def Conexao2(cont, conn):
         PorcPctperdidos = round((((vetor[10] - vetor[9])/vetor[10])*100), 1)
         datahora = datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S')
 
-        t = time.sleep(5)
 
-        def leitura(conn):
-            cursor = conn.cursor()
+        cursor = conn.cursor()
 
-            cursor.execute("INSERT INTO Leitura (dataHora, cpuPercent, ramTotal, ramUso, ramUsoPercent, discoTotal, discoUso, discoLivre, discoPercent, pacoEnv, pacoRec ,pacoPerd) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
-                           (datahora,PorcentCPU, RamTotal, RamUso, PorcentUsoRam, DiscoRTotal, UsoDiscoR, LivreDiscoR,
+        cursor.execute("INSERT INTO Leitura (dataHora, cpuPercent, ramTotal, ramUso, ramUsoPercent, discoTotal, discoUso, discoLivre, discoPercent, pacoEnv, pacoRec ,pacoPerd) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+                           (datahora, PorcentCPU, RamTotal, RamUso, PorcentUsoRam, DiscoRTotal, UsoDiscoR, LivreDiscoR,
                             PorcentDiscoR, PacotesEnv, PacotesRec, PorcPctperdidos))
-            conn.commit()
+        conn.commit()
 
-            print("Inserindo dados no banco de dados!")
+        print("Inserindo leitura no banco de dados local!")
 
-        if cont > cont: # Este contador realiza apenas 4 leitura e para, não sendo necessário dar ctrl+c para para o serviço de captura
-            break
-        else:
-            cont += 1
 
-        leitura(conn)
-
-try:
-    conn = mysql.connector.connect(
-        host='172.17.0.2',
-        user='root',
-        password='123',
-        database='MoniToll'
-    )
-    print("Conexão com o Banco de Dados MySQL efetuada com sucesso!")
-
-    cont = 0
-
-# Validações de Erro:
-except mysql.connector.Error as err:
-    if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-        print("Algo está errado com o Usuário do Banco ou a Senha.")
-        time.sleep(10)
-    elif err.errno == errorcode.ER_BAD_DB_ERROR:
-        print("O banco de dados direcionado não existe.")
-        time.sleep(10)
-    else:
-        print(err)
-        time.sleep(10)
+ConectarBancoLocal()
