@@ -60,8 +60,8 @@ def ConectarBancoAzure():
 
         cnxn: pyodbc.Connection = pyodbc.connect(connection_string)
 
-        global cursor
-        cursor = cnxn.cursor()
+        global crsr
+        crsr = cnxn.cursor()
         print("Conectado ao banco de dados da Nuvem")
         global conectado
         conectado = True
@@ -138,7 +138,7 @@ def LeituraLocal(conn):
 
 def ValidarLogin(email,senha):
     try:
-        cursor.execute('''
+        crsr.execute('''
         SELECT Nome FROM Usuario WHERE Email = ? and Senha = ?
         ''',email, senha)
         # Executando comando SQL
