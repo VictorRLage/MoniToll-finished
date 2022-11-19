@@ -17,11 +17,15 @@ from json import loads
 
 
 def Login():
-    print("Bem vindo ao Grenn Light!")
-    print("Login")
-    u_email = input('Seu e-mail: ')
-    u_senha = input('Sua senha: ')
-    ValidarLogin(u_email,u_senha)
+    if conectado:
+        print("Bem vindo ao Grenn Light!")
+        print("Login")
+        u_email = input('Seu e-mail: ')
+        u_senha = input('Sua senha: ')
+        ValidarLogin(u_email,u_senha)
+    else:
+        print("Sem conexão com a internet.")
+
 
 
 # estabelecer conexao com Azure
@@ -60,12 +64,15 @@ def ConectarBancoAzure():
         crsr = cnxn.cursor()
         print("Conectado ao banco de dados da Nuvem")
         cnxn.close()
+        global conectado
+        conectado = True
 
     except pyodbc.Error as ex:
         print("NÃO CONECTOU COM A AZURE")
         print("{c} não conexão com o banco".format(c=connection_string))
         print(ex)
         ConectarBancoLocal()
+        conectado = False
 
 
 # Estabelecer conexao com banco de dados local no docker
@@ -148,3 +155,6 @@ def ValidarLogin(email,senha):
 
 
 ConectarBancoAzure()
+Login()
+while True:
+    ConectarBancoAzure()
