@@ -16,6 +16,49 @@ from errno import errorcode
 from json import loads
 
 
+# estabelecer conexao com Azure
+def ConectarBancoAzure():
+
+    try:
+        # variaveis de conexao
+        driver = '{ODBC Driver 18 for SQL Server}'
+        server_name = 'montioll'
+        database_name = 'Monitoll'
+        server = '{server_name}.database.windows.net,1433'.format(
+            server_name=server_name)
+        username = 'Monitoll'
+        password = 'Grupo7@123'
+        # definindo banco url
+        connection_string = textwrap.dedent('''
+        Driver={driver};
+        Server={server};
+        Database={database};
+        Uid={username};
+        Pwd={password};
+        Encrypt=yes;
+        TrustedServerCertificate=no;
+        Connection Timeout=10;
+        '''.format(
+            driver=driver,
+            server=server,
+            database=database_name,
+            username=username,
+            password=password
+        ))
+
+        cnxn: pyodbc.Connection = pyodbc.connect(connection_string)
+
+        global crsr
+        crsr = cnxn.cursor()
+        print("Conectado ao banco de dados da Nuvem")
+        cnxn.close()
+
+    except pyodbc.Error as ex:
+        print("NÃO CONECTOU COM A AZURE")
+        print("{c} não conexão com o banco".format(c=connection_string))
+        print(ex)
+        ConectarBancoLocal()
+
 
 # Estabelecer conexao com banco de dados local no docker
 def ConectarBancoLocal():
@@ -40,7 +83,6 @@ def ConectarBancoLocal():
         else:
             print(err)
             time.sleep(10)
-
 
 
 # Inserir leituras Banco local
@@ -71,15 +113,14 @@ def LeituraLocal(conn):
         PorcPctperdidos = round((((vetor[10] - vetor[9])/vetor[10])*100), 1)
         datahora = datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S')
 
-
         cursor = conn.cursor()
 
         cursor.execute("INSERT INTO Leitura (dataHora, cpuPercent, ramTotal, ramUso, ramUsoPercent, discoTotal, discoUso, discoLivre, discoPercent, pacoEnv, pacoRec ,pacoPerd) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
-                           (datahora, PorcentCPU, RamTotal, RamUso, PorcentUsoRam, DiscoRTotal, UsoDiscoR, LivreDiscoR,
-                            PorcentDiscoR, PacotesEnv, PacotesRec, PorcPctperdidos))
+                       (datahora, PorcentCPU, RamTotal, RamUso, PorcentUsoRam, DiscoRTotal, UsoDiscoR, LivreDiscoR,
+                        PorcentDiscoR, PacotesEnv, PacotesRec, PorcPctperdidos))
         conn.commit()
 
         print("Inserindo leitura no banco de dados local!")
 
 
-ConectarBancoLocal()
+ConectarBancoAzure()
