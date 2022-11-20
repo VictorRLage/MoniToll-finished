@@ -274,16 +274,13 @@ def BuscarComponentes(idTorre):
                 # Executing the SQL command
                 print("Pegando codigo do componente ", idComponente, '...')
                 Codigo = crsr.fetchone()
-                print("Codigo do componente ", idComponente, ":", Codigo)
+                print("Codigo do componente ", idComponente,":", Codigo[0])
 
             except pyodbc.Error as err:
                 print("Something went wrong: {}".format(err))
 
 
 
-            # def convertTuple(tup):
-            #     str = functools.reduce(operator.add, (tup))
-            #     return str
 
             # global strCodigo
             # strCodigo = convertTuple(Codigo)
