@@ -275,7 +275,7 @@ def BuscarComponentes(idTorre):
                 print("Pegando codigo do componente ",idComponente,'.........')
                 Codigo = crsr.fetchone()
                 print(Codigo)
-                print("Codigo do componente ", idComponente,":",Codigo[0])
+                print("Codigo do componente ", idComponente,":",Codigo[0], Codigo[1])
 
             except pyodbc.Error as err:
                 print("Something went wrong: {}".format(err))
