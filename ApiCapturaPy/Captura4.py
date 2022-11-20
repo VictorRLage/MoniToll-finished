@@ -100,7 +100,7 @@ def ConectarBancoAzure():
         crsr = cnxn.cursor()
         print("Conectado ao banco de dados da Nuvem")
         if conectado == 0:
-            BuscarComponentes()
+            BuscarComponentes(idTorre)
         conectado = 1
 
     except pyodbc.Error as ex:
@@ -254,7 +254,7 @@ def InserirDadosMaquina(SerialID, OS, Maquina, Processador, Disco, RamSpeed):
         print("Something went wrong: {}".format(err))
 
 
-def BuscarComponentes():
+def BuscarComponentes(idTorre):
 
     # PEGAR fkCOMPONENTE
     try:
