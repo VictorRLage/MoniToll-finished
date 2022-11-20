@@ -231,7 +231,7 @@ def VerificarDadosMaquina(idTorre):
 
     if SerialIdBanco[0] != '':
         print("A torre possui dados cadastrados")
-        ConectarBancoAzure()
+        ConectarBancoAzure(3)
     else:
         print("A torre não possui dados")
         InserirDadosMaquina(strip_SerialIdAtual, strip3_OsAtual, strip3_MaquinaAtual,
