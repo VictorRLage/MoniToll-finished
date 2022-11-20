@@ -264,8 +264,7 @@ def BuscarComponentes(idTorre):
         ''', idTorre)
         fkComponente = crsr.fetchall()
         print(fkComponente)
-        u_fkComponente = fkComponente[0]
-        for x in u_fkComponente:
+        for x in fkComponente:
             print(x)
             # global y
             # y = int(x[0])
