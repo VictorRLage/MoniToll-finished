@@ -165,7 +165,7 @@ def BuscarTorres(fkEmpresa):
         idTorres = crsr.fetchall()
         idTorres = idTorres[0]
         for x in idTorres:
-            print(idTorres[x])
+            print(idTorres[0])
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
