@@ -263,12 +263,10 @@ def BuscarComponentes(idTorre):
         SELECT fkComponente FROM Torre_Componente WHERE Torre_Componente.fkTorre = ?
         ''', idTorre)
         fkComponente = crsr.fetchall()
-        print(fkComponente)
         for x in fkComponente:
-            print(x)
-            # global y
-            # y = int(x[0])
-            # print(y)
+            global idComponente
+            idComponente = x[0]
+            print(idComponente)
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
