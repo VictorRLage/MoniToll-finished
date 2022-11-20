@@ -48,8 +48,11 @@ global strip2_RamAtual
 strip2_RamAtual = byte_RamAtual
 
 
+conectado = False
+
+
 def Login():
-    if conectado == 1:
+    if conectado:
         print("Bem vindo ao Grenn Light!")
         print("Login")
         u_email = input('Seu e-mail: ')
@@ -60,6 +63,7 @@ def Login():
 
 
 # estabelecer conexao com Azure
+
 def ConectarBancoAzure():
 
     try:
@@ -94,15 +98,18 @@ def ConectarBancoAzure():
         global crsr
         crsr = cnxn.cursor()
         print("Conectado ao banco de dados da Nuvem")
-        if conectado == 1:
-            BuscarComponentes(idTorre)
-        conectado = 1
+        conectado = True
 
     except pyodbc.Error as ex:
         print("Conexão com a Azure perdida")
         print(ex)
+        conectado = False
+
+    if conectado:
+        BuscarComponentes(idTorre)
+    else:
         ConectarBancoLocal()
-        conectado = 0
+
 
 
 # Estabelecer conexao com banco de dados local no docker
@@ -314,10 +321,7 @@ def BuscarComponentes(idTorre):
 
 
 
-# 0 = False
-# 1 = True  
-global conectado
-conectado = 0
+
 
 ConectarBancoAzure()
 Login()
