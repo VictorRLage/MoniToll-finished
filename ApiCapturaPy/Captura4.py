@@ -269,12 +269,13 @@ def BuscarComponentes(idTorre):
             print("Componente:",idComponente)
             try:
                 crsr.execute('''
-                    SELECT Codigo FROM Componente WHERE Componente.idComponente = ?
+                    SELECT Codigo, Nome FROM Componente WHERE Componente.idComponente = ?
                     ''', idComponente)
                 # Executing the SQL command
-                print("Pegando codigo do componente ", idComponente, '...')
+                print("Pegando codigo do componente ",idComponente,'.........')
                 Codigo = crsr.fetchone()
-                print("Codigo do componente ", idComponente,":", Codigo[0])
+                print(Codigo)
+                print("Codigo do componente ", idComponente,":",Codigo[0])
 
             except pyodbc.Error as err:
                 print("Something went wrong: {}".format(err))
