@@ -48,14 +48,6 @@ global strip2_RamAtual
 strip2_RamAtual = byte_RamAtual
 
 
-def EscolherTorres(idTorres):
-    for x in idTorres:
-        print('Maquina:', x[0])
-    global idTorre
-    idTorre = input('Qual é esta maquina?')
-    VerificarDadosMaquina(idTorre)
-
-
 def Login():
     if conectado == 1:
         print("Bem vindo ao Grenn Light!")
@@ -107,7 +99,7 @@ def ConectarBancoAzure():
         global crsr
         crsr = cnxn.cursor()
         print("Conectado ao banco de dados da Nuvem")
-        if conectado == 0:
+        if conectado == 1:
             BuscarComponentes(idTorre)
         conectado = 1
 
@@ -215,7 +207,12 @@ def BuscarTorres(fkEmpresa):
         print("Something went wrong: {}".format(err))
 
 
-
+def EscolherTorres(idTorres):
+    for x in idTorres:
+        print('Maquina:', x[0])
+    global idTorre
+    idTorre = input('Qual é esta maquina?')
+    VerificarDadosMaquina(idTorre)
 
 
 def VerificarDadosMaquina(idTorre):
