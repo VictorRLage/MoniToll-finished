@@ -4,8 +4,6 @@ import time
 import psutil
 import numpy
 import datetime
-import functools
-import operator
 import pyodbc
 from pyodbc import Error
 import textwrap
@@ -115,7 +113,7 @@ def ConectarBancoAzure(nmr):
 def ConectarBancoLocal():
     try:
         conn = mysql.connector.connect(
-            host='172.17.0.3',
+            host='172.17.0.2',
             user='root',
             password='123',
             database='MoniToll'
