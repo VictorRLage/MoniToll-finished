@@ -148,8 +148,7 @@ def ValidarLogin(email,senha):
         u_usuario = usuario[0]
         print(u_usuario)
         print(u_usuario[1])
-
-
+        BuscarTorres(u_usuario[1])
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
@@ -170,7 +169,7 @@ def BuscarTorres(fkEmpresa):
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
     
-    EscolherTorres(idTorres)
+    # EscolherTorres(idTorres)
 
 ConectarBancoAzure()
 Login()
