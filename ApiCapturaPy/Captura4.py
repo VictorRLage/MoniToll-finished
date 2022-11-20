@@ -16,16 +16,46 @@ from errno import errorcode
 from json import loads
 
 
+# Bloco pegar serial id
+byte_SerialIdAtual = "c26d"
+global strip_SerialIdAtual
+strip_SerialIdAtual = byte_SerialIdAtual
+
+# Bloco pegar sistema operacional
+byte_OsAtual = "Ubuntu 20.04"
+global strip3_OsAtual
+strip3_OsAtual = byte_OsAtual
+
+# Bloco pegar modelo maquina
+byte_MaquinaAtual = "docker"
+global strip3_MaquinaAtual
+strip3_MaquinaAtual = byte_MaquinaAtual
+
+# Bloco pegar processador
+byte_ProcessadorAtual = "Quad.Core"
+global strip2_ProcessadorAtual
+strip2_ProcessadorAtual = byte_ProcessadorAtual
+
+# Bloco pegar disco
+byte_DiscoAtual = 1000000
+global strip2_DiscoAtual
+strip2_DiscoAtual = byte_DiscoAtual
+
+# Bloco pegar velocidade da ram
+byte_RamAtual = 1000
+global strip2_RamAtual
+strip2_RamAtual = byte_RamAtual
+
+
 def Login():
     if conectado:
         print("Bem vindo ao Grenn Light!")
         print("Login")
         u_email = input('Seu e-mail: ')
         u_senha = input('Sua senha: ')
-        ValidarLogin(u_email,u_senha)
+        ValidarLogin(u_email, u_senha)
     else:
         print("Sem conexão com a internet.")
-
 
 
 # estabelecer conexao com Azure
@@ -64,8 +94,9 @@ def ConectarBancoAzure():
         crsr = cnxn.cursor()
         print("Conectado ao banco de dados da Nuvem")
         global conectado
-        conectado = True
+        if conectado:
 
+        conectado = True
 
     except pyodbc.Error as ex:
         print("Conexão com a Azure perdida")
@@ -114,7 +145,7 @@ def LeituraLocal(conn):
     BytesRec = round(psutil.net_io_counters()[1] / 10**6, 2)
     BytesEnv = round(psutil.net_io_counters()[0] / 10**6, 2)
     PacotesEnv = round((psutil.net_io_counters(
-    pernic=False, nowrap=True)[2] / 1024), 2)
+        pernic=False, nowrap=True)[2] / 1024), 2)
     PacotesRec = round((psutil.net_io_counters(
         pernic=False, nowrap=True)[3] / 1024), 2)
     contador = 0
@@ -122,24 +153,25 @@ def LeituraLocal(conn):
         contador = contador + x
         PorcentCPU = (round(contador/QtdProcessadores, 1))
     vetor = [PorcentCPU, QtdProcessadores, RamTotal, RamUso, PorcentUsoRam,
-            DiscoRTotal, UsoDiscoR, LivreDiscoR, PorcentDiscoR, PacotesEnv, PacotesRec, vmem, BytesRec, BytesEnv]
+             DiscoRTotal, UsoDiscoR, LivreDiscoR, PorcentDiscoR, PacotesEnv, PacotesRec, vmem, BytesRec, BytesEnv]
     PorcPctperdidos = round((((vetor[10] - vetor[9])/vetor[10])*100), 1)
     datahora = datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S')
 
     cursor = conn.cursor()
 
     cursor.execute("INSERT INTO Leitura (dataHora, cpuPercent, ramTotal, ramUso, ramUsoPercent, discoTotal, discoUso, discoLivre, discoPercent, pacoEnv, pacoRec ,pacoPerd) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
-                    (datahora, PorcentCPU, RamTotal, RamUso, PorcentUsoRam, DiscoRTotal, UsoDiscoR, LivreDiscoR,
+                   (datahora, PorcentCPU, RamTotal, RamUso, PorcentUsoRam, DiscoRTotal, UsoDiscoR, LivreDiscoR,
                     PorcentDiscoR, PacotesEnv, PacotesRec, PorcPctperdidos))
     conn.commit()
 
     print("Inserindo leitura no banco de dados local!")
 
-def ValidarLogin(email,senha):
+
+def ValidarLogin(email, senha):
     try:
         crsr.execute('''
         SELECT Nome,fkEmpresa FROM Usuario WHERE Email = ? and Senha = ?
-        ''',email, senha)
+        ''', email, senha)
         # Executando comando SQL
         print("Fazendo login...")
         global usuario
@@ -147,8 +179,9 @@ def ValidarLogin(email,senha):
         print("Login efetuado com sucesso")
         u_usuario = usuario[0]
         print(u_usuario)
-        print(u_usuario[1])
-        BuscarTorres(u_usuario[1])
+        global fkEmpresa
+        fkEmpresa = u_usuario[1]
+        BuscarTorres(fkEmpresa)
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
@@ -160,29 +193,29 @@ def BuscarTorres(fkEmpresa):
     try:
         crsr.execute('''
     SELECT idTorre FROM Torre WHERE fkEmpresa = ?
-    ''',fkEmpresa)                    
+    ''', fkEmpresa)
         # Executando comando SQL)
         idTorres = crsr.fetchall()
         EscolherTorres(idTorres)
 
-
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
-    
-    
+
 
 def EscolherTorres(idTorres):
     for x in idTorres:
         print('Maquina:', x[0])
+    global idTorre
     idTorre = input('Qual é esta maquina?')
     VerificarDadosMaquina(idTorre)
 
+
 def VerificarDadosMaquina(idTorre):
-                    
+
     try:
         crsr.execute('''
         SELECT SerialID FROM Torre WHERE idTorre = ?
-        ''',idTorre)
+        ''', idTorre)
         # Executando comando SQL
         print("Verificando dados da torre...")
         SerialIdBanco = crsr.fetchone()
@@ -190,14 +223,96 @@ def VerificarDadosMaquina(idTorre):
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
-    
+
     if SerialIdBanco[0] != '':
         print("A torre possui dados cadastrados")
-        print("Cadastrando leituras...")
-        # InserindoLeitura()
+        ConectarBancoAzure()
     else:
         print("A torre não possui dados")
-        # InserirDadosMaquina(strip_SerialIdAtual, strip3_OsAtual, strip3_MaquinaAtual, strip2_ProcessadorAtual, strip2_DiscoAtual, strip2_RamAtual)
+        InserirDadosMaquina(strip_SerialIdAtual, strip3_OsAtual, strip3_MaquinaAtual,
+                            strip2_ProcessadorAtual, strip2_DiscoAtual, strip2_RamAtual)
+
+
+def InserirDadosMaquina(SerialID, OS, Maquina, Processador, Disco, RamSpeed):
+
+    try:
+        crsr.execute('''
+        UPDATE Torre  SET SerialID = ?,  SO = ?, Maquina = ?, Processador = ?, Disco = ?, Ram = ?,  fkEmpresa = ? WHERE idTorre = ?
+        ''', SerialID, OS, Maquina, Processador, Disco, RamSpeed, fkEmpresa, idTorre)
+        # Executando comando SQL
+        # Commit de mudanças no banco de dados
+        crsr.commit()
+        print("Inserindo dados...")
+
+    except pyodbc.Error as err:
+        crsr.rollback()
+        print("Something went wrong: {}".format(err))
+
+
+def InserindoLeitura():
+
+    # PEGAR fkCOMPONENTE
+    try:
+        print("Buscando os componentes da torre...")
+        crsr.execute('''
+        SELECT fkComponente FROM Torre_Componente WHERE Torre_Componente.fkTorre = ?
+        ''', idTorre)
+        fkComponente = crsr.fetchall()
+        print(fkComponente)
+        # vet_fkComponente = fkComponente
+        # print("Componentes da maquina:", vet_fkComponente)
+        # for x in vet_fkComponente:
+        #     print(x)
+        #     global y
+        #     y = int(x[0])
+        #     print(y)
+
+    except pyodbc.Error as err:
+        print("Something went wrong: {}".format(err))
+
+
+
+        # PEGAR CODIGO COMPONENTE
+
+        # try:
+        #     crsr.execute('''
+        #         SELECT Codigo FROM Componente WHERE Componente.idComponente = ?
+        #         ''', y)
+        #     # Executing the SQL command
+        #     print("Pegando codigo do componente ", y, '...')
+
+        # except pyodbc.Error as err:
+        #     print("Something went wrong: {}".format(err))
+
+        # Codigo = crsr.fetchone()
+        # print("Codigo do componente ", y, ":", Codigo)
+
+        # def convertTuple(tup):
+        #     str = functools.reduce(operator.add, (tup))
+        #     return str
+
+        # global strCodigo
+        # strCodigo = convertTuple(Codigo)
+
+        # # PREGAR NOME COMPONENTE
+
+        # try:
+        #     crsr.execute('''
+        #         SELECT Nome FROM Componente WHERE Componente.idComponente = ?
+        #         ''', y)
+        #     # Executing the SQL command
+        #     print("Pegando nome do componente", y)
+
+        # except pyodbc.Error as err:
+        #     print("Something went wrong: {}".format(err))
+
+        # Nome = crsr.fetchone()
+        # global strNome
+        # strNome = convertTuple(Nome)
+        # print("Nome componente ", y, ":", strNome)
+        # print(strNome + " = " + strCodigo)
+        # teste()
+
 
 ConectarBancoAzure()
 Login()
