@@ -264,13 +264,12 @@ def BuscarComponentes(idTorre):
         ''', idTorre)
         fkComponente = crsr.fetchall()
         print(fkComponente)
-        # vet_fkComponente = fkComponente
-        # print("Componentes da maquina:", vet_fkComponente)
-        # for x in vet_fkComponente:
-        #     print(x)
-        #     global y
-        #     y = int(x[0])
-        #     print(y)
+        u_fkComponente = fkComponente[0]
+        for x in u_fkComponente:
+            print(x)
+            # global y
+            # y = int(x[0])
+            # print(y)
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
