@@ -164,8 +164,10 @@ def BuscarTorres(fkEmpresa):
         # Executando comando SQL)
         idTorres = crsr.fetchall()
         idTorres = idTorres[0]
+        cont = 0
         for x in idTorres:
-            print(idTorres[0])
+            print(idTorres[cont])
+            cont+=1
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
