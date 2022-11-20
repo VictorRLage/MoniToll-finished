@@ -164,6 +164,7 @@ def BuscarTorres(fkEmpresa):
         # Executando comando SQL)
         idTorres = crsr.fetchall()
         u_idTorres = idTorres[0]
+        print(idTorres)
         print(u_idTorres)
         for x in u_idTorres:
             print(x)
