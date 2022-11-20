@@ -69,7 +69,6 @@ def ConectarBancoAzure():
 
     except pyodbc.Error as ex:
         print("Conexão com a Azure perdida")
-        print("{c} não conexão com o banco".format(c=connection_string))
         print(ex)
         ConectarBancoLocal()
         conectado = False
