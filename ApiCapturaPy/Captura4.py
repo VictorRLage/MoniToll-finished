@@ -138,19 +138,37 @@ def LeituraLocal(conn):
 def ValidarLogin(email,senha):
     try:
         crsr.execute('''
-        SELECT Nome FROM Usuario WHERE Email = ? and Senha = ?
+        SELECT Nome,fkEmpresa FROM Usuario WHERE Email = ? and Senha = ?
         ''',email, senha)
         # Executando comando SQL
         print("Fazendo login...")
         global usuario
-        usuario = crsr.fetchone()
+        usuario = crsr.fetchall()
         print("Login efetuado com sucesso")
         print(usuario)
+
+
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
         print("Falha ao realizar login por favor tente novamente")
 
+
+def BuscarTorres(fkEmpresa):
+
+    try:
+        crsr.execute('''
+    SELECT idTorre FROM Torre WHERE fkEmpresa = ?
+    ''',fkEmpresa)                    
+        # Executando comando SQL)
+        idTorres = crsr.fetchall()
+        print(idTorres)
+        
+
+    except pyodbc.Error as err:
+        print("Something went wrong: {}".format(err))
+    
+    EscolherTorres(idTorres)
 
 ConectarBancoAzure()
 Login()
