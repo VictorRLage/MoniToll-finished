@@ -163,14 +163,19 @@ def BuscarTorres(fkEmpresa):
     ''',fkEmpresa)                    
         # Executando comando SQL)
         idTorres = crsr.fetchall()
-        for x in idTorres:
-            print(x[0])
+        EscolherTorres(idTorres)
 
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
     
-    # EscolherTorres(idTorres)
+    
+
+def EscolherTorres(idTorres):
+    for x in idTorres:
+        print('Maquinas:', x[0])
+    idTorre = input('Qual é esta maquina?')
+    # VerificarDadosMaquina(idTorre)
 
 ConectarBancoAzure()
 Login()
