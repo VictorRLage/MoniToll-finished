@@ -16,7 +16,7 @@ from errno import errorcode
 from json import loads
 
 # 0 = False
-# 1 = True
+# 1 = True  
 global conectado
 conectado = 0
 
