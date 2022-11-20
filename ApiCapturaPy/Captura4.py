@@ -62,11 +62,6 @@ def Login():
 # estabelecer conexao com Azure
 def ConectarBancoAzure():
 
-    # 0 = False
-    # 1 = True  
-    global conectado
-    conectado = 0
-
     try:
         # variaveis de conexao
         driver = '{ODBC Driver 18 for SQL Server}'
@@ -211,7 +206,7 @@ def EscolherTorres(idTorres):
     for x in idTorres:
         print('Maquina:', x[0])
     global idTorre
-    idTorre = input('Qual é esta maquina?')
+    idTorre = input('Qual é esta maquina? ')
     VerificarDadosMaquina(idTorre)
 
 
@@ -224,7 +219,6 @@ def VerificarDadosMaquina(idTorre):
         # Executando comando SQL
         print("Verificando dados da torre...")
         SerialIdBanco = crsr.fetchone()
-        print("SerialIdBanco")
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
@@ -318,6 +312,12 @@ def BuscarComponentes(idTorre):
         # print(strNome + " = " + strCodigo)
         # teste()
 
+
+
+# 0 = False
+# 1 = True  
+global conectado
+conectado = 0
 
 ConectarBancoAzure()
 Login()
