@@ -95,7 +95,7 @@ def ConectarBancoAzure():
         print("Conectado ao banco de dados da Nuvem")
         global conectado
         if conectado:
-
+            BuscarComponentes()
         conectado = True
 
     except pyodbc.Error as ex:
@@ -249,7 +249,7 @@ def InserirDadosMaquina(SerialID, OS, Maquina, Processador, Disco, RamSpeed):
         print("Something went wrong: {}".format(err))
 
 
-def InserindoLeitura():
+def BuscarComponentes():
 
     # PEGAR fkCOMPONENTE
     try:
