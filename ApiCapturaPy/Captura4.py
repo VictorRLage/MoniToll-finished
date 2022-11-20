@@ -275,46 +275,53 @@ def BuscarComponentes(idTorre):
                 print("Pegando codigo do componente ",idComponente,'.........')
                 Codigo = crsr.fetchone()
                 print(Codigo)
-                print("Codigo do componente ", idComponente,":",Codigo[0], Codigo[1])
+                print("Codigo do componente ",idComponente,"(", Codigo[1],")",":",Codigo[0])
+                InserirLeitura(Codigo[0], Codigo[1], idComponente)
 
             except pyodbc.Error as err:
                 print("Something went wrong: {}".format(err))
-
-
-
-
-            # global strCodigo
-            # strCodigo = convertTuple(Codigo)
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
 
 
 
-        # PEGAR CODIGO COMPONENTE
 
+def InserirLeitura(Codigo,Nome, idComponente):
+        print("Inserindo leitura no banco...")
+        datahora = datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+        print(datahora)
+        exec(Nome + " = " + Codigo, globals())
+        var_leitura = globals()[Nome]
+        if Nome == 'processadores_nucleo_porcentagem':
+            
+            print(var_leitura)
+            var_leitura2 = mean(var_leitura)
+            print(var_leitura2)
+        elif Nome == 'pacotes_perdidos_porcentagem':
+            print('caiu no elif 1')
+            var_leitura2 = round((((pacotes_perdidos_porcentagem[1] - pacotes_perdidos_porcentagem[0])/pacotes_perdidos_porcentagem[1])*100), 1)
+        elif Nome == 'processadores_nucleo_porcentagem':
+            print('caiu no elif 2')
+            var_leitura2 = numpy.mean(var_leitura) 
+        else:
+            print('caiu no else')
+            var_leitura2 = var_leitura
+        print(var_leitura2)
 
+        
+        try:
+            # Executando comando SQL   
+            crsr.execute('''
+            INSERT INTO Leitura (Leitura, DataHora, fkTorre, fkComponente) VALUES (?, ?, ?, ?)
+            ''',var_leitura2, datahora, idTorre , idComponente)
+            # Commit de mudanças no banco de dados
+            crsr.commit()
+            print("Leitura inserida no banco")
 
-        # PREGAR NOME COMPONENTE
-
-        # try:
-        #     crsr.execute('''
-        #         SELECT Nome FROM Componente WHERE Componente.idComponente = ?
-        #         ''', y)
-        #     # Executing the SQL command
-        #     print("Pegando nome do componente", y)
-
-        # except pyodbc.Error as err:
-        #     print("Something went wrong: {}".format(err))
-
-        # Nome = crsr.fetchone()
-        # global strNome
-        # strNome = convertTuple(Nome)
-        # print("Nome componente ", y, ":", strNome)
-        # print(strNome + " = " + strCodigo)
-        # teste()
-
-
+        except pyodbc.Error as err:
+            crsr.rollback()
+            print("Something went wrong: {}".format(err))
 
 
 
