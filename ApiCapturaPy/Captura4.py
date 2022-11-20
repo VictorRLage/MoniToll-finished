@@ -266,7 +266,27 @@ def BuscarComponentes(idTorre):
         for x in fkComponente:
             global idComponente
             idComponente = x[0]
-            print(idComponente)
+            print("Componente:",idComponente)
+            try:
+                crsr.execute('''
+                    SELECT Codigo FROM Componente WHERE Componente.idComponente = ?
+                    ''', idComponente)
+                # Executing the SQL command
+                print("Pegando codigo do componente ", idComponente, '...')
+                Codigo = crsr.fetchone()
+                print("Codigo do componente ", idComponente, ":", Codigo)
+
+            except pyodbc.Error as err:
+                print("Something went wrong: {}".format(err))
+
+
+
+            # def convertTuple(tup):
+            #     str = functools.reduce(operator.add, (tup))
+            #     return str
+
+            # global strCodigo
+            # strCodigo = convertTuple(Codigo)
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
@@ -275,27 +295,9 @@ def BuscarComponentes(idTorre):
 
         # PEGAR CODIGO COMPONENTE
 
-        # try:
-        #     crsr.execute('''
-        #         SELECT Codigo FROM Componente WHERE Componente.idComponente = ?
-        #         ''', y)
-        #     # Executing the SQL command
-        #     print("Pegando codigo do componente ", y, '...')
 
-        # except pyodbc.Error as err:
-        #     print("Something went wrong: {}".format(err))
 
-        # Codigo = crsr.fetchone()
-        # print("Codigo do componente ", y, ":", Codigo)
-
-        # def convertTuple(tup):
-        #     str = functools.reduce(operator.add, (tup))
-        #     return str
-
-        # global strCodigo
-        # strCodigo = convertTuple(Codigo)
-
-        # # PREGAR NOME COMPONENTE
+        # PREGAR NOME COMPONENTE
 
         # try:
         #     crsr.execute('''
