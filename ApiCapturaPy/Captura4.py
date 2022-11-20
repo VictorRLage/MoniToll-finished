@@ -15,10 +15,7 @@ from asyncio import sleep
 from errno import errorcode
 from json import loads
 
-# 0 = False
-# 1 = True  
-global conectado
-conectado = 0
+
 
 # Bloco pegar serial id
 byte_SerialIdAtual = "c26d"
@@ -64,6 +61,11 @@ def Login():
 
 # estabelecer conexao com Azure
 def ConectarBancoAzure():
+
+    # 0 = False
+    # 1 = True  
+    global conectado
+    conectado = 0
 
     try:
         # variaveis de conexao
