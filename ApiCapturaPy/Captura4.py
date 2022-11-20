@@ -145,7 +145,7 @@ def ValidarLogin(email,senha):
         global usuario
         usuario = crsr.fetchall()
         print("Login efetuado com sucesso")
-        print(usuario)
+        print(usuario[1])
 
 
 
