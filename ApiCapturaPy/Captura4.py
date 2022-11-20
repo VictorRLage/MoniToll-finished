@@ -16,6 +16,9 @@ from errno import errorcode
 from json import loads
 
 
+global conectado
+conectado = False
+
 # Bloco pegar serial id
 byte_SerialIdAtual = "c26d"
 global strip_SerialIdAtual
@@ -93,7 +96,6 @@ def ConectarBancoAzure():
         global crsr
         crsr = cnxn.cursor()
         print("Conectado ao banco de dados da Nuvem")
-        global conectado
         if conectado:
             BuscarComponentes()
         conectado = True
