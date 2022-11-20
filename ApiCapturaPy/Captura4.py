@@ -15,9 +15,10 @@ from asyncio import sleep
 from errno import errorcode
 from json import loads
 
-
+# 0 = False
+# 1 = True
 global conectado
-conectado = False
+conectado = 0
 
 # Bloco pegar serial id
 byte_SerialIdAtual = "c26d"
@@ -51,7 +52,7 @@ strip2_RamAtual = byte_RamAtual
 
 
 def Login():
-    if conectado:
+    if conectado == 1:
         print("Bem vindo ao Grenn Light!")
         print("Login")
         u_email = input('Seu e-mail: ')
@@ -96,15 +97,15 @@ def ConectarBancoAzure():
         global crsr
         crsr = cnxn.cursor()
         print("Conectado ao banco de dados da Nuvem")
-        if conectado:
+        if conectado == 0:
             BuscarComponentes()
-        conectado = True
+        conectado = 1
 
     except pyodbc.Error as ex:
         print("Conexão com a Azure perdida")
         print(ex)
         ConectarBancoLocal()
-        conectado = False
+        conectado = 0
 
 
 # Estabelecer conexao com banco de dados local no docker
