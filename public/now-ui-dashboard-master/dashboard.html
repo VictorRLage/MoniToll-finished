@@ -298,7 +298,7 @@
 
 <script>
   var vetor_Componentes = []
-  var nome = sessionStorage.NOME_USUARIO 
+  var nome = sessionStorage.NOME_USUARIO
   function ObterDados(fkTorre) {
 
     var perfil;
@@ -384,16 +384,16 @@
   function AparecerGraficos(vetor_Componentes, fkTorre) {
     vetor_Componentes.forEach(element => {
       if (element == 2) {
-        lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem uso CPU</h4><canvas style="width: 100%; display: block;" id="myChartPUC"></canvas></div>`
+        lista.innerHTML += `<div class="CardGrafico card"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem uso CPU</h4><canvas style="width: 100%; display: block;" id="myChartPUC"></canvas></div>`
         setTimeout(() => PlotarGrafico(vetor_PorcentagemUsoCPU, sessionStorage.ID_TORRE, 'myChartPUC', 'Porcentagem uso CPU'), 2000);
       } else if (element == 5) {
-        lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem uso Ram</h4><canvas style="width: 100%; display: block;" id="myChartPUR"></canvas></div>`
+        lista.innerHTML += `<div class="CardGrafico card"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem uso Ram</h4><canvas style="width: 100%; display: block;" id="myChartPUR"></canvas></div>`
         setTimeout(() => PlotarGrafico(vetor_PorcentagemUsoRam, sessionStorage.ID_TORRE, 'myChartPUR', 'Porcentagem uso Ram'), 2000);
       } else if (element == 9) {
-        lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem uso Disco</h4><canvas style="width: 100%; display: block;" id="myChartPUD"></canvas></div>`
+        lista.innerHTML += `<div class="CardGrafico card"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem uso Disco</h4><canvas style="width: 100%; display: block;" id="myChartPUD"></canvas></div>`
         setTimeout(() => PlotarGrafico(vetor_PorcentagemUsoDisco, sessionStorage.ID_TORRE, 'myChartPUD', 'Porcentagem uso Disco'), 2000);
       } else if (element == 12) {
-        lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem pacotes perdidos</h4><canvas style="width: 100%; display: block;" id="myChartPUP"></canvas></div>`
+        lista.innerHTML += `<div class="CardGrafico card"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem pacotes perdidos</h4><canvas style="width: 100%; display: block;" id="myChartPUP"></canvas></div>`
         setTimeout(() => PlotarGrafico(vetor_PorcentagemPercaPacotes, sessionStorage.ID_TORRE, 'myChartPUP', 'Porcentagem pacotes perdidos'), 2000);
       }
     });
@@ -549,6 +549,9 @@
         label: label,
         data: [],
         fill: false,
+        pointRadius: 1,
+        borderWidth: 3,
+        tension: 0.4,
         borderColor: '#ffc107',
         tension: 0.1
       },]
@@ -578,6 +581,8 @@
       type: 'line',
       data: dados,
       options: {
+        responsive: true,
+        maintainAspectRatio: true,
         scales: {
           yAxes: [{
             ticks: {
@@ -586,6 +591,7 @@
             }
           }]
         }
+
       }
     };
 
@@ -732,7 +738,7 @@
   function verificarDisco(metrica) {
     var frase = ""
     // incluir uma nova medida de temperatura  
-    if (metrica >60 && metrica <= 80) {
+    if (metrica > 60 && metrica <= 80) {
       frase = "Alerta: Disco sobrecarregando! Porcentagem de uso: "
       console.log('Cheguei aqui')
       alertas(nome, "Disco", metrica, frase)
@@ -743,4 +749,3 @@
   }
 
 </script>
-

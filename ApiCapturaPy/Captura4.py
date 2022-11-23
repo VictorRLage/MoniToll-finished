@@ -327,4 +327,4 @@ ConectarBancoAzure(1)
 Login()
 while True:
     ConectarBancoAzure(3)
-    time.sleep(5)
+    time.sleep(2)
