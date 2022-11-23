@@ -1,17 +1,13 @@
 from statistics import mean
-import subprocess
 import time
 import psutil
 import numpy
 import datetime
 import pyodbc
-from pyodbc import Error
 import textwrap
 import mysql.connector
 from mysql.connector import errorcode
-from asyncio import sleep
 from errno import errorcode
-from json import loads
 
 
 
@@ -36,12 +32,12 @@ global strip2_ProcessadorAtual
 strip2_ProcessadorAtual = byte_ProcessadorAtual
 
 # Bloco pegar disco
-byte_DiscoAtual = 1000000
+byte_DiscoAtual = ""
 global strip2_DiscoAtual
 strip2_DiscoAtual = byte_DiscoAtual
 
 # Bloco pegar velocidade da ram
-byte_RamAtual = 1000
+byte_RamAtual = ""
 global strip2_RamAtual
 strip2_RamAtual = byte_RamAtual
 
@@ -50,6 +46,7 @@ conectado = 1
 
 
 def Login():
+    print(conectado)
     if conectado == 1:
         print("Bem vindo ao Grenn Light!")
         print("Login")
