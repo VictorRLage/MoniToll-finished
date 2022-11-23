@@ -96,6 +96,7 @@ def ConectarBancoAzure(nmr):
 
     except pyodbc.Error as ex:
         conectado = 0
+        print(conectado)
         print("Conexão com a Azure perdida")
         print(ex)
         
