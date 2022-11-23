@@ -241,14 +241,14 @@
       console.log("resposta: ", resposta);
 
       if (resposta.ok) {
-        setTimeout(() => {
-
-          titulo_m.innerHTML = ("Cadastro realizado com sucesso. Bem-vindo")
+        titulo_m.innerHTML = ("Cadastro realizado com sucesso. Bem-vindo!")
           modal_container.classList.add('show');
 
           close.addEventListener('click', () => {
           modal_container.classList.remove('show');
           });
+
+        setTimeout(() => {
 
           window.location = "../login.html";
         }, 3000)

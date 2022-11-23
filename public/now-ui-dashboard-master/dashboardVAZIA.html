@@ -213,8 +213,13 @@
 </script>
 <script>
     if (sessionStorage.FK_EMPRESA == 'null') {
-        titulo.innerHTML=`<h2>Você ainda não adquiriu nenhum de nossos planos!</h2><h3>Visite nossa pagina de <a href="../plano.html" class="login100-form-btn">planos</a> para conhece-los!</h3>`
-    }else if(sessionStorage.SEM_TORRE == 1){
-        titulo.innerHTML=`<h2>Sua empresa ainda não cadastrou nenhum servidor.</h2><h3>O administrador deve cadastrar os servidores ao realizar o login no nosso sistema.</h3>`
+        titulo.innerHTML = `<h2>Você ainda não adquiriu nenhum de nossos planos!</h2><h3>Visite nossa pagina de <a onclick="Logout()" href="../plano.html" class="login100-form-btn">planos</a> para conhece-los!</h3>`
+    } else if (sessionStorage.SEM_TORRE == 1) {
+        titulo.innerHTML = `<h2>Sua empresa ainda não cadastrou nenhum servidor.</h2><h3>O administrador deve cadastrar os servidores ao realizar o login no nosso sistema.</h3>`
+    }
+</script>
+<script>
+    function Logout() {
+        sessionStorage.clear();
     }
 </script>

@@ -314,19 +314,11 @@
                           console.log(JSON.stringify(json));
                           sessionStorage.PLANO_EMPRESA = json.Plano;
 
-                          if (sessionStorage.PLANO_EMPRESA == "Plano 1") {
-                            setTimeout(function () {
-                              window.location = "p1componente.html"
-                            }, 1000); // apenas para exibir o loading
-                          } else if (sessionStorage.PLANO_EMPRESA == "Plano 2") {
-                            setTimeout(function () {
-                              window.location = "p2componente.html"
-                            }, 1000); // apenas para exibir o loading
-                          } else if (sessionStorage.PLANO_EMPRESA == "Plano 3") {
-                            setTimeout(function () {
-                              window.location = "p3componente.html"
-                            }, 1000); // apenas para exibir o loading
-                          }
+
+                          setTimeout(function () {
+                            window.location = "componente.html"
+                          }, 1000); // apenas para exibir o loading
+
                         });
                       }
                     }).catch(function (erro) {

@@ -56,7 +56,7 @@
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="login.html">Sair</a></li>
+          <li><a onclick="Logout()" href="login.html">Sair</a></li>
         </ul>
       </nav><!-- .navbar -->
 
@@ -130,7 +130,6 @@
       <div style="margin-top: 60px;" class="wrap-input100 validate-input">
         <input class="input100" id="inp_EmailAdm">
         <span class="focus-input100" data-placeholder="Email do Administrador"></span>
-        <br>
       </div>
       <div style="margin-top: 20px;" class="container-login100-form-btn">
         <div class="wrap-login100-form-btn">
@@ -143,15 +142,15 @@
     </div>
   </div>
 
-    <div class="modal-containerL3" id="modal_container3">
-      <div class="modalL3">
-        <h2 id="titulo_m3"></h2>
-        <p id="p_msg3"></p>
-      </div>
-      <button class="button1L3" id="close3">X</button>
+  <div class="modal-containerL2" id="modal_container3">
+    <div class="modalL3">
+      <h2 id="titulo_m3"></h2>
+      <p id="p_msg3"></p>
     </div>
+    <button class="button1L3" id="close3">X</button>
+  </div>
 
-    <div id="preloader"></div>
+  <div id="preloader"></div>
 
 </body>
 
@@ -200,6 +199,11 @@
 <script src="assets/js/main.js"></script>
 
 <script>
+  function Logout() {
+    sessionStorage.clear();
+  }
+</script>
+<script>
   function cadastrarEmp() {
 
     const open = document.getElementById('open');
@@ -233,7 +237,7 @@
         modal_container.classList.remove('show');
       });
       return
-    }else if (emailEmpVar.indexOf("@") == -1 || emailEmpVar.indexOf(".com") == -1) {
+    } else if (emailEmpVar.indexOf("@") == -1 || emailEmpVar.indexOf(".com") == -1) {
       titulo_m.innerHTML = "E-mail inválido. Verifique e tente novamente."
 
       modal_container.classList.add('show');
@@ -262,18 +266,18 @@
       })
     }).then(function (resposta) {
       if (resposta.ok) {
-          sessionStorage.ID_EMPRESA = idEmpVar; 
+        sessionStorage.ID_EMPRESA = idEmpVar;
 
-          titulo_m2.innerHTML = `Cadastro realizado com sucesso! <br>`
-          p_msg2.innerHTML = `<br> Por favor atualize a permissão do usuário:`
-
-
-          modal_container2.classList.add('show');
+        titulo_m2.innerHTML = `Cadastro realizado com sucesso! <br>`
+        p_msg2.innerHTML = `<br> Por favor atualize a permissão do usuário:`
 
 
-          close2.addEventListener('click', () => {
+        modal_container2.classList.add('show');
+
+
+        close2.addEventListener('click', () => {
           modal_container2.classList.remove('show');
-          });
+        });
       } else {
         titulo_m.innerHTML = `Houve um erro ao tentar realizar o cadastro!`
         p_msg.innerHTML = `Uma empresa com esse id já existe!`
@@ -282,7 +286,7 @@
         modal_container.classList.add('show');
 
         close.addEventListener('click', () => {
-        modal_container.classList.remove('show');
+          modal_container.classList.remove('show');
         });
         throw ("Houve um erro ao tentar realizar o cadastro!");
       }
@@ -292,7 +296,7 @@
 
     return false;
   }
-    function atualizarAdm() {
+  function atualizarAdm() {
     const open = document.getElementById('open');
     const modal_container = document.getElementById('modal_container');
     const close = document.getElementById('close2');
@@ -312,14 +316,15 @@
       })
     }).then(function (resposta) {
       if (resposta.ok) {
-          titulo_m3.innerHTML = `Permissão atualizada com sucesso! <br>`
+        modal_container2.classList.remove('show');
+        titulo_m3.innerHTML = `Permissão atualizada com sucesso! <br>`
 
-          modal_container3.classList.add('show');
+        modal_container3.classList.add('show');
 
 
-          close3.addEventListener('click', () => {
+        close3.addEventListener('click', () => {
           modal_container3.classList.remove('show');
-          });
+        });
       } else {
         titulo_m3.innerHTML = `Falha ao atualizar permissão! <br>`
         p_msg3.innerHTML = `<br>Email não consta em nosso sistema!`
@@ -327,7 +332,7 @@
 
 
         close3.addEventListener('click', () => {
-        modal_container3.classList.remove('show');
+          modal_container3.classList.remove('show');
         });
         throw ("Houve um erro ao tentar atualizar o perfil!");
       }
@@ -336,7 +341,7 @@
     });
 
     return false;
-}
+  }
 
 
 </script>
