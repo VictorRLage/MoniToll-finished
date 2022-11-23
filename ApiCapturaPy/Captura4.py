@@ -95,13 +95,15 @@ def ConectarBancoAzure(nmr):
         conectado = nmr
 
     except pyodbc.Error as ex:
+        conectado = 0
         print("Conexão com a Azure perdida")
         print(ex)
-        conectado = 0
+        
 
     if conectado == 3:
         BuscarComponentes(idTorre)
     elif conectado == 0:
+        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
         ConectarBancoLocal()
 
 
