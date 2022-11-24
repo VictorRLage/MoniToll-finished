@@ -48,7 +48,7 @@ v_login = False
 
 def Login(conectado):
     print(conectado)
-    if conectado == 1 or 3:
+    if conectado == 1 or conectado == 3:
         print("Bem vindo ao Grenn Light!")
         print("Login")
         u_email = input('Seu e-mail: ')
