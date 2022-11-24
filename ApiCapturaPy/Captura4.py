@@ -101,6 +101,7 @@ def ConectarBancoAzure(nmr, login):
         conectado = 0
         
     
+    pritn(conectado)
     if conectado == 3 and login == True:
         BuscarComponentes(idTorre)
     elif conectado == 3 and login == False:
