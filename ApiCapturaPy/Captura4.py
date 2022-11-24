@@ -43,6 +43,8 @@ strip2_RamAtual = byte_RamAtual
 
 
 
+global v_login
+v_login = False
 
 def Login(conectado):
     if conectado == 1:
@@ -185,7 +187,6 @@ def ValidarLogin(email, senha):
         print(u_usuario)
         global fkEmpresa
         fkEmpresa = u_usuario[1]
-        global v_login
         v_login = True 
         BuscarTorres(fkEmpresa)
 
@@ -327,7 +328,7 @@ def InserirLeitura(Codigo,Nome, idComponente):
 
 
 
-ConectarBancoAzure(1, False)
+ConectarBancoAzure(1, v_login)
 Login(conectado)
 while True:
     ConectarBancoAzure(3,v_login)
