@@ -42,11 +42,9 @@ global strip2_RamAtual
 strip2_RamAtual = byte_RamAtual
 
 
-conectado = 0
 
 
-def Login():
-    print(conectado)
+def Login(conectado):
     if conectado == 1:
         print("Bem vindo ao Grenn Light!")
         print("Login")
@@ -92,19 +90,18 @@ def ConectarBancoAzure(nmr):
         global crsr
         crsr = cnxn.cursor()
         print("Conectado ao banco de dados da Nuvem")
+        global conectado
         conectado = nmr
 
     except pyodbc.Error as ex:
-        conectado = 0
-        print(conectado)
         print("Conexão com a Azure perdida")
         print(ex)
+        conectado = 0
         
 
     if conectado == 3:
         BuscarComponentes(idTorre)
     elif conectado == 0:
-        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
         ConectarBancoLocal()
 
 
@@ -324,7 +321,7 @@ def InserirLeitura(Codigo,Nome, idComponente):
 
 
 ConectarBancoAzure(1)
-Login()
+Login(conectado)
 while True:
     ConectarBancoAzure(3)
     time.sleep(2)
