@@ -57,7 +57,7 @@ def Login(conectado):
 
 # estabelecer conexao com Azure
 
-def ConectarBancoAzure(nmr):
+def ConectarBancoAzure(nmr, login):
 
     try:
         # variaveis de conexao
@@ -102,7 +102,7 @@ def ConectarBancoAzure(nmr):
     if conectado == 3:
         BuscarComponentes(idTorre)
     elif conectado == 0:
-        ConectarBancoLocal(v_login)
+        ConectarBancoLocal(login)
 
 
 
@@ -326,7 +326,7 @@ def InserirLeitura(Codigo,Nome, idComponente):
 
 
 
-ConectarBancoAzure(1)
+ConectarBancoAzure(1, False)
 Login(conectado)
 while True:
     ConectarBancoAzure(3)
