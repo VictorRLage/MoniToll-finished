@@ -329,5 +329,5 @@ def InserirLeitura(Codigo,Nome, idComponente):
 ConectarBancoAzure(1, False)
 Login(conectado)
 while True:
-    ConectarBancoAzure(3)
+    ConectarBancoAzure(3,v_login)
     time.sleep(2)
