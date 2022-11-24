@@ -102,33 +102,36 @@ def ConectarBancoAzure(nmr):
     if conectado == 3:
         BuscarComponentes(idTorre)
     elif conectado == 0:
-        ConectarBancoLocal()
+        ConectarBancoLocal(v_login)
 
 
 
 # Estabelecer conexao com banco de dados local no docker
-def ConectarBancoLocal():
-    try:
-        conn = mysql.connector.connect(
-            host='172.17.0.2',
-            user='root',
-            password='123',
-            database='MoniToll'
-        )
-        print("Conexão com o Banco de Dados MySQL efetuada com sucesso!")
-        LeituraLocal(conn)
+def ConectarBancoLocal(login):
+    if login:
+        try:
+            conn = mysql.connector.connect(
+                host='172.17.0.2',
+                user='root',
+                password='123',
+                database='MoniToll'
+            )
+            print("Conexão com o Banco de Dados MySQL efetuada com sucesso!")
+            LeituraLocal(conn)
 
-    # Validações de Erro:
-    except mysql.connector.Error as err:
-        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-            print("Algo está errado com o Usuário do Banco ou a Senha.")
-            time.sleep(10)
-        elif err.errno == errorcode.ER_BAD_DB_ERROR:
-            print("O banco de dados direcionado não existe.")
-            time.sleep(10)
-        else:
-            print(err)
-            time.sleep(10)
+        # Validações de Erro:
+        except mysql.connector.Error as err:
+            if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+                print("Algo está errado com o Usuário do Banco ou a Senha.")
+                time.sleep(10)
+            elif err.errno == errorcode.ER_BAD_DB_ERROR:
+                print("O banco de dados direcionado não existe.")
+                time.sleep(10)
+            else:
+                print(err)
+                time.sleep(10)
+    else:
+        print("Login ainda não efetuado")
 
 
 # Inserir leituras Banco local
@@ -183,10 +186,13 @@ def ValidarLogin(email, senha):
         global fkEmpresa
         fkEmpresa = u_usuario[1]
         BuscarTorres(fkEmpresa)
+        global v_login
+        v_login = True 
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
         print("Falha ao realizar login por favor tente novamente")
+        v_login = False
 
 
 def BuscarTorres(fkEmpresa):
