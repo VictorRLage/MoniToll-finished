@@ -185,9 +185,10 @@ def ValidarLogin(email, senha):
         print(u_usuario)
         global fkEmpresa
         fkEmpresa = u_usuario[1]
-        BuscarTorres(fkEmpresa)
         global v_login
         v_login = True 
+        BuscarTorres(fkEmpresa)
+
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
