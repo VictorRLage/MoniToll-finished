@@ -47,6 +47,7 @@ global v_login
 v_login = False
 
 def Login(conectado):
+    print(conectado)
     if conectado == 1 or 3:
         print("Bem vindo ao Grenn Light!")
         print("Login")
@@ -102,12 +103,12 @@ def ConectarBancoAzure(nmr, login):
         
     
     print(conectado)
-    if conectado == 3 and login == True:
+    if conectado == 0:
+        ConectarBancoLocal(login)
+    elif conectado == 3 and login == True:
         BuscarComponentes(idTorre)
     elif conectado == 3 and login == False:
         Login(conectado)
-    elif conectado == 0:
-        ConectarBancoLocal(login)
 
 
 
