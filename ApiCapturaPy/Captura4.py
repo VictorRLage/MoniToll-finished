@@ -42,7 +42,7 @@ global strip2_RamAtual
 strip2_RamAtual = byte_RamAtual
 
 
-conectado = 1
+conectado = 0
 
 
 def Login():
