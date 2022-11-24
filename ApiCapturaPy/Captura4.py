@@ -44,7 +44,7 @@ strip2_RamAtual = byte_RamAtual
 
 
 global v_login
-v_login = False
+
 
 def Login(conectado):
     print(conectado)
@@ -332,7 +332,7 @@ def InserirLeitura(Codigo,Nome, idComponente):
 
 
 
-ConectarBancoAzure(1, v_login)
+ConectarBancoAzure(1, False)
 Login(conectado)
 while True:
     ConectarBancoAzure(3,v_login)
