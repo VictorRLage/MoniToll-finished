@@ -100,9 +100,11 @@ def ConectarBancoAzure(nmr, login):
         print(ex)
         conectado = 0
         
-
+    
     if conectado == 3 and login:
         BuscarComponentes(idTorre)
+    elif conectado == 3 and not login:
+        Login(conectado)
     elif conectado == 0:
         ConectarBancoLocal(login)
 
