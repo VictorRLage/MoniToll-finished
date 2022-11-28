@@ -259,9 +259,12 @@ def InserindoLeitura():
                 Nome= crsr.fetchone()
                 global strNome
                 strNome = convertTuple(Nome)
-                print("Nome componente ",y,":", strNome)
-                print(strNome + " = " + strCodigo)
-                teste()
+                if y > 12:
+                    print('Esse componente é em outra API!')
+                else:
+                    print("Nome componente ",y,":", strNome)
+                    print(strNome + " = " + strCodigo)
+                    teste()
 
 def VerificarDadosMaquina(idTorre):
                     
