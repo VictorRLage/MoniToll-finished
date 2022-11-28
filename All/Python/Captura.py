@@ -159,7 +159,7 @@ global strip2_RamAtual
 strip2_RamAtual = strip_RamAtual.strip('\n')
 
 
-def teste():
+def teste(idComponente):
         print("Inserindo leitura no banco...")
         datahora = datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')
         print(datahora)
@@ -176,6 +176,8 @@ def teste():
         elif strNome == 'processadores_nucleo_porcentagem':
             print('caiu no elif 2')
             var_leitura2 = numpy.mean(var_leitura) 
+        elif idComponente > 12:
+            print('Esse componente é em outra API')
         else:
             print('caiu no else')
             var_leitura2 = var_leitura
@@ -261,7 +263,7 @@ def InserindoLeitura():
                 strNome = convertTuple(Nome)
                 print("Nome componente ",y,":", strNome)
                 print(strNome + " = " + strCodigo)
-                teste()
+                teste(y)
 
 def VerificarDadosMaquina(idTorre):
                     
