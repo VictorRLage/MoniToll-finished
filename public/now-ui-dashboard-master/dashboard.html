@@ -53,7 +53,7 @@
           <li>
             <a href="metricas.html">
               <i class="now-ui-icons ui-1_bell-53"></i>
-              <p class="maior">Notificações</p>
+              <p class="maior">Métricas</p>
             </a>
           </li>
           <li>
@@ -699,7 +699,7 @@
   function verificarInternet(metrica) {
     var frase = ""
     // incluir uma nova medida de temperatura  
-    if (metrica > 15 && metrica < 30) {
+    if (metrica > 30 && metrica < 31) {
       frase = "Alerta: Alguns pacotes estão sendo perdidos! Porcentagem de perda de pacotes: "
       console.log('Cheguei aqui')
       alertas(nome, "Pacotes", metrica, frase)
