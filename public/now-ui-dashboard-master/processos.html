@@ -440,7 +440,7 @@
       })
     }).then(function (resposta) {
 
-      console.log("resposta: ", resposta);
+      // console.log("resposta: ", resposta);
 
       if (resposta.ok) {
         modal_titulo_aviso.innerHTML = `<h2>Cadastro realizado com sucesso!</h2>`
@@ -484,8 +484,8 @@
     fetch(`/medidas/BuscarProc/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
-          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-          console.log(resposta)
+          // console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          // console.log(resposta)
           resposta.reverse();
           resposta.forEach(element => {
             console.log(element)
@@ -506,7 +506,6 @@
   }
   function LimparJson(){
     firstFile.length = 0;
-    console.log(firstFile)
   }
   
   function createTable() {
@@ -514,6 +513,8 @@
     var div = document.getElementById(divId);
 
     div.innerHTML = '<span class="loadingP">Carregando...</span>';
+    botoesA.innerHTML = ''
+    botoesK.innerHTML = ''
 
     setTimeout(() => {
       div.innerHTML = '';
@@ -623,7 +624,6 @@
     });
     var contador = 0
     data.forEach(function (item) {
-      console.log(item)
       
       if (contador == 0){
         botoesA.innerHTML += `<div onclick="AddConfivel(${item.Pid},'${item.Nome}')" class="quadrado primeiro qAdd"><i class="adicionar now-ui-icons ui-1_simple-add"></i></div>`
