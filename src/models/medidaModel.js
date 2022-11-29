@@ -102,6 +102,16 @@ function buscarRegistro(fkTorre, nmrComponentes) {
     return database.executar(instrucaoSql);
 }
 
+function buscarProc(fkTorre) {
+    
+    instrucaoSql = ''
+    
+    instrucaoSql = `select idProcessoDinamica as 'idProcesso', Nome, Pid, StatusP as 'Status', usoCPU, usoRAM, DataCriacao as 'Data de criação', fkTorre as 'Servidor' from ProcessoDinamica where fkTorre = ${fkTorre}`;
+        
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 
 
 
@@ -114,6 +124,7 @@ module.exports = {
     buscarPorcentagemDisco,
     buscarPorcentagemPercaPacotes,
     buscarDataHora,
-    buscarRegistro
+    buscarRegistro,
+    buscarProc
     
 }

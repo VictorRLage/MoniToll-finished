@@ -22,7 +22,7 @@
   <link href="assets/demo/demo.css" rel="stylesheet" />
 </head>
 
-<body onload="ObterDados(sessionStorage.ID_TORRE)" class="">
+<body onload="ObterDados(sessionStorage.ID_TORRE)">
   <div class="wrapper ">
     <div class="sidebar" data-color="orange">
       <!--
@@ -49,6 +49,9 @@
               <i class="now-ui-icons design_bullet-list-67"></i>
               <p class="maior">Registros</p>
             </a>
+          </li>
+          <li id="processos">
+
           </li>
           <li>
             <a href="metricas.html">
@@ -329,7 +332,6 @@
         console.log(resposta);
 
         resposta.json().then(json => {
-          console.log('AQUIIIIIII')
           console.log(json);
           console.log(JSON.stringify(json));
           sessionStorage.NOME_EMPRESA = json[0].Nome
@@ -364,11 +366,18 @@
           json.forEach(element => {
             vetor_Componentes.push(element.fkComponente)
           });
+          vetor_Componentes.forEach(element => {
+            if (element == 25){
+              processos.innerHTML = `<a href="processos.html" ><i class="now-ui-icons loader_gear"></i><p class="maior">Processos</p></a>`
+            }
+          });
         });
       }
     }).catch(function (erro) {
       console.log("ERRO: " + erro);
     })
+
+
     setTimeout(() =>
       ObterDataHora(sessionStorage.ID_TORRE),
       ObterPorcentagemRAM(sessionStorage.ID_TORRE),

@@ -50,6 +50,9 @@
               <p class="maior">Registros</p>
             </a>
           </li>
+          <li id="processos">
+
+          </li>
           <li class="active">
             <a href="metricas.html">
               <i class="now-ui-icons ui-1_bell-53"></i>
@@ -403,8 +406,41 @@
 
 </script>
 
+<script>
+  fkTorre = sessionStorage.ID_TORRE
+  fetch("/usuarios/ObterComponentes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        fkTorreServer: fkTorre,
+      })
+    }).then(function (resposta) {
+      console.log("ESTOU NO THEN DO entrar()!")
 
+      if (resposta.ok) {
+        console.log(resposta);
+
+        resposta.json().then(json => {
+          console.log(json);
+          console.log(JSON.stringify(json));
+
+          json.forEach(element => {
+            vetor_Componentes.push(element.fkComponente)
+          });
+          vetor_Componentes.forEach(element => {
+            if (element == 25){
+              processos.innerHTML = `<a href="processos.html" ><i class="now-ui-icons loader_gear"></i><p class="maior">Processos</p></a>`
+            }
+          });
+        });
+      }
+    }).catch(function (erro) {
+      console.log("ERRO: " + erro);
+    })
 </script>
+
 <script>
   function Logout() {
     sessionStorage.clear();

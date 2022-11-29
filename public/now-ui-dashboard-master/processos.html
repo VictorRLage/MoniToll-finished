@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Monitoll - Registros
+    Monitoll - Processos
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
     name='viewport' />
@@ -22,7 +22,142 @@
   <link href="assets/demo/demo.css" rel="stylesheet" />
 </head>
 
-<body onload="ObterDados(sessionStorage.ID_TORRE)" class="">
+<style>
+  .containerP {
+    max-width: 2000px;
+    margin: 20px auto;
+    padding: 15px;
+    overflow-y: auto;
+    height: 470px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .containerP table {
+    border: 1px solid #d6d6d6;
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #fff;
+  }
+
+  .containerP table thead {
+    background-color: #ffffff;
+    border: 1px solid #d6d6d6;
+    border-bottom: none;
+  }
+
+  .containerP table thead th {
+    text-transform: capitalize;
+    border-right: 1px solid #d6d6d6;
+    background-color: #f5f5f5;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .containerP table thead th:last-child {
+    border-right: none;
+  }
+
+  .containerP table thead th a {
+    position: relative;
+    text-decoration: none;
+    color: #feb900;
+    display: block;
+    padding: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: left;
+    padding-right: 25px;
+  }
+
+  .containerP table thead th a:hover,
+  .containerP table thead th a:focus {
+    background-color: #e2e2e4;
+  }
+
+  .containerP table thead th.ascendent_sort,
+  .containerP table thead th.descendent_sort {
+    background-color: #e3edfd;
+  }
+
+  .containerP table thead th.ascendent_sort a:hover,
+  .containerP table thead th.ascendent_sort a:focus,
+  .containerP table thead th.descendent_sort a:hover,
+  .containerP table thead th.descendent_sort a:focus {
+    background-color: transparent;
+  }
+
+  .containerP table thead th.ascendent_sort a:before,
+  .containerP table thead th.descendent_sort a:before {
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    border: 5px solid transparent;
+  }
+
+  .containerP table thead th.ascendent_sort a:before {
+    border-bottom-color: #feb900;
+    margin-top: -7px;
+  }
+
+  .containerP table thead th.descendent_sort a:before {
+    border-top-color: #feb900;
+    margin-top: -2px;
+  }
+
+  .containerP table tbody tr {
+    border-top: 1px solid #d6d6d6;
+  }
+
+  .containerP table tbody td {
+    border-right: 1px solid #d6d6d6;
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .containerP table tbody td:last-child {
+    border-right: none;
+  }
+
+  .responsive-table {
+    width: 95%;
+  }
+
+  .loadingP {
+    display: block;
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+  }
+
+  .quadrado {
+    height: 30px;
+    width: 30px;
+    margin-top: 9px;
+    cursor: pointer;
+    border-radius: 50px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .qAdd {
+    background-color: rgb(118, 250, 118);
+  }
+
+  .qKill {
+    background-color: rgb(244, 80, 80);
+
+  }
+
+  .primeiro {
+    margin-top: 45px;
+  }
+</style>
+
+<body>
   <div class="wrapper ">
     <div class="sidebar" data-color="orange">
       <!--
@@ -44,14 +179,17 @@
               <p class="maior">Dashboard</p>
             </a>
           </li>
-          <li class="active">
+          <li>
             <a href="registros.html">
               <i class="now-ui-icons design_bullet-list-67"></i>
               <p class="maior">Registros</p>
             </a>
           </li>
-          <li id="processos">
-
+          <li class="active">
+            <a href="processos.html">
+              <i class="now-ui-icons loader_gear"></i>
+              <p class="maior">Processos</p>
+            </a>
           </li>
           <li>
             <a href="metricas.html">
@@ -89,7 +227,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand maior">Registros</a>
+            <a class="navbar-brand maior">Processos</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
             aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -136,32 +274,26 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title">Histórico de registros</h4>
+                <h4 class="card-title">Lista de processos</h4>
               </div>
+              <!-- --------------------------------------------------------------------------------------------------------------------- -->
+              <div class="containerP">
+
+                <div class="responsive-table">
+                  <div id="dynamic-table"></div>
+                </div>
+                <div id="botoesA">
+                </div>
+
+                <div id="botoesK">
+
+                </div>
+
+              </div>
+
               <div class="card-body">
                 <div class="table-responsive">
-                  <table class="table">
-                    <thead class=" text-primary">
-                      <th>
-                        idLeitura
-                      </th>
-                      <th>
-                        Leitura
-                      </th>
-                      <th>
-                        Data/Hora
-                      </th>
-                      <th>
-                        Servidor
-                      </th>
-                      <th class="text-right">
-                        Componente
-                      </th>
-                    </thead>
-                    <tbody id="tabela_registro">
 
-                    </tbody>
-                  </table>
                 </div>
               </div>
             </div>
@@ -251,6 +383,12 @@
 </body>
 
 <script>
+  function Logout() {
+    sessionStorage.clear();
+  }
+</script>
+
+<script>
   const open = document.getElementById('AddUsuario')
   const modal_container = document.getElementById('modal_container')
   const close = document.getElementById('close')
@@ -324,122 +462,34 @@
 
 <script>
   var vetor_Componentes = []
-  function ObterDados(fkTorre) {
-    var nome = sessionStorage.NOME_USUARIO
-    var perfil;
-    if (sessionStorage.FK_PERFIL == 2) {
-      perfil = 'Adm'
-      AddUsuario.innerHTML = `<a><i class="now-ui-icons business_badge"></i><p class="maior">Adicionar Usuario</p></a>`
-    } else {
-      perfil = 'Fun'
-    }
-    BemVindo.innerHTML = `Bem vindo, ${nome}.<br> ${perfil}`
-
-    setTimeout(() => ObterRegistros(fkTorre), 1000);
-
+  var nome = sessionStorage.NOME_USUARIO
+  var perfil;
+  if (sessionStorage.FK_PERFIL == 2) {
+    perfil = 'Adm'
+    AddUsuario.innerHTML = `<a><i class="now-ui-icons business_badge"></i><p class="maior">Adicionar Usuario</p></a>`
+  } else {
+    perfil = 'Fun'
   }
-
-
+  BemVindo.innerHTML = `Bem vindo, ${nome}.<br> ${perfil}`
 </script>
 
-<script>
-  function Logout() {
-    sessionStorage.clear();
-  }
-</script>
+
 
 <script>
-  var vetor_Componentes = []
-  var componente;
-  function ObterRegistros(fkTorre) {
-    fetch("/usuarios/ObterComponentes", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        fkTorreServer: fkTorre,
-      })
-    }).then(function (resposta) {
-      console.log("ESTOU NO THEN DO entrar()!")
-
-      if (resposta.ok) {
-        console.log(resposta);
-
-        resposta.json().then(json => {
-          console.log(json);
-          console.log(JSON.stringify(json));
-
-          json.forEach(element => {
-            vetor_Componentes.push(element.fkComponente)
-          });
-          vetor_Componentes.forEach(element => {
-            if (element == 25){
-              processos.innerHTML = `<a href="processos.html" ><i class="now-ui-icons loader_gear"></i><p class="maior">Processos</p></a>`
-            }
-          });
-        });
-      }
-    }).catch(function (erro) {
-      console.log("ERRO: " + erro);
-    })
-
-    setTimeout(() => PlotarRegistro(fkTorre), 1000);
-
-  }
-
-  function PlotarRegistro(fkTorre) {
-    fetch(`/medidas/Registro/${fkTorre}/${vetor_Componentes.length}`, { cache: 'no-store' }).then(function (response) {
+  var firstFile = [];
+  window.onload = function () {
+    BuscarProc(sessionStorage.ID_TORRE)
+  };
+  function BuscarProc(fkTorre){
+    fetch(`/medidas/BuscarProc/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
           console.log(resposta)
           resposta.reverse();
           resposta.forEach(element => {
-            if (element.fkComponente == 1){
-              componente = "Quantidade de processadores"
-            } else if (element.fkComponente == 2){
-              componente = "% uso processadores"
-            } else if (element.fkComponente == 3){
-              componente = "Memória Ram Total"
-            } else if (element.fkComponente == 4){
-              componente = "Memória Ram em uso"
-            } else if (element.fkComponente == 5){
-              componente = "% uso da memória Ram"
-            } else if (element.fkComponente == 6){
-              componente = "Memória do disco total"
-            } else if (element.fkComponente == 7){
-              componente = "Memória do disco em uso"
-            } else if (element.fkComponente == 8){
-              componente = "Memória do disco livre"
-            } else if (element.fkComponente == 9){
-              componente = "% uso memória disco"
-            } else if (element.fkComponente == 10){
-              componente = "Pacotes enviados"
-            }else if (element.fkComponente == 11){
-              componente = "Pacotes recebidos"
-            }else if (element.fkComponente == 12){
-              componente = "% pacotes perdidos"
-            }
-
-            tabela_registro.innerHTML += `
-                       <tr>
-                        <td>
-                          ${element.idLeitura}
-                        </td>
-                        <td>
-                          ${element.Leitura}
-                        </td>
-                        <td>
-                          ${element.DataHora}
-                        </td>
-                        <td>
-                          ${sessionStorage.LOCALIZACAO}
-                        </td>
-                        <td class="text-right">
-                          ${componente}
-                        </td>
-                      </tr>`
+            console.log(element)
+            firstFile.push(element)
           });
           // PlotarGrafico(resposta, fkTorre);
         });
@@ -448,7 +498,255 @@
       }
     })
       .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ registro: ${error.message}`);
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
       });
+      setTimeout(() => createTable(), 5000);
+      setTimeout(() => LimparJson(), 10000);
+      setTimeout(() => BuscarProc(fkTorre), 30000);
+  }
+  function LimparJson(){
+    firstFile.length = 0;
+    console.log(firstFile)
+  }
+  
+  function createTable() {
+    var divId = 'dynamic-table';
+    var div = document.getElementById(divId);
+
+    div.innerHTML = '<span class="loadingP">Carregando...</span>';
+
+    setTimeout(() => {
+      div.innerHTML = '';
+
+      var tableId = 'sortable';
+      var json = firstFile;
+      var table = new DynamicTable(tableId, json);
+      div.appendChild(table);
+
+      new SortableTable(tableId);
+    }, 500);
+  }
+
+
+
+  /**
+  * *******************************************************************
+  * **************************** SOLUTION ****************************
+  * *******************************************************************
+  */
+
+  /**
+  * *******************************************************************
+  * HELPERS: helper functions I use in the solutions
+  * *******************************************************************
+  */
+
+  // Sort helper
+  function sortFn(a, b) {
+    if (a.value < b.value) {
+      return -1;
+    }
+
+    if (a.value > b.value) {
+      return 1;
+    }
+
+    return 0;
+  }
+
+  // Sort the list
+  function sortList(list, direction) {
+    var sorted = list.sort(sortFn);
+
+    if (direction === -1) {
+      list.reverse();
+    }
+
+    return sorted;
+  }
+
+  // Event triggered on heading anchor click (which will trigger the sort)
+  function onHeadigClick(that, cellIndex) {
+    return function () {
+      that.sortColumn(this, cellIndex);
+
+      return false;
+    };
+  }
+
+  // Create anchor for each th
+  function createAnchor(html, index) {
+    var a = document.createElement('a');
+    a.href = '#';
+    a.innerHTML = html;
+    a.onclick = onHeadigClick(this, index);
+
+    return a;
+  }
+
+  /**
+  * *******************************************************************
+  * TASKS: from here are the real task solutions
+  * *******************************************************************
+  */
+
+  /**
+  * Solution for task A. Generate a table with dymanic headers based on the data
+  * @param {string} id the id the table will have
+  * @param {array} data json data
+  *
+  * @return {HTMLElement} resulting table
+  */
+  function DynamicTable(tableId, data) {
+    var headings = data.reduce(function (result, item) {
+      var item_headings = Object.keys(item);
+
+      item_headings.forEach(function (heading) {
+        if (result.indexOf(heading) === -1) {
+          result.push(heading);
+        }
+      });
+
+      return result;
+    }, []);
+
+    var table = document.createElement('table');
+    var thead = document.createElement('thead');
+    var tbody = document.createElement('tbody');
+    var thead_tr = document.createElement('tr');
+
+    headings.forEach(function (heading) {
+      var cell = document.createElement('th');
+      cell.innerHTML = heading;
+
+      thead_tr.appendChild(cell);
+    });
+    var contador = 0
+    data.forEach(function (item) {
+      console.log(item)
+      
+      if (contador == 0){
+        botoesA.innerHTML += `<div onclick="AddConfivel(${item.Pid},'${item.Nome}')" class="quadrado primeiro qAdd"><i class="adicionar now-ui-icons ui-1_simple-add"></i></div>`
+      } else{
+        botoesA.innerHTML += `<div onclick="AddConfivel(${item.Pid},'${item.Nome}')" class="quadrado qAdd"><i class="adicionar now-ui-icons ui-1_simple-add"></i></div>`
+      }
+
+      if (contador == 0){
+        botoesK.innerHTML += `<div onclick="MatarProc(${item.Pid},'${item.Nome}')" class="quadrado primeiro qKill"><i class="adicionar now-ui-icons ui-1_simple-remove"></i></div>`
+      } else{
+        botoesK.innerHTML += `<div onclick="MatarProc(${item.Pid},'${item.Nome}')" class="quadrado qKill"><i class="adicionar now-ui-icons ui-1_simple-remove"></i></div>`
+      }
+      contador+=1
+
+
+      var tbody_tr = document.createElement('tr');
+
+      headings.forEach(function (heading) {
+        var cell = document.createElement('td');
+        cell.innerHTML = item[heading] || '';
+
+        tbody_tr.appendChild(cell);
+      });
+
+      tbody.appendChild(tbody_tr);
+    });
+
+    thead.appendChild(thead_tr);
+    table.appendChild(thead);
+    table.appendChild(tbody);
+    table.id = tableId;
+
+    return table;
+  }
+
+  /**
+  * Solution for task B. reate a new instance of sortableTable tied to a table
+  * @param {string} id table id
+  */
+  function SortableTable(id) {
+    this.table = document.getElementById(id);
+    this.lastSortedTh = null;
+
+    if (this.table && this.table.nodeName === 'TABLE') {
+      var headings = this.table.tHead.rows[0].cells;
+
+      Object.assign([], headings).forEach(
+        function (heading, index) {
+          if (heading.className.match(/ascendent_sort|descendent_sort/)) {
+            this.lastSortedTh = heading;
+          }
+        }.bind(this),
+      );
+
+      this.setTableSortable();
+    }
+  }
+
+  SortableTable.prototype.setTableSortable = function () {
+    var headings = this.table.tHead.rows[0].cells;
+
+    Object.assign([], headings).forEach(
+      function (heading, index) {
+        var sortAnchor = createAnchor.bind(this);
+        var html = heading.innerHTML;
+        heading.innerHTML = '';
+        heading.appendChild(sortAnchor(html, index));
+      }.bind(this),
+    );
+  };
+
+  SortableTable.prototype.sortColumn = function (el, cellIndex) {
+    var tBody = this.table.tBodies[0];
+    var rows = this.table.rows;
+    var th = el.parentNode;
+    var list = [];
+
+    Object.assign([], rows).forEach(function (row, index) {
+      if (index > 0) {
+        var cell = row.cells[cellIndex];
+        var content = cell.textContent || cell.innerText;
+
+        list.push({
+          value: content,
+          row: row,
+        });
+      }
+    });
+
+    var hasAscendentClassName = th.className.match('ascendent_sort');
+    var hasDescendentClassName = th.className.match('descendent_sort');
+
+    list = sortList(list, hasAscendentClassName ? -1 : 1);
+
+    if (hasAscendentClassName) {
+      th.className = th.className.replace(/ascendent_sort/, 'descendent_sort');
+    } else {
+      if (hasDescendentClassName) {
+        th.className = th.className.replace(/descendent_sort/, 'ascendent_sort');
+      } else {
+        th.className += 'ascendent_sort';
+      }
+    }
+
+    if (this.lastSortedTh && th !== this.lastSortedTh) {
+      this.lastSortedTh.className = this.lastSortedTh.className.replace(
+        /descendent_sort|ascendent_sort/g,
+        '',
+      );
+    }
+
+    this.lastSortedTh = th;
+
+    list.forEach(function (item, index) {
+      tBody.appendChild(item.row);
+    });
+  };
+</script>
+<script>
+  function AddConfivel(pid,name){
+    console.log(pid,name)
+  }
+  function MatarProc(pid,name){
+    console.log(pid,name)
   }
 </script>

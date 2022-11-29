@@ -36,5 +36,9 @@ router.get("/Registro/:fkTorre/:nmrComponentes", function (req, res) {
     medidaController.buscarRegistro(req, res);
 })
 
+router.get("/BuscarProc/:fkTorre", function (req, res) {
+    medidaController.buscarProc(req, res);
+})
+
 
 module.exports = router;
