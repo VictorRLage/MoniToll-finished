@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>MoniToll - Cadastro de Métricas</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="Cadastro/css/main.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: MoniToll - v1.1.0
+  * Template URL: https://bootstrapmade.com/MoniToll-bootstrap-construction-website-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header2" class="header d-flex align-items-center">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1>MoniToll<span>.</span></h1>
+      </a>
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="servicos.html">Serviços</a></li>
+          <li><a href="plano.html">Planos</a></li>
+          <li><a href="contato.html">Contato</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="cadastro.html" class="active">Cadastro</a></li>
+        </ul>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login100">
+        <div class="login100-form validate-form">
+          <span class="login100-form-title p-b-26">
+            Métricas
+          </span>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">CPU</legend>
+            <div class="nova-metrica">
+              <p>Coloque sua nova métrica abaixo:</p>
+              <input class="nova-metrica-ideal" placeholder="Métrica ideal" id="NormalCPU">
+              <input class="nova-metrica-ideal" placeholder="Métrica de alerta" id="AtencaoCPU">
+              <input class="nova-metrica-ideal" placeholder="Métrica crítica" id="CriticoCPU">
+            </div>
+          </div>
+
+          <div class="wrap-input200 validate-input">
+            <legend class="input200">Memória RAM</legend>
+            <div class="nova-metrica">
+              <p>Coloque sua nova métrica abaixo:</p>
+              <input class="nova-metrica-ideal" placeholder="Métrica ideal" id="NormalRAM">
+              <input class="nova-metrica-ideal" placeholder="Métrica de alerta" id="AtencaoRAM">
+              <input class="nova-metrica-ideal" placeholder="Métrica crítica" id="CriticoRAM">
+            </div>
+
+
+            <div class="wrap-input200 validate-input">
+              <legend class="input200">Disco</legend>
+              <div class="nova-metrica">
+                <p>Coloque sua nova métrica abaixo:</p>
+                <input class="nova-metrica-ideal" placeholder="Métrica ideal" id="NormalDisco">
+                <input class="nova-metrica-ideal" placeholder="Métrica de alerta" id="AtencaoDisco">
+                <input class="nova-metrica-ideal" placeholder="Métrica crítica" id="CriticoDisco">
+              </div>
+            </div>
+            <div class="wrap-input200 validate-input">
+              <legend class="input200">Internet</legend>
+              <div class="nova-metrica">
+                <p>Coloque sua nova métrica abaixo:</p>
+                <input class="nova-metrica-ideal" placeholder="Métrica ideal" id="NormalInternet">
+                <input class="nova-metrica-ideal" placeholder="Métrica de alerta" id="AtencaoInternet">
+                <input class="nova-metrica-ideal" placeholder="Métrica crítica" id="CriticoInternet">
+              </div>
+
+
+              <div class="container-login100-form-btn">
+                <div class="wrap-login100-form-btn">
+                  <div class="login100-form-bgbtn">
+                  </div>
+                  <button class="login100-form-btn" onclick="cadastrarMetrica()">
+                    Cadastrar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-containerL" id="modal_container">
+    <div class="modalL">
+      <h2 id="titulo_m"></h2>
+      <p id="p_msg"></p>
+    </div>
+    <button class="button1L" id="close">X</button>
+  </div>
+
+  <div id="preloader"></div>
+</body>
+
+
+
+<!--===============================================================================================-->
+<script src="Cadastro/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="Cadastro/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+<script src="Cadastro/vendor/bootstrap/js/popper.js"></script>
+<script src="Cadastro/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="Cadastro/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="Cadastro/vendor/daterangepicker/moment.min.js"></script>
+<script src="Cadastro/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+<script src="Cadastro/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+<script src="Cadastro/js/main.js"></script>
+
+<!-- Vendor JS Files -->
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<!-- <script src="assets/vendor/php-email-form/validate.js"></script> -->
+
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
+<script src="js/funcoes.js"></script>
+<!-- Vendor JS Files -->
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
+
+
+</body>
+
+</html>
+<script>
+  var fkEmpresaVar = sessionStorage.FK_EMPRESA
+
+
+  function cadastrarMetrica(req, res) {
+    const open = document.getElementById('open');
+    const modal_container = document.getElementById('modal_container');
+    const close = document.getElementById('close');
+
+    var fkComponenteCPU = 2
+    var fkComponenteRAM = 5
+    var fkComponenteDisco = 9
+    var fkComponenteInternet = 12
+    var fkEmpresaVar = sessionStorage.FK_EMPRESA;
+    var NormalCPUVar = NormalCPU.value;
+    var AtencaoCPUVar = AtencaoCPU.value;
+    var CriticoCPUVar = CriticoCPU.value;
+    var NormalRAMVar = NormalRAM.value;
+    var AtencaoRAMVar = AtencaoRAM.value;
+    var CriticoRAMVar = CriticoRAM.value;
+    var NormalDiscoVar = NormalDisco.value;
+    var AtencaoDiscoVar = AtencaoDisco.value;
+    var CriticoDiscoVar = CriticoDisco.value;
+    var NormalInternetVar = NormalInternet.value;
+    var AtencaoInternetVar = AtencaoInternet.value;
+    var CriticoInternetVar = CriticoInternet.value;
+
+    if (fkEmpresaVar == "" || NormalCPUVar == "" || AtencaoCPUVar == "" || CriticoCPUVar == "" || NormalRAMVar == "" || AtencaoRAMVar == "" || CriticoRAMVar == "" || NormalDiscoVar == "" || AtencaoDiscoVar == "" || CriticoDiscoVar == "" || NormalInternetVar == "" || AtencaoInternetVar == "" || CriticoInternetVar == "") {
+
+      titulo_m.innerHTML = ("Preencha todos os campos para prosseguir")
+
+      modal_container.classList.add('show');
+
+      close.addEventListener('click', () => {
+        modal_container.classList.remove('show');
+      });
+      return
+    }
+
+    
+    // fetch 1
+    fetch("/usuarios/cadastrarMetrica", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        fkComponenteServer: fkComponenteCPU,
+        fkEmpresaServer: fkEmpresaVar,
+        NormalServer: NormalCPUVar,
+        AtencaoServer: AtencaoCPUVar,
+        CriticoServer: CriticoCPUVar,
+
+      })
+    }).then(function (response) {
+
+      console.log("response: ", response);
+      
+      if (response.ok) {
+        setTimeout(() => {
+
+          titulo_m.innerHTML = ("Cadastro realizado com sucesso. Bem-vindo")
+          modal_container.classList.add('show');
+
+          close.addEventListener('click', () => {
+            modal_container.classList.remove('show');
+          });
+
+          window.location = "../login.html";
+        }, 3000)
+
+      } else {
+        throw ("Houve um erro ao tentar realizar o cadastro!");
+      }
+    }).catch(function (response) {
+      console.log(`#ERRO: ${response}`);
+    });
+
+    // return false;
+
+
+    // fetch 2
+    fetch("/usuarios/cadastrarMetrica", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        fkComponenteServer: fkComponenteRAM,
+        fkEmpresaServer: fkEmpresaVar,
+        NormalServer: NormalRAMVar,
+        AtencaoServer: AtencaoRAMVar,
+        CriticoServer: CriticoRAMVar,
+
+
+      })
+    }).then(function (response) {
+
+      console.log("response: ", response);
+
+      if (response.ok) {
+        setTimeout(() => {
+
+          titulo_m.innerHTML = ("Cadastro realizado com sucesso. Bem-vindo")
+          modal_container.classList.add('show');
+
+          close.addEventListener('click', () => {
+            modal_container.classList.remove('show');
+          });
+
+          window.location = "../login.html";
+        }, 3000)
+
+        // limparFormulario();
+        // finalizarAguardar();
+      } else {
+        throw ("Houve um erro ao tentar realizar o cadastro!");
+      }
+    }).catch(function (response) {
+      console.log(`#ERRO: ${response}`);
+    });
+
+    // return false;
+
+
+    // fetch 3
+
+    fetch("/usuarios/cadastrarMetrica", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        fkComponenteServer: fkComponenteDisco,
+        fkEmpresaServer: fkEmpresaVar,
+        NormalServer: NormalDiscoVar,
+        AtencaoServer: AtencaoDiscoVar,
+        CriticoServer: CriticoDiscoVar,
+
+
+      })
+    }).then(function (response) {
+
+      console.log("response: ", response);
+
+      if (response.ok) {
+        setTimeout(() => {
+
+          titulo_m.innerHTML = ("Cadastro realizado com sucesso. Bem-vindo")
+          modal_container.classList.add('show');
+
+          close.addEventListener('click', () => {
+            modal_container.classList.remove('show');
+          });
+
+          window.location = "../login.html";
+        }, 3000)
+
+        // limparFormulario();
+        // finalizarAguardar();
+      } else {
+        throw ("Houve um erro ao tentar realizar o cadastro!");
+      }
+    }).catch(function (response) {
+      console.log(`#ERRO: ${response}`);
+    });
+
+    // return false;
+
+
+    // fetch 4
+
+    fetch("/usuarios/cadastrarMetrica", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        fkComponenteServer: fkComponenteInternet,
+        fkEmpresaServer: fkEmpresaVar,
+        NormalServer: NormalInternetVar,
+        AtencaoServer: AtencaoInternetVar,
+        CriticoServer: CriticoInternetVar,
+
+
+      })
+    }).then(function (response) {
+
+      console.log("response: ", response);
+
+      if (response.ok) {
+        setTimeout(() => {
+
+          titulo_m.innerHTML = ("Cadastro realizado com sucesso. Bem-vindo")
+          modal_container.classList.add('show');
+
+          close.addEventListener('click', () => {
+            modal_container.classList.remove('show');
+          });
+
+          window.location = "../login.html";
+        }, 3000)
+
+        // limparFormulario();
+        // finalizarAguardar();
+      } else {
+        throw ("Houve um erro ao tentar realizar o cadastro!");
+      }
+    }).catch(function (response) {
+      console.log(`#ERRO: ${response}`);
+    });
+
+    // return false;
+
+
+
+
+
+
+
+  }
+
+</script>
