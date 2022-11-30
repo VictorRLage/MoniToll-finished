@@ -68,4 +68,8 @@ router.post("/CadastrarProcesso", function (req, res) {
     usuarioController.CadastrarProcesso(req, res);
 });
 
+router.post("/VerificarProcesso", function (req, res) {
+    usuarioController.VerificarProcesso(req, res);
+});
+
 module.exports = router;

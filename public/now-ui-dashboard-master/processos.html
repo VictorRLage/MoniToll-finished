@@ -136,7 +136,6 @@
     height: 30px;
     width: 30px;
     margin-top: 9px;
-    cursor: pointer;
     border-radius: 50px;
     margin-left: 10px;
     display: flex;
@@ -145,10 +144,12 @@
   }
 
   .qAdd {
+    cursor: pointer;
     background-color: rgb(118, 250, 118);
   }
 
   .qKill {
+    cursor: pointer;
     background-color: rgb(244, 80, 80);
 
   }
@@ -386,6 +387,7 @@
 </body>
 
 <script>
+  
   function Logout() {
     sessionStorage.clear();
   }
@@ -406,6 +408,7 @@
 </script>
 
 <script>
+  var fkTorre = sessionStorage.ID_TORRE
   function CadastrarUsuario() {
 
     var nomeVar = nome_inp.value;
@@ -627,12 +630,38 @@
     });
     var contador = 0
     data.forEach(function (item) {
+      fetch("/usuarios/VerificarProcesso", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          pidServer: item.Pid,
+          nameServer: item.Nome,
+          fkTorreServer: fkTorre,
 
-      if (contador == 0) {
-        botoesA.innerHTML += `<div onclick="CadastrarProcesso(${item.Pid},'${item.Nome}','ProcessoConfiavel')" class="quadrado primeiro qAdd"><i class="adicionar now-ui-icons ui-1_simple-add"></i></div>`
-      } else {
-        botoesA.innerHTML += `<div onclick="CadastrarProcesso(${item.Pid},'${item.Nome}','ProcessoConfiavel')" class="quadrado qAdd"><i class="adicionar now-ui-icons ui-1_simple-add"></i></div>`
-      }
+        })
+      }).then(function (resposta) {
+
+
+        if (resposta.ok) {
+          if (contador == 0) {
+            botoesA.innerHTML += `<div onclick="CadastrarProcesso(${item.Pid},'${item.Nome}','ProcessoConfiavel')" class="quadrado primeiro qAdd"><i class="adicionar now-ui-icons ui-1_simple-add"></i></div>`
+          } else {
+            botoesA.innerHTML += `<div onclick="CadastrarProcesso(${item.Pid},'${item.Nome}','ProcessoConfiavel')" class="quadrado qAdd"><i class="adicionar now-ui-icons ui-1_simple-add"></i></div>`
+          }
+        } else {
+          if (contador == 0) {
+            botoesA.innerHTML += `<div onclick="CadastrarProcesso(${item.Pid},'${item.Nome}','ProcessoConfiavel')" class="quadrado primeiro"></div>`
+          } else {
+            botoesA.innerHTML += `<div onclick="CadastrarProcesso(${item.Pid},'${item.Nome}','ProcessoConfiavel')" class="quadrado"></div>`
+          }
+        }
+      }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+
 
       if (contador == 0) {
         botoesK.innerHTML += `<div onclick="CadastrarProcesso(${item.Pid},'${item.Nome}','ProcessoToKill')" class="quadrado primeiro qKill"><i class="adicionar now-ui-icons ui-1_simple-remove"></i></div>`
@@ -749,7 +778,6 @@
   function CadastrarProcesso(pid, name, tabela) {
     var dh = moment()
     var datahora = dh.format('D/MM/YYYY HH:mm:ss');
-    var fkTorre = sessionStorage.ID_TORRE
     fetch("/usuarios/CadastrarProcesso", {
       method: "POST",
       headers: {
@@ -775,7 +803,7 @@
       console.log(`#ERRO: ${resposta}`);
     });
 
-    if (tabela == 'ProcessoToKill'){
+    if (tabela == 'ProcessoToKill') {
       // cadastrarProcessosMortos()
     }
   }

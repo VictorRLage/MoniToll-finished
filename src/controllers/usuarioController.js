@@ -499,6 +499,46 @@ function CadastrarProcesso(req, res) {
 }
 
 
+function VerificarProcesso(req, res) {
+    var pid = req.body.pidServer;
+    var name = req.body.nameServer;
+    var fkTorre = req.body.fkTorreServer;
+
+    if (pid == undefined) {
+        res.status(400).send("Seu pid está undefined!");
+    } else if (name == undefined) {
+        res.status(400).send("Sua name está indefinida!");
+    } else if (fkTorre == undefined) {
+        res.status(400).send("Sua fkTorre está indefinida!");
+    } else {
+
+        usuarioModel.VerificarProcesso(pid, name, fkTorre)
+            .then(
+                function (resultado) {
+                    console.log(`\nResultados encontrados: ${resultado.length}`);
+                    console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
+
+                    if (resultado.length == 0) {
+                        console.log(resultado);
+                        res.json(resultado);
+                    } else if (resultado.length == 1) {
+                        res.status(403).send("Processo ja cadastrado");
+                    } else {
+                        res.status(403).send("Mais de um processo cadastrado");
+                    }
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
+}
+
+
 
 module.exports = {
     entrar,
@@ -516,5 +556,6 @@ module.exports = {
     CadastrarUsuario,
     ObterDadosTorre,
     ObterNomeEmp,
-    CadastrarProcesso
+    CadastrarProcesso,
+    VerificarProcesso
 }
