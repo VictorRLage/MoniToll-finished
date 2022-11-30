@@ -64,8 +64,12 @@ router.post("/ObterNomeEmp", function (req, res) {
     usuarioController.ObterNomeEmp(req, res);
 });
 
-router.post("/CadastrarProcesso", function (req, res) {
-    usuarioController.CadastrarProcesso(req, res);
+router.post("/CadastrarProcessoMatar", function (req, res) {
+    usuarioController.CadastrarProcessoMatar(req, res);
+});
+
+router.post("/CadastrarProcessoConfiavel", function (req, res) {
+    usuarioController.CadastrarProcessoConfiavel(req, res);
 });
 
 router.post("/VerificarProcesso", function (req, res) {

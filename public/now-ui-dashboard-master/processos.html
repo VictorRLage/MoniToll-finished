@@ -636,7 +636,6 @@
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          pidServer: item.Pid,
           nameServer: item.Nome,
           fkTorreServer: fkTorre,
 
@@ -646,15 +645,15 @@
 
         if (resposta.ok) {
           if (contador == 0) {
-            botoesA.innerHTML += `<div onclick="CadastrarProcesso(${item.Pid},'${item.Nome}','ProcessoConfiavel')" class="quadrado primeiro qAdd"><i class="adicionar now-ui-icons ui-1_simple-add"></i></div>`
+            botoesA.innerHTML += `<div onclick="CadastrarProcessoConfiavel('${item.Nome}')" class="quadrado primeiro qAdd"><i class="adicionar now-ui-icons ui-1_simple-add"></i></div>`
           } else {
-            botoesA.innerHTML += `<div onclick="CadastrarProcesso(${item.Pid},'${item.Nome}','ProcessoConfiavel')" class="quadrado qAdd"><i class="adicionar now-ui-icons ui-1_simple-add"></i></div>`
+            botoesA.innerHTML += `<div onclick="CadastrarProcessoConfiavel('${item.Nome}')" class="quadrado qAdd"><i class="adicionar now-ui-icons ui-1_simple-add"></i></div>`
           }
         } else {
           if (contador == 0) {
-            botoesA.innerHTML += `<div onclick="CadastrarProcesso(${item.Pid},'${item.Nome}','ProcessoConfiavel')" class="quadrado primeiro"></div>`
+            botoesA.innerHTML += `<div onclick="CadastrarProcessoConfiavel('${item.Nome}')" class="quadrado primeiro"></div>`
           } else {
-            botoesA.innerHTML += `<div onclick="CadastrarProcesso(${item.Pid},'${item.Nome}','ProcessoConfiavel')" class="quadrado"></div>`
+            botoesA.innerHTML += `<div onclick="CadastrarProcessoConfiavel('${item.Nome}')" class="quadrado"></div>`
           }
         }
       }).catch(function (resposta) {
@@ -664,9 +663,9 @@
 
 
       if (contador == 0) {
-        botoesK.innerHTML += `<div onclick="CadastrarProcesso(${item.Pid},'${item.Nome}','ProcessoToKill')" class="quadrado primeiro qKill"><i class="adicionar now-ui-icons ui-1_simple-remove"></i></div>`
+        botoesK.innerHTML += `<div onclick="CadastrarProcessoMatar(${item.Pid},'${item.Nome}')" class="quadrado primeiro qKill"><i class="adicionar now-ui-icons ui-1_simple-remove"></i></div>`
       } else {
-        botoesK.innerHTML += `<div onclick="CadastrarProcesso(${item.Pid},'${item.Nome}','ProcessoToKill')" class="quadrado qKill"><i class="adicionar now-ui-icons ui-1_simple-remove"></i></div>`
+        botoesK.innerHTML += `<div onclick="CadastrarProcessoMatar(${item.Pid},'${item.Nome}')" class="quadrado qKill"><i class="adicionar now-ui-icons ui-1_simple-remove"></i></div>`
       }
       contador += 1
 
@@ -775,10 +774,10 @@
   };
 </script>
 <script>
-  function CadastrarProcesso(pid, name, tabela) {
+  function CadastrarProcessoMatar(pid, name) {
     var dh = moment()
     var datahora = dh.format('D/MM/YYYY HH:mm:ss');
-    fetch("/usuarios/CadastrarProcesso", {
+    fetch("/usuarios/CadastrarProcessoMatar", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -786,7 +785,6 @@
       body: JSON.stringify({
         pidServer: pid,
         nameServer: name,
-        tabelaServer: tabela,
         datahoraServer: datahora,
         fkTorreServer: fkTorre,
       })
@@ -795,16 +793,39 @@
       console.log("resposta: ", resposta);
 
       if (resposta.ok) {
-        console.log('Inseriu o processo na tabela ' + tabela);
+        console.log('Inseriu o processo na tabela matar');
       } else {
-        throw ("Houve um erro ao tentar realizar o cadastro do processo na tabela " + tabela);
+        throw ("Houve um erro ao tentar realizar o cadastro do processo na tabela Matar");
       }
     }).catch(function (resposta) {
       console.log(`#ERRO: ${resposta}`);
     });
+  }
 
-    if (tabela == 'ProcessoToKill') {
-      // cadastrarProcessosMortos()
-    }
+  function CadastrarProcessoConfiavel(name) {
+    var dh = moment()
+    var datahora = dh.format('D/MM/YYYY HH:mm:ss');
+    fetch("/usuarios/CadastrarProcessoConfiavel", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        nameServer: name,
+        datahoraServer: datahora,
+        fkTorreServer: fkTorre,
+      })
+    }).then(function (resposta) {
+
+      console.log("resposta: ", resposta);
+
+      if (resposta.ok) {
+        console.log('Inseriu o processo na tabela confiavel');
+      } else {
+        throw ("Houve um erro ao tentar realizar o cadastro do processo na tabela confiavel");
+      }
+    }).catch(function (resposta) {
+      console.log(`#ERRO: ${resposta}`);
+    });
   }
 </script>

@@ -458,11 +458,10 @@ function ObterComponentes(req, res) {
     }
 }
 
-function CadastrarProcesso(req, res) {
+function CadastrarProcessoMatar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var pid = req.body.pidServer;
     var name = req.body.nameServer;
-    var tabela = req.body.tabelaServer;
     var datahora = req.body.datahoraServer;
     var fkTorre = req.body.fkTorreServer;
 
@@ -472,16 +471,48 @@ function CadastrarProcesso(req, res) {
         res.status(400).send("Seu pid está undefined!");
     } else if (name == undefined) {
         res.status(400).send("Seu name está undefined!");
-    } else if (tabela == undefined) {
-        res.status(400).send("Seu tabela está undefined!");
-    } else if (datahora == undefined) {
+    }  else if (datahora == undefined) {
         res.status(400).send("Seu datahora está undefined!");
     } else if (fkTorre == undefined) {
         res.status(400).send("Seu fkTorre está undefined!");
     } else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.CadastrarProcesso(pid, name, tabela, datahora, fkTorre)
+        usuarioModel.CadastrarProcessoMatar(pid, name, datahora, fkTorre)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro do processo! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+function CadastrarProcessoConfiavel(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var name = req.body.nameServer;
+    var datahora = req.body.datahoraServer;
+    var fkTorre = req.body.fkTorreServer;
+
+
+    // Faça as validações dos valores
+     if (name == undefined) {
+        res.status(400).send("Seu name está undefined!");
+    }  else if (datahora == undefined) {
+        res.status(400).send("Seu datahora está undefined!");
+    } else if (fkTorre == undefined) {
+        res.status(400).send("Seu fkTorre está undefined!");
+    } else {
+
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.CadastrarProcessoConfiavel(name, datahora, fkTorre)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -500,19 +531,16 @@ function CadastrarProcesso(req, res) {
 
 
 function VerificarProcesso(req, res) {
-    var pid = req.body.pidServer;
     var name = req.body.nameServer;
     var fkTorre = req.body.fkTorreServer;
 
-    if (pid == undefined) {
-        res.status(400).send("Seu pid está undefined!");
-    } else if (name == undefined) {
+    if (name == undefined) {
         res.status(400).send("Sua name está indefinida!");
     } else if (fkTorre == undefined) {
         res.status(400).send("Sua fkTorre está indefinida!");
     } else {
 
-        usuarioModel.VerificarProcesso(pid, name, fkTorre)
+        usuarioModel.VerificarProcesso(name, fkTorre)
             .then(
                 function (resultado) {
                     console.log(`\nResultados encontrados: ${resultado.length}`);
@@ -556,6 +584,7 @@ module.exports = {
     CadastrarUsuario,
     ObterDadosTorre,
     ObterNomeEmp,
-    CadastrarProcesso,
+    CadastrarProcessoMatar,
+    CadastrarProcessoConfiavel,
     VerificarProcesso
 }
