@@ -56,13 +56,7 @@
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="index.html">Início</a></li>
-          <li><a href="sobre.html">Sobre</a></li>
-          <li><a href="servicos.html">Serviços</a></li>
-          <li><a href="plano.html">Planos</a></li>
-          <li><a href="contato.html">Contato</a></li>
-          <li><a href="login.html">Login</a></li>
-          <li><a href="cadastro.html" class="active">Cadastro</a></li>
+          <li><a onclick="Logout()" href="login.html">Sair</a></li>
         </ul>
       </nav><!-- .navbar -->
 
@@ -71,7 +65,7 @@
 
   <div class="limiter">
     <div class="container-login100">
-      <div class="wrap-login100">
+      <div class="wrap-login500">
         <div class="login100-form validate-form">
           <span class="login100-form-title p-b-26">
             Métricas
@@ -190,6 +184,11 @@
 </body>
 
 </html>
+<script>
+  function Logout() {
+    sessionStorage.clear();
+  }
+</script>
 <script>
   var fkEmpresaVar = sessionStorage.FK_EMPRESA
 

@@ -76,4 +76,8 @@ router.post("/VerificarProcesso", function (req, res) {
     usuarioController.VerificarProcesso(req, res);
 });
 
+router.post("/cadastrarMetrica", function (req, res) {
+    usuarioController.cadastrarMetrica(req, res);
+});
+
 module.exports = router;

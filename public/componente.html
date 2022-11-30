@@ -70,6 +70,21 @@
     .same-as-selected {
       background-color: rgba(0, 0, 0, 0.1);
     }
+
+
+    .espaco-btn{
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: end;
+      padding: 10px;
+    }
+    .pato{
+      background-color: black;
+      color: #fff;
+      border-radius: 50px;
+      height: 50px;
+      width: 300px;
+    }
   </style>
 
   <title>MoniToll - Cadastro Servidor & Planos</title>
@@ -132,8 +147,15 @@
 
   <!-- Início do Bloco de Cadastro -->
   <div id="formularios">
-    
-  </div> 
+
+  </div>
+  <div class="espaco-btn">
+        <button class="pato" onclick="mudarPagina()">
+          Cadastrar métricas
+        </button>
+  </div>
+
+
 
 
 
@@ -265,7 +287,7 @@
               </div>
             </div>
           </div>`
-          contador+=1
+        contador += 1
       }
 
     } else if (sessionStorage.PLANO_EMPRESA == "Plano 2") {
@@ -329,19 +351,11 @@
                     </div>
                   </div>
 
-                  <div class="container-login100-form-btn">
-                    <div class="wrap-login100-form-btn">
-                      <div class="login100-form-bgbtn"></div>
-                      <button class="login100-form-btn" onclick="Servidor${contador + 1}()">
-                        Cadastrar
-                      </button>
-                    </div>
-                  </div>
-                </div>
+c
               </div>
             </div>
           </div>`
-          contador+=1
+        contador += 1
       }
 
     } else if (sessionStorage.PLANO_EMPRESA == "Plano 3") {
@@ -432,20 +446,24 @@
               </div>
             </div>
           </div>`
-          contador+=1
+        contador += 1
       }
     }
+  }
+</script>
+
+<script>
+  function mudarPagina(){
+    window.location = "cadastrarMetricas.html"
   }
 </script>
 
 
 
 
-
-
 <!-- ------------------------------------------------ PLANO 1 ------------------------------------------------ -->
 <script>
-  if (sessionStorage.PLANO_EMPRESA == 'Plano 1'){
+  if (sessionStorage.PLANO_EMPRESA == 'Plano 1') {
     var vetor_componenteSel1 = []
     var vetor_componenteSel2 = []
     var fkEmpresaVar = sessionStorage.FK_EMPRESA
@@ -619,9 +637,9 @@
         vetor_componenteSel2.push(6, 7, 8, 9)
       } else if (comp2Var == 4) {
         vetor_componenteSel2.push(10, 11, 12)
-      }  else if (comp2Var == 5) {
+      } else if (comp2Var == 5) {
         vetor_componenteSel2.push(22, 23, 24)
-      }  else if (comp2Var == 6) {
+      } else if (comp2Var == 6) {
         vetor_componenteSel2.push(25)
       }
 
@@ -764,7 +782,7 @@
         vetor_componenteSel2 = []
       }, 3000);
     }
-    }
+  }
 </script>
 
 
@@ -773,7 +791,7 @@
 
 <!-- ------------------------------------------------ PLANO 2 ------------------------------------------------ -->
 <script>
-  if (sessionStorage.PLANO_EMPRESA == 'Plano 2'){
+  if (sessionStorage.PLANO_EMPRESA == 'Plano 2') {
     var vetor_componenteSel1 = []
     var vetor_componenteSel2 = []
     var vetor_componenteSel3 = []
@@ -1151,7 +1169,7 @@
         vetor_componenteSel3 = []
       }, 3000);
     }
-    }
+  }
 </script>
 
 
@@ -1160,425 +1178,163 @@
 
 <!-- ------------------------------------------------ PLANO 3 ------------------------------------------------ -->
 <script>
-if (sessionStorage.PLANO_EMPRESA == 'Plano 3'){
-  var vetor_componenteSel1 = []
-  var vetor_componenteSel2 = []
-  var vetor_componenteSel3 = []
-  var vetor_componenteSel4 = []
-  var fkEmpresaVar = sessionStorage.FK_EMPRESA
-  var inseriuComponentes = false
+  if (sessionStorage.PLANO_EMPRESA == 'Plano 3') {
+    var vetor_componenteSel1 = []
+    var vetor_componenteSel2 = []
+    var vetor_componenteSel3 = []
+    var vetor_componenteSel4 = []
+    var fkEmpresaVar = sessionStorage.FK_EMPRESA
+    var inseriuComponentes = false
 
-  // servidor 1 
-  function Servidor1() {
-    let loc = loc1_input.value
-    let comp1 = select1t1.value
-    let comp2 = select2t1.value
-    let comp3 = select3t1.value
-    let comp4 = select4t1.value
-    ValidarSelect(loc, comp1, comp2, comp3, comp4)
-  }
-
-
-  // servidor 2
-  function Servidor2() {
-    let loc = loc2_input.value
-    let comp1 = select1t2.value
-    let comp2 = select2t2.value
-    let comp3 = select3t2.value
-    let comp4 = select4t2.value
-    ValidarSelect(loc, comp1, comp2, comp3, comp4)
-  }
-
-
-  // servidor 3
-  function Servidor3() {
-    let loc = loc3_input.value
-    let comp1 = select1t3.value
-    let comp2 = select2t3.value
-    let comp3 = select3t3.value
-    let comp4 = select4t3.value
-    ValidarSelect(loc, comp1, comp2, comp3, comp4)
-  }
-
-  // servidor 4
-  function Servidor4() {
-    let loc = loc4_input.value
-    let comp1 = select1t4.value
-    let comp2 = select2t4.value
-    let comp3 = select3t4.value
-    let comp4 = select4t4.value
-    ValidarSelect(loc, comp1, comp2, comp3, comp4)
-  }
-
-  // servidor 5
-  function Servidor5() {
-    let loc = loc5_input.value
-    let comp1 = select1t5.value
-    let comp2 = select2t5.value
-    let comp3 = select3t5.value
-    let comp4 = select4t5.value
-    ValidarSelect(loc, comp1, comp2, comp3, comp4)
-  }
-
-
-  // servidor 6
-  function Servidor6() {
-    let loc = loc6_input.value
-    let comp1 = select1t6.value
-    let comp2 = select2t6.value
-    let comp3 = select3t6.value
-    let comp4 = select4t6.value
-    ValidarSelect(loc, comp1, comp2, comp3, comp4)
-  }
-
-
-  // servidor 7
-  function Servidor7() {
-    let loc = loc7_input.value
-    let comp1 = select1t7.value
-    let comp2 = select2t7.value
-    let comp3 = select3t7.value
-    let comp4 = select4t7.value
-    ValidarSelect(loc, comp1, comp2, comp3, comp4)
-  }
-
-
-  // servidor 8
-  function Servidor8() {
-    let loc = loc8_input.value
-    let comp1 = select1t8.value
-    let comp2 = select2t8.value
-    let comp3 = select3t8.value
-    let comp4 = select4t8.value
-    ValidarSelect(loc, comp1, comp2, comp3, comp4)
-  }
-
-
-
-  // servidor 9
-  function Servidor9() {
-    let loc = loc9_input.value
-    let comp1 = select1t9.value
-    let comp2 = select2t9.value
-    let comp3 = select3t9.value
-    let comp4 = select4t9.value
-    ValidarSelect(loc, comp1, comp2, comp3, comp4)
-  }
-
-
-  // servidor 10
-  function Servidor10() {
-    let loc = loc10_input.value
-    let comp1 = select1t10.value
-    let comp2 = select2t10.value
-    let comp3 = select3t10.value
-    let comp4 = select4t10.value
-    ValidarSelect(loc, comp1, comp2, comp3, comp4)
-  }
-
-  // servidor 11
-  function Servidor11() {
-    let loc = loc11_input.value
-    let comp1 = select1t11.value
-    let comp2 = select2t11.value
-    let comp3 = select3t11.value
-    let comp4 = select4t11.value
-    ValidarSelect(loc, comp1, comp2, comp3, comp4)
-  }
-
-
-  // servidor 12
-  function Servidor12() {
-    let loc = loc12_input.value
-    let comp1 = select1t12.value
-    let comp2 = select2t12.value
-    let comp3 = select3t12.value
-    let comp4 = select4t12.value
-    ValidarSelect(loc, comp1, comp2, comp3, comp4)
-  }
-
-
-
-
-
-
-
-  function ValidarSelect(loc, comp1, comp2, comp3, comp4) {
-    const open = document.getElementById('open');
-    const modal_container = document.getElementById('modal1');
-    const close = document.getElementById('close1');
-    var locVar = loc
-    var comp1Var = comp1
-    var comp2Var = comp2
-    var comp3Var = comp3
-    var comp4Var = comp4
-
-
-
-    if (locVar == "") {
-      titulo1.innerHTML = `Informe localização e os selecione os componentes para prosseguir.`
-      p1.innerHTML = ``
-
-      modal_container.classList.add('show');
-
-      close.addEventListener('click', () => {
-        modal_container.classList.remove('show');
-      });
-    } else {
-      CadastrarServidor(locVar, comp1Var, comp2Var, comp3Var, comp4Var)
-    }
-  }
-
-
-  function CadastrarServidor(loc, comp1, comp2, comp3, comp4) {
-    const open = document.getElementById('open');
-    const modal_container = document.getElementById('modal1');
-    const closeC = document.getElementById('close1');
-    var locVar = loc
-    var comp1Var = comp1
-    var comp2Var = comp2
-    var comp3Var = comp3
-    var comp4Var = comp4
-
-
-    // grupo de componentes 1
-    if (comp1Var == 1) {
-      vetor_componenteSel1.push(1, 2)
-    } else if (comp1Var == 2) {
-      vetor_componenteSel1.push(3, 4, 5)
-    } else if (comp1Var == 3) {
-      vetor_componenteSel1.push(6, 7, 8, 9)
-    } else if (comp1Var == 4) {
-      vetor_componenteSel1.push(10, 11, 12)
-    }  else if (comp1Var == 5) {
-      vetor_componenteSel4.push(22, 23, 24)
-    }  else if (comp1Var == 6) {
-      vetor_componenteSel4.push(25)
+    // servidor 1 
+    function Servidor1() {
+      let loc = loc1_input.value
+      let comp1 = select1t1.value
+      let comp2 = select2t1.value
+      let comp3 = select3t1.value
+      let comp4 = select4t1.value
+      ValidarSelect(loc, comp1, comp2, comp3, comp4)
     }
 
-    // grupo de componentes 2
-    if (comp2Var == 1) {
-      vetor_componenteSel2.push(1, 2)
-    } else if (comp2Var == 2) {
-      vetor_componenteSel2.push(3, 4, 5)
-    } else if (comp2Var == 3) {
-      vetor_componenteSel2.push(6, 7, 8, 9)
-    } else if (comp2Var == 4) {
-      vetor_componenteSel2.push(10, 11, 12)
-    }  else if (comp2Var == 5) {
-      vetor_componenteSel4.push(22, 23, 24)
-    }  else if (comp1Var == 6) {
-      vetor_componenteSel4.push(25)
+
+    // servidor 2
+    function Servidor2() {
+      let loc = loc2_input.value
+      let comp1 = select1t2.value
+      let comp2 = select2t2.value
+      let comp3 = select3t2.value
+      let comp4 = select4t2.value
+      ValidarSelect(loc, comp1, comp2, comp3, comp4)
     }
 
-    // grupo de componentes 3
-    if (comp3Var == 1) {
-      vetor_componenteSel3.push(1, 2)
-    } else if (comp3Var == 2) {
-      vetor_componenteSel3.push(3, 4, 5)
-    } else if (comp3Var == 3) {
-      vetor_componenteSel3.push(6, 7, 8, 9)
-    } else if (comp3Var == 4) {
-      vetor_componenteSel3.push(10, 11, 12)
-    }  else if (comp3Var == 5) {
-      vetor_componenteSel4.push(22, 23, 24)
-    }  else if (comp1Var == 6) {
-      vetor_componenteSel4.push(25)
+
+    // servidor 3
+    function Servidor3() {
+      let loc = loc3_input.value
+      let comp1 = select1t3.value
+      let comp2 = select2t3.value
+      let comp3 = select3t3.value
+      let comp4 = select4t3.value
+      ValidarSelect(loc, comp1, comp2, comp3, comp4)
     }
 
-    // grupo de componentes 4
-    if (comp4Var == 1) {
-      vetor_componenteSel4.push(1, 2)
-    } else if (comp4Var == 2) {
-      vetor_componenteSel4.push(3, 4, 5)
-    } else if (comp4Var == 3) {
-      vetor_componenteSel4.push(6, 7, 8, 9)
-    } else if (comp4Var == 4) {
-      vetor_componenteSel4.push(10, 11, 12)
-    }  else if (comp4Var == 5) {
-      vetor_componenteSel4.push(22, 23, 24)
-    }  else if (comp1Var == 6) {
-      vetor_componenteSel4.push(25)
+    // servidor 4
+    function Servidor4() {
+      let loc = loc4_input.value
+      let comp1 = select1t4.value
+      let comp2 = select2t4.value
+      let comp3 = select3t4.value
+      let comp4 = select4t4.value
+      ValidarSelect(loc, comp1, comp2, comp3, comp4)
     }
 
-    // --------------------------------- inserir torre
-    fetch("/usuarios/CadastrarTorre", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        fkEmpresaServer: fkEmpresaVar,
-        locServer: locVar,
-      })
-    }).then(function (resposta) {
-
-      console.log("resposta: ", resposta);
-
-      if (resposta.ok) {
-        setTimeout(function () {
-          CadastrarComponente()
-        }, 4000);
-      } else {
-        alert('Houve um erro ao tentar realizar o cadastro da torre!')
-        throw ("Houve um erro ao tentar realizar o cadastro da torre!");
-      }
-    }).catch(function (resposta) {
-      console.log(`#ERRO: ${resposta}`);
-    });
+    // servidor 5
+    function Servidor5() {
+      let loc = loc5_input.value
+      let comp1 = select1t5.value
+      let comp2 = select2t5.value
+      let comp3 = select3t5.value
+      let comp4 = select4t5.value
+      ValidarSelect(loc, comp1, comp2, comp3, comp4)
+    }
 
 
-    setTimeout(function () {
-
-      // ------------------------ pegar ultima torre
-      fetch("/usuarios/UltimaTorre", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          fkEmpresaServer: fkEmpresaVar,
-        })
-      }).then(function (resposta) {
-
-        if (resposta.ok) {
-          console.log(resposta);
-
-          resposta.json().then(json => {
-            console.log(json);
-            console.log(JSON.stringify(json));
-            sessionStorage.IDTORRE_ULTIMA_TORRE = json.idTorre;
-            idTorreVar = sessionStorage.IDTORRE_ULTIMA_TORRE
-            console.log("Pegou a ultima torre com sucesso: " + json.idTorre);
-
-          });
-        } else {
-          alert('Erro ao selecionar ultima torre!')
-          throw ("Houve um Erro ao selecionar ultima torre!");
-        }
-      }).catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-
-    }, 3000);
-  }
+    // servidor 6
+    function Servidor6() {
+      let loc = loc6_input.value
+      let comp1 = select1t6.value
+      let comp2 = select2t6.value
+      let comp3 = select3t6.value
+      let comp4 = select4t6.value
+      ValidarSelect(loc, comp1, comp2, comp3, comp4)
+    }
 
 
-  function CadastrarComponente() {
-    const open = document.getElementById('open');
-    const modal_container = document.getElementById('modal1');
-    const close = document.getElementById('close1');
-    // inserir componentes 1 select
-    vetor_componenteSel1.forEach(element => {
-      fetch("/usuarios/CadastrarComponente", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          fkTorreServer: idTorreVar,
-          fkComponenteServer: element,
-        })
-      }).then(function (resposta) {
+    // servidor 7
+    function Servidor7() {
+      let loc = loc7_input.value
+      let comp1 = select1t7.value
+      let comp2 = select2t7.value
+      let comp3 = select3t7.value
+      let comp4 = select4t7.value
+      ValidarSelect(loc, comp1, comp2, comp3, comp4)
+    }
 
-        console.log("resposta: ", resposta);
 
-        if (resposta.ok) {
-          console.log("Inseriu um componente do 1 select");
-          inseriuComponentes = true
-        } else {
-          throw ("Houve um erro ao tentar realizar o cadastro da torre!");
-        }
-      }).catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
+    // servidor 8
+    function Servidor8() {
+      let loc = loc8_input.value
+      let comp1 = select1t8.value
+      let comp2 = select2t8.value
+      let comp3 = select3t8.value
+      let comp4 = select4t8.value
+      ValidarSelect(loc, comp1, comp2, comp3, comp4)
+    }
 
-    });
 
-    // inserir componentes 2 select
-    vetor_componenteSel2.forEach(element => {
-      fetch("/usuarios/CadastrarComponente", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          fkTorreServer: idTorreVar,
-          fkComponenteServer: element,
-        })
-      }).then(function (resposta) {
 
-        console.log("resposta: ", resposta);
+    // servidor 9
+    function Servidor9() {
+      let loc = loc9_input.value
+      let comp1 = select1t9.value
+      let comp2 = select2t9.value
+      let comp3 = select3t9.value
+      let comp4 = select4t9.value
+      ValidarSelect(loc, comp1, comp2, comp3, comp4)
+    }
 
-        if (resposta.ok) {
-          inseriuComponentes = true
-          console.log("Inseriu um componente do 2 select");
-        } else {
-          throw ("Houve um erro ao tentar realizar o cadastro da torre!");
-        }
-      }).catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
 
-    });
+    // servidor 10
+    function Servidor10() {
+      let loc = loc10_input.value
+      let comp1 = select1t10.value
+      let comp2 = select2t10.value
+      let comp3 = select3t10.value
+      let comp4 = select4t10.value
+      ValidarSelect(loc, comp1, comp2, comp3, comp4)
+    }
 
-    // inserir componentes 3 select
-    vetor_componenteSel3.forEach(element => {
-      fetch("/usuarios/CadastrarComponente", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          fkTorreServer: idTorreVar,
-          fkComponenteServer: element,
-        })
-      }).then(function (resposta) {
+    // servidor 11
+    function Servidor11() {
+      let loc = loc11_input.value
+      let comp1 = select1t11.value
+      let comp2 = select2t11.value
+      let comp3 = select3t11.value
+      let comp4 = select4t11.value
+      ValidarSelect(loc, comp1, comp2, comp3, comp4)
+    }
 
-        console.log("resposta: ", resposta);
 
-        if (resposta.ok) {
-          inseriuComponentes = true
-          console.log("Inseriu um componente do 2 select");
-        } else {
-          throw ("Houve um erro ao tentar realizar o cadastro da torre!");
-        }
-      }).catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
+    // servidor 12
+    function Servidor12() {
+      let loc = loc12_input.value
+      let comp1 = select1t12.value
+      let comp2 = select2t12.value
+      let comp3 = select3t12.value
+      let comp4 = select4t12.value
+      ValidarSelect(loc, comp1, comp2, comp3, comp4)
+    }
 
-    });
 
-    // inserir componentes 4 select
-    vetor_componenteSel4.forEach(element => {
-      fetch("/usuarios/CadastrarComponente", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          fkTorreServer: idTorreVar,
-          fkComponenteServer: element,
-        })
-      }).then(function (resposta) {
 
-        console.log("resposta: ", resposta);
 
-        if (resposta.ok) {
-          inseriuComponentes = true
-          console.log("Inseriu um componente do 2 select");
-        } else {
-          throw ("Houve um erro ao tentar realizar o cadastro da torre!");
-        }
-      }).catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
 
-    });
 
-    setTimeout(function () {
-      if (inseriuComponentes) {
-        titulo1.innerHTML = `Servidor e componentes cadastrados com sucesso!`
+
+    function ValidarSelect(loc, comp1, comp2, comp3, comp4) {
+      const open = document.getElementById('open');
+      const modal_container = document.getElementById('modal1');
+      const close = document.getElementById('close1');
+      var locVar = loc
+      var comp1Var = comp1
+      var comp2Var = comp2
+      var comp3Var = comp3
+      var comp4Var = comp4
+
+
+
+      if (locVar == "") {
+        titulo1.innerHTML = `Informe localização e os selecione os componentes para prosseguir.`
         p1.innerHTML = ``
 
         modal_container.classList.add('show');
@@ -1587,15 +1343,277 @@ if (sessionStorage.PLANO_EMPRESA == 'Plano 3'){
           modal_container.classList.remove('show');
         });
       } else {
-        alert('Componentes não cadastrados')
+        CadastrarServidor(locVar, comp1Var, comp2Var, comp3Var, comp4Var)
       }
-      vetor_componenteSel1 = []
-      vetor_componenteSel2 = []
-      vetor_componenteSel3 = []
-      vetor_componenteSel4 = []
-    }, 3000);
+    }
+
+
+    function CadastrarServidor(loc, comp1, comp2, comp3, comp4) {
+      const open = document.getElementById('open');
+      const modal_container = document.getElementById('modal1');
+      const closeC = document.getElementById('close1');
+      var locVar = loc
+      var comp1Var = comp1
+      var comp2Var = comp2
+      var comp3Var = comp3
+      var comp4Var = comp4
+
+
+      // grupo de componentes 1
+      if (comp1Var == 1) {
+        vetor_componenteSel1.push(1, 2)
+      } else if (comp1Var == 2) {
+        vetor_componenteSel1.push(3, 4, 5)
+      } else if (comp1Var == 3) {
+        vetor_componenteSel1.push(6, 7, 8, 9)
+      } else if (comp1Var == 4) {
+        vetor_componenteSel1.push(10, 11, 12)
+      } else if (comp1Var == 5) {
+        vetor_componenteSel4.push(22, 23, 24)
+      } else if (comp1Var == 6) {
+        vetor_componenteSel4.push(25)
+      }
+
+      // grupo de componentes 2
+      if (comp2Var == 1) {
+        vetor_componenteSel2.push(1, 2)
+      } else if (comp2Var == 2) {
+        vetor_componenteSel2.push(3, 4, 5)
+      } else if (comp2Var == 3) {
+        vetor_componenteSel2.push(6, 7, 8, 9)
+      } else if (comp2Var == 4) {
+        vetor_componenteSel2.push(10, 11, 12)
+      } else if (comp2Var == 5) {
+        vetor_componenteSel4.push(22, 23, 24)
+      } else if (comp1Var == 6) {
+        vetor_componenteSel4.push(25)
+      }
+
+      // grupo de componentes 3
+      if (comp3Var == 1) {
+        vetor_componenteSel3.push(1, 2)
+      } else if (comp3Var == 2) {
+        vetor_componenteSel3.push(3, 4, 5)
+      } else if (comp3Var == 3) {
+        vetor_componenteSel3.push(6, 7, 8, 9)
+      } else if (comp3Var == 4) {
+        vetor_componenteSel3.push(10, 11, 12)
+      } else if (comp3Var == 5) {
+        vetor_componenteSel4.push(22, 23, 24)
+      } else if (comp1Var == 6) {
+        vetor_componenteSel4.push(25)
+      }
+
+      // grupo de componentes 4
+      if (comp4Var == 1) {
+        vetor_componenteSel4.push(1, 2)
+      } else if (comp4Var == 2) {
+        vetor_componenteSel4.push(3, 4, 5)
+      } else if (comp4Var == 3) {
+        vetor_componenteSel4.push(6, 7, 8, 9)
+      } else if (comp4Var == 4) {
+        vetor_componenteSel4.push(10, 11, 12)
+      } else if (comp4Var == 5) {
+        vetor_componenteSel4.push(22, 23, 24)
+      } else if (comp1Var == 6) {
+        vetor_componenteSel4.push(25)
+      }
+
+      // --------------------------------- inserir torre
+      fetch("/usuarios/CadastrarTorre", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          fkEmpresaServer: fkEmpresaVar,
+          locServer: locVar,
+        })
+      }).then(function (resposta) {
+
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          setTimeout(function () {
+            CadastrarComponente()
+          }, 4000);
+        } else {
+          alert('Houve um erro ao tentar realizar o cadastro da torre!')
+          throw ("Houve um erro ao tentar realizar o cadastro da torre!");
+        }
+      }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+
+      setTimeout(function () {
+
+        // ------------------------ pegar ultima torre
+        fetch("/usuarios/UltimaTorre", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            fkEmpresaServer: fkEmpresaVar,
+          })
+        }).then(function (resposta) {
+
+          if (resposta.ok) {
+            console.log(resposta);
+
+            resposta.json().then(json => {
+              console.log(json);
+              console.log(JSON.stringify(json));
+              sessionStorage.IDTORRE_ULTIMA_TORRE = json.idTorre;
+              idTorreVar = sessionStorage.IDTORRE_ULTIMA_TORRE
+              console.log("Pegou a ultima torre com sucesso: " + json.idTorre);
+
+            });
+          } else {
+            alert('Erro ao selecionar ultima torre!')
+            throw ("Houve um Erro ao selecionar ultima torre!");
+          }
+        }).catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+        });
+
+      }, 3000);
+    }
+
+
+    function CadastrarComponente() {
+      const open = document.getElementById('open');
+      const modal_container = document.getElementById('modal1');
+      const close = document.getElementById('close1');
+      // inserir componentes 1 select
+      vetor_componenteSel1.forEach(element => {
+        fetch("/usuarios/CadastrarComponente", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            fkTorreServer: idTorreVar,
+            fkComponenteServer: element,
+          })
+        }).then(function (resposta) {
+
+          console.log("resposta: ", resposta);
+
+          if (resposta.ok) {
+            console.log("Inseriu um componente do 1 select");
+            inseriuComponentes = true
+          } else {
+            throw ("Houve um erro ao tentar realizar o cadastro da torre!");
+          }
+        }).catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+        });
+
+      });
+
+      // inserir componentes 2 select
+      vetor_componenteSel2.forEach(element => {
+        fetch("/usuarios/CadastrarComponente", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            fkTorreServer: idTorreVar,
+            fkComponenteServer: element,
+          })
+        }).then(function (resposta) {
+
+          console.log("resposta: ", resposta);
+
+          if (resposta.ok) {
+            inseriuComponentes = true
+            console.log("Inseriu um componente do 2 select");
+          } else {
+            throw ("Houve um erro ao tentar realizar o cadastro da torre!");
+          }
+        }).catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+        });
+
+      });
+
+      // inserir componentes 3 select
+      vetor_componenteSel3.forEach(element => {
+        fetch("/usuarios/CadastrarComponente", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            fkTorreServer: idTorreVar,
+            fkComponenteServer: element,
+          })
+        }).then(function (resposta) {
+
+          console.log("resposta: ", resposta);
+
+          if (resposta.ok) {
+            inseriuComponentes = true
+            console.log("Inseriu um componente do 2 select");
+          } else {
+            throw ("Houve um erro ao tentar realizar o cadastro da torre!");
+          }
+        }).catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+        });
+
+      });
+
+      // inserir componentes 4 select
+      vetor_componenteSel4.forEach(element => {
+        fetch("/usuarios/CadastrarComponente", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            fkTorreServer: idTorreVar,
+            fkComponenteServer: element,
+          })
+        }).then(function (resposta) {
+
+          console.log("resposta: ", resposta);
+
+          if (resposta.ok) {
+            inseriuComponentes = true
+            console.log("Inseriu um componente do 2 select");
+          } else {
+            throw ("Houve um erro ao tentar realizar o cadastro da torre!");
+          }
+        }).catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+        });
+
+      });
+
+      setTimeout(function () {
+        if (inseriuComponentes) {
+          titulo1.innerHTML = `Servidor e componentes cadastrados com sucesso!`
+          p1.innerHTML = ``
+
+          modal_container.classList.add('show');
+
+          close.addEventListener('click', () => {
+            modal_container.classList.remove('show');
+          });
+        } else {
+          alert('Componentes não cadastrados')
+        }
+        vetor_componenteSel1 = []
+        vetor_componenteSel2 = []
+        vetor_componenteSel3 = []
+        vetor_componenteSel4 = []
+      }, 3000);
+    }
   }
-}
 </script>
 
 
@@ -1608,85 +1626,85 @@ if (sessionStorage.PLANO_EMPRESA == 'Plano 3'){
 
 
 <script>
-setTimeout(function (){
-  var x, i, j, l, ll, selElmnt, a, b, c;
-  /*look for any elements with the class "custom-select":*/
-  x = document.getElementsByClassName("custom-select");
-  l = x.length;
-  for (i = 0; i < l; i++) {
-    selElmnt = x[i].getElementsByTagName("select")[0];
-    ll = selElmnt.length;
-    /*for each element, create a new DIV that will act as the selected item:*/
-    a = document.createElement("DIV");
-    a.setAttribute("class", "select-selected");
-    a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
-    x[i].appendChild(a);
-    /*for each element, create a new DIV that will contain the option list:*/
-    b = document.createElement("DIV");
-    b.setAttribute("class", "select-items select-hide");
-    for (j = 1; j < ll; j++) {
-      /*for each option in the original select element,
-      create a new DIV that will act as an option item:*/
-      c = document.createElement("DIV");
-      c.innerHTML = selElmnt.options[j].innerHTML;
-      c.addEventListener("click", function (e) {
-        /*when an item is clicked, update the original select box,
-        and the selected item:*/
-        var y, i, k, s, h, sl, yl;
-        s = this.parentNode.parentNode.getElementsByTagName("select")[0];
-        sl = s.length;
-        h = this.parentNode.previousSibling;
-        for (i = 0; i < sl; i++) {
-          if (s.options[i].innerHTML == this.innerHTML) {
-            s.selectedIndex = i;
-            h.innerHTML = this.innerHTML;
-            y = this.parentNode.getElementsByClassName("same-as-selected");
-            yl = y.length;
-            for (k = 0; k < yl; k++) {
-              y[k].removeAttribute("class");
+  setTimeout(function () {
+    var x, i, j, l, ll, selElmnt, a, b, c;
+    /*look for any elements with the class "custom-select":*/
+    x = document.getElementsByClassName("custom-select");
+    l = x.length;
+    for (i = 0; i < l; i++) {
+      selElmnt = x[i].getElementsByTagName("select")[0];
+      ll = selElmnt.length;
+      /*for each element, create a new DIV that will act as the selected item:*/
+      a = document.createElement("DIV");
+      a.setAttribute("class", "select-selected");
+      a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+      x[i].appendChild(a);
+      /*for each element, create a new DIV that will contain the option list:*/
+      b = document.createElement("DIV");
+      b.setAttribute("class", "select-items select-hide");
+      for (j = 1; j < ll; j++) {
+        /*for each option in the original select element,
+        create a new DIV that will act as an option item:*/
+        c = document.createElement("DIV");
+        c.innerHTML = selElmnt.options[j].innerHTML;
+        c.addEventListener("click", function (e) {
+          /*when an item is clicked, update the original select box,
+          and the selected item:*/
+          var y, i, k, s, h, sl, yl;
+          s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+          sl = s.length;
+          h = this.parentNode.previousSibling;
+          for (i = 0; i < sl; i++) {
+            if (s.options[i].innerHTML == this.innerHTML) {
+              s.selectedIndex = i;
+              h.innerHTML = this.innerHTML;
+              y = this.parentNode.getElementsByClassName("same-as-selected");
+              yl = y.length;
+              for (k = 0; k < yl; k++) {
+                y[k].removeAttribute("class");
+              }
+              this.setAttribute("class", "same-as-selected");
+              break;
             }
-            this.setAttribute("class", "same-as-selected");
-            break;
           }
-        }
-        h.click();
+          h.click();
+        });
+        b.appendChild(c);
+      }
+      x[i].appendChild(b);
+      a.addEventListener("click", function (e) {
+        /*when the select box is clicked, close any other select boxes,
+        and open/close the current select box:*/
+        e.stopPropagation();
+        closeAllSelect(this);
+        this.nextSibling.classList.toggle("select-hide");
+        this.classList.toggle("select-arrow-active");
       });
-      b.appendChild(c);
     }
-    x[i].appendChild(b);
-    a.addEventListener("click", function (e) {
-      /*when the select box is clicked, close any other select boxes,
-      and open/close the current select box:*/
-      e.stopPropagation();
-      closeAllSelect(this);
-      this.nextSibling.classList.toggle("select-hide");
-      this.classList.toggle("select-arrow-active");
-    });
-  }
-  function closeAllSelect(elmnt) {
-    /*a function that will close all select boxes in the document,
-    except the current select box:*/
-    var x, y, i, xl, yl, arrNo = [];
-    x = document.getElementsByClassName("select-items");
-    y = document.getElementsByClassName("select-selected");
-    xl = x.length;
-    yl = y.length;
-    for (i = 0; i < yl; i++) {
-      if (elmnt == y[i]) {
-        arrNo.push(i)
-      } else {
-        y[i].classList.remove("select-arrow-active");
+    function closeAllSelect(elmnt) {
+      /*a function that will close all select boxes in the document,
+      except the current select box:*/
+      var x, y, i, xl, yl, arrNo = [];
+      x = document.getElementsByClassName("select-items");
+      y = document.getElementsByClassName("select-selected");
+      xl = x.length;
+      yl = y.length;
+      for (i = 0; i < yl; i++) {
+        if (elmnt == y[i]) {
+          arrNo.push(i)
+        } else {
+          y[i].classList.remove("select-arrow-active");
+        }
+      }
+      for (i = 0; i < xl; i++) {
+        if (arrNo.indexOf(i)) {
+          x[i].classList.add("select-hide");
+        }
       }
     }
-    for (i = 0; i < xl; i++) {
-      if (arrNo.indexOf(i)) {
-        x[i].classList.add("select-hide");
-      }
-    }
-  }
-  /*if the user clicks anywhere outside the select box,
-  then close all select boxes:*/
-  document.addEventListener("click", closeAllSelect);
-}, 1000);
+    /*if the user clicks anywhere outside the select box,
+    then close all select boxes:*/
+    document.addEventListener("click", closeAllSelect);
+  }, 1000);
 
 </script>

@@ -176,6 +176,31 @@ function buscarProc(req, res) {
     });
 }
 
+function buscarMetrica(req, res) {
+
+    var fkEmpresa = req.params.fkEmpresa;
+    var nmrComponentes = req.params.nmrComponentes;
+
+    if (fkEmpresa.length < 1){
+        res.status(300).send("Sem fkEmpresa!")
+    }
+    if (nmrComponentes.length < 1){
+        res.status(300).send("Sem nmrComponentes!")
+    }
+
+    medidaModel.buscarMetrica(fkEmpresa, nmrComponentes).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar porcentagem perca pacotes.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 
 
 
@@ -188,6 +213,7 @@ module.exports = {
     buscarPorcentagemPercaPacotes,
     buscarDataHora,
     buscarRegistro,
-    buscarProc
+    buscarProc,
+    buscarMetrica
 
 }

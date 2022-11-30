@@ -566,6 +566,49 @@ function VerificarProcesso(req, res) {
 
 }
 
+// cadastrarMetrica //
+function cadastrarMetrica(req, res) {
+    
+    var fkComponente = req.body.fkComponenteServer;
+    var fkEmpresa = req.body.fkEmpresaServer;
+    var Normal = req.body.NormalServer;
+    var Atencao = req.body.AtencaoServer;
+    var Critico = req.body.CriticoServer;
+
+         
+        // Faça as validações dos valores
+
+        if (fkComponente == undefined) {
+            res.status(400).send("Seu fkComponente está undefined!");
+        } else if (fkEmpresa == undefined) {
+            res.status(400).send("Seu fkEmpresa está undefined!");
+        } else if (Normal == undefined) {
+            res.status(400).send("Seu Normal está undefined!");
+        } else if (Atencao == undefined) {
+            res.status(400).send("Seu atencao está undefined!");
+        } else if (Critico == undefined) {
+            res.status(400).send("Sua critico está undefined!");
+        } else {
+
+            // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+            usuarioModel.cadastrarMetrica(fkComponente, fkEmpresa, Normal, Atencao, Critico)
+                .then(
+                    function (resultado) {
+                        res.json(resultado);
+                    }
+                ).catch(
+                    function (erro) {
+                        console.log(erro);
+                        console.log(
+                            "\nHouve um erro ao realizar o cadastro! Erro: ",
+                            erro.sqlMessage
+                        );
+                        res.status(500).json(erro.sqlMessage);
+                    }
+                );
+        }           
+}
+
 
 
 module.exports = {
@@ -586,5 +629,6 @@ module.exports = {
     ObterNomeEmp,
     CadastrarProcessoMatar,
     CadastrarProcessoConfiavel,
-    VerificarProcesso
+    VerificarProcesso,
+    cadastrarMetrica
 }
