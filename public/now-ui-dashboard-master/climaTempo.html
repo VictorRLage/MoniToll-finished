@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+    </style>
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="stylesheet" href="../now-ui-dashboard-master/assets/css/index.css">
+    <title>
+        Monitoll - Servidores
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+        name='viewport' />
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <!-- CSS Files -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/now-ui-dashboard.css" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="assets/demo/demo.css" rel="stylesheet" />
+</head>
+
+<body onload="obterDados(1)" class="">
+    <div class="wrapper ">
+        <div class="sidebar" data-color="orange">
+            <!--
+            Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+        -->
+            <div class="logo">
+                <a onclick="Logout()" href="../../index.html" class="simple-text logo-mini">
+                    MT
+                </a>
+                <a onclick="Logout()" href="../../index.html" class="simple-text logo-normal">
+                    MoniToll
+                </a>
+            </div>
+            <div class="sidebar-wrapper" id="sidebar-wrapper">
+                <ul class="nav">
+                    <li >
+                        <a href="dashboard.html">
+                            <i class="now-ui-icons design_app"></i>
+                            <p class="maior">Dashboard</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="registros.html">
+                            <i class="now-ui-icons design_bullet-list-67"></i>
+                            <p class="maior">Registros</p>
+                        </a>
+                    </li>
+                    <li class="active ">
+                        <a href="climaTempo.html">
+                          <i class="now-ui-icons objects_umbrella-13"></i>
+                          <p class="maior">Clima Tempo</p>
+                        </a>
+                      </li>
+                    <li id="processos">
+
+                    </li>
+                    <li>
+                        <a href="metricas.html">
+                            <i class="now-ui-icons ui-1_bell-53"></i>
+                            <p class="maior">Métricas</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://app.pipefy.com/public/form/JuN9i3P6">
+                            <i class="now-ui-icons travel_info"></i>
+                            <p class="maior">Suporte</p>
+                        </a>
+                    </li>
+                    <li id="AddUsuario">
+
+                    </li>
+                    <li class="active-pro">
+                        <a href="../../login.html">
+                            <i class="now-ui-icons sport_user-run"></i>
+                            <p class="maior" onclick="Logout()">Sair</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel" id="main-panel">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
+                <div class="container-fluid">
+                    <div class="navbar-wrapper">
+                        <div class="navbar-toggle">
+                            <button type="button" class="navbar-toggler">
+                                <span class="navbar-toggler-bar bar1"></span>
+                                <span class="navbar-toggler-bar bar2"></span>
+                                <span class="navbar-toggler-bar bar3"></span>
+                            </button>
+                        </div>
+                        <a class="navbar-brand maior">Dashboard</a>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                        aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                        <ul class="navbar-nav">
+                            <li class="nav-item" style="text-align: end; margin-right: 10px;">
+                                <span id="BemVindo"></span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link">
+                                    <i class="now-ui-icons users_single-02"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <i class="now-ui-icons location_world"></i>
+                                    <p>
+                                        <span class="d-lg-none d-md-block">Some Actions</span>
+                                    </p>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href=""><img src="https://i.imgur.com/cLfSqm3.png"
+                                            style="width: 24px;"></img> Português</a>
+                                    <a class="dropdown-item" href=""><img src="https://i.imgur.com/lYq0cdt.png"
+                                            style="width: 24px;">
+                                        English</a>
+                                    <a class="dropdown-item" href=""><img src="https://i.imgur.com/S5eEVok.png"
+                                            style="width: 24px;">
+                                        Español</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- End Navbar -->
+            <div class="panel-header panel-header-sm">
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="carda">
+                        <div class="card_1">
+                            <div class="e">
+                                <p class="temp" id="p_temp">
+
+                                </p>
+                                <span class="lugar" id="p_hora_dia">
+
+                                </span>
+                                <span class="lugar" id="p_lugar">
+
+                                </span>
+                                <br />
+                                <div class="carrossel">
+                                    <input type="radio" name="radio-btn" id="radio1">
+                                    <input type="radio" name="radio-btn" id="radio2">
+
+                                    <div class="navigation-auto">
+                                        <div class="auto-btn1"></div>
+                                        <div class="auto-btn2"></div>
+                                    </div>
+
+                                    <div class="manual-navigation">
+                                        <label for="radio1" class="manual-btn"></label>
+                                        <label for="radio2" class="manual-btn"></label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="f">
+                                <img src="./imagem/Frame (1).png" class="trocar" onclick="obterDadosClima()">
+                                <p class="texto" id="climatexto" style="text-align:center">
+                                    Chuvoso
+                                </p>
+                                <span class="img">
+                                    <img id="imgClima" src="">
+                                </span>
+
+                            </div>
+
+
+
+
+
+
+                        </div>
+                        <div class="card_2" onclick="obtaerDadosSemana()">
+                            <div class="a">
+                                <pi id="div_a"> Sabado</p>
+                            </div>
+                            <div class="b">
+                                <p id="div_b">Domingo</p>
+                            </div>
+                            <div class="c">
+                                <p id="div_c">Segunda-Feira</p>
+                            </div>
+                            <div class="d">
+                                <p id="div_d">Terça-Feira</p>
+                            </div>
+                            <div class="g">
+                                <p id="div_g">Quarta-Feira</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class=" container-fluid ">
+                    <nav>
+                        <ul>
+                            <li>
+                                <a href="../../index.html">
+                                    MoniToll
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../../sobre.html">
+                                    Sobre
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../../contato.html">
+                                    Contato
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="copyright" id="copyright">
+                        &copy; Copyright <a href="../../index.html">MoniToll.</a> Todos os direitos reservados
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+
+
+    <!-- modal grafico 1 -->
+    <div class="modal-container" id="modal_container">
+        <div class="modal-dash">
+            <div class="modal-titulo">
+                <br>
+                <br>
+                <h2 class="negrito">Cadastrar usuario</h2>
+                <div class="inp">
+                    <input placeholder="Nome" id="nome_inp">
+                </div>
+                <div class="inp">
+                    <input placeholder="Email" id="email_inp">
+                </div>
+                <div class="inp">
+                    <input placeholder="Senha" id="senha_inp">
+                </div>
+                <button class="btn-cadastrar" onclick="CadastrarUsuario()">Cadastrar</button>
+            </div>
+            <button class="modal-close" id="close"><i class="now-ui-icons ui-1_simple-remove"></i></button>
+        </div>
+    </div>
+
+    <!-- modal aviso -->
+    <div class="modal-container-aviso" id="modal_container_aviso">
+        <div class="modal-dash-aviso">
+            <div id="modal_titulo_aviso" class="modal-titulo-aviso">
+            </div>
+            <button class="modal-close-aviso" id="close_aviso"><i class="now-ui-icons ui-1_simple-remove"></i></button>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+<body>
+    <!--   Core JS Files   -->
+    <script src="assets/js/core/jquery.min.js"></script>
+    <script src="assets/js/core/popper.min.js"></script>
+    <script src="assets/js/core/bootstrap.min.js"></script>
+    <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <!-- Chart JS -->
+    <script src="assets/js/plugins/chartjs.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="assets/js/plugins/bootstrap-notify.js"></script>
+    <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script>
+    <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+    <script src="assets/demo/demo.js"></script>
+</body>
+
+<script>
+    const open = document.getElementById('AddUsuario')
+    const modal_container = document.getElementById('modal_container')
+    const close = document.getElementById('close')
+  
+  
+    open.addEventListener('click', () => { modal_container.classList.add('show') });
+    close.addEventListener('click', () => { modal_container.classList.remove('show') });
+  
+    const modal_container_aviso = document.getElementById('modal_container_aviso')
+    const close_aviso = document.getElementById('close_aviso')
+    close_aviso.addEventListener('click', () => { modal_container_aviso.classList.remove('show') });
+  </script>
+
+<script>
+    function CadastrarUsuario() {
+
+        var nomeVar = nome_inp.value;
+        var emailVar = email_inp.value;
+        var senhaVar = senha_inp.value;
+        var perfilVar = 3
+        var fkEmpresa = sessionStorage.FK_EMPRESA
+
+        if (nomeVar == "" || emailVar == "" || senhaVar == "") {
+
+            modal_titulo_aviso.innerHTML = `<h2>Preencha todos os campos para prosseguir</h2>`
+            modal_container_aviso.classList.add('show');
+            return
+        }
+        if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1) {
+
+            modal_titulo_aviso.innerHTML = `<h2>Esse email não é valido</h2>`
+            modal_container_aviso.classList.add('show');
+            return
+        }
+
+        fetch("/usuarios/cadastrarUsuario", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeServer: nomeVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar,
+                fkPerfilServer: perfilVar,
+                fkEmpresaServer: fkEmpresa
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                modal_titulo_aviso.innerHTML = `<h2>Cadastro realizado com sucesso!</h2>`
+                modal_container_aviso.classList.add('show');
+            } else {
+                modal_titulo_aviso.innerHTML = `<h2>Falha ao realizar cadastro</h2>`
+                modal_container_aviso.classList.add('show');
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+
+        return false;
+
+
+
+    }
+</script>
+
+<script>
+    var vetor_Componentes = []
+    var nome = sessionStorage.NOME_USUARIO
+
+    var perfil;
+    if (sessionStorage.FK_PERFIL == 2) {
+        perfil = 'Adm'
+        AddUsuario.innerHTML = `<a><i class="now-ui-icons business_badge"></i><p class="maior">Adicionar Usuario</p></a>`
+    } else {
+        perfil = 'Fun'
+    }
+    BemVindo.innerHTML = `Bem vindo, ${nome}.<br> ${perfil}`
+    h4_titulo.innerHTML = `<h3>${sessionStorage.LOCALIZACAO}</h3>`
+
+
+
+    // ---------------------------------  Obter nome emp
+    fetch("/usuarios/ObterNomeEmp", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            fkEmpresaServer: sessionStorage.FK_EMPRESA,
+        })
+    }).then(function (resposta) {
+        console.log("ESTOU NO THEN DO entrar()!")
+
+        if (resposta.ok) {
+            console.log(resposta);
+
+            resposta.json().then(json => {
+                console.log(json);
+                console.log(JSON.stringify(json));
+                sessionStorage.NOME_EMPRESA = json[0].Nome
+
+            });
+        }
+    }).catch(function (erro) {
+        console.log("ERRO: " + erro);
+    })
+
+
+
+    // ---------------------------------  Obter Componentes
+    fetch("/usuarios/ObterComponentes", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            fkTorreServer: fkTorre,
+        })
+    }).then(function (resposta) {
+        console.log("ESTOU NO THEN DO entrar()!")
+
+        if (resposta.ok) {
+            console.log(resposta);
+
+            resposta.json().then(json => {
+                console.log(json);
+                console.log(JSON.stringify(json));
+
+                json.forEach(element => {
+                    vetor_Componentes.push(element.fkComponente)
+                });
+                vetor_Componentes.forEach(element => {
+                    if (element == 25) {
+                        processos.innerHTML = `<a href="processos.html" ><i class="now-ui-icons loader_gear"></i><p class="maior">Processos</p></a>`
+                    }
+                });
+            });
+        }
+    }).catch(function (erro) {
+        console.log("ERRO: " + erro);
+    })
+
+</script>
+
+<script>
+    let count = 1;
+    document.getElementById("radio1").checked = true;
+
+    var locaisUsuario = []
+    var lugarAtual = 0;
+    function obterDados() {
+        // if (proximaAtualizacao != undefined) {
+        //     clearTimeout(proximaAtualizacao);
+        // }
+
+        //chama o usuario e retorna os locais que ele possui e dentro do then da requisição você pega a primeira posição
+        // pra quando carregar a página vir com o primeiro local que o usuario possui 
+
+        locaisUsuario = [162, 2]
+
+        //passa a primeira posição
+        lugarAtual = locaisUsuario[0]
+        obterDadosClima()
+        obtaerDadosSemana()
+    }
+
+    function trocarDados() {
+        locaisUsuario = [1, 2]
+        if (document.getElementById("radio1") == checked) {
+            lugarAtual = locaisUsuario[0]
+            obterDados()
+        }
+        if (document.getElementById("radio2") == checked) {
+            lugarAtual = locaisUsuario[1]
+            obterDados(lugarAtual)
+        }
+    }
+
+    function obtaerDadosSemana() {
+        fetch(`/clima/semana/${lugarAtual}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(resposta);
+                    // resposta = resposta[0];
+
+                    resposta.forEach((element, i) => {
+                        console.log(element.diaSemana + i);
+
+                    });
+
+                    console.log("AAAAAAAAAA", resposta[0].diaSemana)
+
+
+                    div_a.innerHTML = resposta[0].diaSemana;
+                    div_b.innerHTML = resposta[1].diaSemana;
+                    div_c.innerHTML = resposta[2].diaSemana;
+                    div_d.innerHTML = resposta[3].diaSemana;
+                    div_g.innerHTML = resposta[4].diaSemana;
+                })
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+
+        }).catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+    }
+
+    function obterDadosClima() {
+        const weekday = ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"];
+
+        fetch(`/clima/listar/${lugarAtual}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(resposta);
+                    resposta = resposta[0];
+
+                    p_temp.innerHTML = Number(resposta.temperatura).toFixed(0) + "º";
+
+                    p_lugar.innerHTML = resposta.nomeLocal;
+
+                    var dataHoraFormatada = new Date(resposta.dataHora)
+                    var dataSplitada = dataHoraFormatada.toLocaleString("pt-BR", { timeZone: "America/sao_paulo" }).split(" ")[0].split("/");
+
+                    p_hora_dia.innerHTML = dataSplitada[0] + "/" + dataSplitada[1] + " - " + weekday[dataHoraFormatada.getDay()]
+                    climatexto.innerHTML = resposta.textoClima;
+
+                    if (resposta.textoClima == "Chuvoso") {
+                        imgClima.src = "./imagem/chuvoso.png";
+                    }
+                    if (resposta.textoClima == "Ensolarado") {
+                        imgClima.src = "./imagem/ensolarado.png";
+                    }
+                    if (resposta.textoClima == "Predominantemente nublado, com tempestades" || resposta.textoClima == "Tempestades") {
+                        imgClima.src = "./imagem/chuvoso.png";
+                    }
+                    if (resposta.textoClima == "Parcialmente ensolarado") {
+                        imgClima.src = "./imagem/parcialmente_sol.png"
+                    }
+
+                    // plotarGrafico(resposta, fkLugar);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+    }
+</script>
