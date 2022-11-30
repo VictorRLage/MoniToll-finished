@@ -629,6 +629,7 @@
       thead_tr.appendChild(cell);
     });
     var contador = 0
+    var contador2 = 0
     data.forEach(function (item) {
       fetch("/usuarios/VerificarProcesso", {
         method: "POST",
@@ -645,12 +646,14 @@
 
         if (resposta.ok) {
           if (contador == 0) {
+            contador += 1
             botoesA.innerHTML += `<div onclick="CadastrarProcessoConfiavel('${item.Nome}')" class="quadrado primeiro qAdd"><i class="adicionar now-ui-icons ui-1_simple-add"></i></div>`
           } else {
             botoesA.innerHTML += `<div onclick="CadastrarProcessoConfiavel('${item.Nome}')" class="quadrado qAdd"><i class="adicionar now-ui-icons ui-1_simple-add"></i></div>`
           }
         } else {
           if (contador == 0) {
+            contador += 1
             botoesA.innerHTML += `<div onclick="CadastrarProcessoConfiavel('${item.Nome}')" class="quadrado primeiro"></div>`
           } else {
             botoesA.innerHTML += `<div onclick="CadastrarProcessoConfiavel('${item.Nome}')" class="quadrado"></div>`
@@ -662,12 +665,13 @@
 
 
 
-      if (contador == 0) {
+      if (contador2 == 0) {
+        contador2 += 1
         botoesK.innerHTML += `<div onclick="CadastrarProcessoMatar(${item.Pid},'${item.Nome}')" class="quadrado primeiro qKill"><i class="adicionar now-ui-icons ui-1_simple-remove"></i></div>`
       } else {
         botoesK.innerHTML += `<div onclick="CadastrarProcessoMatar(${item.Pid},'${item.Nome}')" class="quadrado qKill"><i class="adicionar now-ui-icons ui-1_simple-remove"></i></div>`
       }
-      contador += 1
+      
 
 
       var tbody_tr = document.createElement('tr');
