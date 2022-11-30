@@ -20,6 +20,7 @@
   <link href="assets/css/now-ui-dashboard.css" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="assets/demo/demo.css" rel="stylesheet" />
+
 </head>
 
 <style>
@@ -380,6 +381,8 @@
   <script src="assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script>
   <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
   <script src="assets/demo/demo.js"></script>
+  <!-- CHAMANDO MOMENT LIB -->
+  <script src="../lib/moment/moment.min.js"></script>
 </body>
 
 <script>
@@ -480,7 +483,7 @@
   window.onload = function () {
     BuscarProc(sessionStorage.ID_TORRE)
   };
-  function BuscarProc(fkTorre){
+  function BuscarProc(fkTorre) {
     fetch(`/medidas/BuscarProc/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
@@ -488,7 +491,7 @@
           // console.log(resposta)
           resposta.reverse();
           resposta.forEach(element => {
-            console.log(element)
+            // console.log(element)
             firstFile.push(element)
           });
           // PlotarGrafico(resposta, fkTorre);
@@ -500,14 +503,14 @@
       .catch(function (error) {
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
       });
-      setTimeout(() => createTable(), 5000);
-      setTimeout(() => LimparJson(), 10000);
-      setTimeout(() => BuscarProc(fkTorre), 30000);
+    setTimeout(() => createTable(), 5000);
+    setTimeout(() => LimparJson(), 10000);
+    setTimeout(() => BuscarProc(fkTorre), 30000);
   }
-  function LimparJson(){
+  function LimparJson() {
     firstFile.length = 0;
   }
-  
+
   function createTable() {
     var divId = 'dynamic-table';
     var div = document.getElementById(divId);
@@ -624,19 +627,19 @@
     });
     var contador = 0
     data.forEach(function (item) {
-      
-      if (contador == 0){
-        botoesA.innerHTML += `<div onclick="AddConfivel(${item.Pid},'${item.Nome}')" class="quadrado primeiro qAdd"><i class="adicionar now-ui-icons ui-1_simple-add"></i></div>`
-      } else{
-        botoesA.innerHTML += `<div onclick="AddConfivel(${item.Pid},'${item.Nome}')" class="quadrado qAdd"><i class="adicionar now-ui-icons ui-1_simple-add"></i></div>`
+
+      if (contador == 0) {
+        botoesA.innerHTML += `<div onclick="CadastrarProcesso(${item.Pid},'${item.Nome}','ProcessoConfiavel')" class="quadrado primeiro qAdd"><i class="adicionar now-ui-icons ui-1_simple-add"></i></div>`
+      } else {
+        botoesA.innerHTML += `<div onclick="CadastrarProcesso(${item.Pid},'${item.Nome}','ProcessoConfiavel')" class="quadrado qAdd"><i class="adicionar now-ui-icons ui-1_simple-add"></i></div>`
       }
 
-      if (contador == 0){
-        botoesK.innerHTML += `<div onclick="MatarProc(${item.Pid},'${item.Nome}')" class="quadrado primeiro qKill"><i class="adicionar now-ui-icons ui-1_simple-remove"></i></div>`
-      } else{
-        botoesK.innerHTML += `<div onclick="MatarProc(${item.Pid},'${item.Nome}')" class="quadrado qKill"><i class="adicionar now-ui-icons ui-1_simple-remove"></i></div>`
+      if (contador == 0) {
+        botoesK.innerHTML += `<div onclick="CadastrarProcesso(${item.Pid},'${item.Nome}','ProcessoToKill')" class="quadrado primeiro qKill"><i class="adicionar now-ui-icons ui-1_simple-remove"></i></div>`
+      } else {
+        botoesK.innerHTML += `<div onclick="CadastrarProcesso(${item.Pid},'${item.Nome}','ProcessoToKill')" class="quadrado qKill"><i class="adicionar now-ui-icons ui-1_simple-remove"></i></div>`
       }
-      contador+=1
+      contador += 1
 
 
       var tbody_tr = document.createElement('tr');
@@ -743,10 +746,37 @@
   };
 </script>
 <script>
-  function AddConfivel(pid,name){
-    console.log(pid,name)
-  }
-  function MatarProc(pid,name){
-    console.log(pid,name)
+  function CadastrarProcesso(pid, name, tabela) {
+    var dh = moment()
+    var datahora = dh.format('D/MM/YYYY HH:mm:ss');
+    var fkTorre = sessionStorage.ID_TORRE
+    fetch("/usuarios/CadastrarProcesso", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        pidServer: pid,
+        nameServer: name,
+        tabelaServer: tabela,
+        datahoraServer: datahora,
+        fkTorreServer: fkTorre,
+      })
+    }).then(function (resposta) {
+
+      console.log("resposta: ", resposta);
+
+      if (resposta.ok) {
+        console.log('Inseriu o processo na tabela ' + tabela);
+      } else {
+        throw ("Houve um erro ao tentar realizar o cadastro do processo na tabela " + tabela);
+      }
+    }).catch(function (resposta) {
+      console.log(`#ERRO: ${resposta}`);
+    });
+
+    if (tabela == 'ProcessoToKill'){
+      // cadastrarProcessosMortos()
+    }
   }
 </script>
