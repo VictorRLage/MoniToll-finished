@@ -162,6 +162,19 @@ function ObterNomeEmp(fkEmpresa) {
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
+
+function CadastrarProcesso(pid,name, tabela, datahora, fkTorre) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarP():", pid, name, tabela, datahora, fkTorre);
+
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+    INSERT INTO ${tabela} values ('${name}', '${pid}', '${datahora}', '${fkTorre}');
+    `;
+    
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
 module.exports = {
     entrar,
     cadastrar,
@@ -176,6 +189,7 @@ module.exports = {
     ObterComponentes,
     CadastrarUsuario,
     ObterDadosTorre,
-    ObterNomeEmp
+    ObterNomeEmp,
+    CadastrarProcesso
     
 };

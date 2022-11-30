@@ -63,4 +63,9 @@ router.post("/ObterDadosTorre", function (req, res) {
 router.post("/ObterNomeEmp", function (req, res) {
     usuarioController.ObterNomeEmp(req, res);
 });
+
+router.post("/CadastrarProcesso", function (req, res) {
+    usuarioController.CadastrarProcesso(req, res);
+});
+
 module.exports = router;
