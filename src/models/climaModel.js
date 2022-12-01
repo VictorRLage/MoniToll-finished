@@ -10,16 +10,16 @@ function inserir(nomeLocal) {
     return database.executar(inserir);
 }
 
-function tempLocal(fkLocal){
+function tempLocal(fkTorre){
   instrucaoSql = ''
 
 
   if (process.env.AMBIENTE_PROCESSO == "producao") {
       instrucaoSql = 
-      `select TOP 1 textoClima, temperatura, dataHora, (select Localização from Torre where idTorre = '${fkLocal}') as nomeLocal from tempLocal where fkTorre = '${fkLocal}' order by idTempLocal desc`;
+      `select TOP 1 textoClima, temperatura, dataHora, (select Localização from Torre where idTorre = '${fkTorre}') as nomeLocal from tempLocal where fkTorre = '${fkTorre}' order by idTempLocal desc`;
   } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
           instrucaoSql = 
-          `select textoClima, temperatura, dataHora, (select nomeLocal from lugar where idLoc = ${fkLocal}) as nomeLocal from tempLocal where fkLocal = ${fkLocal} order by idCaptura desc limit 1`
+          `select textoClima, temperatura, dataHora, (select nomeLocal from lugar where idLoc = ${fkTorre}) as nomeLocal from tempLocal where fkLocal = ${fkLocal} order by idCaptura desc limit 1`
       } 
    else {
       console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -30,13 +30,13 @@ function tempLocal(fkLocal){
   return database.executar(instrucaoSql);
 }
 
-function tempSemana(fkLocal){
+function tempSemana(fkTorre){
     instrucaoSql = ''
 
 
   if (process.env.AMBIENTE_PROCESSO == "producao") {
       instrucaoSql = 
-      `select top 5 *, convert(varchar,diaMes,113) as datas from [dbo].[TempSemana] where fkTorre = ${fkLocal} order by diaMes asc;`;
+      `select top 5 *, convert(varchar,diaMes,113) as datas from [dbo].[TempSemana] where fkTorre = ${fkTorre} order by diaMes asc;`;
   } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
           instrucaoSql = 
           `select * from tempSemana order by fkLocal limit 4;`
