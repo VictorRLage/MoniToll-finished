@@ -80,4 +80,18 @@ router.post("/cadastrarMetrica", function (req, res) {
     usuarioController.cadastrarMetrica(req, res);
 });
 
+router.post("/ObterAlertasTorre", function (req, res) {
+    usuarioController.ObterAlertasTorre(req, res);
+});
+
+router.post("/ObterAlertasEmpresa", function (req, res) {
+    usuarioController.ObterAlertasEmpresa(req, res);
+});
+
+router.post("/ObterCriticidadeTorre", function (req, res) {
+    usuarioController.ObterCriticidadeTorre(req, res);
+});
+
+
+
 module.exports = router;

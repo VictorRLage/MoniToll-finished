@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Monitoll - Dashboard
+    Monitoll - Alertas
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
     name='viewport' />
@@ -20,9 +20,13 @@
   <link href="assets/css/now-ui-dashboard.css" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="assets/demo/demo.css" rel="stylesheet" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
 </head>
 
-<body onload="ObterDados(sessionStorage.ID_TORRE)">
+<body onload="ObterDados(sessionStorage.ID_TORRE), ObterAlertasTorre(), ObterAlertasEmpresa(), ObterCriticidadeTorre()"
+  class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="orange">
       <!--
@@ -38,7 +42,7 @@
       </div>
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
-          <li class="active ">
+          <li>
             <a href="dashboard.html">
               <i class="now-ui-icons design_app"></i>
               <p class="maior">Dashboard</p>
@@ -72,7 +76,7 @@
               <p class="maior">Alertas</p>
             </a>
           </li>
-          <li>
+          <li class="active ">
             <a href="https://app.pipefy.com/public/form/JuN9i3P6">
               <i class="now-ui-icons travel_info"></i>
               <p class="maior">Suporte</p>
@@ -147,14 +151,30 @@
       <div class="content">
         <div class="row">
           <div class="col-md-12">
-            <div class="cardResponsivo card">
+            <div class="cardResponsivo2 card" style="display: flex; align-items: center;">
               <div class="card-header">
                 <h4 id="h4_titulo" class="card-title">
                 </h4>
               </div>
               <div id="lista" class="lista">
+                <div class="CardGrafico">
+                  <h4 style="margin: 0 auto;" id="grafico_torre">Total de Alertas da Torre</h4><canvas
+                    style="width: 100%; display: flex; height: 500px;" id="myChartTOTAL"></canvas>
+                </div>
+                <div class="CardGrafico">
+                  <h4 style="margin: 0 auto; ">Total de Alertas da Empresa</h4><canvas
+                    style="width: 100%; display: flex; height: 500px;" id="myChartEMPRESA"></canvas>
+                </div>
               </div>
+              <div id="lista" class="lista2">
+                <div class="CardGrafico2">
+                  <h4 style="margin: 0 auto; ">Criticidade dos Alertas da Torre</h4><canvas
+                    style="width: 100%; display: flex; height: 500px;" id="myChartCRITICIDADE"></canvas>
+                </div>
+              </div>
+
             </div>
+
           </div>
         </div>
       </div>
@@ -163,24 +183,24 @@
           <nav>
             <ul>
               <li>
-                <a onclick="Logout()" href="../../index.html">
+                <a href="../../index.html">
                   MoniToll
                 </a>
               </li>
               <li>
-                <a onclick="Logout()" href="../../sobre.html">
+                <a href="../../sobre.html">
                   Sobre
                 </a>
               </li>
               <li>
-                <a onclick="Logout()" href="../../contato.html">
+                <a href="../../contato.html">
                   Contato
                 </a>
               </li>
             </ul>
           </nav>
           <div class="copyright" id="copyright">
-            &copy; Copyright <a onclick="Logout()" href="../../index.html">MoniToll.</a> Todos os direitos reservados
+            &copy; Copyright <a href="../../index.html">MoniToll.</a> Todos os direitos reservados
           </div>
         </div>
       </footer>
@@ -314,6 +334,7 @@
 
 <script>
   var vetor_Componentes = []
+  var nomeEmp = sessionStorage.NOME_EMPRESA
   var nome = sessionStorage.NOME_USUARIO
   var fkEmp = sessionStorage.FK_EMPRESA
   function ObterDados(fkTorre) {
@@ -392,41 +413,140 @@
     })
 
 
-    setTimeout(() =>
-      ObterDataHora(sessionStorage.ID_TORRE),
-      ObterPorcentagemRAM(sessionStorage.ID_TORRE),
-      ObterPorcentagemPercaPacotes(sessionStorage.ID_TORRE),
-      ObterPorcentagemCPU(sessionStorage.ID_TORRE),
-      ObterPorcentagemDisco(sessionStorage.ID_TORRE)
-      , 2000);
-    setTimeout(() => AparecerGraficos(vetor_Componentes, fkTorre), 3000);
-    setTimeout(() =>
-      buscarMetrica(fkEmp, 2),
-      buscarMetrica(fkEmp, 5),
-      buscarMetrica(fkEmp, 9),
-      buscarMetrica(fkEmp, 12)
-      , 1000)
-
   }
+</script>
 
+<script>
 
-  function AparecerGraficos(vetor_Componentes, fkTorre) {
-    vetor_Componentes.forEach(element => {
-      if (element == 2) {
-        lista.innerHTML += `<div class="CardGrafico card"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem uso CPU</h4><canvas style="width: 100%; display: block;" id="myChartPUC"></canvas></div>`
-        setTimeout(() => PlotarGrafico(vetor_PorcentagemUsoCPU, sessionStorage.ID_TORRE, 'myChartPUC', 'Porcentagem uso CPU'), 2000);
-      } else if (element == 5) {
-        lista.innerHTML += `<div class="CardGrafico card"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem uso Ram</h4><canvas style="width: 100%; display: block;" id="myChartPUR"></canvas></div>`
-        setTimeout(() => PlotarGrafico(vetor_PorcentagemUsoRam, sessionStorage.ID_TORRE, 'myChartPUR', 'Porcentagem uso Ram'), 2000);
-      } else if (element == 9) {
-        lista.innerHTML += `<div class="CardGrafico card"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem uso Disco</h4><canvas style="width: 100%; display: block;" id="myChartPUD"></canvas></div>`
-        setTimeout(() => PlotarGrafico(vetor_PorcentagemUsoDisco, sessionStorage.ID_TORRE, 'myChartPUD', 'Porcentagem uso Disco'), 2000);
-      } else if (element == 12) {
-        lista.innerHTML += `<div class="CardGrafico card"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem pacotes perdidos</h4><canvas style="width: 100%; display: block;" id="myChartPUP"></canvas></div>`
-        setTimeout(() => PlotarGrafico(vetor_PorcentagemPercaPacotes, sessionStorage.ID_TORRE, 'myChartPUP', 'Porcentagem pacotes perdidos'), 2000);
+  // ---------------------------------  Obter Alertas
+  function ObterAlertasTorre() {
+    let fkTorre = sessionStorage.ID_TORRE
+    var vetor_Componentes = []
+    var vetor_Alertas = []
+    fetch("/usuarios/ObterAlertasTorre", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        nomeEmpServer: nomeEmp,
+        fkTorreServer: fkTorre
+      })
+    }).then(function (resposta) {
+      console.log("ESTOU NO THEN DO entrar()!")
+
+      if (resposta.ok) {
+        console.log(resposta);
+
+        resposta.json().then(json => {
+          console.log(json);
+          console.log(JSON.stringify(json));
+
+          json.forEach(element => {
+            vetor_Alertas.push(element.Quantidade)
+            vetor_Componentes.push(element.componente)
+          });
+        });
+        console.log(vetor_Alertas)
+        console.log(vetor_Componentes)
       }
-    });
+    }).catch(function (erro) {
+      console.log("ERRO: " + erro);
+    })
+
+    setTimeout(() => PlotarGrafico(vetor_Alertas, sessionStorage.ID_TORRE, 'myChartTOTAL', vetor_Componentes), 1000);
+
   }
+
+  function ObterAlertasEmpresa() {
+
+    var vetor_Componentes2 = []
+    var vetor_Alertas2 = []
+    fetch("/usuarios/ObterAlertasEmpresa", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        nomeEmpServer: nomeEmp,
+
+      })
+    }).then(function (resposta) {
+      console.log("ESTOU NO THEN DO entrar()!")
+
+      if (resposta.ok) {
+        console.log(resposta);
+
+        resposta.json().then(json => {
+          console.log(json);
+          console.log(JSON.stringify(json));
+
+          json.forEach(element => {
+            vetor_Alertas2.push(element.Quantidade)
+            vetor_Componentes2.push(element.componente)
+          });
+        });
+        console.log(vetor_Alertas2)
+        console.log(vetor_Componentes2)
+      }
+    }).catch(function (erro) {
+      console.log("ERRO: " + erro);
+    })
+
+    setTimeout(() => PlotarGrafico(vetor_Alertas2, sessionStorage.ID_TORRE, 'myChartEMPRESA', vetor_Componentes2), 1000);
+
+  }
+
+  function ObterCriticidadeTorre() {
+
+    let fkTorre = sessionStorage.ID_TORRE
+
+    var vetor_comp = []
+    var vetor_alert = []
+    var vetor_perigo = []
+
+    fetch("/usuarios/ObterCriticidadeTorre", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        nomeEmpServer: nomeEmp,
+        fkTorreServer: fkTorre
+
+      })
+    }).then(function (resposta) {
+      console.log("ESTOU NO OBTER CRITICIDADE!!!!!")
+
+      if (resposta.ok) {
+        console.log(resposta);
+
+        resposta.json().then(json => {
+          console.log(json);
+          console.log(JSON.stringify(json));
+
+          json.forEach(element => {
+            vetor_comp.push(element.componente)
+            vetor_alert.push(element.Alerta)
+            vetor_perigo.push(element.Perigo)
+          });
+        });
+        console.log(vetor_comp)
+        console.log(vetor_alert)
+        console.log(vetor_perigo)
+      }
+    }).catch(function (erro) {
+      console.log("ERRO: " + erro);
+    })
+
+    setTimeout(() => PlotarGrafico2(vetor_comp, 'myChartCRITICIDADE', vetor_alert, vetor_perigo), 1000);
+
+  }
+
+
+
+
+
 </script>
 <script>
   var vetor_DataHora = []
@@ -550,152 +670,142 @@
   }
 
 
-  function PlotarGrafico(vetor, fkTorre, idCanva, label) {
-    var fkComponenteVar = 0
-    if (idCanva == 'myChartPUC') {
-      fkComponenteVar = 2
-    } else if (idCanva == 'myChartPUR') {
-      fkComponenteVar = 5
-    } else if (idCanva == 'myChartPUD') {
-      fkComponenteVar = 9
-    } else if (idCanva == 'myChartPUP') {
-      fkComponenteVar = 12
-    }
+  function PlotarGrafico2(vetor_comp, idCanva, vetor_alert, vetor_perigo) {
 
-    for (i = 0; i < vetor.length; i++) {
-      vetor_leituras.push({ DataHora: vetor_DataHora[i], Leitura: vetor[i] })
-    }
+    var ctx = document.getElementById(idCanva).getContext("2d");
 
-    console.log('iniciando plotagem do gráfico...');
-
-    // Criando estrutura para plotar gráfico - labels
-    let labels = [];
-
-    // Criando estrutura para plotar gráfico - dados
-    let dados = {
-      labels: labels,
+    var data = {
+      labels: vetor_comp,
       datasets: [{
-        label: label,
-        data: [],
-        fill: false,
-        pointRadius: 1,
-        borderWidth: 3,
-        tension: 0.4,
-        borderColor: '#ffc107',
-        tension: 0.1
-      },]
+        label: "Alerta",
+        backgroundColor: "yellow",
+        data: vetor_alert
+      }, {
+        label: "Perigo",
+        backgroundColor: "Red",
+        data: vetor_perigo
+      }]
     };
 
-    console.log('----------------------------------------------')
-    console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-    console.log(vetor_leituras)
-
-    // Inserindo valores recebidos em estrutura para plotar o gráfico
-    for (i = 0; i < vetor_leituras.length; i++) {
-      var registro = vetor_leituras[i];
-      labels.push(registro.DataHora);
-      dados.datasets[0].data.push(registro.Leitura);
-    }
-
-    console.log('----------------------------------------------')
-    console.log('O gráfico será plotado com os respectivos valores:')
-    console.log('Labels:')
-    console.log(labels)
-    console.log('Dados:')
-    console.log(dados.datasets)
-    console.log('----------------------------------------------')
-
-    // Criando estrutura para plotar gráfico - config
-    const config = {
-      type: 'line',
-      data: dados,
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: data,
       options: {
-        responsive: true,
-        maintainAspectRatio: true,
+        barValueSpacing: 20,
         scales: {
           yAxes: [{
             ticks: {
-              suggestedMin: 0,
-              suggestedMax: 100
+              min: 0,
             }
           }]
         }
-
       }
-    };
+    });
 
-    // Adicionando gráfico criado em div na tela
-    let myChart = new Chart(
-      document.getElementById(idCanva),
-      config
-    );
-    vetor_leituras = []
-    setTimeout(() => atualizarGrafico(fkTorre, fkComponenteVar, dados, myChart), 5000);
+
+    setTimeout(() => atualizarGrafico(data, myChart, idCanva), 15000);
 
   }
 
 
-  function atualizarGrafico(fkTorre, fkComponente, dados, myChart) {
-    fetch(`/medidas/tempo-real/${fkTorre}/${fkComponente}`, { cache: 'no-store' }).then(function (response) {
-      if (response.ok) {
-        response.json().then(function (novoRegistro) {
-
-          console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-          console.log(`Dados atuais do gráfico:`);
-          console.log(dados);
+  function PlotarGrafico(vetor, fkTorre, idCanva, label) {
 
 
-          if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
-            console.log("---------------------------------------------------------------")
-            console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-            console.log("Horário do novo dado capturado:")
-            console.log(novoRegistro[0].momento_grafico)
-            console.log("Horário do último dado capturado:")
-            console.log(dados.labels[dados.labels.length - 1])
-            console.log("---------------------------------------------------------------")
-          } else {
-            // tirando e colocando valores no gráfico
-            dados.labels.shift(); // apagar o primeiro
-            dados.labels.push(novoRegistro[0].momento_grafico.slice(11)); // incluir um novo momento
+    if (idCanva == 'myChartEMPRESA' || idCanva == 'myChartTOTAL') {
 
-            dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-            dados.datasets[0].data.push(novoRegistro[0].Leitura); // incluir uma nova medida de umidade
+      console.log('iniciando plotagem do gráfico...');
 
-            let metrica = novoRegistro[0].Leitura
+      // Criando estrutura para plotar gráfico - labels
 
-            myChart.update();
-
-            // if (fkComponente == 2) {
-            //   verificarCpu(metrica)
-            // }
-
-            // if (fkComponente == 5) {
-            //   verificarRam(metrica)
-            // }
-
-            // if (fkComponente == 9) {
-            //   verificarDisco(metrica)
-            // }
-
-            // if (fkComponente == 12) {
-            //   verificarInternet(metrica)
-            // }
-
+      // Criando estrutura para plotar gráfico - dados
+      const data = {
+        labels: label,
+        datasets: [
+          {
+            label: 'Dataset 1',
+            data: vetor,
+            backgroundColor: ['yellow', 'red', 'green', 'blue', 'purple', 'orange'],
           }
+        ]
+      };
+
+      console.log('----------------------------------------------')
+      console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
 
 
-          // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-          proximaAtualizacao = setTimeout(() => atualizarGrafico(fkTorre, fkComponente, dados, myChart), 5000);
-        });
-      } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-        proximaAtualizacao = setTimeout(() => atualizarGrafico(fkTorre, fkComponente, dados, myChart), 5000);
-      }
-    })
-      .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-      });
+      // Inserindo valores recebidos em estrutura para plotar o gráfico
+
+
+      console.log('----------------------------------------------')
+      console.log('O gráfico será plotado com os respectivos valores:')
+      console.log('Labels:')
+
+      console.log('Dados:')
+      console.log(data)
+      console.log('----------------------------------------------')
+
+
+      const config = {
+        type: 'pie',
+        data: data,
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+            title: {
+              display: true,
+
+            }
+          }
+        },
+      };
+
+
+
+
+
+      // Adicionando gráfico criado em div na tela
+      let myChart = new Chart(
+        document.getElementById(idCanva),
+        config
+      );
+
+
+      setTimeout(() => atualizarGrafico(data, myChart, idCanva), 15000);
+    }
+  }
+
+
+  function atualizarGrafico(data, myChart, idCanva) {
+
+    if (idCanva == 'myChartTOTAL') {
+      myChart.destroy()
+
+      vetor_Alertas = []
+      vetor_Componentes = []
+
+      setTimeout(() => ObterAlertasTorre(), 1000);
+
+    } else if (idCanva == 'myChartEMPRESA') {
+      myChart.destroy()
+
+      vetor_Alertas2 = []
+      vetor_Componentes2 = []
+      setTimeout(() => ObterAlertasEmpresa(), 1000);
+
+    } else if (idCanva == 'myChartCRITICIDADE') {
+      myChart.destroy()
+      vetor_alert = []
+      vetor_perigo = []
+      vetor_comp = []
+      setTimeout(() => ObterCriticidadeTorre(), 1000);
+    }
+
+
+
+
   }
 
 
@@ -706,102 +816,15 @@
   }
 </script>
 <script>
-  // vetor_cpu = []
-  // vetor_ram = []
-  // vetor_disco = []
-  // vetor_net = []
-  // function buscarMetrica(fkEmpresa, nmrComponente) {
-  //   fetch(`/medidas/Metrica/buscarMetrica/${fkEmpresa}/${nmrComponente}`, { cache: 'no-store' }).then(function (response) {
-  //     metrica = 15
-  //     if (response.ok) {
-  //       response.json().then(function (resposta) {
-  //         console.log(`Metricas recebidos: ${JSON.stringify(resposta)}`);
-  //         resposta.reverse();
-  //         console.log(resposta)
-  //         resposta.forEach(element => {
-  //           if (element.fkComponente == 2) {
-  //             vetor_cpu.push(element.Normall)
-  //             vetor_cpu.push(element.Atencao)
-  //             vetor_cpu.push(element.Critico)
-  //           } else if (element.fkComponente == 5) {
-  //             vetor_ram.push(element.Normall)
-  //             vetor_ram.push(element.Atencao)
-  //             vetor_ram.push(element.Critico)
-  //           } else if (element.fkComponente == 9) {
-  //             vetor_disco.push(element.Normall)
-  //             vetor_disco.push(element.Atencao)
-  //             vetor_disco.push(element.Critico)
-  //           } else if (element.fkComponente == 12) {
-  //             vetor_net.push(element.Normall)
-  //             vetor_net.push(element.Atencao)
-  //             vetor_net.push(element.Critico)
-  //           }
-  //         });
-
-  //         // PlotarGrafico(resposta, fkTorre);
-  //       });
-  //     } else {
-  //       console.error('Nenhum dado encontrado ou erro na API metrica');
-  //     }
-  //   })
-  //     .catch(function (error) {
-  //       console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-  //     });
 
 
 
-  // }
 
-  // function verificarInternet(metrica,) {
-  //   var frase = ""
-  //   // incluir uma nova medida de temperatura  
-  //   if (metrica > vetor_net[0] && metrica < vetor_net[0]) {
-  //     frase = "Alerta: Alguns pacotes estão sendo perdidos! Porcentagem de perda de pacotes: "
-  //     console.log('Cheguei aqui')
-  //     alertas(nome, "Pacotes", metrica, frase)
-  //   } else if (metrica > vetor_net[0]) {
-  //     frase = "Perigo: Muitos Pacotes Perdidos! Porcentagem de perda de pacotes: "
-  //     alertas(nome, "Pacotes", metrica, frase)
-  //   }
-  // }
 
-  // function verificarRam(metrica) {
-  //   var frase = ""
-  //   // incluir uma nova medida de temperatura  
-  //   if (metrica > vetor_ram[0] && metrica < vetor_ram[1]) {
-  //     frase = "Alerta: RAM sobrecarregando! Porcentagem de uso: "
-  //     console.log('Cheguei aqui')
-  //     alertas(nome, "RAM", metrica, frase)
-  //   } else if (metrica == vetor_ram[2]) {
-  //     frase = "Perigo: RAM está sobrecarregada! Porcentagem de uso: "
-  //     alertas(nome, "RAM", metrica, frase)
-  //   }
-  // }
 
-  // function verificarCpu(metrica) {
-  //   var frase = ""
-  //   // incluir uma nova medida de temperatura  
-  //   if (metrica > vetor_cpu[0] && metrica < vetor_cpu[1]) {
-  //     frase = "Alerta: CPU sobrecarregando! Porcentagem de uso: "
-  //     console.log('Cheguei aqui')
-  //     alertas(nome, "CPU", metrica, frase)
-  //   } else if (metrica >= vetor_cpu[2]) {
-  //     frase = "Perigo: CPU sobrecarregada! Porcentagem de uso: "
-  //     alertas(nome, "CPU", metrica, frase)
-  //   }
-  // }
 
-  // function verificarDisco(metrica) {
-  //   var frase = ""
-  //   // incluir uma nova medida de temperatura  
-  //   if (metrica > vetor_disco[0] && metrica <= vetor_disco[1]) {
-  //     frase = "Alerta: Disco sobrecarregando! Porcentagem de uso: "
-  //     console.log('Cheguei aqui')
-  //     alertas(nome, "Disco", metrica, frase)
-  //   } else if (metrica > vetor_disco[2]) {
-  //     frase = "Perigo: Disco sobrecarregado! Porcentagem de uso: "
-  //     alertas(nome, "Disco", metrica, frase)
-  //   }
-  // }
+
+
+
 
 </script>

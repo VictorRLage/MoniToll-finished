@@ -6011,9 +6011,18 @@ Created using IcoMoon - icomoon.io
   display: grid;
   width: 94%;
   margin: 0 auto;
-  gap: 1.8rem;
+  gap: 1.8rem; 
   grid-template-columns: repeat(2, 1fr);
 }
+.lista2 {
+  display: flex;
+  width: 94%;
+  margin: 0 auto;
+  margin-bottom: 80px;
+  align-items: center;
+  justify-content: center; 
+}
+
 .lista-torre{
     display: grid;
   width: 94%;
@@ -6032,10 +6041,25 @@ Created using IcoMoon - icomoon.io
   box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.17);
 }
 
+.CardGrafico2 {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2px;
+  background-color: #DDDDDD;
+  margin-top: 100px;
+  height: 450px;
+  width: 800px;
+  box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.17); 
+}
+
 .cardResponsivo {
   height: 750px;
 }
 
+.cardResponsivo2 {
+  height: 1200px;
+}
 .cardResponsivo-torre {
   height: 1150px;
 }
@@ -6206,3 +6230,4 @@ Created using IcoMoon - icomoon.io
   border-radius: 50px;
   border: none;
 }
+
