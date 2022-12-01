@@ -579,20 +579,20 @@
   }
 
   // Event triggered on heading anchor click (which will trigger the sort)
-  function onHeadigClick(that, cellIndex) {
-    return function () {
-      that.sortColumn(this, cellIndex);
+  // function onHeadigClick(that, cellIndex) {
+  //   return function () {
+  //     that.sortColumn(this, cellIndex);
 
-      return false;
-    };
-  }
+  //     return false;
+  //   };
+  // }
 
   // Create anchor for each th
   function createAnchor(html, index) {
     var a = document.createElement('a');
     a.href = '#';
     a.innerHTML = html;
-    a.onclick = onHeadigClick(this, index);
+    // a.onclick = onHeadigClick(this, index);
 
     return a;
   }
