@@ -315,11 +315,10 @@ function verificarTorres(req, res) {
                     console.log(`\nResultados encontrados: ${resultado.length}`);
                     console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
 
-                    if (resultado.length != 0) {
-                        console.log(resultado);
-                        res.json(resultado);
-                    } else if (resultado.length == 0) {
-                        res.status(403).send("Não tem torre");
+                    if (resultado.length > 0) {
+                        res.status(200).json(resultado);
+                    } else {
+                        res.status(500).send("Não tem torre");
                     }
                 }
             ).catch(

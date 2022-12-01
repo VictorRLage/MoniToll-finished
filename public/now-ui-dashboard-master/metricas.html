@@ -143,22 +143,8 @@
               <div class="card-header">
                 <h4 class="card-title">Métrica para CPU</h4>
               </div>
-              <div class="card-body">
-                <div class="alert alert-warning">
-                  <button type="button" aria-hidden="true" class="close">
-                  </button>
-                  <span><b>Uso Ideal Entre 30% e 65% </b></span>
-                </div>
-                <div class="alert alert-primary">
-                  <button type="button" aria-hidden="true" class="close">
-                  </button>
-                  <span><b>Atenção Entre 66% e 79% </b></span>
-                </div>
-                <div class="alert alert-danger">
-                  <button type="button" aria-hidden="true" class="close">
-                  </button>
-                  <span><b>Crítico Entre 80% e 100% </b></span>
-                </div>
+              <div id="m_cpu" class="card-body">
+
               </div>
             </div>
           </div>
@@ -167,22 +153,8 @@
               <div class="card-header">
                 <h4 class="card-title">Métricas para Memória RAM</h4>
               </div>
-              <div class="card-body">
-                <div class="alert alert-warning">
-                  <button type="button" aria-hidden="true" class="close">
-                  </button>
-                  <span><b>Uso Ideal Entre 30% e 65% </b></span>
-                </div>
-                <div class="alert alert-primary">
-                  <button type="button" aria-hidden="true" class="close">
-                  </button>
-                  <span><b>Atenção Entre 66% e 79% </b></span>
-                </div>
-                <div class="alert alert-danger">
-                  <button type="button" aria-hidden="true" class="close">
-                  </button>
-                  <span><b>Crítico Entre 80% e 100% </b></span>
-                </div>
+              <div id="m_ram" class="card-body">
+
               </div>
             </div>
           </div>
@@ -191,22 +163,8 @@
               <div class="card-header">
                 <h4 class="card-title">Métricas para Internet</h4>
               </div>
-              <div class="card-body">
-                <div class="alert alert-warning">
-                  <button type="button" aria-hidden="true" class="close">
-                  </button>
-                  <span><b>Uso Ideal Entre 0% e 19% </b></span>
-                </div>
-                <div class="alert alert-primary">
-                  <button type="button" aria-hidden="true" class="close">
-                  </button>
-                  <span><b>Atenção Entre 20% e 30% </b></span>
-                </div>
-                <div class="alert alert-danger">
-                  <button type="button" aria-hidden="true" class="close">
-                  </button>
-                  <span><b>Crítico Entre 31% e 50% </b></span>
-                </div>
+              <div id="m_net" class="card-body">
+
               </div>
             </div>
           </div>
@@ -215,22 +173,8 @@
               <div class="card-header">
                 <h4 class="card-title">Métricas para Disco Rígido</h4>
               </div>
-              <div class="card-body">
-                <div class="alert alert-warning">
-                  <button type="button" aria-hidden="true" class="close">
-                  </button>
-                  <span><b>Uso Ideal Entre 30% e 60% </b></span>
-                </div>
-                <div class="alert alert-primary">
-                  <button type="button" aria-hidden="true" class="close">
-                  </button>
-                  <span><b>Atenção Entre 61% e 80% </b></span>
-                </div>
-                <div class="alert alert-danger">
-                  <button type="button" aria-hidden="true" class="close">
-                  </button>
-                  <span><b>Crítico Entre 81% e 100% </b></span>
-                </div>
+              <div id="m_disco" class="card-body">
+
               </div>
             </div>
           </div>
@@ -449,6 +393,12 @@
 </script>
 
 <SCRipt>
+  fkEmp = sessionStorage.FK_EMPRESA
+  buscarMetrica(fkEmp, 2)
+  buscarMetrica(fkEmp, 5)
+  buscarMetrica(fkEmp, 9)
+  buscarMetrica(fkEmp, 12)
+  setTimeout(()=>plotarMetrica() ,2000)
   vetor_cpu = []
   vetor_ram = []
   vetor_disco = []
@@ -495,3 +445,78 @@
 
   }
 </SCRipt>
+
+<script>
+  function plotarMetrica() {
+    m_cpu.innerHTML = `                
+                <div class="alert alert-warning">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Uso ideal entre 0% e ${vetor_cpu[0]}% </b></span>
+                </div>
+                <div class="alert alert-primary">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Atenção entre ${parseInt(vetor_cpu[0])+1}% e ${vetor_cpu[1]}% </b></span>
+                </div>
+                <div class="alert alert-danger">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Crítico entre ${parseInt(vetor_cpu[1])+1}% e ${vetor_cpu[2]}% </b></span>
+                </div>`
+  
+  
+  m_ram.innerHTML = `                
+                <div class="alert alert-warning">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Uso ideal entre 0% e ${vetor_ram[0]}% </b></span>
+                </div>
+                <div class="alert alert-primary">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Atenção entre ${parseInt(vetor_ram[0])+1}% e ${parseInt(vetor_ram[1])}% </b></span>
+                </div>
+                <div class="alert alert-danger">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Crítico entre ${parseInt(vetor_ram[1])+1}% e ${parseInt(vetor_ram[2])}% </b></span>
+                </div>`
+
+ m_net.innerHTML = `               
+                <div class="alert alert-warning">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Uso ideal entre 0% e ${vetor_net[0]}% </b></span>
+                </div>
+                <div class="alert alert-primary">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Atenção entre ${parseInt(vetor_net[0])+1}% e ${vetor_net[1]}% </b></span>
+                </div>
+                <div class="alert alert-danger">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Crítico entre ${parseInt(vetor_net[1])+1}% e ${vetor_net[2]}% </b></span>
+                </div>`
+
+
+m_disco.innerHTML = `                
+                <div class="alert alert-warning">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Uso ideal entre 0% e ${vetor_disco[0]}% </b></span>
+                </div>
+                <div class="alert alert-primary">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Atenção entre ${parseInt(vetor_disco[0])+1}% e ${vetor_disco[1]}% </b></span>
+                </div>
+                <div class="alert alert-danger">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Crítico entre ${parseInt(vetor_disco[1])+1}% e ${vetor_disco[2]}% </b></span>
+                </div>`
+
+}
+</script>

@@ -72,13 +72,14 @@
     }
 
 
-    .espaco-btn{
+    .espaco-btn {
       background-color: #f2f2f2;
       display: flex;
       justify-content: end;
       padding: 10px;
     }
-    .pato{
+
+    .pato {
       background-color: black;
       color: #fff;
       border-radius: 50px;
@@ -150,9 +151,9 @@
 
   </div>
   <div class="espaco-btn">
-        <button class="pato" onclick="mudarPagina()">
-          Cadastrar métricas
-        </button>
+    <button class="pato" onclick="mudarPagina()">
+      Cadastrar métricas
+    </button>
   </div>
 
 
@@ -453,8 +454,39 @@ c
 </script>
 
 <script>
-  function mudarPagina(){
-    window.location = "cadastrarMetricas.html"
+  var fkTorre = sessionStorage.ID_TORRE
+  function mudarPagina() {
+    const open = document.getElementById('open');
+    const modal_container = document.getElementById('modal1');
+    const close = document.getElementById('close1');
+
+    fetch("/usuarios/verificarTorres", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        fkEmpresaServer: sessionStorage.FK_EMPRESA,
+      })
+    }).then(function (resposta) {
+      console.log("ESTOU NO THEN DO entrar()!")
+
+      if (resposta.ok) {
+        console.log('ja tem torre');
+        window.location = "cadastrarMetricas.html"
+      } else {
+        titulo1.innerHTML = `Você não cadastrou nenhuma torre.`
+        p1.innerHTML = `Por favor cadastre suas torres e os componentes que deseja monitorar.`
+
+        modal_container.classList.add('show');
+
+        close.addEventListener('click', () => {
+          modal_container.classList.remove('show');
+        });
+      }
+    }).catch(function (resposta) {
+      console.log(`#ERRO: ${resposta}`);
+    });
   }
 </script>
 

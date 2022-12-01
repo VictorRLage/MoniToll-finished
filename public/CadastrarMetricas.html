@@ -39,6 +39,30 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
+<style>
+  .espaco-btn {
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: end;
+    padding: 10px;
+  }
+
+  .pato {
+    background-color: black;
+    color: #fff;
+    border-radius: 50px;
+    height: 50px;
+    width: 300px;
+  }
+
+  .modalL {
+    height: 200px;
+  }
+
+  .button1L {
+    margin-bottom: 285px;
+  }
+</style>
 
 <body>
 
@@ -114,7 +138,8 @@
                 <div class="wrap-login100-form-btn">
                   <div class="login100-form-bgbtn">
                   </div>
-                  <button class="login100-form-btn" onclick="cadastrarMetrica()">
+                  <button class="login100-form-btn"
+                    onclick="cadastrarMetrica(NormalCPU.value,AtencaoCPU.value,CriticoCPU.value,NormalRAM.value,AtencaoRAM.value,CriticoRAM.value,NormalDisco.value,AtencaoDisco.value,CriticoDisco.value,NormalInternet.value,AtencaoInternet.value,CriticoInternet.value)">
                     Cadastrar
                   </button>
                 </div>
@@ -125,9 +150,14 @@
       </div>
     </div>
   </div>
+  <div class="espaco-btn">
+    <button class="pato" onclick="finalizar()">
+      Finalizar
+    </button>
+  </div>
 
   <div class="modal-containerL" id="modal_container">
-    <div class="modalL">
+    <div id="modalL" class="modalL">
       <h2 id="titulo_m"></h2>
       <p id="p_msg"></p>
     </div>
@@ -192,8 +222,7 @@
 <script>
   var fkEmpresaVar = sessionStorage.FK_EMPRESA
 
-
-  function cadastrarMetrica(req, res) {
+  function cadastrarMetrica(NormalCPUVar, AtencaoCPUVar, CriticoCPUVar, NormalRAMVar, AtencaoRAMVar,CriticoRAMVar, NormalDiscoVar, AtencaoDiscoVar, CriticoDiscoVar, NormalInternetVar, AtencaoInternetVar, CriticoInternetVar) {
     const open = document.getElementById('open');
     const modal_container = document.getElementById('modal_container');
     const close = document.getElementById('close');
@@ -202,19 +231,7 @@
     var fkComponenteRAM = 5
     var fkComponenteDisco = 9
     var fkComponenteInternet = 12
-    var fkEmpresaVar = sessionStorage.FK_EMPRESA;
-    var NormalCPUVar = NormalCPU.value;
-    var AtencaoCPUVar = AtencaoCPU.value;
-    var CriticoCPUVar = CriticoCPU.value;
-    var NormalRAMVar = NormalRAM.value;
-    var AtencaoRAMVar = AtencaoRAM.value;
-    var CriticoRAMVar = CriticoRAM.value;
-    var NormalDiscoVar = NormalDisco.value;
-    var AtencaoDiscoVar = AtencaoDisco.value;
-    var CriticoDiscoVar = CriticoDisco.value;
-    var NormalInternetVar = NormalInternet.value;
-    var AtencaoInternetVar = AtencaoInternet.value;
-    var CriticoInternetVar = CriticoInternet.value;
+
 
     if (fkEmpresaVar == "" || NormalCPUVar == "" || AtencaoCPUVar == "" || CriticoCPUVar == "" || NormalRAMVar == "" || AtencaoRAMVar == "" || CriticoRAMVar == "" || NormalDiscoVar == "" || AtencaoDiscoVar == "" || CriticoDiscoVar == "" || NormalInternetVar == "" || AtencaoInternetVar == "" || CriticoInternetVar == "") {
 
@@ -228,7 +245,7 @@
       return
     }
 
-    
+
     // fetch 1
     fetch("/usuarios/cadastrarMetrica", {
       method: "POST",
@@ -248,22 +265,21 @@
     }).then(function (response) {
 
       console.log("response: ", response);
-      
+
       if (response.ok) {
         setTimeout(() => {
 
-          titulo_m.innerHTML = ("Cadastro realizado com sucesso. Bem-vindo")
+          titulo_m.innerHTML = ("Cadastro das metricas realizado com sucesso!")
           modal_container.classList.add('show');
 
           close.addEventListener('click', () => {
             modal_container.classList.remove('show');
           });
 
-          window.location = "../login.html";
         }, 3000)
 
       } else {
-        throw ("Houve um erro ao tentar realizar o cadastro!");
+        throw ("Houve um erro ao tentar realizar o cadastro das metricas!");
       }
     }).catch(function (response) {
       console.log(`#ERRO: ${response}`);
@@ -296,20 +312,18 @@
       if (response.ok) {
         setTimeout(() => {
 
-          titulo_m.innerHTML = ("Cadastro realizado com sucesso. Bem-vindo")
+          titulo_m.innerHTML = ("Cadastro das metricas realizado com sucesso!")
           modal_container.classList.add('show');
 
           close.addEventListener('click', () => {
             modal_container.classList.remove('show');
           });
-
-          window.location = "../login.html";
         }, 3000)
 
         // limparFormulario();
         // finalizarAguardar();
       } else {
-        throw ("Houve um erro ao tentar realizar o cadastro!");
+        throw ("Houve um erro ao tentar realizar o cadastro das metricas!");
       }
     }).catch(function (response) {
       console.log(`#ERRO: ${response}`);
@@ -343,20 +357,16 @@
       if (response.ok) {
         setTimeout(() => {
 
-          titulo_m.innerHTML = ("Cadastro realizado com sucesso. Bem-vindo")
+          titulo_m.innerHTML = ("Cadastro das metricas realizado com sucesso!")
           modal_container.classList.add('show');
 
           close.addEventListener('click', () => {
             modal_container.classList.remove('show');
           });
+        }, 5000)
 
-          window.location = "../login.html";
-        }, 3000)
-
-        // limparFormulario();
-        // finalizarAguardar();
       } else {
-        throw ("Houve um erro ao tentar realizar o cadastro!");
+        throw ("Houve um erro ao tentar realizar o cadastro das metricas!");
       }
     }).catch(function (response) {
       console.log(`#ERRO: ${response}`);
@@ -390,33 +400,65 @@
       if (response.ok) {
         setTimeout(() => {
 
-          titulo_m.innerHTML = ("Cadastro realizado com sucesso. Bem-vindo")
+          titulo_m.innerHTML = ("Cadastro das metricas realizado com sucesso!")
           modal_container.classList.add('show');
 
           close.addEventListener('click', () => {
             modal_container.classList.remove('show');
           });
 
-          window.location = "../login.html";
         }, 3000)
 
-        // limparFormulario();
-        // finalizarAguardar();
       } else {
-        throw ("Houve um erro ao tentar realizar o cadastro!");
+        throw ("Houve um erro ao tentar realizar o cadastro das metricas!");
       }
     }).catch(function (response) {
       console.log(`#ERRO: ${response}`);
     });
 
     // return false;
-
-
-
-
-
-
-
   }
 
+</script>
+
+<script>
+  fkEmpresa = sessionStorage.FK_EMPRESA
+  nmrComponente = 2
+  function finalizar() {
+    const open = document.getElementById('open');
+    const modal_container = document.getElementById('modal_container');
+    const close = document.getElementById('close');
+
+
+
+    fetch(`/medidas/Metrica/buscarMetrica/${fkEmpresa}/${nmrComponente}`, { cache: 'no-store' }).then(function (response) {
+      metrica = 15
+      if (response.ok) {
+        Logout()
+        window.location = "login.html"
+        console.log("ja tem torre")
+      } else {
+        titulo_m.innerHTML = ("Você não cadastrou as metricas! <br>")
+        p_msg.innerHTML = 'Você pode prosseguir usando nossas metricas padrões para cada componente!'
+        modalL.innerHTML += ` <br>   
+        <button class="pato" onclick="Prosseguir()">
+          Prosseguir
+        </button>`
+        modal_container.classList.add('show');
+
+
+        close.addEventListener('click', () => {
+          modal_container.classList.remove('show');
+        });
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+
+  }
+  function Prosseguir() {
+    modal_container.classList.remove('show');
+    cadastrarMetrica(65, 80, 100, 65, 80, 100, 65, 80, 100, 20, 30, 50)
+  }
 </script>

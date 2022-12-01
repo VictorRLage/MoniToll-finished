@@ -192,7 +192,7 @@ function buscarMetrica(req, res) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
-            res.status(204).send("Nenhum resultado encontrado!")
+            res.status(500).send("Nenhum resultado encontrado!")
         }
     }).catch(function (erro) {
         console.log(erro);
