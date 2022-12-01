@@ -40,5 +40,8 @@ router.get("/BuscarProc/:fkTorre", function (req, res) {
     medidaController.buscarProc(req, res);
 })
 
+router.get("/Metrica/buscarMetrica/:fkEmpresa/:nmrComponentes", function (req, res) {
+    medidaController.buscarMetrica(req, res);
+})
 
 module.exports = router;

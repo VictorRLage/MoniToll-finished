@@ -240,7 +240,7 @@ iframe {
 
 .wrap-login200 {
   width: 500px;
-  height: 700px;
+  height: 640px;
   margin-top: 120px;
   background: #fff;
   border-radius: 10px;
@@ -272,7 +272,7 @@ iframe {
 
 .wrap-login400 {
   width: 500px;
-  height: 850px;
+  height: 870px;
   margin-top: 120px;
   background: #fff;
   border-radius: 10px;
@@ -728,4 +728,25 @@ iframe {
   border: 1px solid rgba(254, 185, 0, 1);
   border-radius: 40px;
   box-shadow: 2px 2px 2px rgb(189, 188, 188);
+}
+
+.nova-metrica-ideal{
+  border: solid 2px #adadad;
+  margin-bottom: 3%;
+}
+
+.wrap-login500 {
+  width: 500px;
+  height: 1000px;
+  margin-top: 120px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 25px 55px 33px 55px;
+
+  box-shadow: 0 5px 10px 2px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 5px 10px 2px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 5px 10px 2px rgba(0, 0, 0, 0.1);
+  -o-box-shadow: 0 5px 10px 2px rgba(0, 0, 0, 0.1);
+  -ms-box-shadow: 0 5px 10px 2px rgba(0, 0, 0, 0.1);
 }

@@ -132,7 +132,8 @@
       <div class="panel-header">
         <div class="header text-center">
           <h2 class="title">Métricas para Comparativo</h2>
-          <p class="category">Veja as Métricas em Porcentagem. <br> Qual é a medida Ideal a de Atenção e a Crítica ? </p>
+          <p class="category">Veja as Métricas em Porcentagem. <br> Qual é a medida Ideal a de Atenção e a Crítica ?
+          </p>
         </div>
       </div>
       <div class="content">
@@ -142,22 +143,8 @@
               <div class="card-header">
                 <h4 class="card-title">Métrica para CPU</h4>
               </div>
-              <div class="card-body">
-                <div class="alert alert-warning">
-                  <button type="button" aria-hidden="true" class="close">
-                  </button>
-                  <span><b>Uso Ideal Entre 30% e 65% </b></span>
-                </div>
-                <div class="alert alert-primary">
-                  <button type="button" aria-hidden="true" class="close">
-                  </button>
-                  <span><b>Atenção Entre 66% e 79% </b></span>
-                </div>
-                <div class="alert alert-danger">
-                  <button type="button" aria-hidden="true" class="close">
-                  </button>
-                  <span><b>Crítico Entre 80% e 100% </b></span>
-                </div>
+              <div id="m_cpu" class="card-body">
+
               </div>
             </div>
           </div>
@@ -166,22 +153,8 @@
               <div class="card-header">
                 <h4 class="card-title">Métricas para Memória RAM</h4>
               </div>
-              <div class="card-body">
-                <div class="alert alert-warning">
-                  <button type="button" aria-hidden="true" class="close">
-                  </button>
-                  <span><b>Uso Ideal Entre 30% e 65% </b></span>
-                </div>
-                <div class="alert alert-primary">
-                  <button type="button" aria-hidden="true" class="close">
-                  </button>
-                  <span><b>Atenção Entre 66% e 79% </b></span>
-                </div>
-                <div class="alert alert-danger">
-                  <button type="button" aria-hidden="true" class="close">
-                  </button>
-                  <span><b>Crítico Entre 80% e 100% </b></span>
-                </div>
+              <div id="m_ram" class="card-body">
+
               </div>
             </div>
           </div>
@@ -190,22 +163,8 @@
               <div class="card-header">
                 <h4 class="card-title">Métricas para Internet</h4>
               </div>
-              <div class="card-body">
-                <div class="alert alert-warning">
-                  <button type="button" aria-hidden="true" class="close">
-                  </button>
-                  <span><b>Uso Ideal Entre 0% e 19% </b></span>
-                </div>
-                <div class="alert alert-primary">
-                  <button type="button" aria-hidden="true" class="close">
-                  </button>
-                  <span><b>Atenção Entre 20% e 30% </b></span>
-                </div>
-                <div class="alert alert-danger">
-                  <button type="button" aria-hidden="true" class="close">
-                  </button>
-                  <span><b>Crítico Entre 31% e 50% </b></span>
-                </div>
+              <div id="m_net" class="card-body">
+
               </div>
             </div>
           </div>
@@ -214,22 +173,8 @@
               <div class="card-header">
                 <h4 class="card-title">Métricas para Disco Rígido</h4>
               </div>
-              <div class="card-body">
-                <div class="alert alert-warning">
-                  <button type="button" aria-hidden="true" class="close">
-                  </button>
-                  <span><b>Uso Ideal Entre 30% e 60% </b></span>
-                </div>
-                <div class="alert alert-primary">
-                  <button type="button" aria-hidden="true" class="close">
-                  </button>
-                  <span><b>Atenção Entre 61% e 80% </b></span>
-                </div>
-                <div class="alert alert-danger">
-                  <button type="button" aria-hidden="true" class="close">
-                  </button>
-                  <span><b>Crítico Entre 81% e 100% </b></span>
-                </div>
+              <div id="m_disco" class="card-body">
+
               </div>
             </div>
           </div>
@@ -372,8 +317,8 @@
       console.log("resposta: ", resposta);
 
       if (resposta.ok) {
-          modal_titulo_aviso.innerHTML = `<h2>Cadastro realizado com sucesso!</h2>`
-          modal_container_aviso.classList.add('show');
+        modal_titulo_aviso.innerHTML = `<h2>Cadastro realizado com sucesso!</h2>`
+        modal_container_aviso.classList.add('show');
       } else {
         modal_titulo_aviso.innerHTML = `<h2>Falha ao realizar cadastro</h2>`
         modal_container_aviso.classList.add('show');
@@ -409,40 +354,169 @@
 <script>
   fkTorre = sessionStorage.ID_TORRE
   fetch("/usuarios/ObterComponentes", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        fkTorreServer: fkTorre,
-      })
-    }).then(function (resposta) {
-      console.log("ESTOU NO THEN DO entrar()!")
-
-      if (resposta.ok) {
-        console.log(resposta);
-
-        resposta.json().then(json => {
-          console.log(json);
-          console.log(JSON.stringify(json));
-
-          json.forEach(element => {
-            vetor_Componentes.push(element.fkComponente)
-          });
-          vetor_Componentes.forEach(element => {
-            if (element == 25){
-              processos.innerHTML = `<a href="processos.html" ><i class="now-ui-icons loader_gear"></i><p class="maior">Processos</p></a>`
-            }
-          });
-        });
-      }
-    }).catch(function (erro) {
-      console.log("ERRO: " + erro);
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      fkTorreServer: fkTorre,
     })
+  }).then(function (resposta) {
+    console.log("ESTOU NO THEN DO entrar()!")
+
+    if (resposta.ok) {
+      console.log(resposta);
+
+      resposta.json().then(json => {
+        console.log(json);
+        console.log(JSON.stringify(json));
+
+        json.forEach(element => {
+          vetor_Componentes.push(element.fkComponente)
+        });
+        vetor_Componentes.forEach(element => {
+          if (element == 25) {
+            processos.innerHTML = `<a href="processos.html" ><i class="now-ui-icons loader_gear"></i><p class="maior">Processos</p></a>`
+          }
+        });
+      });
+    }
+  }).catch(function (erro) {
+    console.log("ERRO: " + erro);
+  })
 </script>
 
 <script>
   function Logout() {
     sessionStorage.clear();
   }
+</script>
+
+<SCRipt>
+  fkEmp = sessionStorage.FK_EMPRESA
+  buscarMetrica(fkEmp, 2)
+  buscarMetrica(fkEmp, 5)
+  buscarMetrica(fkEmp, 9)
+  buscarMetrica(fkEmp, 12)
+  setTimeout(()=>plotarMetrica() ,2000)
+  vetor_cpu = []
+  vetor_ram = []
+  vetor_disco = []
+  vetor_net = []
+  function buscarMetrica(fkEmpresa, nmrComponente) {
+    fetch(`/medidas/Metrica/buscarMetrica/${fkEmpresa}/${nmrComponente}`, { cache: 'no-store' }).then(function (response) {
+      metrica = 15
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Metricas recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+          console.log(resposta)
+          resposta.forEach(element => {
+            if (element.fkComponente == 2) {
+              vetor_cpu.push(element.Normall)
+              vetor_cpu.push(element.Atencao)
+              vetor_cpu.push(element.Critico)
+            } else if (element.fkComponente == 5) {
+              vetor_ram.push(element.Normall)
+              vetor_ram.push(element.Atencao)
+              vetor_ram.push(element.Critico)
+            } else if (element.fkComponente == 9) {
+              vetor_disco.push(element.Normall)
+              vetor_disco.push(element.Atencao)
+              vetor_disco.push(element.Critico)
+            } else if (element.fkComponente == 12) {
+              vetor_net.push(element.Normall)
+              vetor_net.push(element.Atencao)
+              vetor_net.push(element.Critico)
+            }
+          });
+
+          // PlotarGrafico(resposta, fkTorre);
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API metrica');
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+
+
+
+  }
+</SCRipt>
+
+<script>
+  function plotarMetrica() {
+    m_cpu.innerHTML = `                
+                <div class="alert alert-warning">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Uso ideal entre 0% e ${vetor_cpu[0]}% </b></span>
+                </div>
+                <div class="alert alert-primary">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Atenção entre ${parseInt(vetor_cpu[0])+1}% e ${vetor_cpu[1]}% </b></span>
+                </div>
+                <div class="alert alert-danger">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Crítico entre ${parseInt(vetor_cpu[1])+1}% e ${vetor_cpu[2]}% </b></span>
+                </div>`
+  
+  
+  m_ram.innerHTML = `                
+                <div class="alert alert-warning">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Uso ideal entre 0% e ${vetor_ram[0]}% </b></span>
+                </div>
+                <div class="alert alert-primary">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Atenção entre ${parseInt(vetor_ram[0])+1}% e ${parseInt(vetor_ram[1])}% </b></span>
+                </div>
+                <div class="alert alert-danger">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Crítico entre ${parseInt(vetor_ram[1])+1}% e ${parseInt(vetor_ram[2])}% </b></span>
+                </div>`
+
+ m_net.innerHTML = `               
+                <div class="alert alert-warning">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Uso ideal entre 0% e ${vetor_net[0]}% </b></span>
+                </div>
+                <div class="alert alert-primary">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Atenção entre ${parseInt(vetor_net[0])+1}% e ${vetor_net[1]}% </b></span>
+                </div>
+                <div class="alert alert-danger">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Crítico entre ${parseInt(vetor_net[1])+1}% e ${vetor_net[2]}% </b></span>
+                </div>`
+
+
+m_disco.innerHTML = `                
+                <div class="alert alert-warning">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Uso ideal entre 0% e ${vetor_disco[0]}% </b></span>
+                </div>
+                <div class="alert alert-primary">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Atenção entre ${parseInt(vetor_disco[0])+1}% e ${vetor_disco[1]}% </b></span>
+                </div>
+                <div class="alert alert-danger">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Crítico entre ${parseInt(vetor_disco[1])+1}% e ${vetor_disco[2]}% </b></span>
+                </div>`
+
+}
 </script>
