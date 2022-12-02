@@ -462,7 +462,8 @@ def VerificarMetricas(Leitura,idComponente,idTorre):
     alertas(frase,componente,Leitura,idTorre,alertar)
 
 def alertas(frase,componente,Leitura,idTorre,alertar):
-    # if alertar:
+    if alertar:
+        print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
     #     url = "https://api.pipefy.com/graphql"
 
     #     payload = {"query": "{"mutation { createCard(input: { pipe_id:\"302621694\" fields_attributes:[ {field_id: "nome_da_empresa", field_value: "${nomeEmp}"},{field_id: "descri_o_do_alerta", field_value: "${componente}"},{field_id: "m_tricas", field_value: " ${frase}: ${metrica}"}]})}"}
@@ -474,7 +475,7 @@ def alertas(frase,componente,Leitura,idTorre,alertar):
     # response = requests.post(url, json=payload, headers=headers)
 
     # print(response.text)
-    print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+    
         
 
 
