@@ -391,141 +391,66 @@ def InserirLeitura(Codigo,Nome, idComponente, idTorre):
 
 #
 def VerificarMetricas(Leitura,idComponente,idTorre):
-    alertar = 0
+    alertar = False
     frase = ''
     componente = ''
     if idComponente == 2:
+        componente = 'CPU'
         if Leitura > int(m_cpu[0][0]) and Leitura < int(m_cpu[0][1]):
-            print(f'''
-            Alerta: Acima do Normal - {int(m_cpu[0][0])}%
-            Leitura: {Leitura}
-            Componente: CPU
-            Torre: {idTorre}
-            ''')
             frase = 'Alerta'
-            componente = 'CPU'
-            alertar = 1
+            alertar = True
         elif Leitura > int(m_cpu[0][1]) and Leitura < int(m_cpu[0][2]):
-            print(f'''
-            Alerta: Acima de Atencão - {int(m_cpu[0][1])}%
-            Leitura: {Leitura}
-            Componente: CPU
-            Torre: {idTorre}
-            ''')
             frase = 'Perigo'
-            componente = 'CPU'
-            alertar = 1
+            alertar = True
         elif Leitura > int(m_cpu[0][2]):
-            print(f'''
-            Alerta: Acima de Atencão - {int(m_cpu[0][2])}%
-            Leitura: {Leitura}
-            Componente: CPU
-            Torre: {idTorre}
-            ''')
             frase = 'Crítico'
-            componente = 'CPU'
-            alertar = 1
-        print('Nenhum alerta emitido')
+            alertar = True
+        else:
+            print('Nenhum alerta emitido')
     if idComponente == 5:
+        componente = 'RAM'
         if Leitura > int(m_ram[0][0]) and Leitura < int(m_ram[0][1]):
-            print(f'''
-            Alerta: Acima do Normal - {int(m_ram[0][0])}%
-            Leitura: {Leitura}
-            Componente: CPU
-            Torre: {idTorre}
-            ''')
             frase = 'Alerta'
-            componente = 'RAM'
-            alertar = 1
+            alertar = True
         elif Leitura > int(m_ram[0][1]) and Leitura < int(m_ram[0][2]):
-            print(f'''
-            Alerta: Acima de Atencão - {int(m_ram[0][1])}%
-            Leitura: {Leitura}
-            Componente: CPU
-            Torre: {idTorre}
-            ''')
             frase = 'Perigo'
             componente = 'RAM'
-            alertar = 1
+            alertar = True
         elif Leitura > int(m_ram[0][2]):
-            print(f'''
-            Alerta: Acima de Atencão - {int(m_ram[0][2])}%
-            Leitura: {Leitura}
-            Componente: CPU
-            Torre: {idTorre}
-            ''')
             frase = 'Crítico'
-            componente = 'RAM'
-            alertar = 1
-        print('Nenhum alerta emitido')
+            alertar = True
+        else:
+            print('Nenhum alerta emitido')
     if idComponente == 9:
+        componente = 'Disco'
         if Leitura > int(m_disco[0][0]) and Leitura < int(m_disco[0][1]):
-            print(f'''
-            Alerta: Acima do Normal - {int(m_disco[0][0])}%
-            Leitura: {Leitura}
-            Componente: CPU
-            Torre: {idTorre}
-            ''')
             frase = 'Alerta'
-            componente = 'Disco'
-            alertar = 1
+            alertar = True
         elif Leitura > int(m_disco[0][1]) and Leitura < int(m_disco[0][2]):
-            print(f'''
-            Alerta: Acima de Atencão - {int(m_disco[0][1])}%
-            Leitura: {Leitura}
-            Componente: CPU
-            Torre: {idTorre}
-            ''')
             frase = 'Perigo'
-            componente = 'Disco'
-            alertar = 1
+            alertar = True
         elif Leitura > int(m_disco[0][2]):
-            print(f'''
-            Alerta: Acima de Atencão - {int(m_disco[0][2])}%
-            Leitura: {Leitura}
-            Componente: CPU
-            Torre: {idTorre}
-            ''')
             frase = 'Crítico'
-            componente = 'Disco'
-            alertar = 1
-        print('Nenhum alerta emitido')
+            alertar = True
+        else:
+            print('Nenhum alerta emitido')
     if idComponente == 12:
+        componente = 'Pacotes'
         if Leitura > int(m_net[0][0]) and Leitura < int(m_net[0][1]):
-            print(f'''
-            Alerta: Acima do Normal - {int(m_net[0][0])}%
-            Leitura: {Leitura}
-            Componente: CPU
-            Torre: {idTorre}
-            ''')
             frase = 'Alerta'
-            componente = 'Pacotes'
-            alertar = 1
+            alertar = True
         elif Leitura > int(m_net[0][1]) and Leitura < int(m_net[0][2]):
-            print(f'''
-            Alerta: Acima de Atencão - {int(m_net[0][1])}%
-            Leitura: {Leitura}
-            Componente: CPU
-            Torre: {idTorre}
-            ''')
             frase = 'Perigo'
-            componente = 'Pacotes'
-            alertar = 1
+            alertar = True
         elif Leitura > int(m_net[0][2]):
-            print(f'''
-            Alerta: Acima de Atencão - {int(m_net[0][2])}%
-            Leitura: {Leitura}
-            Componente: CPU
-            Torre: {idTorre}
-            ''')
             frase = 'Crítico'
-            componente = 'Pacotes'
-            alertar = 1
-        print('Nenhum alerta emitido')
-        alertas(frase,componente,Leitura,idTorre)
+            alertar = True
+        else:
+            print('Nenhum alerta emitido')
+        alertas(frase,componente,Leitura,idTorre,alertar)
 
-def alertas():
-    if alertar == 1:
+def alertas(frase,componente,Leitura,idTorre,alertar):
+    if alertar:
         url = "https://api.pipefy.com/graphql"
 
         payload = {"query": "{"mutation { createCard(input: { pipe_id:\"302621694\" fields_attributes:[ {field_id: "nome_da_empresa", field_value: "${nomeEmp}"},{field_id: "descri_o_do_alerta", field_value: "${componente}"},{field_id: "m_tricas", field_value: " ${frase}: ${metrica}"}]})}"}
