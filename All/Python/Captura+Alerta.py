@@ -460,7 +460,7 @@ def VerificarMetricas(Leitura,idComponente,idTorre):
             alertar = True
         else:
             print('Nenhum alerta emitido')
-    alertas(frase,componente,Leitura,Leitura,idTorre,alertar)
+    alertas(frase,componente,Leitura,idTorre,alertar)
 
 def alertas(frase,componente,Leitura,idTorre,alertar):
     if alertar:
