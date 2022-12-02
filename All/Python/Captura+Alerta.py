@@ -242,18 +242,13 @@ def BuscarTorres(fkEmpresa):
 
 
 def BuscarNomeEmp(fkEmpresa):
-        try:
+    try:
         crsr.execute('''
-    SELECT idTorre FROM Torre WHERE fkEmpresa = ?
+    SELECT Nome FROM Empresa WHERE idEmpresa = ?
     ''', fkEmpresa)
         # Executando comando SQL)
-        idTorres = crsr.fetchall()
-        BuscarNomeEmp(fkEmpresa)
-        BuscarMetricas(2,fkEmpresa)
-        BuscarMetricas(5,fkEmpresa)
-        BuscarMetricas(9,fkEmpresa)
-        BuscarMetricas(12,fkEmpresa)
-        EscolherTorres(idTorres)
+        global nomeEmp
+        nomeEmp = crsr.fetchone()
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
