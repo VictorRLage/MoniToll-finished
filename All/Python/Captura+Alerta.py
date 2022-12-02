@@ -374,8 +374,7 @@ def InserirLeitura(Codigo,Nome, idComponente, idTorre):
         exec(Nome + " = " + Codigo, globals())
         var_leitura = globals()[Nome]
         if Nome == 'processadores_nucleo_porcentagem':
-            
-            var_leitura2 = mean(var_leitura)
+            var_leitura2 = round(mean(var_leitura), 2)
         elif Nome == 'pacotes_perdidos_porcentagem':
             print('caiu no elif 1')
             var_leitura2 = round((((pacotes_perdidos_porcentagem[1] - pacotes_perdidos_porcentagem[0])/pacotes_perdidos_porcentagem[1])*100), 1)
