@@ -467,7 +467,7 @@ def alertas(frase,componente,Leitura,idTorre,alertar):
         print(f'Alerta no componente {componente}: {frase} - {Leitura}%')
         url = "https://api.pipefy.com/graphql"
 
-        payload = {"query": "mutation {createCard(input: { pipe_id:\"302621694\" fields_attributes:[ {field_id: \"nome_da_empresa\", field_value: \"%s\"},{field_id: \"servidor\", field_value: \"%s\"},{field_id: \"descri_o_do_alerta\", field_value: \"%s\"},{field_id: \"m_tricas\", field_value: \"%s: %s\"}]})}" % (nomeEmp,idTorre,componente,frase,Leitura)}
+        payload = {"query": "mutation {createCard(input: { pipe_id:\"302621694\" fields_attributes:[ {field_id: \"nome_da_empresa\", field_value: \"%s\"},{field_id: \"servidor\", field_value: \"%s\"},{field_id: \"descri_o_do_alerta\", field_value: \"%s\"},{field_id: \"m_tricas\", field_value: \"%s: %s\"}]})  {clientMutationId card {id title }}}" % (nomeEmp,idTorre,componente,frase,Leitura)}
         
         headers = {
             "accept": "application/json",
