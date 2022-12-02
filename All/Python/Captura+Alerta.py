@@ -470,9 +470,10 @@ def alertas(frase,componente,Leitura,idTorre,alertar):
         payload = {"query": "mutation {createCard(input: { pipe_id:\"302621694\" fields_attributes:[ {field_id: \"nome_da_empresa\", field_value: \"%s\"},{field_id: \"servidor\", field_value: \"%s\"},{field_id: \"descri_o_do_alerta\", field_value: \"%s\"},{field_id: \"m_tricas\", field_value: \"%s: %s\"}]})}" % (nomeEmp,idTorre,componente,frase,Leitura)}
         
         headers = {
-            "Authorizarion": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjozMDIwOTE4NzAsImVtYWlsIjoicmVuYXRvLnRpZXJub0BzcHRlY2guc2Nob29sIiwiYXBwbGljYXRpb24iOjMwMDIwMDc5OX19.u1OD3vfD6im7FYV9owyD6kVPdstkeU3_1tX-WJdZz0Pf5VM8QZ2VEO6vEye9ht82VD7t2bnBqMwtuWywW0rjEg",
             "accept": "application/json",
-            "content-type": "application/json"
+            "content-type": "application/json",
+            "authorizarion": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjozMDIwOTE4NzAsImVtYWlsIjoicmVuYXRvLnRpZXJub0BzcHRlY2guc2Nob29sIiwiYXBwbGljYXRpb24iOjMwMDIwMDc5OX19.u1OD3vfD6im7FYV9owyD6kVPdstkeU3_1tX-WJdZz0Pf5VM8QZ2VEO6vEye9ht82VD7t2bnBqMwtuWywW0rjEg"
+
         }
         # print(payload)
 
