@@ -9,6 +9,7 @@ import mysql.connector
 from mysql.connector import errorcode
 from errno import errorcode
 import subprocess
+import requests
 
 # Bloco pegar serial id
 byte_SerialIdAtual = subprocess.check_output(
@@ -212,6 +213,7 @@ def ValidarLogin(email, senha):
         global v_login
         v_login = True
         BuscarTorres(fkEmpresa)
+        
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
@@ -389,6 +391,9 @@ def InserirLeitura(Codigo,Nome, idComponente, idTorre):
 
 #
 def VerificarMetricas(Leitura,idComponente,idTorre):
+    alertar = 0
+    frase = ''
+    componente = ''
     if idComponente == 2:
         if Leitura > int(m_cpu[0][0]) and Leitura < int(m_cpu[0][1]):
             print(f'''
@@ -397,6 +402,9 @@ def VerificarMetricas(Leitura,idComponente,idTorre):
             Componente: CPU
             Torre: {idTorre}
             ''')
+            frase = 'Alerta'
+            componente = 'CPU'
+            alertar = 1
         elif Leitura > int(m_cpu[0][1]) and Leitura < int(m_cpu[0][2]):
             print(f'''
             Alerta: Acima de Atencão - {int(m_cpu[0][1])}%
@@ -404,6 +412,9 @@ def VerificarMetricas(Leitura,idComponente,idTorre):
             Componente: CPU
             Torre: {idTorre}
             ''')
+            frase = 'Perigo'
+            componente = 'CPU'
+            alertar = 1
         elif Leitura > int(m_cpu[0][2]):
             print(f'''
             Alerta: Acima de Atencão - {int(m_cpu[0][2])}%
@@ -411,7 +422,10 @@ def VerificarMetricas(Leitura,idComponente,idTorre):
             Componente: CPU
             Torre: {idTorre}
             ''')
-            print('Nenhum alerta emitido')
+            frase = 'Crítico'
+            componente = 'CPU'
+            alertar = 1
+        print('Nenhum alerta emitido')
     if idComponente == 5:
         if Leitura > int(m_ram[0][0]) and Leitura < int(m_ram[0][1]):
             print(f'''
@@ -420,6 +434,9 @@ def VerificarMetricas(Leitura,idComponente,idTorre):
             Componente: CPU
             Torre: {idTorre}
             ''')
+            frase = 'Alerta'
+            componente = 'RAM'
+            alertar = 1
         elif Leitura > int(m_ram[0][1]) and Leitura < int(m_ram[0][2]):
             print(f'''
             Alerta: Acima de Atencão - {int(m_ram[0][1])}%
@@ -427,6 +444,9 @@ def VerificarMetricas(Leitura,idComponente,idTorre):
             Componente: CPU
             Torre: {idTorre}
             ''')
+            frase = 'Perigo'
+            componente = 'RAM'
+            alertar = 1
         elif Leitura > int(m_ram[0][2]):
             print(f'''
             Alerta: Acima de Atencão - {int(m_ram[0][2])}%
@@ -434,6 +454,9 @@ def VerificarMetricas(Leitura,idComponente,idTorre):
             Componente: CPU
             Torre: {idTorre}
             ''')
+            frase = 'Crítico'
+            componente = 'RAM'
+            alertar = 1
         print('Nenhum alerta emitido')
     if idComponente == 9:
         if Leitura > int(m_disco[0][0]) and Leitura < int(m_disco[0][1]):
@@ -443,6 +466,9 @@ def VerificarMetricas(Leitura,idComponente,idTorre):
             Componente: CPU
             Torre: {idTorre}
             ''')
+            frase = 'Alerta'
+            componente = 'Disco'
+            alertar = 1
         elif Leitura > int(m_disco[0][1]) and Leitura < int(m_disco[0][2]):
             print(f'''
             Alerta: Acima de Atencão - {int(m_disco[0][1])}%
@@ -450,6 +476,9 @@ def VerificarMetricas(Leitura,idComponente,idTorre):
             Componente: CPU
             Torre: {idTorre}
             ''')
+            frase = 'Perigo'
+            componente = 'Disco'
+            alertar = 1
         elif Leitura > int(m_disco[0][2]):
             print(f'''
             Alerta: Acima de Atencão - {int(m_disco[0][2])}%
@@ -457,6 +486,9 @@ def VerificarMetricas(Leitura,idComponente,idTorre):
             Componente: CPU
             Torre: {idTorre}
             ''')
+            frase = 'Crítico'
+            componente = 'Disco'
+            alertar = 1
         print('Nenhum alerta emitido')
     if idComponente == 12:
         if Leitura > int(m_net[0][0]) and Leitura < int(m_net[0][1]):
@@ -466,6 +498,9 @@ def VerificarMetricas(Leitura,idComponente,idTorre):
             Componente: CPU
             Torre: {idTorre}
             ''')
+            frase = 'Alerta'
+            componente = 'Pacotes'
+            alertar = 1
         elif Leitura > int(m_net[0][1]) and Leitura < int(m_net[0][2]):
             print(f'''
             Alerta: Acima de Atencão - {int(m_net[0][1])}%
@@ -473,6 +508,9 @@ def VerificarMetricas(Leitura,idComponente,idTorre):
             Componente: CPU
             Torre: {idTorre}
             ''')
+            frase = 'Perigo'
+            componente = 'Pacotes'
+            alertar = 1
         elif Leitura > int(m_net[0][2]):
             print(f'''
             Alerta: Acima de Atencão - {int(m_net[0][2])}%
@@ -480,7 +518,25 @@ def VerificarMetricas(Leitura,idComponente,idTorre):
             Componente: CPU
             Torre: {idTorre}
             ''')
+            frase = 'Crítico'
+            componente = 'Pacotes'
+            alertar = 1
         print('Nenhum alerta emitido')
+        alertas(frase,componente,Leitura,idTorre)
+
+def alertas():
+    if alertar == 1:
+        url = "https://api.pipefy.com/graphql"
+
+        payload = {"query": "{"mutation { createCard(input: { pipe_id:\"302621694\" fields_attributes:[ {field_id: "nome_da_empresa", field_value: "${nomeEmp}"},{field_id: "descri_o_do_alerta", field_value: "${componente}"},{field_id: "m_tricas", field_value: " ${frase}: ${metrica}"}]})}"}
+        headers = {
+            "Authorizarion": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjozMDIwOTE4NzAsImVtYWlsIjoicmVuYXRvLnRpZXJub0BzcHRlY2guc2Nob29sIiwiYXBwbGljYXRpb24iOjMwMDIwMDc5OX19.u1OD3vfD6im7FYV9owyD6kVPdstkeU3_1tX-WJdZz0Pf5VM8QZ2VEO6vEye9ht82VD7t2bnBqMwtuWywW0rjEg"
+            "Content-Type": "application/json"
+        }
+
+response = requests.post(url, json=payload, headers=headers)
+
+print(response.text)
         
 
 
