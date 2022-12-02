@@ -396,7 +396,7 @@ def InserirLeitura(Codigo,Nome, idComponente, idTorre):
         except pyodbc.Error as err:
             crsr.rollback()
             print("Something went wrong: {}".format(err))
-        print(f"Leitura componente {idComponente} inserida no banco as :{datahora}")
+        print(f"Leitura componente {idComponente} inserida no banco as {datahora}")
         VerificarMetricas(var_leitura2, idComponente, idTorre)
 
 
@@ -459,7 +459,7 @@ def VerificarMetricas(Leitura,idComponente,idTorre):
             alertar = True
         else:
             print('Nenhum alerta emitido')
-        alertas(frase,componente,Leitura,idTorre,alertar)
+    alertas(frase,componente,Leitura,idTorre,alertar)
 
 def alertas(frase,componente,Leitura,idTorre,alertar):
     # if alertar:
