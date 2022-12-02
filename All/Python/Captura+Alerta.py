@@ -247,8 +247,9 @@ def BuscarNomeEmp(fkEmpresa):
     SELECT Nome FROM Empresa WHERE idEmpresa = ?
     ''', fkEmpresa)
         # Executando comando SQL)
+        nomeEmpFetch = crsr.fetchone()
         global nomeEmp
-        nomeEmp = crsr.fetchone()
+        nomeEmp = nomeEmpFetch[0]
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
@@ -463,19 +464,22 @@ def VerificarMetricas(Leitura,idComponente,idTorre):
 
 def alertas(frase,componente,Leitura,idTorre,alertar):
     if alertar:
+        print(f'Alerta no componente {componente}: {frase} - {Leitura}%')
         url = "https://api.pipefy.com/graphql"
 
-        payload = {f"query": "mutation { createCard(input: { pipe_id:\"302621694\" fields_attributes:[ {field_id: \"nome_da_empresa\", field_value: \"{nomeEmp}\"},{field_id: \"descri_o_do_alerta\", field_value: \"{componente}\"},{field_id: \"m_tricas\", field_value: \"{frase}: {Leitura}\"}]})}"}
+        arroz = '''
+        "query": "mutation {createCard(input: { pipe_id:\"302621694\" fields_attributes:[ {field_id: \"nome_da_empresa\", field_value: \"%s\"},{field_id: \"servidor\", field_value: \"%s\"},{field_id: \"descri_o_do_alerta\", field_value: \"%s\"},{field_id: \"m_tricas\", field_value: \"%s: %s\"}]})}
+        ''' % (nomeEmp,idTorre,componente,frase,Leitura)
+
+        payload = {arroz}
         headers = {
             "Authorizarion": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjozMDIwOTE4NzAsImVtYWlsIjoicmVuYXRvLnRpZXJub0BzcHRlY2guc2Nob29sIiwiYXBwbGljYXRpb24iOjMwMDIwMDc5OX19.u1OD3vfD6im7FYV9owyD6kVPdstkeU3_1tX-WJdZz0Pf5VM8QZ2VEO6vEye9ht82VD7t2bnBqMwtuWywW0rjEg",
             "Content-Type": "application/json"
         }
 
-    response = requests.post(url, json=payload, headers=headers)
+        response = requests.post(url, json=payload, headers=headers)
 
-    print(response.text)
-    
-        
+        print(response.text)
 
 
 
