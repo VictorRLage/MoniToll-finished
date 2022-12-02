@@ -504,6 +504,7 @@
     var vetor_comp = []
     var vetor_alert = []
     var vetor_perigo = []
+    var vetor_critico = []
 
     fetch("/usuarios/ObterCriticidadeTorre", {
       method: "POST",
@@ -529,6 +530,7 @@
             vetor_comp.push(element.componente)
             vetor_alert.push(element.Alerta)
             vetor_perigo.push(element.Perigo)
+            vetor_critico.push(element.Crítico)
           });
         });
         console.log(vetor_comp)
@@ -539,7 +541,7 @@
       console.log("ERRO: " + erro);
     })
 
-    setTimeout(() => PlotarGrafico2(vetor_comp, 'myChartCRITICIDADE', vetor_alert, vetor_perigo), 1000);
+    setTimeout(() => PlotarGrafico2(vetor_comp, 'myChartCRITICIDADE', vetor_alert, vetor_perigo, vetor_critico), 1000);
 
   }
 
@@ -670,7 +672,7 @@
   }
 
 
-  function PlotarGrafico2(vetor_comp, idCanva, vetor_alert, vetor_perigo) {
+  function PlotarGrafico2(vetor_comp, idCanva, vetor_alert, vetor_perigo, vetor_critico) {
 
     var ctx = document.getElementById(idCanva).getContext("2d");
 
@@ -682,8 +684,13 @@
         data: vetor_alert
       }, {
         label: "Perigo",
-        backgroundColor: "Red",
+        backgroundColor: "Orange",
         data: vetor_perigo
+      },
+      {
+        label: "Critico",
+        backgroundColor: "Red",
+        data: vetor_critico
       }]
     };
 
