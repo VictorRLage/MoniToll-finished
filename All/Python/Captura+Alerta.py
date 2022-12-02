@@ -464,7 +464,6 @@ def VerificarMetricas(Leitura,idComponente,idTorre):
 
 def alertas(frase,componente,Leitura,idTorre,alertar):
     if alertar:
-        print(f'Alerta no componente {componente}: {frase} - {Leitura}%')
         url = "https://api.pipefy.com/graphql"
 
         payload = {"query": "mutation {createCard(input: { pipe_id:\"302621694\" fields_attributes:[ {field_id: \"nome_da_empresa\", field_value: \"%s\"},{field_id: \"servidor\", field_value: \"%s\"},{field_id: \"descri_o_do_alerta\", field_value: \"%s\"},{field_id: \"m_tricas\", field_value: \"%s: %s\"}]})  {clientMutationId card {id title }}}" % (nomeEmp,idTorre,componente,frase,Leitura)}
@@ -473,13 +472,24 @@ def alertas(frase,componente,Leitura,idTorre,alertar):
             "accept": "application/json",
             "content-type": "application/json",
             "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjozMDIwOTE4NzAsImVtYWlsIjoicmVuYXRvLnRpZXJub0BzcHRlY2guc2Nob29sIiwiYXBwbGljYXRpb24iOjMwMDIwMDc5OX19.u1OD3vfD6im7FYV9owyD6kVPdstkeU3_1tX-WJdZz0Pf5VM8QZ2VEO6vEye9ht82VD7t2bnBqMwtuWywW0rjEg"
-
         }
         # print(payload)
 
-        response = requests.post(url, json=payload, headers=headers)
+        requests.post(url, json=payload, headers=headers)
+        print(f'Alerta no componente {componente}: {frase} - {Leitura}%')
 
-        print(response.text)
+        try:
+            crsr.execute('''
+            INSERT INTO AlertaRenato (nomeEmp, componente, metrica, criticidade, fkTorre) VALUES (?, ?, ?, ?, ?)
+            ''',nomeEmp, componente, Leitura, frase, idTorre)
+            crsr.commit()
+            print('Chamado aberto!')
+            
+
+        except pyodbc.Error as err:
+            crsr.rollback()
+            print("Something went wrong: {}".format(err))
+        print()
 
 
 
