@@ -230,6 +230,7 @@ def BuscarTorres(fkEmpresa):
     ''', fkEmpresa)
         # Executando comando SQL)
         idTorres = crsr.fetchall()
+        BuscarNomeEmp(fkEmpresa)
         BuscarMetricas(2,fkEmpresa)
         BuscarMetricas(5,fkEmpresa)
         BuscarMetricas(9,fkEmpresa)
@@ -240,6 +241,22 @@ def BuscarTorres(fkEmpresa):
         print("Something went wrong: {}".format(err))
 
 
+def BuscarNomeEmp(fkEmpresa):
+        try:
+        crsr.execute('''
+    SELECT idTorre FROM Torre WHERE fkEmpresa = ?
+    ''', fkEmpresa)
+        # Executando comando SQL)
+        idTorres = crsr.fetchall()
+        BuscarNomeEmp(fkEmpresa)
+        BuscarMetricas(2,fkEmpresa)
+        BuscarMetricas(5,fkEmpresa)
+        BuscarMetricas(9,fkEmpresa)
+        BuscarMetricas(12,fkEmpresa)
+        EscolherTorres(idTorres)
+
+    except pyodbc.Error as err:
+        print("Something went wrong: {}".format(err))
 
 m_cpu = []
 m_ram = []
