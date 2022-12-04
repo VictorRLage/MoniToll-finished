@@ -397,15 +397,14 @@
       console.log("ERRO: " + erro);
     })
 
-
+    setTimeout(() => AparecerGraficos(vetor_Componentes, fkTorre), 2000);
     setTimeout(() =>
       ObterDataHora(sessionStorage.ID_TORRE),
       ObterPorcentagemRAM(sessionStorage.ID_TORRE),
       ObterPorcentagemPercaPacotes(sessionStorage.ID_TORRE),
       ObterPorcentagemCPU(sessionStorage.ID_TORRE),
       ObterPorcentagemDisco(sessionStorage.ID_TORRE)
-      , 2000);
-    setTimeout(() => AparecerGraficos(vetor_Componentes, fkTorre), 3000);
+      , 5000);
 
 
   }
@@ -755,7 +754,7 @@
 
   // function verificarInternet(metrica,) {
   //   var frase = ""
-  //   // incluir uma nova medida de temperatura  
+  //   // incluir uma nova medida de temperatura
   //   if (metrica > vetor_net[0] && metrica < vetor_net[0]) {
   //     frase = "Alerta: Alguns pacotes estão sendo perdidos! Porcentagem de perda de pacotes: "
   //     console.log('Cheguei aqui')
@@ -768,7 +767,7 @@
 
   // function verificarRam(metrica) {
   //   var frase = ""
-  //   // incluir uma nova medida de temperatura  
+  //   // incluir uma nova medida de temperatura
   //   if (metrica > vetor_ram[0] && metrica < vetor_ram[1]) {
   //     frase = "Alerta: RAM sobrecarregando! Porcentagem de uso: "
   //     console.log('Cheguei aqui')
@@ -781,7 +780,7 @@
 
   // function verificarCpu(metrica) {
   //   var frase = ""
-  //   // incluir uma nova medida de temperatura  
+  //   // incluir uma nova medida de temperatura
   //   if (metrica > vetor_cpu[0] && metrica < vetor_cpu[1]) {
   //     frase = "Alerta: CPU sobrecarregando! Porcentagem de uso: "
   //     console.log('Cheguei aqui')
@@ -794,7 +793,7 @@
 
   // function verificarDisco(metrica) {
   //   var frase = ""
-  //   // incluir uma nova medida de temperatura  
+  //   // incluir uma nova medida de temperatura
   //   if (metrica > vetor_disco[0] && metrica <= vetor_disco[1]) {
   //     frase = "Alerta: Disco sobrecarregando! Porcentagem de uso: "
   //     console.log('Cheguei aqui')
