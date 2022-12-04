@@ -164,6 +164,10 @@ core = data['coretemp']
 item = core[0]
 global tempcpu
 tempcpu = item.current
+mae = data['acpitz']
+item2 = mae[0]
+global placa_mae
+placa_mae = item2.current
 
 
 def teste():
