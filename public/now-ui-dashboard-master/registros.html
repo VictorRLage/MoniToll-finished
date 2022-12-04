@@ -22,17 +22,17 @@
   <link href="assets/demo/demo.css" rel="stylesheet" />
 </head>
 
-<body onload="ObterDados(sessionStorage.ID_TORRE)" class="">
+<body onload="ObterDados()" class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="orange">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
       <div class="logo">
-        <a href="../../index.html" class="simple-text logo-mini">
+        <a onclick="Logout()" href="../../index.html" class="simple-text logo-mini">
           MT
         </a>
-        <a href="../../index.html" class="simple-text logo-normal">
+        <a onclick="Logout()" href="../../index.html" class="simple-text logo-normal">
           MoniToll
         </a>
       </div>
@@ -44,7 +44,7 @@
               <p class="maior">Dashboard</p>
             </a>
           </li>
-          <li class="active">
+          <li class=" active">
             <a href="registros.html">
               <i class="now-ui-icons design_bullet-list-67"></i>
               <p class="maior">Registros</p>
@@ -56,13 +56,22 @@
               <p class="maior">Clima Tempo</p>
             </a>
           </li>
+          </li>
           <li id="processos">
 
+          </li>
+          <li id="temperatura">
           </li>
           <li>
             <a href="metricas.html">
               <i class="now-ui-icons ui-1_bell-53"></i>
               <p class="maior">Métricas</p>
+            </a>
+          </li>
+          <li>
+            <a href="dashboardAlertas.html">
+              <i class="now-ui-icons business_chart-pie-36"></i>
+              <p class="maior">Alertas</p>
             </a>
           </li>
           <li>
@@ -95,7 +104,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand maior">Registros</a>
+            <a class="navbar-brand maior">Dashboard</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
             aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -330,8 +339,9 @@
 
 <script>
   var vetor_Componentes = []
-  function ObterDados(fkTorre) {
+  function ObterDados() {
     var nome = sessionStorage.NOME_USUARIO
+    var fkTorre = sessionStorage.ID_TORRE
     var perfil;
     if (sessionStorage.FK_PERFIL == 2) {
       perfil = 'Adm'
@@ -341,23 +351,6 @@
     }
     BemVindo.innerHTML = `Bem vindo, ${nome}.<br> ${perfil}`
 
-    setTimeout(() => ObterRegistros(fkTorre), 1000);
-
-  }
-
-
-</script>
-
-<script>
-  function Logout() {
-    sessionStorage.clear();
-  }
-</script>
-
-<script>
-  var vetor_Componentes = []
-  var componente;
-  function ObterRegistros(fkTorre) {
     fetch("/usuarios/ObterComponentes", {
       method: "POST",
       headers: {
@@ -380,8 +373,11 @@
             vetor_Componentes.push(element.fkComponente)
           });
           vetor_Componentes.forEach(element => {
-            if (element == 25){
+            if (element == 25) {
               processos.innerHTML = `<a href="processos.html" ><i class="now-ui-icons loader_gear"></i><p class="maior">Processos</p></a>`
+            }
+            if (element == 22) {
+              temperatura.innerHTML = `<a href="temperatura.html" ><i class="now-ui-icons ui-2_settings-90"></i><p class="maior">Temperatura</p></a>`
             }
           });
         });
@@ -394,6 +390,18 @@
 
   }
 
+
+</script>
+
+<script>
+  function Logout() {
+    sessionStorage.clear();
+  }
+</script>
+
+<script>
+  var componente;
+
   function PlotarRegistro(fkTorre) {
     fetch(`/medidas/Registro/${fkTorre}/${vetor_Componentes.length}`, { cache: 'no-store' }).then(function (response) {
       if (response.ok) {
@@ -402,29 +410,29 @@
           console.log(resposta)
           resposta.reverse();
           resposta.forEach(element => {
-            if (element.fkComponente == 1){
+            if (element.fkComponente == 1) {
               componente = "Quantidade de processadores"
-            } else if (element.fkComponente == 2){
+            } else if (element.fkComponente == 2) {
               componente = "% uso processadores"
-            } else if (element.fkComponente == 3){
+            } else if (element.fkComponente == 3) {
               componente = "Memória Ram Total"
-            } else if (element.fkComponente == 4){
+            } else if (element.fkComponente == 4) {
               componente = "Memória Ram em uso"
-            } else if (element.fkComponente == 5){
+            } else if (element.fkComponente == 5) {
               componente = "% uso da memória Ram"
-            } else if (element.fkComponente == 6){
+            } else if (element.fkComponente == 6) {
               componente = "Memória do disco total"
-            } else if (element.fkComponente == 7){
+            } else if (element.fkComponente == 7) {
               componente = "Memória do disco em uso"
-            } else if (element.fkComponente == 8){
+            } else if (element.fkComponente == 8) {
               componente = "Memória do disco livre"
-            } else if (element.fkComponente == 9){
+            } else if (element.fkComponente == 9) {
               componente = "% uso memória disco"
-            } else if (element.fkComponente == 10){
+            } else if (element.fkComponente == 10) {
               componente = "Pacotes enviados"
-            }else if (element.fkComponente == 11){
+            } else if (element.fkComponente == 11) {
               componente = "Pacotes recebidos"
-            }else if (element.fkComponente == 12){
+            } else if (element.fkComponente == 12) {
               componente = "% pacotes perdidos"
             }
 

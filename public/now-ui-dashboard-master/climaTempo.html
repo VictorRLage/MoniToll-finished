@@ -42,7 +42,7 @@
             </div>
             <div class="sidebar-wrapper" id="sidebar-wrapper">
                 <ul class="nav">
-                    <li >
+                    <li>
                         <a href="dashboard.html">
                             <i class="now-ui-icons design_app"></i>
                             <p class="maior">Dashboard</p>
@@ -54,14 +54,17 @@
                             <p class="maior">Registros</p>
                         </a>
                     </li>
-                    <li class="active ">
+                    <li class=" active">
                         <a href="climaTempo.html">
-                          <i class="now-ui-icons objects_umbrella-13"></i>
-                          <p class="maior">Clima Tempo</p>
+                            <i class="now-ui-icons objects_umbrella-13"></i>
+                            <p class="maior">Clima Tempo</p>
                         </a>
-                      </li>
+                    </li>
+                    </li>
                     <li id="processos">
 
+                    </li>
+                    <li id="temperatura">
                     </li>
                     <li>
                         <a href="metricas.html">
@@ -71,10 +74,10 @@
                     </li>
                     <li>
                         <a href="dashboardAlertas.html">
-                          <i class="now-ui-icons business_chart-pie-36"></i>
-                          <p class="maior">Alertas</p>
+                            <i class="now-ui-icons business_chart-pie-36"></i>
+                            <p class="maior">Alertas</p>
                         </a>
-                      </li>
+                    </li>
                     <li>
                         <a href="https://app.pipefy.com/public/form/JuN9i3P6">
                             <i class="now-ui-icons travel_info"></i>
@@ -165,7 +168,8 @@
                                 </span>
                             </div>
                             <div class="f">
-                                <span class="trocar"><img src="./imagem/Frame (1).png"  onclick="obterDadosClima()"></span>
+                                <span class="trocar"><img src="./imagem/Frame (1).png"
+                                        onclick="obterDadosClima()"></span>
                                 <span class="img">
                                     <img id="imgClima" src=>
                                 </span>
@@ -181,30 +185,30 @@
 
                         </div>
                         <div class="card_2" onclick="obterDadosSemana()">
-                            <div class="a" >
+                            <div class="a">
                                 <p id="div_a"> Sabado</p>
                                 <span class="img_s">
-                                    <img id="imgClima_a" src="" >
+                                    <img id="imgClima_a" src="">
                                     <span class="valor">
-                                    <p  id="max_a">maz</p> 
-                                    <p  id="min_a">min</p>
+                                        <p id="max_a">maz</p>
+                                        <p id="min_a">min</p>
                                     </span>
                                 </span>
-                                
+
                                 <p class="texto_p" id="climatexto_a" style="text-align:center">
                                     Chuvoso
                                 </p>
-                                </div>
+                            </div>
                             <div class="b">
                                 <p id="div_b">Domingo</p>
                                 <span class="img_s">
-                                    <img id="imgClima_b" src="" >
+                                    <img id="imgClima_b" src="">
                                     <span class="valor">
-                                    <p  id="max_b">maz</p> 
-                                    <p  id="min_b">min</p>
+                                        <p id="max_b">maz</p>
+                                        <p id="min_b">min</p>
                                     </span>
                                 </span>
-                                
+
                                 <p class="texto_p" id="climatexto_b" style="text-align:center">
                                     Chuvoso
                                 </p>
@@ -212,13 +216,13 @@
                             <div class="c">
                                 <p id="div_c">Segunda-Feira</p>
                                 <span class="img_s">
-                                    <img id="imgClima_c" src="" >
+                                    <img id="imgClima_c" src="">
                                     <span class="valor">
-                                    <p  id="max_c">max</p> 
-                                    <p  id="min_c">min</p>
+                                        <p id="max_c">max</p>
+                                        <p id="min_c">min</p>
                                     </span>
                                 </span>
-                                
+
                                 <p class="texto_p" id="climatexto_c" style="text-align:center">
                                     Chuvoso
                                 </p>
@@ -226,13 +230,13 @@
                             <div class="d">
                                 <p id="div_d">Terça-Feira</p>
                                 <span class="img_s">
-                                    <img id="imgClima_d" src="" >
+                                    <img id="imgClima_d" src="">
                                     <span class="valor">
-                                    <p  id="max_d">maz</p> 
-                                    <p  id="min_d">min</p>
+                                        <p id="max_d">maz</p>
+                                        <p id="min_d">min</p>
                                     </span>
                                 </span>
-                                
+
                                 <p class="texto_p" id="climatexto_d" style="text-align:center">
                                     Chuvoso
                                 </p>
@@ -240,13 +244,13 @@
                             <div class="g">
                                 <p id="div_g">Quarta-Feira</p>
                                 <span class="img_s">
-                                    <img id="imgClima_g" src="" >
+                                    <img id="imgClima_g" src="">
                                     <span class="valor">
-                                    <p  id="max_g">maz</p> 
-                                    <p  id="min_g">min</p>
+                                        <p id="max_g">maz</p>
+                                        <p id="min_g">min</p>
                                     </span>
                                 </span>
-                                
+
                                 <p class="texto_p" id="climatexto_g" style="text-align:center">
                                     Chuvoso
                                 </p>
@@ -341,15 +345,15 @@
     const open = document.getElementById('AddUsuario')
     const modal_container = document.getElementById('modal_container')
     const close = document.getElementById('close')
-  
-  
+
+
     open.addEventListener('click', () => { modal_container.classList.add('show') });
     close.addEventListener('click', () => { modal_container.classList.remove('show') });
-  
+
     const modal_container_aviso = document.getElementById('modal_container_aviso')
     const close_aviso = document.getElementById('close_aviso')
     close_aviso.addEventListener('click', () => { modal_container_aviso.classList.remove('show') });
-  </script>
+</script>
 
 <script>
     function CadastrarUsuario() {
@@ -412,6 +416,7 @@
 <script>
     var vetor_Componentes = []
     var nome = sessionStorage.NOME_USUARIO
+    var fkTorre = sessionStorage.ID_TORRE
 
     var perfil;
     if (sessionStorage.FK_PERFIL == 2) {
@@ -421,6 +426,41 @@
         perfil = 'Fun'
     }
     BemVindo.innerHTML = `Bem vindo, ${nome}.<br> ${perfil}`
+
+    fetch("/usuarios/ObterComponentes", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            fkTorreServer: fkTorre,
+        })
+    }).then(function (resposta) {
+        console.log("ESTOU NO THEN DO entrar()!")
+
+        if (resposta.ok) {
+            console.log(resposta);
+
+            resposta.json().then(json => {
+                console.log(json);
+                console.log(JSON.stringify(json));
+
+                json.forEach(element => {
+                    vetor_Componentes.push(element.fkComponente)
+                });
+                vetor_Componentes.forEach(element => {
+                    if (element == 25) {
+                        processos.innerHTML = `<a href="processos.html" ><i class="now-ui-icons loader_gear"></i><p class="maior">Processos</p></a>`
+                    }
+                    if (element == 22) {
+                        temperatura.innerHTML = `<a href="temperatura.html" ><i class="now-ui-icons ui-2_settings-90"></i><p class="maior">Temperatura</p></a>`
+                    }
+                });
+            });
+        }
+    }).catch(function (erro) {
+        console.log("ERRO: " + erro);
+    })
 </script>
 
 <script>
@@ -478,23 +518,23 @@
                     min_c.innerHTML = resposta[2].climaMin + ' min.';
                     min_d.innerHTML = resposta[3].climaMin + ' min.';
                     min_g.innerHTML = resposta[4].climaMin + ' min.';
-            
+
                     //texto div_a
                     climatexto_a.innerHTML = resposta[0].climaTexto
 
                     if (resposta[0].climaTexto == "Chuvoso") {
                         imgClima_a.src = "./imagem/chuvoso.png";
                     }
-                    if (resposta[0].climaTexto == "Ensolarado" ) {
+                    if (resposta[0].climaTexto == "Ensolarado") {
                         imgClima_a.src = "./imagem/ensolarado.png";
                     }
-                    if(resposta[0].climaTexto == "Predominantemente nublado, com tempestades" || resposta[0].climaTexto == "Parcialmente nublado, com tempestades" ){
+                    if (resposta[0].climaTexto == "Predominantemente nublado, com tempestades" || resposta[0].climaTexto == "Parcialmente nublado, com tempestades") {
                         imgClima_a.src = "./imagem/parcialmente_temp.png";
                     }
-                    if(resposta[0].climaTexto == "Parcialmente ensolarado"){
+                    if (resposta[0].climaTexto == "Parcialmente ensolarado") {
                         imgClima_a.src = "./imagem/parcialmente_sol.png"
                     }
-                    if(resposta[0].climaTexto == "Tempestade" || resposta[0].climaTexto == "Tempestades"){
+                    if (resposta[0].climaTexto == "Tempestade" || resposta[0].climaTexto == "Tempestades") {
                         imgClima_a.src = "./imagem/tempestade.png"
                     }
 
@@ -504,16 +544,16 @@
                     if (resposta[1].climaTexto == "Chuvoso") {
                         imgClima_b.src = "./imagem/chuvoso.png";
                     }
-                    if (resposta[1].climaTexto == "Ensolarado" ) {
+                    if (resposta[1].climaTexto == "Ensolarado") {
                         imgClima_b.src = "./imagem/ensolarado.png";
                     }
-                    if(resposta[1].climaTexto == "Predominantemente nublado, com tempestades" || resposta[1].climaTexto == "Parcialmente nublado, com tempestades" ){
+                    if (resposta[1].climaTexto == "Predominantemente nublado, com tempestades" || resposta[1].climaTexto == "Parcialmente nublado, com tempestades") {
                         imgClima_b.src = "./imagem/parcialmente_temp.png";
                     }
-                    if(resposta[1].climaTexto == "Parcialmente ensolarado"){
+                    if (resposta[1].climaTexto == "Parcialmente ensolarado") {
                         imgClima_b.src = "./imagem/parcialmente_sol.png"
                     }
-                    if(resposta[1].climaTexto == "Tempestade" || resposta[1].climaTexto == "Tempestades"){
+                    if (resposta[1].climaTexto == "Tempestade" || resposta[1].climaTexto == "Tempestades") {
                         imgClima_b.src = "./imagem/tempestade.png"
                     }
 
@@ -523,38 +563,38 @@
                     if (resposta[2].climaTexto == "Chuvoso") {
                         imgClima_c.src = "./imagem/chuvoso.png";
                     }
-                    if (resposta[2].climaTexto == "Ensolarado" ) {
+                    if (resposta[2].climaTexto == "Ensolarado") {
                         imgClima_c.src = "./imagem/ensolarado.png";
                     }
-                    if(resposta[2].climaTexto == "Predominantemente nublado, com tempestades" || resposta[2].climaTexto == "Parcialmente nublado, com tempestades" ){
+                    if (resposta[2].climaTexto == "Predominantemente nublado, com tempestades" || resposta[2].climaTexto == "Parcialmente nublado, com tempestades") {
                         imgClima_c.src = "./imagem/parcialmente_temp.png";
                     }
-                    if(resposta[2].climaTexto == "Parcialmente ensolarado"){
+                    if (resposta[2].climaTexto == "Parcialmente ensolarado") {
                         imgClima_c.src = "./imagem/parcialmente_sol.png"
                     }
-                    if(resposta[2].climaTexto == "Tempestade" || resposta[2].climaTexto == "Tempestades"){
+                    if (resposta[2].climaTexto == "Tempestade" || resposta[2].climaTexto == "Tempestades") {
                         imgClima_c.src = "./imagem/tempestade.png"
                     }
 
                     //texto div_d
-                     climatexto_d.innerHTML = resposta[3].climaTexto
+                    climatexto_d.innerHTML = resposta[3].climaTexto
 
                     if (resposta[3].climaTexto == "Chuvoso") {
                         imgClima_d.src = "./imagem/chuvoso.png";
                     }
-                    if (resposta[3].climaTexto == "Ensolarado" ) {
+                    if (resposta[3].climaTexto == "Ensolarado") {
                         imgClima_d.src = "./imagem/ensolarado.png";
                     }
-                    if(resposta[3].climaTexto == "Predominantemente nublado, com tempestades" || resposta[3].climaTexto == "Parcialmente nublado, com tempestades" ){
+                    if (resposta[3].climaTexto == "Predominantemente nublado, com tempestades" || resposta[3].climaTexto == "Parcialmente nublado, com tempestades") {
                         imgClima_d.src = "./imagem/parcialmente_temp.png";
                     }
-                    if(resposta[3].climaTexto == "Parcialmente ensolarado"){
+                    if (resposta[3].climaTexto == "Parcialmente ensolarado") {
                         imgClima_d.src = "./imagem/parcialmente_sol.png"
                     }
-                    if(resposta[3].climaTexto == "Tempestade" || resposta[3].climaTexto == "Tempestades"){
+                    if (resposta[3].climaTexto == "Tempestade" || resposta[3].climaTexto == "Tempestades") {
                         imgClima_d.src = "./imagem/tempestade.png"
                     }
-                    if(resposta[3].climaTexto == "Nublado"){
+                    if (resposta[3].climaTexto == "Nublado") {
                         imgClima_d.src = "./imagem/nublado.png"
                     }
 
@@ -564,19 +604,19 @@
                     if (resposta[4].climaTexto == "Chuvoso") {
                         imgClima_g.src = "./imagem/chuvoso.png";
                     }
-                    if (resposta[4].climaTexto == "Ensolarado" ) {
+                    if (resposta[4].climaTexto == "Ensolarado") {
                         imgClima_g.src = "./imagem/ensolarado.png";
                     }
-                    if(resposta[4].climaTexto == "Predominantemente nublado, com tempestades" || resposta[4].climaTexto == "Parcialmente nublado, com tempestades" ){
+                    if (resposta[4].climaTexto == "Predominantemente nublado, com tempestades" || resposta[4].climaTexto == "Parcialmente nublado, com tempestades") {
                         imgClima_g.src = "./imagem/parcialmente_temp.png";
                     }
-                    if(resposta[4].climaTexto == "Parcialmente ensolarado"){
+                    if (resposta[4].climaTexto == "Parcialmente ensolarado") {
                         imgClima_g.src = "./imagem/parcialmente_sol.png"
                     }
-                    if(resposta[4].climaTexto == "Tempestade" || resposta[4].climaTexto == "Tempestades"){
+                    if (resposta[4].climaTexto == "Tempestade" || resposta[4].climaTexto == "Tempestades") {
                         imgClima_g.src = "./imagem/tempestade.png"
                     }
-                    if(resposta[4].climaTexto == "Nublado"){
+                    if (resposta[4].climaTexto == "Nublado") {
                         imgClima_g.src = "./imagem/nublado.png"
                     }
 
@@ -621,7 +661,7 @@
                     if (resposta.textoClima == "Parcialmente ensolarado") {
                         imgClima.src = "/imagem/parcialmente_sol.png"
                     }
-                    if(resposta.textoClima == "Tempestade" || resposta.textoClima == "Tempestades"){
+                    if (resposta.textoClima == "Tempestade" || resposta.textoClima == "Tempestades") {
                         imgClima.src = "imagem/tempestade.png"
                     }
 

@@ -22,129 +22,129 @@
   <link href="assets/demo/demo.css" rel="stylesheet" />
 </head>
 
-<body onload="ObterDados(sessionStorage.ID_TORRE)">
-  <div class="wrapper ">
-    <div class="sidebar" data-color="orange">
-      <!--
-        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
-    -->
-      <div class="logo">
-        <a onclick="Logout()" href="../../index.html" class="simple-text logo-mini">
-          MT
-        </a>
-        <a onclick="Logout()" href="../../index.html" class="simple-text logo-normal">
-          MoniToll
-        </a>
-      </div>
-      <div class="sidebar-wrapper" id="sidebar-wrapper">
-        <ul class="nav">
-          <li class="active ">
-            <a href="dashboard.html">
-              <i class="now-ui-icons design_app"></i>
-              <p class="maior">Dashboard</p>
+<body onload="ObterDados(sessionStorage.ID_TORRE)" class="">
+    <div class="wrapper ">
+        <div class="sidebar" data-color="orange">
+          <!--
+            Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+        -->
+          <div class="logo">
+            <a onclick="Logout()" href="../../index.html" class="simple-text logo-mini">
+              MT
             </a>
-          </li>
-          <li>
-            <a href="registros.html">
-              <i class="now-ui-icons design_bullet-list-67"></i>
-              <p class="maior">Registros</p>
+            <a onclick="Logout()" href="../../index.html" class="simple-text logo-normal">
+              MoniToll
             </a>
-          </li>
-          <li>
-            <a href="climaTempo.html">
-              <i class="now-ui-icons objects_umbrella-13"></i>
-              <p class="maior">Clima Tempo</p>
-            </a>
-          </li>
-          </li>
-          <li id="processos">
-
-          </li>
-          <li id="temperatura">
-
-          </li>
-          <li>
-            <a href="metricas.html">
-              <i class="now-ui-icons ui-1_bell-53"></i>
-              <p class="maior">Métricas</p>
-            </a>
-          </li>
-          <li>
-            <a href="dashboardAlertas.html">
-              <i class="now-ui-icons business_chart-pie-36"></i>
-              <p class="maior">Alertas</p>
-            </a>
-          </li>
-          <li>
-            <a href="https://app.pipefy.com/public/form/JuN9i3P6">
-              <i class="now-ui-icons travel_info"></i>
-              <p class="maior">Suporte</p>
-            </a>
-          </li>
-          <li id="AddUsuario">
-
-          </li>
-          <li class="active-pro">
-            <a href="../../login.html">
-              <i class="now-ui-icons sport_user-run"></i>
-              <p class="maior" onclick="Logout()">Sair</p>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="main-panel" id="main-panel">
-      <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
-        <div class="container-fluid">
-          <div class="navbar-wrapper">
-            <div class="navbar-toggle">
-              <button type="button" class="navbar-toggler">
-                <span class="navbar-toggler-bar bar1"></span>
-                <span class="navbar-toggler-bar bar2"></span>
-                <span class="navbar-toggler-bar bar3"></span>
-              </button>
-            </div>
-            <a class="navbar-brand maior">Dashboard</a>
           </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
-            aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navigation">
-            <ul class="navbar-nav">
-              <li class="nav-item" style="text-align: end; margin-right: 10px;">
-                <span id="BemVindo"></span>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link">
-                  <i class="now-ui-icons users_single-02"></i>
+          <div class="sidebar-wrapper" id="sidebar-wrapper">
+            <ul class="nav">
+              <li>
+                <a href="dashboard.html">
+                  <i class="now-ui-icons design_app"></i>
+                  <p class="maior">Dashboard</p>
                 </a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false">
-                  <i class="now-ui-icons location_world"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Some Actions</span>
-                  </p>
+              <li>
+                <a href="registros.html">
+                  <i class="now-ui-icons design_bullet-list-67"></i>
+                  <p class="maior">Registros</p>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href=""><img src="https://i.imgur.com/cLfSqm3.png"
-                      style="width: 24px;"></img> Português</a>
-                  <a class="dropdown-item" href=""><img src="https://i.imgur.com/lYq0cdt.png" style="width: 24px;">
-                    English</a>
-                  <a class="dropdown-item" href=""><img src="https://i.imgur.com/S5eEVok.png" style="width: 24px;">
-                    Español</a>
-                </div>
+              </li>
+              <li>
+                <a href="climaTempo.html">
+                  <i class="now-ui-icons objects_umbrella-13"></i>
+                  <p class="maior">Clima Tempo</p>
+                </a>
+              </li>
+              </li>
+              <li id="processos">
+    
+              </li>
+              <li class=" active" id="temperatura">
+                <a href="temperatura.html" ><i class="now-ui-icons ui-2_settings-90"></i><p class="maior">Temperatura</p></a>
+              </li>
+              <li>
+                <a href="metricas.html">
+                  <i class="now-ui-icons ui-1_bell-53"></i>
+                  <p class="maior">Métricas</p>
+                </a>
+              </li>
+              <li>
+                <a href="dashboardAlertas.html">
+                  <i class="now-ui-icons business_chart-pie-36"></i>
+                  <p class="maior">Alertas</p>
+                </a>
+              </li>
+              <li>
+                <a href="https://app.pipefy.com/public/form/JuN9i3P6">
+                  <i class="now-ui-icons travel_info"></i>
+                  <p class="maior">Suporte</p>
+                </a>
+              </li>
+              <li id="AddUsuario">
+    
+              </li>
+              <li class="active-pro">
+                <a href="../../login.html">
+                  <i class="now-ui-icons sport_user-run"></i>
+                  <p class="maior" onclick="Logout()">Sair</p>
+                </a>
               </li>
             </ul>
           </div>
         </div>
-      </nav>
-      <!-- End Navbar -->
+        <div class="main-panel" id="main-panel">
+          <!-- Navbar -->
+          <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
+            <div class="container-fluid">
+              <div class="navbar-wrapper">
+                <div class="navbar-toggle">
+                  <button type="button" class="navbar-toggler">
+                    <span class="navbar-toggler-bar bar1"></span>
+                    <span class="navbar-toggler-bar bar2"></span>
+                    <span class="navbar-toggler-bar bar3"></span>
+                  </button>
+                </div>
+                <a class="navbar-brand maior">Dashboard</a>
+              </div>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-bar navbar-kebab"></span>
+                <span class="navbar-toggler-bar navbar-kebab"></span>
+                <span class="navbar-toggler-bar navbar-kebab"></span>
+              </button>
+              <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                <ul class="navbar-nav">
+                  <li class="nav-item" style="text-align: end; margin-right: 10px;">
+                    <span id="BemVindo"></span>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link">
+                      <i class="now-ui-icons users_single-02"></i>
+                    </a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                      <i class="now-ui-icons location_world"></i>
+                      <p>
+                        <span class="d-lg-none d-md-block">Some Actions</span>
+                      </p>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                      <a class="dropdown-item" href=""><img src="https://i.imgur.com/cLfSqm3.png"
+                          style="width: 24px;"></img> Português</a>
+                      <a class="dropdown-item" href=""><img src="https://i.imgur.com/lYq0cdt.png" style="width: 24px;">
+                        English</a>
+                      <a class="dropdown-item" href=""><img src="https://i.imgur.com/S5eEVok.png" style="width: 24px;">
+                        Español</a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <!-- End Navbar -->
       <div class="panel-header panel-header-sm">
       </div>
       <div class="content">
@@ -166,24 +166,24 @@
           <nav>
             <ul>
               <li>
-                <a onclick="Logout()" href="../../index.html">
+                <a href="../../index.html">
                   MoniToll
                 </a>
               </li>
               <li>
-                <a onclick="Logout()" href="../../sobre.html">
+                <a href="../../sobre.html">
                   Sobre
                 </a>
               </li>
               <li>
-                <a onclick="Logout()" href="../../contato.html">
+                <a href="../../contato.html">
                   Contato
                 </a>
               </li>
             </ul>
           </nav>
           <div class="copyright" id="copyright">
-            &copy; Copyright <a onclick="Logout()" href="../../index.html">MoniToll.</a> Todos os direitos reservados
+            &copy; Copyright <a href="../../index.html">MoniToll.</a> Todos os direitos reservados
           </div>
         </div>
       </footer>
@@ -310,8 +310,6 @@
 
     return false;
 
-
-
   }
 </script>
 
@@ -359,8 +357,6 @@
       console.log("ERRO: " + erro);
     })
 
-
-
     // ---------------------------------  Obter Componentes
     fetch("/usuarios/ObterComponentes", {
       method: "POST",
@@ -387,144 +383,42 @@
             if (element == 25) {
               processos.innerHTML = `<a href="processos.html" ><i class="now-ui-icons loader_gear"></i><p class="maior">Processos</p></a>`
             }
-            if (element == 22) {
-              temperatura.innerHTML = `<a href="temperatura.html" ><i class="now-ui-icons ui-2_settings-90"></i><p class="maior">Temperatura</p></a>`
-            }
           });
         });
       }
     }).catch(function (erro) {
       console.log("ERRO: " + erro);
     })
-
-
     setTimeout(() =>
-      ObterDataHora(sessionStorage.ID_TORRE),
-      ObterPorcentagemRAM(sessionStorage.ID_TORRE),
-      ObterPorcentagemPercaPacotes(sessionStorage.ID_TORRE),
-      ObterPorcentagemCPU(sessionStorage.ID_TORRE),
-      ObterPorcentagemDisco(sessionStorage.ID_TORRE)
+      ObterTemperatura(sessionStorage.ID_TORRE),
+      ObterPlacaMae(sessionStorage.ID_TORRE),
+      ObterDesempenho(sessionStorage.ID_TORRE)
       , 2000);
     setTimeout(() => AparecerGraficos(vetor_Componentes, fkTorre), 3000);
 
-
   }
-
 
   function AparecerGraficos(vetor_Componentes, fkTorre) {
     vetor_Componentes.forEach(element => {
-      if (element == 2) {
-        lista.innerHTML += `<div class="CardGrafico card"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem uso CPU</h4><canvas style="width: 100%; display: block;" id="myChartPUC"></canvas></div>`
-        setTimeout(() => PlotarGrafico(vetor_PorcentagemUsoCPU, sessionStorage.ID_TORRE, 'myChartPUC', 'Porcentagem uso CPU'), 2000);
-      } else if (element == 5) {
-        lista.innerHTML += `<div class="CardGrafico card"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem uso Ram</h4><canvas style="width: 100%; display: block;" id="myChartPUR"></canvas></div>`
-        setTimeout(() => PlotarGrafico(vetor_PorcentagemUsoRam, sessionStorage.ID_TORRE, 'myChartPUR', 'Porcentagem uso Ram'), 2000);
-      } else if (element == 9) {
-        lista.innerHTML += `<div class="CardGrafico card"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem uso Disco</h4><canvas style="width: 100%; display: block;" id="myChartPUD"></canvas></div>`
-        setTimeout(() => PlotarGrafico(vetor_PorcentagemUsoDisco, sessionStorage.ID_TORRE, 'myChartPUD', 'Porcentagem uso Disco'), 2000);
-      } else if (element == 12) {
-        lista.innerHTML += `<div class="CardGrafico card"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem pacotes perdidos</h4><canvas style="width: 100%; display: block;" id="myChartPUP"></canvas></div>`
-        setTimeout(() => PlotarGrafico(vetor_PorcentagemPercaPacotes, sessionStorage.ID_TORRE, 'myChartPUP', 'Porcentagem pacotes perdidos'), 2000);
+    if (element == 22) {
+        lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Temperatura da CPU</h4><canvas style="width: 100%; display: block;" id="myChartPUT"></canvas></div>`
+        setTimeout(() => PlotarGrafico(vetor_Temperatura, sessionStorage.ID_TORRE, 'myChartPUT', 'Temperatura em Celsius'), 2000);
+      }  else if (element == 23) {
+        lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Temperatura da Placa Mãe</h4><canvas style="width: 100%; display: block;" id="myChartPUM"></canvas></div>`
+        setTimeout(() => PlotarGrafico(vetor_PlacaMae, sessionStorage.ID_TORRE, 'myChartPUM', 'Temperatura em Celsius'), 2000);
+      } else if (element == 24) {
+        lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Desempenho CPU</h4><canvas style="width: 100%; display: block;" id="myChartDese"></canvas></div>`
+        setTimeout(() => PlotarGrafico(vetor_PercaDesem, sessionStorage.ID_TORRE, 'myChartDese', 'Perca de Desempenho em %'), 2000);
       }
     });
   }
 </script>
 <script>
   var vetor_DataHora = []
-  var vetor_PorcentagemUsoCPU = []
-  var vetor_PorcentagemUsoRam = []
-  var vetor_PorcentagemUsoDisco = []
-  var vetor_PorcentagemPercaPacotes = []
   var vetor_leituras = []
-
-  function ObterDataHora(fkTorre) {
-    fetch(`/medidas/DataHora/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
-      if (response.ok) {
-        response.json().then(function (resposta) {
-          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-          console.log(resposta)
-          resposta.reverse();
-          resposta.forEach(element => {
-            vetor_DataHora.push(element.DataHora.slice(11))
-          });
-          // PlotarGrafico(resposta, fkTorre);
-        });
-      } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-      }
-    })
-      .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-      });
-  }
-
-  function ObterPorcentagemCPU(fkTorre) {
-    metrica = 50
-    fetch(`/medidas/PorcentagemCPU/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
-      if (response.ok) {
-        response.json().then(function (resposta) {
-          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-          console.log(resposta)
-          resposta.reverse();
-          resposta.forEach(element => {
-            vetor_PorcentagemUsoCPU.push(element.PorcentagemUsoCPU)
-
-          });
-
-          // PlotarGrafico(resposta, fkTorre);
-        });
-      } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-      }
-    })
-      .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-      });
-  }
-
-  function ObterPorcentagemRAM(fkTorre) {
-    fetch(`/medidas/PorcentagemRAM/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
-      metrica = 85
-      if (response.ok) {
-        response.json().then(function (resposta) {
-          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-          console.log(resposta)
-          resposta.reverse();
-          resposta.forEach(element => {
-            vetor_PorcentagemUsoRam.push(element.PorcentagemUsoRam)
-          });
-
-          // PlotarGrafico(resposta, fkTorre);
-        });
-      } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-      }
-    })
-      .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-      });
-  }
-
-  function ObterPorcentagemDisco(fkTorre) {
-    fetch(`/medidas/PorcentagemDisco/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
-      if (response.ok) {
-        response.json().then(function (resposta) {
-          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-          console.log(resposta)
-          resposta.reverse();
-          resposta.forEach(element => {
-            vetor_PorcentagemUsoDisco.push(element.PorcentagemUsoDisco)
-          });
-          // PlotarGrafico(resposta, fkTorre);
-        });
-      } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-      }
-    })
-      .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-      });
-  }
+  var vetor_Temperatura = []
+  var vetor_PlacaMae = []
+  var vetor_PercaDesem= []
 
 
   function ObterPorcentagemPercaPacotes(fkTorre) {
@@ -550,6 +444,74 @@
       });
   }
 
+  function ObterTemperatura(fkTorre) {
+    fetch(`/medidas/Temperatura/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
+      metrica = 49
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+          console.log(resposta)
+          resposta.forEach(element => {
+            vetor_Temperatura.push(element.Temperatura)
+          });
+
+          // PlotarGrafico(resposta, fkTorre);
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+  }
+
+  function ObterPlacaMae(fkTorre) {
+    fetch(`/medidas/PlacaMae/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
+      metrica = 49
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+          console.log(resposta)
+          resposta.forEach(element => {
+            vetor_PlacaMae.push(element.PlacaMae)
+          });
+
+          // PlotarGrafico(resposta, fkTorre);
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+  }
+
+  function ObterDesempenho(fkTorre) {
+    fetch(`/medidas/Desempenho/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
+      metrica = 49
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+          console.log(resposta)
+          resposta.forEach(element => {
+            vetor_PercaDesem.push(element.Desempenho)
+          });
+
+          // PlotarGrafico(resposta, fkTorre);
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+  }
 
   function PlotarGrafico(vetor, fkTorre, idCanva, label) {
     var fkComponenteVar = 0
@@ -702,107 +664,108 @@
 
 </script>
 <script>
-  function Logout() {
-    sessionStorage.clear();
-  }
-</script>
-<script>
-  // vetor_cpu = []
-  // vetor_ram = []
-  // vetor_disco = []
-  // vetor_net = []
-  // function buscarMetrica(fkEmpresa, nmrComponente) {
-  //   fetch(`/medidas/Metrica/buscarMetrica/${fkEmpresa}/${nmrComponente}`, { cache: 'no-store' }).then(function (response) {
-  //     metrica = 15
-  //     if (response.ok) {
-  //       response.json().then(function (resposta) {
-  //         console.log(`Metricas recebidos: ${JSON.stringify(resposta)}`);
-  //         resposta.reverse();
-  //         console.log(resposta)
-  //         resposta.forEach(element => {
-  //           if (element.fkComponente == 2) {
-  //             vetor_cpu.push(element.Normall)
-  //             vetor_cpu.push(element.Atencao)
-  //             vetor_cpu.push(element.Critico)
-  //           } else if (element.fkComponente == 5) {
-  //             vetor_ram.push(element.Normall)
-  //             vetor_ram.push(element.Atencao)
-  //             vetor_ram.push(element.Critico)
-  //           } else if (element.fkComponente == 9) {
-  //             vetor_disco.push(element.Normall)
-  //             vetor_disco.push(element.Atencao)
-  //             vetor_disco.push(element.Critico)
-  //           } else if (element.fkComponente == 12) {
-  //             vetor_net.push(element.Normall)
-  //             vetor_net.push(element.Atencao)
-  //             vetor_net.push(element.Critico)
-  //           }
-  //         });
+    function Logout() {
+      sessionStorage.clear();
+    }
+  </script>
+  <script>
+    // vetor_cpu = []
+    // vetor_ram = []
+    // vetor_disco = []
+    // vetor_net = []
+    // function buscarMetrica(fkEmpresa, nmrComponente) {
+    //   fetch(`/medidas/Metrica/buscarMetrica/${fkEmpresa}/${nmrComponente}`, { cache: 'no-store' }).then(function (response) {
+    //     metrica = 15
+    //     if (response.ok) {
+    //       response.json().then(function (resposta) {
+    //         console.log(`Metricas recebidos: ${JSON.stringify(resposta)}`);
+    //         resposta.reverse();
+    //         console.log(resposta)
+    //         resposta.forEach(element => {
+    //           if (element.fkComponente == 2) {
+    //             vetor_cpu.push(element.Normall)
+    //             vetor_cpu.push(element.Atencao)
+    //             vetor_cpu.push(element.Critico)
+    //           } else if (element.fkComponente == 5) {
+    //             vetor_ram.push(element.Normall)
+    //             vetor_ram.push(element.Atencao)
+    //             vetor_ram.push(element.Critico)
+    //           } else if (element.fkComponente == 9) {
+    //             vetor_disco.push(element.Normall)
+    //             vetor_disco.push(element.Atencao)
+    //             vetor_disco.push(element.Critico)
+    //           } else if (element.fkComponente == 12) {
+    //             vetor_net.push(element.Normall)
+    //             vetor_net.push(element.Atencao)
+    //             vetor_net.push(element.Critico)
+    //           }
+    //         });
+  
+    //         // PlotarGrafico(resposta, fkTorre);
+    //       });
+    //     } else {
+    //       console.error('Nenhum dado encontrado ou erro na API metrica');
+    //     }
+    //   })
+    //     .catch(function (error) {
+    //       console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    //     });
+  
+  
+  
+    // }
+  
+    // function verificarInternet(metrica,) {
+    //   var frase = ""
+    //   // incluir uma nova medida de temperatura  
+    //   if (metrica > vetor_net[0] && metrica < vetor_net[0]) {
+    //     frase = "Alerta: Alguns pacotes estão sendo perdidos! Porcentagem de perda de pacotes: "
+    //     console.log('Cheguei aqui')
+    //     alertas(nome, "Pacotes", metrica, frase)
+    //   } else if (metrica > vetor_net[0]) {
+    //     frase = "Perigo: Muitos Pacotes Perdidos! Porcentagem de perda de pacotes: "
+    //     alertas(nome, "Pacotes", metrica, frase)
+    //   }
+    // }
+  
+    // function verificarRam(metrica) {
+    //   var frase = ""
+    //   // incluir uma nova medida de temperatura  
+    //   if (metrica > vetor_ram[0] && metrica < vetor_ram[1]) {
+    //     frase = "Alerta: RAM sobrecarregando! Porcentagem de uso: "
+    //     console.log('Cheguei aqui')
+    //     alertas(nome, "RAM", metrica, frase)
+    //   } else if (metrica == vetor_ram[2]) {
+    //     frase = "Perigo: RAM está sobrecarregada! Porcentagem de uso: "
+    //     alertas(nome, "RAM", metrica, frase)
+    //   }
+    // }
+  
+    // function verificarCpu(metrica) {
+    //   var frase = ""
+    //   // incluir uma nova medida de temperatura  
+    //   if (metrica > vetor_cpu[0] && metrica < vetor_cpu[1]) {
+    //     frase = "Alerta: CPU sobrecarregando! Porcentagem de uso: "
+    //     console.log('Cheguei aqui')
+    //     alertas(nome, "CPU", metrica, frase)
+    //   } else if (metrica >= vetor_cpu[2]) {
+    //     frase = "Perigo: CPU sobrecarregada! Porcentagem de uso: "
+    //     alertas(nome, "CPU", metrica, frase)
+    //   }
+    // }
+  
+    // function verificarDisco(metrica) {
+    //   var frase = ""
+    //   // incluir uma nova medida de temperatura  
+    //   if (metrica > vetor_disco[0] && metrica <= vetor_disco[1]) {
+    //     frase = "Alerta: Disco sobrecarregando! Porcentagem de uso: "
+    //     console.log('Cheguei aqui')
+    //     alertas(nome, "Disco", metrica, frase)
+    //   } else if (metrica > vetor_disco[2]) {
+    //     frase = "Perigo: Disco sobrecarregado! Porcentagem de uso: "
+    //     alertas(nome, "Disco", metrica, frase)
+    //   }
+    // }
+  
+  </script>
 
-  //         // PlotarGrafico(resposta, fkTorre);
-  //       });
-  //     } else {
-  //       console.error('Nenhum dado encontrado ou erro na API metrica');
-  //     }
-  //   })
-  //     .catch(function (error) {
-  //       console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-  //     });
-
-
-
-  // }
-
-  // function verificarInternet(metrica,) {
-  //   var frase = ""
-  //   // incluir uma nova medida de temperatura  
-  //   if (metrica > vetor_net[0] && metrica < vetor_net[0]) {
-  //     frase = "Alerta: Alguns pacotes estão sendo perdidos! Porcentagem de perda de pacotes: "
-  //     console.log('Cheguei aqui')
-  //     alertas(nome, "Pacotes", metrica, frase)
-  //   } else if (metrica > vetor_net[0]) {
-  //     frase = "Perigo: Muitos Pacotes Perdidos! Porcentagem de perda de pacotes: "
-  //     alertas(nome, "Pacotes", metrica, frase)
-  //   }
-  // }
-
-  // function verificarRam(metrica) {
-  //   var frase = ""
-  //   // incluir uma nova medida de temperatura  
-  //   if (metrica > vetor_ram[0] && metrica < vetor_ram[1]) {
-  //     frase = "Alerta: RAM sobrecarregando! Porcentagem de uso: "
-  //     console.log('Cheguei aqui')
-  //     alertas(nome, "RAM", metrica, frase)
-  //   } else if (metrica == vetor_ram[2]) {
-  //     frase = "Perigo: RAM está sobrecarregada! Porcentagem de uso: "
-  //     alertas(nome, "RAM", metrica, frase)
-  //   }
-  // }
-
-  // function verificarCpu(metrica) {
-  //   var frase = ""
-  //   // incluir uma nova medida de temperatura  
-  //   if (metrica > vetor_cpu[0] && metrica < vetor_cpu[1]) {
-  //     frase = "Alerta: CPU sobrecarregando! Porcentagem de uso: "
-  //     console.log('Cheguei aqui')
-  //     alertas(nome, "CPU", metrica, frase)
-  //   } else if (metrica >= vetor_cpu[2]) {
-  //     frase = "Perigo: CPU sobrecarregada! Porcentagem de uso: "
-  //     alertas(nome, "CPU", metrica, frase)
-  //   }
-  // }
-
-  // function verificarDisco(metrica) {
-  //   var frase = ""
-  //   // incluir uma nova medida de temperatura  
-  //   if (metrica > vetor_disco[0] && metrica <= vetor_disco[1]) {
-  //     frase = "Alerta: Disco sobrecarregando! Porcentagem de uso: "
-  //     console.log('Cheguei aqui')
-  //     alertas(nome, "Disco", metrica, frase)
-  //   } else if (metrica > vetor_disco[2]) {
-  //     frase = "Perigo: Disco sobrecarregado! Porcentagem de uso: "
-  //     alertas(nome, "Disco", metrica, frase)
-  //   }
-  // }
-
-</script>

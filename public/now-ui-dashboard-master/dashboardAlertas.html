@@ -64,19 +64,22 @@
           <li id="processos">
 
           </li>
+          <li id="temperatura">
+
+          </li>
           <li>
             <a href="metricas.html">
               <i class="now-ui-icons ui-1_bell-53"></i>
               <p class="maior">Métricas</p>
             </a>
           </li>
-          <li>
+          <li class=" active">
             <a href="dashboardAlertas.html">
               <i class="now-ui-icons business_chart-pie-36"></i>
               <p class="maior">Alertas</p>
             </a>
           </li>
-          <li class="active ">
+          <li>
             <a href="https://app.pipefy.com/public/form/JuN9i3P6">
               <i class="now-ui-icons travel_info"></i>
               <p class="maior">Suporte</p>
@@ -405,6 +408,9 @@
             if (element == 25) {
               processos.innerHTML = `<a href="processos.html" ><i class="now-ui-icons loader_gear"></i><p class="maior">Processos</p></a>`
             }
+            if (element == 22) {
+              temperatura.innerHTML = `<a href="temperatura.html" ><i class="now-ui-icons ui-2_settings-90"></i><p class="maior">Temperatura</p></a>`
+            }
           });
         });
       }
@@ -445,6 +451,7 @@
           json.forEach(element => {
             vetor_Alertas.push(element.Quantidade)
             vetor_Componentes.push(element.componente)
+            
           });
         });
         console.log(vetor_Alertas)
