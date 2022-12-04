@@ -26,7 +26,6 @@
 <style>
   .containerP {
     max-width: 2000px;
-    margin: 20px auto;
     padding: 15px;
     overflow-y: auto;
     height: 470px;
@@ -157,6 +156,18 @@
   .primeiro {
     margin-top: 45px;
   }
+
+  .lado {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .refresh {
+    margin-right: 33px;
+    font-size: 28px;
+    color: #feb900;
+  }
 </style>
 
 <body>
@@ -166,16 +177,16 @@
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
       <div class="logo">
-        <a href="../../index.html" class="simple-text logo-mini">
+        <a onclick="Logout()" href="../../index.html" class="simple-text logo-mini">
           MT
         </a>
-        <a href="../../index.html" class="simple-text logo-normal">
+        <a onclick="Logout()" href="../../index.html" class="simple-text logo-normal">
           MoniToll
         </a>
       </div>
       <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
-          <li>
+          <li class="active ">
             <a href="dashboard.html">
               <i class="now-ui-icons design_app"></i>
               <p class="maior">Dashboard</p>
@@ -193,16 +204,20 @@
               <p class="maior">Clima Tempo</p>
             </a>
           </li>
-          <li class="active">
-            <a href="processos.html">
-              <i class="now-ui-icons loader_gear"></i>
-              <p class="maior">Processos</p>
-            </a>
+          </li>
+          <li id="processos">
+
           </li>
           <li>
             <a href="metricas.html">
               <i class="now-ui-icons ui-1_bell-53"></i>
               <p class="maior">Métricas</p>
+            </a>
+          </li>
+          <li>
+            <a href="dashboardAlertas.html">
+              <i class="now-ui-icons business_chart-pie-36"></i>
+              <p class="maior">Alertas</p>
             </a>
           </li>
           <li>
@@ -235,7 +250,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand maior">Processos</a>
+            <a class="navbar-brand maior">Dashboard</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
             aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -281,8 +296,10 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card">
-              <div class="card-header">
+              <div class="card-header lado">
                 <h4 class="card-title">Lista de processos</h4>
+                <a onclick="window.location.reload();" href=""><i
+                    class="now-ui-icons arrows-1_refresh-69 refresh"></i></a>
               </div>
               <!-- --------------------------------------------------------------------------------------------------------------------- -->
               <div class="containerP">
@@ -393,7 +410,7 @@
 </body>
 
 <script>
-  
+
   function Logout() {
     sessionStorage.clear();
   }
@@ -512,15 +529,13 @@
       .catch(function (error) {
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
       });
-    setTimeout(() => createTable(), 5000);
-    setTimeout(() => LimparJson(), 10000);
-    setTimeout(() => BuscarProc(fkTorre), 30000);
-  }
-  function LimparJson() {
-    firstFile.length = 0;
+    setTimeout(() => createTable(), 3000);
+    setTimeout(() => botoes(), 4000);
+    setTimeout(() => verificarBotoes(), 5000);
   }
 
   function createTable() {
+    console.log(firstFile)
     var divId = 'dynamic-table';
     var div = document.getElementById(divId);
 
@@ -634,52 +649,9 @@
 
       thead_tr.appendChild(cell);
     });
-    var contador = 0
-    var contador2 = 0
     data.forEach(function (item) {
-      fetch("/usuarios/VerificarProcesso", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          nameServer: item.Nome,
-          fkTorreServer: fkTorre,
-
-        })
-      }).then(function (resposta) {
-
-
-        if (resposta.ok) {
-          if (contador == 0) {
-            contador += 1
-            botoesA.innerHTML += `<div onclick="CadastrarProcessoConfiavel('${item.Nome}')" class="quadrado primeiro qAdd"><i class="adicionar now-ui-icons ui-1_simple-add"></i></div>`
-          } else {
-            botoesA.innerHTML += `<div onclick="CadastrarProcessoConfiavel('${item.Nome}')" class="quadrado qAdd"><i class="adicionar now-ui-icons ui-1_simple-add"></i></div>`
-          }
-        } else {
-          if (contador == 0) {
-            contador += 1
-            botoesA.innerHTML += `<div onclick="CadastrarProcessoConfiavel('${item.Nome}')" class="quadrado primeiro"></div>`
-          } else {
-            botoesA.innerHTML += `<div onclick="CadastrarProcessoConfiavel('${item.Nome}')" class="quadrado"></div>`
-          }
-        }
-      }).catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-
-
-
-      if (contador2 == 0) {
-        contador2 += 1
-        botoesK.innerHTML += `<div onclick="CadastrarProcessoMatar(${item.Pid},'${item.Nome}')" class="quadrado primeiro qKill"><i class="adicionar now-ui-icons ui-1_simple-remove"></i></div>`
-      } else {
-        botoesK.innerHTML += `<div onclick="CadastrarProcessoMatar(${item.Pid},'${item.Nome}')" class="quadrado qKill"><i class="adicionar now-ui-icons ui-1_simple-remove"></i></div>`
-      }
-      
-
-
+      pid = item.Pid
+      nome = item.Nome
       var tbody_tr = document.createElement('tr');
 
       headings.forEach(function (heading) {
@@ -784,58 +756,142 @@
   };
 </script>
 <script>
-  function CadastrarProcessoMatar(pid, name) {
-    var dh = moment()
-    var datahora = dh.format('D/MM/YYYY HH:mm:ss');
-    fetch("/usuarios/CadastrarProcessoMatar", {
+  var contador = 0
+  var contador2 = 0
+  function botoes() {
+    firstFile.forEach(element => {
+      if (contador == 0) {
+        contador += 1
+        botoesA.innerHTML += `<div id="${element.Nome}" onclick="CadastrarProcessoConfiavel('${element.Nome}')" class="quadrado primeiro qAdd"><i class="adicionar now-ui-icons ui-1_simple-add"></i></div>`
+      } else {
+        botoesA.innerHTML += `<div id="${element.Nome}" onclick="CadastrarProcessoConfiavel('${element.Nome}')" class="quadrado qAdd ${element.Nome}"><i class="adicionar now-ui-icons ui-1_simple-add"></i></div>`
+      }
+
+
+      if (contador2 == 0) {
+        contador2 += 1
+        botoesK.innerHTML += `<div onclick="CadastrarProcessoMatar(${element.Pid},'${element.Nome}')" class="quadrado primeiro qKill"><i class="adicionar now-ui-icons ui-1_simple-remove"></i></div>`
+      } else {
+        botoesK.innerHTML += `<div onclick="CadastrarProcessoMatar(${element.Pid},'${element.Nome}')" class="quadrado qKill"><i class="adicionar now-ui-icons ui-1_simple-remove"></i></div>`
+      }
+    });
+  }
+
+  function verificarBotoes(){
+    firstFile.forEach(element => {
+      fetch("/usuarios/VerificarProcesso", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        pidServer: pid,
-        nameServer: name,
-        datahoraServer: datahora,
+        nameServer: element.Nome,
         fkTorreServer: fkTorre,
+
       })
     }).then(function (resposta) {
-
-      console.log("resposta: ", resposta);
-
       if (resposta.ok) {
-        console.log('Inseriu o processo na tabela matar');
+        return
       } else {
-        throw ("Houve um erro ao tentar realizar o cadastro do processo na tabela Matar");
+        console.log(element.Nome)
+        var botao = document.querySelectorAll(`[id='${element.Nome}']`);
+        botao.forEach(element => {
+          element.classList.remove('qAdd')
+          element.innerHTML = ''
+        });
       }
     }).catch(function (resposta) {
       console.log(`#ERRO: ${resposta}`);
     });
+    });
   }
+
+</script>
+<script>
+  function CadastrarProcessoMatar(pid, name) {
+        var dh = moment()
+        var datahora = dh.format('D/MM/YYYY HH:mm:ss');
+        fetch("/usuarios/CadastrarProcessoMatar", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            pidServer: pid,
+            nameServer: name,
+            datahoraServer: datahora,
+            fkTorreServer: fkTorre,
+          })
+        }).then(function (resposta) {
+
+          console.log("resposta: ", resposta);
+
+          if (resposta.ok) {
+            console.log('Inseriu o processo na tabela matar');
+          } else {
+            throw ("Houve um erro ao tentar realizar o cadastro do processo na tabela Matar");
+          }
+        }).catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+        });
+
+
+
+        fetch("/usuarios/CadastrarProcessoMorto", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            pidServer: pid,
+            nameServer: name,
+            datahoraServer: datahora,
+            fkTorreServer: fkTorre,
+            fkUsuarioServer: sessionStorage.ID_USUARIO,
+          })
+        }).then(function (resposta) {
+
+          console.log("resposta: ", resposta);
+
+          if (resposta.ok) {
+            console.log('Inseriu o processo na tabela mortos');
+          } else {
+            throw ("Houve um erro ao tentar realizar o cadastro do processo na tabela Matar");
+          }
+        }).catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+        });
+      }
+      
+
 
   function CadastrarProcessoConfiavel(name) {
-    var dh = moment()
-    var datahora = dh.format('D/MM/YYYY HH:mm:ss');
-    fetch("/usuarios/CadastrarProcessoConfiavel", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        nameServer: name,
-        datahoraServer: datahora,
-        fkTorreServer: fkTorre,
-      })
-    }).then(function (resposta) {
+        var dh = moment()
+        var datahora = dh.format('D/MM/YYYY HH:mm:ss');
+        fetch("/usuarios/CadastrarProcessoConfiavel", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            nameServer: name,
+            datahoraServer: datahora,
+            fkTorreServer: fkTorre,
+          })
+        }).then(function (resposta) {
 
-      console.log("resposta: ", resposta);
+          console.log("resposta: ", resposta);
 
-      if (resposta.ok) {
-        console.log('Inseriu o processo na tabela confiavel');
-      } else {
-        throw ("Houve um erro ao tentar realizar o cadastro do processo na tabela confiavel");
+          if (resposta.ok) {
+            modal_titulo_aviso.innerHTML = `<h2>Porcesso ${name} cadastrado como confiavel!</h2>`
+            modal_container_aviso.classList.add('show');
+            verificarBotoes()
+          } else {
+            throw ("Houve um erro ao tentar realizar o cadastro do processo na tabela confiavel");
+          }
+        }).catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+        });
       }
-    }).catch(function (resposta) {
-      console.log(`#ERRO: ${resposta}`);
-    });
-  }
+
 </script>

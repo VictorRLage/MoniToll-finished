@@ -68,6 +68,10 @@ router.post("/CadastrarProcessoMatar", function (req, res) {
     usuarioController.CadastrarProcessoMatar(req, res);
 });
 
+router.post("/CadastrarProcessoMorto", function (req, res) {
+    usuarioController.CadastrarProcessoMorto(req, res);
+});
+
 router.post("/CadastrarProcessoConfiavel", function (req, res) {
     usuarioController.CadastrarProcessoConfiavel(req, res);
 });
@@ -91,6 +95,7 @@ router.post("/ObterAlertasEmpresa", function (req, res) {
 router.post("/ObterCriticidadeTorre", function (req, res) {
     usuarioController.ObterCriticidadeTorre(req, res);
 });
+
 
 
 

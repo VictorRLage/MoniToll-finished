@@ -179,10 +179,19 @@ function CadastrarProcessoConfiavel(name, datahora, fkTorre) {
 function CadastrarProcessoMatar(pid, name, datahora, fkTorre) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarP():", pid, name, datahora, fkTorre);
 
-    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
-    //  e na ordem de inserção dos dados.
     var instrucao = `
     INSERT INTO ProcessoToKill values ('${name}', '${pid}', '${datahora}', '${fkTorre}');
+    `;
+    
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function CadastrarProcessoMorto(pid, name, datahora, fkTorre, fkUsuario) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarP():", pid, name, datahora, fkTorre);
+
+    var instrucao = `
+    INSERT INTO ProcessoMorto values ('${name}', '${pid}', '${datahora}', '${fkTorre}', '${fkUsuario}');
     `;
     
     console.log("Executando a instrução SQL: \n" + instrucao);
@@ -251,6 +260,7 @@ module.exports = {
     ObterDadosTorre,
     ObterNomeEmp,
     CadastrarProcessoMatar,
+    CadastrarProcessoMorto,
     CadastrarProcessoConfiavel,
     VerificarProcesso,
     cadastrarMetrica,

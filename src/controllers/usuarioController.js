@@ -494,6 +494,46 @@ function CadastrarProcessoMatar(req, res) {
     }
 }
 
+function CadastrarProcessoMorto(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var pid = req.body.pidServer;
+    var name = req.body.nameServer;
+    var datahora = req.body.datahoraServer;
+    var fkTorre = req.body.fkTorreServer;
+    var fkUsuario = req.body.fkUsuarioServer;
+
+
+    // Faça as validações dos valores
+    if (pid == undefined) {
+        res.status(400).send("Seu pid está undefined!");
+    } else if (name == undefined) {
+        res.status(400).send("Seu name está undefined!");
+    }  else if (datahora == undefined) {
+        res.status(400).send("Seu datahora está undefined!");
+    } else if (fkTorre == undefined) {
+        res.status(400).send("Seu fkTorre está undefined!");
+    }else if (fkUsuario == undefined) {
+        res.status(400).send("Seu fkUsuario está undefined!");
+    } else {
+
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.CadastrarProcessoMorto(pid, name, datahora, fkTorre, fkUsuario)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro do processo! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 function CadastrarProcessoConfiavel(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var name = req.body.nameServer;
@@ -548,10 +588,8 @@ function VerificarProcesso(req, res) {
                     if (resultado.length == 0) {
                         console.log(resultado);
                         res.json(resultado);
-                    } else if (resultado.length == 1) {
+                    } else if (resultado.length > 0) {
                         res.status(403).send("Processo ja cadastrado");
-                    } else {
-                        res.status(403).send("Mais de um processo cadastrado");
                     }
                 }
             ).catch(
@@ -725,6 +763,7 @@ module.exports = {
     ObterDadosTorre,
     ObterNomeEmp,
     CadastrarProcessoMatar,
+    CadastrarProcessoMorto,
     CadastrarProcessoConfiavel,
     VerificarProcesso,
     cadastrarMetrica,
