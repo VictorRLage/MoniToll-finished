@@ -415,8 +415,8 @@ def alertas(frase, componente, Leitura,pid, idTorre, alerta):
 
         try:
             crsr.execute('''
-            INSERT INTO AlertaRenato (nomeEmp, componente, metrica, criticidade, fkTorre) VALUES (?, ?, ?, ?, ?)
-            ''', nomeEmp, componente, Leitura, frase, idTorre)
+            INSERT INTO AlertaRenato (nomeEmp, componente, metrica, criticidade, fkTorre) VALUES (?, ?, ?, 'Critico', ?)
+            ''', nomeEmp, componente, Leitura, idTorre)
             crsr.commit()
             print('Chamado aberto!')
 
@@ -460,12 +460,12 @@ def alertas(frase, componente, Leitura,pid, idTorre, alerta):
         # print(payload)
 
         requests.post(url, json=payload, headers=headers)
-        print(f'Alerta no componente {componente}: {frase} - {Leitura}%')
+        print(f'Alerta no componente {componente}: {frase} - {Leitura}')
 
         try:
             crsr.execute('''
-            INSERT INTO AlertaRenato (nomeEmp, componente, metrica, criticidade, fkTorre) VALUES (?, ?, ?, ?, ?)
-            ''', nomeEmp, componente, Leitura, frase, idTorre)
+            INSERT INTO AlertaRenato (nomeEmp, componente, metrica, criticidade, fkTorre) VALUES (?, ?, ?, 'Critico', ?)
+            ''', nomeEmp, componente, Leitura, idTorre)
             crsr.commit()
             print('Chamado aberto!')
 
