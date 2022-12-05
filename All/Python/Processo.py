@@ -420,7 +420,7 @@ def InserirDados(idTorre,dict_dados):
 def VerificarToKill(idTorre):
     try:
         crsr.execute('''
-        SELECT * FROM ProcessoMorto WHERE fkTorre = ?
+        SELECT * FROM ProcessoToKill WHERE fkTorre = ?
         ''', idTorre)
         # Executando comando SQL
         procesosMatar = crsr.fetchall()
@@ -437,7 +437,7 @@ def MatarProcesso(pid,nome,idTorre):
     try:
         os.kill(pid, signal.SIGKILL)
         crsr.execute('''
-        DELETE FROM ProcessoMorto WHERE Nome = ? AND fkTorre = ?
+        DELETE FROM ProcessoToKill WHERE Nome = ? AND fkTorre = ?
         ''', nome,idTorre)
         # Executando comando SQL
         print(f'Processo {nome} encerrado!')
