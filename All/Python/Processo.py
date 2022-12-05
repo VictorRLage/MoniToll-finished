@@ -386,12 +386,10 @@ def VerificarUsoNaoConfiavel(idTorre, naoConfiaveisAtivos, dict_dados):
             contador[element] = 0
         contador[element] += 1
     for l in contador:
-        print(f'''Alerta: {str(l)}''')
         p = psutil.Process(l)
         alertas('Processo não confiavel aberto consumindo mais de 80% da RAM ou CPU',
-                'Processo', p.name(),l, idTorre, 'alerta')
+                'Processo', p.name(),l, idTorre, 'avisar')
         if contador[l] >= 3:
-            print(f'''Matar: {str(l)}''')
             alertas('Processo não confiavel aberto consumindo mais de 80% da RAM ou CPU a 6 leituras, esse processo será encerrado em instatntes, caso que mante-lo adicione ele a lista de confiaveis atraves da nossa dashboard',
                 25, p.name(), idTorre, 'matar')
     InserirDados(idTorre, dict_dados)
