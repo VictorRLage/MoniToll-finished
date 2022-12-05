@@ -356,10 +356,11 @@ def CapturarLeitura(idTorre):
         time.sleep(30)
 
 def VerificarUsoNaoConfiavel(idTorre,naoConfiaveisAtivos,dict_dados):
-    naoConfiaveisAtivosReptindo= []
+    print('Verificando não confiaveis ativos!')
+    naoConfiaveisAtivosReptindo = []
     for w in naoConfiaveisAtivos:
         name = w["name"]
-        if w["usoCpu"] > 80 or w["usoRam"] > 80:
+        if w["usoCpu"] > 80 or w["usoRam"] > 0.10:
             naoConfiaveisAtivosReptindo.append(name)
     contador = {}
     for element in naoConfiaveisAtivosReptindo:
