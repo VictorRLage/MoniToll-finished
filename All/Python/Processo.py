@@ -387,17 +387,22 @@ def VerificarUsoNaoConfiavel(idTorre, naoConfiaveisAtivos, dict_dados):
         contador[element] += 1
     for l in contador:
         p = psutil.Process(l)
-        alertas('Processo não confiavel aberto consumindo mais de 80% da RAM ou CPU',
-                'Processo', p.name(),l, idTorre, 'avisar')
-        if contador[l] >= 3:
-            alertas('Processo não confiavel aberto consumindo mais de 80% da RAM ou CPU a 6 leituras, esse processo será encerrado em instatntes, caso que mante-lo adicione ele a lista de confiaveis atraves da nossa dashboard',
-                25, p.name(), idTorre, 'matar')
+
+        if contador[l] > 0 and contador[l] < 3:
+            alertas('Processo não confiavel aberto consumindo mais de 80% da RAM ou CPU',
+                'Processo', p.name(),l, idTorre, 'Alerta')
+        elif contador[l] >= 3 and contador[l] < 6:
+            alertas('Processo não confiavel aberto consumindo mais de 80% da RAM ou CPU a 3 leituras',
+                25, p.name(), idTorre, 'Perigo')
+        elif contador[l] >= 6:
+            alertas('Processo não confiavel aberto consumindo mais de 80% da RAM ou CPU a 6 leituras, esse processo será encerrado em instantes, caso que mante-lo adicione ele a lista de confiaveis atraves da nossa dashboard',
+                25, p.name(), idTorre, 'Critico')
     InserirDados(idTorre, dict_dados)
 
 
 def alertas(frase, componente, Leitura,pid, idTorre, alerta):
     h = datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')
-    if alerta == 'matar':
+    if alerta == 'Critico':
         url = "https://api.pipefy.com/graphql"
 
         payload = {"query": "mutation {createCard(input: { pipe_id:\"302621694\" fields_attributes:[ {field_id: \"nome_da_empresa\", field_value: \"%s\"},{field_id: \"servidor\", field_value: \"%s\"},{field_id: \"descri_o_do_alerta\", field_value: \"%s\"},{field_id: \"m_tricas\", field_value: \"%s: %s\"}]})  {clientMutationId card {id title }}}" % (
@@ -415,8 +420,8 @@ def alertas(frase, componente, Leitura,pid, idTorre, alerta):
 
         try:
             crsr.execute('''
-            INSERT INTO AlertaRenato (nomeEmp, componente, metrica, criticidade, fkTorre) VALUES (?, ?, ?, 'Critico', ?)
-            ''', nomeEmp, componente, Leitura, idTorre)
+            INSERT INTO AlertaRenato (nomeEmp, componente, metrica, criticidade, fkTorre) VALUES (?, ?, ?, ?, ?)
+            ''', nomeEmp, componente, alerta, Leitura, idTorre)
             crsr.commit()
             print('Chamado aberto!')
 
@@ -446,7 +451,7 @@ def alertas(frase, componente, Leitura,pid, idTorre, alerta):
             crsr.rollback()
             print("Something went wrong: {}".format(err))
 
-    elif alerta == 'avisar':
+    elif alerta == 'Alerta':
         url = "https://api.pipefy.com/graphql"
 
         payload = {"query": "mutation {createCard(input: { pipe_id:\"302621694\" fields_attributes:[ {field_id: \"nome_da_empresa\", field_value: \"%s\"},{field_id: \"servidor\", field_value: \"%s\"},{field_id: \"descri_o_do_alerta\", field_value: \"%s\"},{field_id: \"m_tricas\", field_value: \"%s: %s\"}]})  {clientMutationId card {id title }}}" % (
@@ -464,8 +469,34 @@ def alertas(frase, componente, Leitura,pid, idTorre, alerta):
 
         try:
             crsr.execute('''
-            INSERT INTO AlertaRenato (nomeEmp, componente, metrica, criticidade, fkTorre) VALUES (?, ?, ?, 'Critico', ?)
-            ''', nomeEmp, componente, Leitura, idTorre)
+            INSERT INTO AlertaRenato (nomeEmp, componente, metrica, criticidade, fkTorre) VALUES (?, ?, ?, ?, ?)
+            ''', nomeEmp, componente, alerta, Leitura, idTorre)
+            crsr.commit()
+            print('Chamado aberto!')
+
+        except pyodbc.Error as err:
+            crsr.rollback()
+            print("Something went wrong: {}".format(err))
+    elif alerta == 'Perigo':
+        url = "https://api.pipefy.com/graphql"
+
+        payload = {"query": "mutation {createCard(input: { pipe_id:\"302621694\" fields_attributes:[ {field_id: \"nome_da_empresa\", field_value: \"%s\"},{field_id: \"servidor\", field_value: \"%s\"},{field_id: \"descri_o_do_alerta\", field_value: \"%s\"},{field_id: \"m_tricas\", field_value: \"%s: %s\"}]})  {clientMutationId card {id title }}}" % (
+            nomeEmp, idTorre, componente, frase, Leitura)}
+
+        headers = {
+            "accept": "application/json",
+            "content-type": "application/json",
+            "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjozMDIwOTE4NzAsImVtYWlsIjoicmVuYXRvLnRpZXJub0BzcHRlY2guc2Nob29sIiwiYXBwbGljYXRpb24iOjMwMDIwMDc5OX19.u1OD3vfD6im7FYV9owyD6kVPdstkeU3_1tX-WJdZz0Pf5VM8QZ2VEO6vEye9ht82VD7t2bnBqMwtuWywW0rjEg"
+        }
+        # print(payload)
+
+        requests.post(url, json=payload, headers=headers)
+        print(f'Alerta no componente {componente}: {frase} - {Leitura}')
+
+        try:
+            crsr.execute('''
+            INSERT INTO AlertaRenato (nomeEmp, componente, metrica, criticidade, fkTorre) VALUES (?, ?, ?, ?, ?)
+            ''', nomeEmp, componente, alerta, Leitura, idTorre)
             crsr.commit()
             print('Chamado aberto!')
 
