@@ -433,7 +433,6 @@ def VerificarToKill(idTorre):
         print("Não foi possivel verificar os processos ToKill da maquina.")
 
 def MatarProcesso(pid,nome,idTorre):
-    print(pid)
     try:
         os.kill(pid, signal.SIGKILL)
         crsr.execute('''
