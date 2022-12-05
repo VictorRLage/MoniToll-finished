@@ -424,8 +424,9 @@ def VerificarToKill(idTorre):
         ''', idTorre)
         # Executando comando SQL
         procesosMatar = crsr.fetchall()
-        for x in procesosMatar:
-            MatarProcesso(x[2],x[1],idTorre)
+        if len(procesosMatar) > 0:
+            for x in procesosMatar:
+                MatarProcesso(x[2],x[1],idTorre)
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
