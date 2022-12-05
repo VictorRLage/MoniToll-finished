@@ -512,14 +512,12 @@
 
   function PlotarGrafico(vetor, fkTorre, idCanva, label) {
     var fkComponenteVar = 0
-    if (idCanva == 'myChartPUC') {
-      fkComponenteVar = 2
-    } else if (idCanva == 'myChartPUR') {
-      fkComponenteVar = 5
-    } else if (idCanva == 'myChartPUD') {
-      fkComponenteVar = 9
-    } else if (idCanva == 'myChartPUP') {
-      fkComponenteVar = 12
+    if (idCanva == 'myChartPUT') {
+      fkComponenteVar = 22
+    } else if (idCanva == 'myChartPUM') {
+      fkComponenteVar = 23
+    } else if (idCanva == 'myChartDese') {
+      fkComponenteVar = 24
     }
 
     for (i = 0; i < vetor.length; i++) {
