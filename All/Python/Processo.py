@@ -378,7 +378,7 @@ def VerificarUsoNaoConfiavel(idTorre, naoConfiaveisAtivos, dict_dados):
     for w in naoConfiaveisAtivos:
         name = w["name"]
         pid = w["pid"]
-        if w["usoCpu"] > 80 or w["usoRam"] > 0.10:
+        if w["usoCpu"] > 80 or w["usoRam"] > 80:
             naoConfiaveisAtivosReptindo.append(pid)
     contador = {}
     for element in naoConfiaveisAtivosReptindo:
