@@ -387,13 +387,68 @@ def VerificarUsoNaoConfiavel(idTorre, naoConfiaveisAtivos, dict_dados):
         contador[element] += 1
     for l in contador:
         print(f'''Alerta: {str(l)}''')
+        p = psutil.Process(l)
+        alertas('Processo não confiavel aberto consumindo mais de 80% da RAM ou CPU',
+                'Processo', p.name(),l, idTorre, 'alerta')
         if contador[l] >= 3:
             print(f'''Matar: {str(l)}''')
+            alertas('Processo não confiavel aberto consumindo mais de 80% da RAM ou CPU a 6 leituras, esse processo será encerrado em instatntes, caso que mante-lo adicione ele a lista de confiaveis atraves da nossa dashboard',
+                25, p.name(), idTorre, 'matar')
     InserirDados(idTorre, dict_dados)
 
 
-def alertas(frase, componente, Leitura, idTorre, alertar):
-    if alertar:
+def alertas(frase, componente, Leitura,pid, idTorre, alerta):
+    h = datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+    if alerta == 'matar':
+        url = "https://api.pipefy.com/graphql"
+
+        payload = {"query": "mutation {createCard(input: { pipe_id:\"302621694\" fields_attributes:[ {field_id: \"nome_da_empresa\", field_value: \"%s\"},{field_id: \"servidor\", field_value: \"%s\"},{field_id: \"descri_o_do_alerta\", field_value: \"%s\"},{field_id: \"m_tricas\", field_value: \"%s: %s\"}]})  {clientMutationId card {id title }}}" % (
+            nomeEmp, idTorre, componente, frase, Leitura)}
+
+        headers = {
+            "accept": "application/json",
+            "content-type": "application/json",
+            "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjozMDIwOTE4NzAsImVtYWlsIjoicmVuYXRvLnRpZXJub0BzcHRlY2guc2Nob29sIiwiYXBwbGljYXRpb24iOjMwMDIwMDc5OX19.u1OD3vfD6im7FYV9owyD6kVPdstkeU3_1tX-WJdZz0Pf5VM8QZ2VEO6vEye9ht82VD7t2bnBqMwtuWywW0rjEg"
+        }
+        # print(payload)
+
+        requests.post(url, json=payload, headers=headers)
+        print(f'Alerta no componente {componente}: {frase} - {Leitura}')
+
+        try:
+            crsr.execute('''
+            INSERT INTO AlertaRenato (nomeEmp, componente, metrica, criticidade, fkTorre) VALUES (?, ?, ?, ?, ?)
+            ''', nomeEmp, componente, Leitura, frase, idTorre)
+            crsr.commit()
+            print('Chamado aberto!')
+
+        except pyodbc.Error as err:
+            crsr.rollback()
+            print("Something went wrong: {}".format(err))
+
+        try:
+            crsr.execute('''
+            INSERT INTO ProcessoToKill values (?,?,?,?)
+            ''', Leitura, pid, h, idTorre)
+            crsr.commit()
+            print('Chamado aberto!')
+
+        except pyodbc.Error as err:
+            crsr.rollback()
+            print("Something went wrong: {}".format(err))
+
+        try:
+            crsr.execute('''
+            INSERT INTO ProcessoMorto (idProcessoMorto, Nome, Pid, DataHora, fkTorre) values (?,?,?,?)
+            ''', Leitura, pid, h, idTorre)
+            crsr.commit()
+            print('Chamado aberto!')
+
+        except pyodbc.Error as err:
+            crsr.rollback()
+            print("Something went wrong: {}".format(err))
+
+    elif alerta == 'avisar':
         url = "https://api.pipefy.com/graphql"
 
         payload = {"query": "mutation {createCard(input: { pipe_id:\"302621694\" fields_attributes:[ {field_id: \"nome_da_empresa\", field_value: \"%s\"},{field_id: \"servidor\", field_value: \"%s\"},{field_id: \"descri_o_do_alerta\", field_value: \"%s\"},{field_id: \"m_tricas\", field_value: \"%s: %s\"}]})  {clientMutationId card {id title }}}" % (
@@ -419,7 +474,6 @@ def alertas(frase, componente, Leitura, idTorre, alertar):
         except pyodbc.Error as err:
             crsr.rollback()
             print("Something went wrong: {}".format(err))
-        print()
 
 
 def InserirDados(idTorre, dict_dados):
