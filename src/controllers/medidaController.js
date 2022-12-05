@@ -45,10 +45,11 @@ function buscarMedidasEmTempoReal(req, res) {
 function buscarDataHora(req, res) {
 
     var fkTorre = req.params.fkTorre;
+    var fkComponente = req.params.fkComponente;
 
     console.log(`Recuperando medidas em tempo real`);
 
-    medidaModel.buscarDataHora(fkTorre).then(function (resultado) {
+    medidaModel.buscarDataHora(fkTorre, fkComponente).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {

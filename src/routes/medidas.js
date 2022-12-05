@@ -28,7 +28,7 @@ router.get("/PorcentagemPercaPacotes/:fkTorre", function (req, res) {
 })
 
 
-router.get("/DataHora/:fkTorre", function (req, res) {
+router.get("/DataHora/:fkTorre/:fkComponente", function (req, res) {
     medidaController.buscarDataHora(req, res);
 })
 
@@ -53,7 +53,7 @@ router.get("/PlacaMae/:fkTorre", function (req, res) {
 })
 
 router.get("/Desempenho/:fkTorre", function (req, res) {
-    medidaController.buscarPlacaMae(req, res);
+    medidaController.buscarDesempenho(req, res);
 })
 
 module.exports = router;

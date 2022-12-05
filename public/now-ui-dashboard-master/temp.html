@@ -391,21 +391,20 @@
               temperatura.innerHTML = `<a href="temperatura.html" ><i class="now-ui-icons ui-2_settings-90"></i><p class="maior">Temperatura</p></a>`
             }
           });
-          setTimeout(() => AparecerGraficos(vetor_Componentes, fkTorre), 2000);
-          setTimeout(() =>
-            ObterDataHora(sessionStorage.ID_TORRE, vetor_Componentes[0]),
-            ObterPorcentagemRAM(sessionStorage.ID_TORRE),
-            ObterPorcentagemPercaPacotes(sessionStorage.ID_TORRE),
-            ObterPorcentagemCPU(sessionStorage.ID_TORRE),
-            ObterPorcentagemDisco(sessionStorage.ID_TORRE)
-            , 5000);
         });
       }
     }).catch(function (erro) {
       console.log("ERRO: " + erro);
     })
 
-
+    setTimeout(() => AparecerGraficos(vetor_Componentes, fkTorre), 2000);
+    setTimeout(() =>
+      ObterDataHora(sessionStorage.ID_TORRE),
+      ObterPorcentagemRAM(sessionStorage.ID_TORRE),
+      ObterPorcentagemPercaPacotes(sessionStorage.ID_TORRE),
+      ObterPorcentagemCPU(sessionStorage.ID_TORRE),
+      ObterPorcentagemDisco(sessionStorage.ID_TORRE)
+      , 5000);
 
 
   }
@@ -413,18 +412,15 @@
 
   function AparecerGraficos(vetor_Componentes, fkTorre) {
     vetor_Componentes.forEach(element => {
-      if (element == 2) {
-        lista.innerHTML += `<div class="CardGrafico card"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem uso CPU</h4><canvas style="width: 100%; display: block;" id="myChartPUC"></canvas></div>`
-        setTimeout(() => PlotarGrafico(vetor_PorcentagemUsoCPU, sessionStorage.ID_TORRE, 'myChartPUC', 'Porcentagem uso CPU'), 2000);
-      } else if (element == 5) {
-        lista.innerHTML += `<div class="CardGrafico card"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem uso Ram</h4><canvas style="width: 100%; display: block;" id="myChartPUR"></canvas></div>`
-        setTimeout(() => PlotarGrafico(vetor_PorcentagemUsoRam, sessionStorage.ID_TORRE, 'myChartPUR', 'Porcentagem uso Ram'), 2000);
-      } else if (element == 9) {
-        lista.innerHTML += `<div class="CardGrafico card"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem uso Disco</h4><canvas style="width: 100%; display: block;" id="myChartPUD"></canvas></div>`
-        setTimeout(() => PlotarGrafico(vetor_PorcentagemUsoDisco, sessionStorage.ID_TORRE, 'myChartPUD', 'Porcentagem uso Disco'), 2000);
-      } else if (element == 12) {
-        lista.innerHTML += `<div class="CardGrafico card"><h4 style="margin-top: 10px; margin-bottom: 0px;">Porcentagem pacotes perdidos</h4><canvas style="width: 100%; display: block;" id="myChartPUP"></canvas></div>`
-        setTimeout(() => PlotarGrafico(vetor_PorcentagemPercaPacotes, sessionStorage.ID_TORRE, 'myChartPUP', 'Porcentagem pacotes perdidos'), 2000);
+        if (element == 22) {
+        lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Temperatura da CPU</h4><canvas style="width: 100%; display: block;" id="myChartPUT"></canvas></div>`
+        setTimeout(() => PlotarGrafico(vetor_Temperatura, sessionStorage.ID_TORRE, 'myChartPUT', 'Temperatura em Celsius'), 2000);
+      }  else if (element == 23) {
+        lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Temperatura da Placa Mãe</h4><canvas style="width: 100%; display: block;" id="myChartPUM"></canvas></div>`
+        setTimeout(() => PlotarGrafico(vetor_PlacaMae, sessionStorage.ID_TORRE, 'myChartPUM', 'Temperatura em Celsius'), 2000);
+      } else if (element == 24) {
+        lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Desempenho CPU</h4><canvas style="width: 100%; display: block;" id="myChartDese"></canvas></div>`
+        setTimeout(() => PlotarGrafico(vetor_PercaDesem, sessionStorage.ID_TORRE, 'myChartDese', 'Perca de Desempenho em %'), 2000);
       }
     });
   }
@@ -437,8 +433,8 @@
   var vetor_PorcentagemPercaPacotes = []
   var vetor_leituras = []
 
-  function ObterDataHora(fkTorre, fkComponente) {
-    fetch(`/medidas/DataHora/${fkTorre}/${fkComponente}`, { cache: 'no-store' }).then(function (response) {
+  function ObterDataHora(fkTorre) {
+    fetch(`/medidas/DataHora/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -553,14 +549,12 @@
 
   function PlotarGrafico(vetor, fkTorre, idCanva, label) {
     var fkComponenteVar = 0
-    if (idCanva == 'myChartPUC') {
-      fkComponenteVar = 2
-    } else if (idCanva == 'myChartPUR') {
-      fkComponenteVar = 5
-    } else if (idCanva == 'myChartPUD') {
-      fkComponenteVar = 9
-    } else if (idCanva == 'myChartPUP') {
-      fkComponenteVar = 12
+    if (idCanva == 'myChartPUT') {
+      fkComponenteVar = 22
+    } else if (idCanva == 'myChartPUM') {
+      fkComponenteVar = 23
+    } else if (idCanva == 'myChartDese') {
+      fkComponenteVar = 24
     }
 
     for (i = 0; i < vetor.length; i++) {
@@ -666,22 +660,6 @@
 
             myChart.update();
 
-            // if (fkComponente == 2) {
-            //   verificarCpu(metrica)
-            // }
-
-            // if (fkComponente == 5) {
-            //   verificarRam(metrica)
-            // }
-
-            // if (fkComponente == 9) {
-            //   verificarDisco(metrica)
-            // }
-
-            // if (fkComponente == 12) {
-            //   verificarInternet(metrica)
-            // }
-
           }
 
 
@@ -705,104 +683,4 @@
   function Logout() {
     sessionStorage.clear();
   }
-</script>
-<script>
-  // vetor_cpu = []
-  // vetor_ram = []
-  // vetor_disco = []
-  // vetor_net = []
-  // function buscarMetrica(fkEmpresa, nmrComponente) {
-  //   fetch(`/medidas/Metrica/buscarMetrica/${fkEmpresa}/${nmrComponente}`, { cache: 'no-store' }).then(function (response) {
-  //     metrica = 15
-  //     if (response.ok) {
-  //       response.json().then(function (resposta) {
-  //         console.log(`Metricas recebidos: ${JSON.stringify(resposta)}`);
-  //         resposta.reverse();
-  //         console.log(resposta)
-  //         resposta.forEach(element => {
-  //           if (element.fkComponente == 2) {
-  //             vetor_cpu.push(element.Normall)
-  //             vetor_cpu.push(element.Atencao)
-  //             vetor_cpu.push(element.Critico)
-  //           } else if (element.fkComponente == 5) {
-  //             vetor_ram.push(element.Normall)
-  //             vetor_ram.push(element.Atencao)
-  //             vetor_ram.push(element.Critico)
-  //           } else if (element.fkComponente == 9) {
-  //             vetor_disco.push(element.Normall)
-  //             vetor_disco.push(element.Atencao)
-  //             vetor_disco.push(element.Critico)
-  //           } else if (element.fkComponente == 12) {
-  //             vetor_net.push(element.Normall)
-  //             vetor_net.push(element.Atencao)
-  //             vetor_net.push(element.Critico)
-  //           }
-  //         });
-
-  //         // PlotarGrafico(resposta, fkTorre);
-  //       });
-  //     } else {
-  //       console.error('Nenhum dado encontrado ou erro na API metrica');
-  //     }
-  //   })
-  //     .catch(function (error) {
-  //       console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-  //     });
-
-
-
-  // }
-
-  // function verificarInternet(metrica,) {
-  //   var frase = ""
-  //   // incluir uma nova medida de temperatura
-  //   if (metrica > vetor_net[0] && metrica < vetor_net[0]) {
-  //     frase = "Alerta: Alguns pacotes estão sendo perdidos! Porcentagem de perda de pacotes: "
-  //     console.log('Cheguei aqui')
-  //     alertas(nome, "Pacotes", metrica, frase)
-  //   } else if (metrica > vetor_net[0]) {
-  //     frase = "Perigo: Muitos Pacotes Perdidos! Porcentagem de perda de pacotes: "
-  //     alertas(nome, "Pacotes", metrica, frase)
-  //   }
-  // }
-
-  // function verificarRam(metrica) {
-  //   var frase = ""
-  //   // incluir uma nova medida de temperatura
-  //   if (metrica > vetor_ram[0] && metrica < vetor_ram[1]) {
-  //     frase = "Alerta: RAM sobrecarregando! Porcentagem de uso: "
-  //     console.log('Cheguei aqui')
-  //     alertas(nome, "RAM", metrica, frase)
-  //   } else if (metrica == vetor_ram[2]) {
-  //     frase = "Perigo: RAM está sobrecarregada! Porcentagem de uso: "
-  //     alertas(nome, "RAM", metrica, frase)
-  //   }
-  // }
-
-  // function verificarCpu(metrica) {
-  //   var frase = ""
-  //   // incluir uma nova medida de temperatura
-  //   if (metrica > vetor_cpu[0] && metrica < vetor_cpu[1]) {
-  //     frase = "Alerta: CPU sobrecarregando! Porcentagem de uso: "
-  //     console.log('Cheguei aqui')
-  //     alertas(nome, "CPU", metrica, frase)
-  //   } else if (metrica >= vetor_cpu[2]) {
-  //     frase = "Perigo: CPU sobrecarregada! Porcentagem de uso: "
-  //     alertas(nome, "CPU", metrica, frase)
-  //   }
-  // }
-
-  // function verificarDisco(metrica) {
-  //   var frase = ""
-  //   // incluir uma nova medida de temperatura
-  //   if (metrica > vetor_disco[0] && metrica <= vetor_disco[1]) {
-  //     frase = "Alerta: Disco sobrecarregando! Porcentagem de uso: "
-  //     console.log('Cheguei aqui')
-  //     alertas(nome, "Disco", metrica, frase)
-  //   } else if (metrica > vetor_disco[2]) {
-  //     frase = "Perigo: Disco sobrecarregado! Porcentagem de uso: "
-  //     alertas(nome, "Disco", metrica, frase)
-  //   }
-  // }
-
 </script>

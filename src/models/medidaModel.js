@@ -41,11 +41,11 @@ function buscarMedidasEmTempoReal(fkTorre, fkComponente) {
     return database.executar(instrucaoSql);
 }
 
-function buscarDataHora(fkTorre) {
+function buscarDataHora(fkTorre, fkComponente) {
 
     instrucaoSql = ''
 
-    instrucaoSql = `select top 7 DataHora from Leitura where fkTorre = ${fkTorre} and fkComponente = 1 ORDER BY idLeitura DESC`;
+    instrucaoSql = `select top 7 DataHora from Leitura where fkTorre = ${fkTorre} and fkComponente = ${fkComponente} ORDER BY idLeitura DESC`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -136,7 +136,7 @@ function buscarPlacaMae(fkTorre) {
 
     instrucaoSql = ''
 
-    instrucaoSql = `select top 7 Leitura as 'Placa Mãe' from Leitura where fkTorre = ${fkTorre} and fkComponente = 23 ORDER BY idLeitura DESC`;
+    instrucaoSql = `select top 7 Leitura as 'Placa_mae' from Leitura where fkTorre = ${fkTorre} and fkComponente = 23 ORDER BY idLeitura DESC`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

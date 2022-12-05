@@ -384,19 +384,18 @@
               processos.innerHTML = `<a href="processos.html" ><i class="now-ui-icons loader_gear"></i><p class="maior">Processos</p></a>`
             }
           });
-        });
+            setTimeout(() =>
+            ObterDataHora(sessionStorage.ID_TORRE, vetor_Componentes[0]),
+            ObterTemperatura(sessionStorage.ID_TORRE),
+            ObterPlacaMae(sessionStorage.ID_TORRE),
+            ObterDesempenho(sessionStorage.ID_TORRE)
+            , 2000);
+            setTimeout(() => AparecerGraficos(vetor_Componentes, fkTorre), 3000);
+                });
       }
     }).catch(function (erro) {
       console.log("ERRO: " + erro);
     })
-    setTimeout(() =>
-    ObterDataHora(sessionStorage.ID_TORRE),
-      ObterTemperatura(sessionStorage.ID_TORRE),
-      ObterPlacaMae(sessionStorage.ID_TORRE),
-      ObterDesempenho(sessionStorage.ID_TORRE)
-      , 2000);
-    setTimeout(() => AparecerGraficos(vetor_Componentes, fkTorre), 3000);
-
   }
 
   function AparecerGraficos(vetor_Componentes, fkTorre) {
@@ -408,7 +407,7 @@
         lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Temperatura da Placa Mãe</h4><canvas style="width: 100%; display: block;" id="myChartPUM"></canvas></div>`
         setTimeout(() => PlotarGrafico(vetor_PlacaMae, sessionStorage.ID_TORRE, 'myChartPUM', 'Temperatura em Celsius'), 2000);
       } else if (element == 24) {
-        lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Desempenho CPU</h4><canvas style="width: 100%; display: block;" id="myChartDese"></canvas></div>`
+        lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Perca de Desempenho CPU</h4><canvas style="width: 100%; display: block;" id="myChartDese"></canvas></div>`
         setTimeout(() => PlotarGrafico(vetor_PercaDesem, sessionStorage.ID_TORRE, 'myChartDese', 'Perca de Desempenho em %'), 2000);
       }
     });
@@ -422,8 +421,8 @@
   var vetor_PercaDesem= []
 
 
-  function ObterDataHora(fkTorre) {
-    fetch(`/medidas/DataHora/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
+  function ObterDataHora(fkTorre,fkComponente) {
+    fetch(`/medidas/DataHora/${fkTorre}/${fkComponente}`, { cache: 'no-store' }).then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -474,7 +473,7 @@
           resposta.reverse();
           console.log(resposta)
           resposta.forEach(element => {
-            vetor_PlacaMae.push(element.PlacaMae)
+            vetor_PlacaMae.push(element.Placa_mae)
           });
 
           // PlotarGrafico(resposta, fkTorre);
