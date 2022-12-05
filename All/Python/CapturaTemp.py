@@ -237,16 +237,18 @@ def teste2():
     print("Inserindo leitura no banco...")
     datahora = datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')
     print(datahora)
+    global leitura2 
+    leitura2 = 0.0 
 
-    if (var_leitura > 55 & var_leitura < 64 | var_leitura2 > 55 & var_leitura2 < 64):
-        var_leitura2 = 3.5
-    elif (var_leitura >= 65 | var_leitura2 >= 65):
-        var_leitura2 = 7.0
+    if (var_leitura > 55 and var_leitura < 64 or var_leitura2 > 55 and var_leitura2 < 64):
+        leitura2 = 3.5
+    elif (var_leitura >= 65 and var_leitura2 >= 65):
+        leitura2 = 7.0
     try:
         # Executando comando SQL
         crsr.execute('''
         INSERT INTO Leitura (Leitura, DataHora, fkTorre, fkComponente) VALUES (?, ?, ?, ?)
-        ''', var_leitura2, datahora, 136, 24)
+        ''', leitura2, datahora, 189, 24)
         # Commit de mudanças no banco de dados
         crsr.commit()
         print("Leitura inserida no banco")
