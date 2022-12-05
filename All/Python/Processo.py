@@ -377,7 +377,7 @@ def VerificarUsoNaoConfiavel(idTorre, naoConfiaveisAtivos, dict_dados):
     for w in naoConfiaveisAtivos:
         name = w["name"]
         pid = w["pid"]
-        if w["usoCpu"] > 80 or w["usoRam"] > 80:
+        if w["usoCpu"] > 80 or w["usoRam"] > 0.20:
             naoConfiaveisAtivosReptindo.append(pid)
     contador = {}
     for element in naoConfiaveisAtivosReptindo:
@@ -441,7 +441,7 @@ def alertas(frase, componente, Leitura,pid, idTorre, alerta):
 
         try:
             crsr.execute('''
-            INSERT INTO ProcessoMorto (idProcessoMorto, Nome, Pid, DataHora, fkTorre) values (?,?,?,?)
+            INSERT INTO ProcessoMorto (Nome, Pid, DataHora, fkTorre) values (?,?,?,?)
             ''', Leitura, pid, h, idTorre)
             crsr.commit()
             print('Chamado aberto!')
