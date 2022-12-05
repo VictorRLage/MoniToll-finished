@@ -6,6 +6,8 @@ import textwrap
 import subprocess
 import datetime
 from collections import Counter
+import os
+import signal
 
 
 global strip_SerialIdAtual
@@ -366,8 +368,8 @@ def VerificarUsoNaoConfiavel(idTorre,naoConfiaveisAtivos,dict_dados):
         contador[element] += 1
     for l in contador:
         print("Alerta: "+l)
-        if contador[l] >= 6:
-            print("Matar:"+l)
+        if contador[l] >= 3:
+            print(l)
     InserirDados(idTorre,dict_dados)
         
 def InserirDados(idTorre,dict_dados):
@@ -423,17 +425,14 @@ def VerificarToKill(idTorre):
         # Executando comando SQL
         procesosMatar = crsr.fetchall()
         for x in procesosMatar:
-            print(x)
-            MatarProcesso(x,idTorre)
+            MatarProcesso(x[2],x[1],idTorre)
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
         print("Não foi possivel verificar os processos ToKill da maquina.")
 
-def MatarProcesso(processos,idTorre):
-    print(processos[1])
-    nome = processos[1]
-    subprocess.run([f"killall {nome}"], capture_output=True)
+def MatarProcesso(pid,nome,idTorre):
+    os.kill(pid, signal.SIGKILL)
 
     try:
         crsr.execute('''
