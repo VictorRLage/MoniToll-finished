@@ -290,6 +290,7 @@ def InserirDadosMaquina(SerialID, OS, Maquina, Processador, Disco, RamSpeed, idT
 def CapturarLeitura(idTorre):
     naoConfiaveisAtivos = []
     while True:
+        VerificarToKill(idTorre)
         # buscar confiaveis
         try:
             crsr.execute('''
@@ -350,7 +351,6 @@ def CapturarLeitura(idTorre):
         print(colorama.Fore.RED +"Foram encontrados",len(naoConfiaveisAtivosDinamico),"processos NÃO confiaveis ativos")
         print(colorama.Fore.RESET)
         VerificarUsoNaoConfiavel(idTorre,naoConfiaveisAtivos,dict_dados)
-        VerificarToKill(idTorre)
         time.sleep(30)
 
 def VerificarUsoNaoConfiavel(idTorre,naoConfiaveisAtivos,dict_dados):
