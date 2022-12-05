@@ -152,6 +152,27 @@ function buscarDesempenho(fkTorre) {
     return database.executar(instrucaoSql);
 }
 
+function buscarHorarioPico(nomeEmp2) {
+    
+    instrucaoSql = ''
+    
+    instrucaoSql = `SELECT fkTorre, COUNT(idAlerta) AS Quantidade,nomeEmp,FORMAT(DATEADD (HOUR, -3 , DataHora), 'HH:00') AS DataHora FROM AlertaRenato WHERE fkTorre = ${nomeEmp2} GROUP BY fkTorre, nomeEmp,FORMAT(DATEADD (HOUR, -3 , DataHora), 'HH:00')`;
+    
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarHorarioCHC() {
+    
+    instrucaoSql = ''
+    
+    instrucaoSql = `SELECT TOP 4 t.* FROM (SELECT DISTINCT(componente)  as Componente, SUM(qntCHC) AS Quantidade2 FROM Chamado_Comp GROUP BY componente) t
+    `;
+        
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 
 
 
@@ -169,6 +190,8 @@ module.exports = {
     buscarMetrica,
     buscarTemperatura,
     buscarPlacaMae,
-    buscarDesempenho
+    buscarDesempenho,
+    buscarHorarioPico,
+    buscarHorarioCHC
 
 }
