@@ -434,12 +434,14 @@ def VerificarToKill(idTorre):
 
 def MatarProcesso(pid,nome,idTorre):
     try:
+        os.kill(pid, signal.SIGKILL)
         crsr.execute('''
         DELETE FROM ProcessoToKill WHERE Nome = ? AND fkTorre = ?
         ''', nome,idTorre)
         # Executando comando SQL
+        crsr.commit()
         print(f'Processo {nome} encerrado!')
-        os.kill(pid, signal.SIGKILL)
+        
 
         
 
