@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        Monitoll - Dashboard
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+        name='viewport' />
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <!-- CSS Files -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/now-ui-dashboard.css" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="assets/demo/demo.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.4.0/dist/chartjs-plugin-datalabels.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
+
+</head>
+
+<body onload="ObterDados(sessionStorage.ID_TORRE)" class="">
+    <div class="wrapper ">
+        <div class="sidebar" data-color="orange">
+            <!--
+            Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+        -->
+            <div class="logo">
+                <a onclick="Logout()" href="../../index.html" class="simple-text logo-mini">
+                    MT
+                </a>
+                <a onclick="Logout()" href="../../index.html" class="simple-text logo-normal">
+                    MoniToll
+                </a>
+            </div>
+            <div class="sidebar-wrapper" id="sidebar-wrapper">
+                <ul class="nav">
+                    <li>
+                        <a href="dashboard.html">
+                            <i class="now-ui-icons design_app"></i>
+                            <p class="maior">Dashboard</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="registros.html">
+                            <i class="now-ui-icons design_bullet-list-67"></i>
+                            <p class="maior">Registros</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="climaTempo.html">
+                            <i class="now-ui-icons objects_umbrella-13"></i>
+                            <p class="maior">Clima Tempo</p>
+                        </a>
+                    </li>
+                    </li>
+                    <li id="processos">
+
+                    </li>
+                    <li id="temperatura">
+
+                    <li class="active ">
+                        <a href="chamados.html">
+                            <i class="now-ui-icons ui-1_email-85"></i>
+                            <p class="maior">Chamados</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="metricas.html">
+                            <i class="now-ui-icons ui-1_bell-53"></i>
+                            <p class="maior">Métricas</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="dashboardAlertas.html">
+                            <i class="now-ui-icons business_chart-pie-36"></i>
+                            <p class="maior">Alertas</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://app.pipefy.com/public/form/JuN9i3P6">
+                            <i class="now-ui-icons travel_info"></i>
+                            <p class="maior">Suporte</p>
+                        </a>
+                    </li>
+                    <li id="AddUsuario">
+
+                    </li>
+                    <li class="active-pro">
+                        <a href="../../login.html">
+                            <i class="now-ui-icons sport_user-run"></i>
+                            <p class="maior" onclick="Logout()">Sair</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel" id="main-panel">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
+                <div class="container-fluid">
+                    <div class="navbar-wrapper">
+                        <div class="navbar-toggle">
+                            <button type="button" class="navbar-toggler">
+                                <span class="navbar-toggler-bar bar1"></span>
+                                <span class="navbar-toggler-bar bar2"></span>
+                                <span class="navbar-toggler-bar bar3"></span>
+                            </button>
+                        </div>
+                        <a class="navbar-brand maior">Dashboard</a>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                        aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                        <ul class="navbar-nav">
+                            <li class="nav-item" style="text-align: end; margin-right: 10px;">
+                                <span id="BemVindo"></span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link">
+                                    <i class="now-ui-icons users_single-02"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <i class="now-ui-icons location_world"></i>
+                                    <p>
+                                        <span class="d-lg-none d-md-block">Some Actions</span>
+                                    </p>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href=""><img src="https://i.imgur.com/cLfSqm3.png"
+                                            style="width: 24px;"></img> Português</a>
+                                    <a class="dropdown-item" href=""><img src="https://i.imgur.com/lYq0cdt.png"
+                                            style="width: 24px;">
+                                        English</a>
+                                    <a class="dropdown-item" href=""><img src="https://i.imgur.com/S5eEVok.png"
+                                            style="width: 24px;">
+                                        Español</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- End Navbar -->
+            <div class="panel-header panel-header-sm">
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="cardResponsivo card">
+                            <div class="card-header">
+                                <h4 id="h4_titulo" class="card-title">
+                                </h4>
+                            </div>
+                            <div id="lista" class="lista">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class=" container-fluid ">
+                    <nav>
+                        <ul>
+                            <li>
+                                <a href="../../index.html">
+                                    MoniToll
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../../sobre.html">
+                                    Sobre
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../../contato.html">
+                                    Contato
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="copyright" id="copyright">
+                        &copy; Copyright <a href="../../index.html">MoniToll.</a> Todos os direitos reservados
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+
+
+    <!-- modal grafico 1 -->
+    <div class="modal-container" id="modal_container">
+        <div class="modal-dash">
+            <div class="modal-titulo">
+                <br>
+                <br>
+                <h2 class="negrito">Cadastrar usuario</h2>
+                <div class="inp">
+                    <input placeholder="Nome" id="nome_inp">
+                </div>
+                <div class="inp">
+                    <input placeholder="Email" id="email_inp">
+                </div>
+                <div class="inp">
+                    <input placeholder="Senha" id="senha_inp">
+                </div>
+                <button class="btn-cadastrar" onclick="CadastrarUsuario()">Cadastrar</button>
+            </div>
+            <button class="modal-close" id="close"><i class="now-ui-icons ui-1_simple-remove"></i></button>
+        </div>
+    </div>
+
+    <!-- modal aviso -->
+    <div class="modal-container-aviso" id="modal_container_aviso">
+        <div class="modal-dash-aviso">
+            <div id="modal_titulo_aviso" class="modal-titulo-aviso">
+            </div>
+            <button class="modal-close-aviso" id="close_aviso"><i class="now-ui-icons ui-1_simple-remove"></i></button>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+<body>
+    <!--   Core JS Files   -->
+    <script src="assets/js/core/jquery.min.js"></script>
+    <script src="assets/js/core/popper.min.js"></script>
+    <script src="assets/js/core/bootstrap.min.js"></script>
+    <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <!-- Chart JS -->
+    <script src="assets/js/plugins/chartjs.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="assets/js/plugins/bootstrap-notify.js"></script>
+    <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script>
+    <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+    <script src="assets/demo/demo.js"></script>
+
+
+</body>
+
+<!--1-->
+<script>
+    const open = document.getElementById('AddUsuario')
+    const modal_container = document.getElementById('modal_container')
+    const close = document.getElementById('close')
+
+
+    open.addEventListener('click', () => { modal_container.classList.add('show') });
+    close.addEventListener('click', () => { modal_container.classList.remove('show') });
+
+    const modal_container_aviso = document.getElementById('modal_container_aviso')
+    const close_aviso = document.getElementById('close_aviso')
+    close_aviso.addEventListener('click', () => { modal_container_aviso.classList.remove('show') });
+</script>
+
+<script>
+    function CadastrarUsuario() {
+
+        var nomeVar = nome_inp.value;
+        var emailVar = email_inp.value;
+        var senhaVar = senha_inp.value;
+        var perfilVar = 3
+        var fkEmpresa = sessionStorage.FK_EMPRESA
+
+        if (nomeVar == "" || emailVar == "" || senhaVar == "") {
+
+            modal_titulo_aviso.innerHTML = `<h2>Preencha todos os campos para prosseguir</h2>`
+            modal_container_aviso.classList.add('show');
+            return
+        }
+        if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1) {
+
+            modal_titulo_aviso.innerHTML = `<h2>Esse email não é valido</h2>`
+            modal_container_aviso.classList.add('show');
+            return
+        }
+
+        fetch("/usuarios/cadastrarUsuario", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeServer: nomeVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar,
+                fkPerfilServer: perfilVar,
+                fkEmpresaServer: fkEmpresa
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                modal_titulo_aviso.innerHTML = `<h2>Cadastro realizado com sucesso!</h2>`
+                modal_container_aviso.classList.add('show');
+            } else {
+                modal_titulo_aviso.innerHTML = `<h2>Falha ao realizar cadastro</h2>`
+                modal_container_aviso.classList.add('show');
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+
+        return false;
+
+
+
+    }
+</script>
+
+<script>
+    var vetor_Componentes = []
+    var nome = sessionStorage.NOME_USUARIO
+    var fkEmp = sessionStorage.FK_EMPRESA
+    function ObterDados(fkTorre) {
+
+        var perfil;
+        if (sessionStorage.FK_PERFIL == 2) {
+            perfil = 'Adm'
+            AddUsuario.innerHTML = `<a><i class="now-ui-icons business_badge"></i><p class="maior">Adicionar Usuario</p></a>`
+        } else {
+            perfil = 'Fun'
+        }
+        BemVindo.innerHTML = `Bem vindo, ${nome}.<br> ${perfil}`
+        h4_titulo.innerHTML = `<h3>${sessionStorage.LOCALIZACAO}</h3>`
+
+
+
+        // ---------------------------------  Obter nome emp
+        fetch("/usuarios/ObterNomeEmp", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fkEmpresaServer: sessionStorage.FK_EMPRESA,
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.NOME_EMPRESA = json[0].Nome
+
+                });
+            }
+        }).catch(function (erro) {
+            console.log("ERRO: " + erro);
+        })
+
+
+
+        // ---------------------------------  Obter Componentes
+        fetch("/usuarios/ObterComponentes", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fkTorreServer: fkTorre,
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    json.forEach(element => {
+                        vetor_Componentes.push(element.fkComponente)
+                    });
+                    vetor_Componentes.forEach(element => {
+                        if (element == 25) {
+                            processos.innerHTML = `<a href="processos.html" ><i class="now-ui-icons loader_gear"></i><p class="maior">Processos</p></a>`
+                        }
+                        if (element == 22) {
+                            temperatura.innerHTML = `<a href="temperatura.html" ><i class="now-ui-icons ui-2_settings-90"></i><p class="maior">Temperatura</p></a>`
+                        }
+                    });
+                    setTimeout(() => ObterHorarioPico(sessionStorage.ID_TORRE), 2000);
+
+                    setTimeout(() => ObterHorarioCHC(sessionStorage.ID_TORRE), 2000);
+
+                    setTimeout(() => AparecerGraficos(vetor_Componentes, fkTorre), 3000);
+                });
+            }
+        }).catch(function (erro) {
+            console.log("ERRO: " + erro);
+        })
+
+
+
+
+    }
+
+
+    function AparecerGraficos(vetor_Componentes, nome) {
+
+        lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Chamados Abertos por Hora</h4><canvas style="width: 100%; display: block;" id="myChartHO"></canvas></div>`
+        setTimeout(() => PlotarGrafico(vetor_HorarioPico, sessionStorage.ID_TORRE, 'myChartHO', 'Quantidade de Chamados'), 2000);
+
+        lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Chamados por Componente</h4><canvas style="width: 100%; display: block;" id="myChartRO"></canvas></div>`
+        setTimeout(() => PlotarGrafico2(vetor_HorarioCHC, sessionStorage.ID_TORRE, 'myChartRO', 'Chamados por Componente'), 2000);
+
+        lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 10px;">Chamados por Componente em %</h4><canvas style="width: 100%; display: block;" id="myChartCHC"></canvas></div>`
+        setTimeout(() => PlotarGrafico3(vetor_HorarioCHC, sessionStorage.ID_TORRE, 'myChartCHC', 'Chamados por Componente em %'), 2000);
+
+        lista.innerHTML += `<div class="CardGrafico"><div id="my_dataviz"></div></div>`
+        setTimeout(() => PlotarGrafico4(), 2000);
+
+
+
+    }
+</script>
+
+<!--4-->
+<script>
+    // var vetor_DataHora = []
+
+    var vetor_HorarioPico = []
+    var vetor_Quantidade = []
+    var vetor_NomeComp = []
+    var vetor_HorarioCHC = []
+    var vetor_Quantidade2 = []
+
+    function ObterHorarioPico(nomeEmp) {
+        fetch(`/medidas/HorarioPico/${nomeEmp}`, { cache: 'no-store' }).then(function (response) {
+            // metrica = 50
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    console.log(resposta)
+
+                    resposta.forEach(element => {
+                        vetor_HorarioPico.push(element.DataHora)
+                        vetor_Quantidade.push(element.Quantidade)
+                    });
+                    console.log(vetor_Quantidade, vetor_HorarioPico)
+                    // PlotarGrafico(resposta, nomeEmp);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function ObterHorarioCHC(componente) {
+        fetch(`/medidas/HorarioCHC/${componente}`, { cache: 'no-store' }).then(function (response) {
+            // metrica = 50
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    console.log(resposta)
+                    //resposta.reverse();
+                    resposta.forEach(element => {
+                        vetor_NomeComp.push(element.Componente)
+                        vetor_Quantidade2.push(element.Quantidade2)
+                    });
+
+                    console.log(vetor_NomeComp, vetor_Quantidade2)
+
+                    // PlotarGrafico(resposta, nomeEmp);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    function PlotarGrafico(nomeEmp, vetor, idCanva, label) {
+        var vetor_leituras = []
+
+        console.log()
+        for (i = 0; i < vetor_Quantidade.length; i++) {
+            vetor_leituras.push({ DataHora: vetor_HorarioPico[i], Quantidade: vetor_Quantidade[i] })
+        }
+
+        console.log('iniciando plotagem do gráfico...');
+
+        // Criando estrutura para plotar gráfico - labels
+        let labels = [];
+
+        // Criando estrutura para plotar gráfico - dados
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: label,
+                data: [],
+                fill: false,
+                borderColor: 'orange',
+                backgroundColor: 'orange',
+                tension: 0.1
+            },]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(vetor_leituras)
+
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < vetor_leituras.length; i++) {
+            var registro = vetor_leituras[i];
+            labels.push(registro.DataHora);
+            dados.datasets[0].data.push(registro.Quantidade);
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'bar',
+            data: dados,
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    }]
+                }
+            }
+        };
+
+        // Adicionando gráfico criado em div na tela
+        let myChart = new Chart(
+            document.getElementById(idCanva),
+            config
+        );
+
+    }
+
+    function PlotarGrafico2(componente, vetor, idCanva, label) {
+        var vetor_leituras = []
+
+        for (i = 0; i < vetor_Quantidade2.length; i++) {
+            vetor_leituras.push({ NomeComp: vetor_NomeComp[i], Quantidade2: vetor_Quantidade2[i] })
+        }
+
+        console.log('iniciando plotagem do gráfico...');
+
+        // Criando estrutura para plotar gráfico - labels
+        let labels = [];
+
+        // Criando estrutura para plotar gráfico - dados
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: label,
+                data: [],
+                fill: false,
+                borderColor: "orange",
+                backgroundColor: "orange",
+                tension: 0.1
+            },]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(vetor_leituras)
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < vetor_leituras.length; i++) {
+            var registro = vetor_leituras[i];
+            labels.push(registro.NomeComp);
+            dados.datasets[0].data.push(registro.Quantidade2);
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'bar',
+            data: dados,
+            options: {
+
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            suggestedMin: 0,
+                            suggestedMax: 0
+                        }
+                    }]
+                }
+            }
+        };
+
+        // Adicionando gráfico criado em div na tela
+        let myChart = new Chart(
+            document.getElementById(idCanva),
+            config
+        );
+
+    }
+
+    function PlotarGrafico3(componente, vetor, idCanva, label) {
+        var vetor_leituras = []
+
+        for (i = 0; i < vetor_Quantidade2.length; i++) {
+            vetor_leituras.push({ NomeComp: vetor_NomeComp[i], Quantidade2: vetor_Quantidade2[i] })
+        }
+
+        console.log('iniciando plotagem do gráfico...');
+
+        // Criando estrutura para plotar gráfico - labels
+        let labels = [];
+
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: label,
+                data: [],
+                fill: false,
+                borderColor: [
+                    "yellow",
+                    "#ffd700",
+                    "#c2a300",
+                    "orange"
+                ],
+                backgroundColor: [
+                    "yellow",
+                    "#ffd700",
+                    "#c2a300",
+                    "orange"
+                ],
+                tension: 0.1
+            },]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(vetor_leituras)
+
+        let y = dados.datasets[0].data
+
+        console.log("let y abaixo")
+        console.log(y)
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < vetor_leituras.length; i++) {
+            var registro = vetor_leituras[i];
+            labels.push(registro.NomeComp);
+            dados.datasets[0].data.push(registro.Quantidade2);
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Gráfico 3')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        var options = {
+            tooltips: {
+                enabled: false
+            },
+            plugins: {
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        let datasets = ctx.chart.dados.datasets;
+                        if (datasets.indexOf(ctx.dataset) === datasets.length - 1) {
+                            let sum = datasets[0].dados.reduce((a, b) => a + b, 0);
+                            let percentage = Math.round((value / sum) * 100) + '%';
+                            return percentage;
+                        } else {
+                            return percentage;
+                        }
+                    },
+                    color: '#fff',
+                }
+            }
+        };
+        var ctx = document.getElementById(idCanva).getContext('2d');
+
+        let myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: dados,
+            options: options
+        });
+
+        // Criando estrutura para plotar gráfico - dados
+        //   let dados = {
+        //     labels: labels,
+        //     datasets: [{
+        //       label: label,
+        //       data: [],
+        //       fill: false,
+        //       borderColor:[
+        //    "yellow",
+        //    "#ffd700",
+        //    "#c2a300",
+        //     "orange"
+        //  ],
+        //       backgroundColor: [
+        //    "yellow",
+        //    "#ffd700",
+        //    "#c2a300",
+        //     "orange"
+        //  ],
+        //       tension: 0.1
+        //     },]
+        //   };
+
+
+
+        //   // Inserindo valores recebidos em estrutura para plotar o gráfico
+        // for (i = 0; i < vetor_leituras.length; i++) {
+        //   var registro = vetor_leituras[i];
+        //   labels.push(registro.NomeComp);
+        //   dados.datasets[0].data.push(registro.Quantidade2);
+        // }
+
+        // var lala = dados
+
+        //   // Criando estrutura para plotar gráfico - config
+        // const config = {
+        //   type: 'doughnut',
+        //   data: lala,
+        //   options: {}
+        // };
+
+        //   // Adicionando gráfico criado em div na tela
+        // let myChart = new Chart(
+        //   document.getElementById(idCanva),
+        //   config
+        // );
+
+    }
+
+    function PlotarGrafico4(componente, vetor, idCanva, label) {
+
+        var vetor_leituras = []
+
+        for (i = 0; i < vetor_Quantidade2.length; i++) {
+            vetor_leituras.push({ NomeComp: vetor_NomeComp[i], Quantidade2: vetor_Quantidade2[i] })
+        }
+
+        console.log('iniciando plotagem do gráfico...');
+
+        // Criando estrutura para plotar gráfico - labels
+        let labels = [];
+
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: label,
+                data: [],
+                fill: false,
+                borderColor: [
+                    "yellow",
+                    "#ffd700",
+                    "#c2a300",
+                    "orange"
+                ],
+                backgroundColor: [
+                    "yellow",
+                    "#ffd700",
+                    "#c2a300",
+                    "orange"
+                ],
+                tension: 0.1
+            },]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(vetor_leituras)
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < vetor_leituras.length; i++) {
+            var registro = vetor_leituras[i];
+            labels.push(registro.NomeComp);
+            dados.datasets[0].data.push(registro.Quantidade2);
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        var lastSelected = "";
+        var firstSelected = "";
+
+        var width = 400
+        height = 400
+        margin = 50
+
+        var radius = Math.min(width, height) / 2 - margin
+
+        var normalArc = d3.arc().outerRadius(radius - 30).innerRadius(radius - 80);
+        var biggerArc = d3.arc().outerRadius(radius - 80).innerRadius(radius - 25);
+
+        var svg = d3.select("#my_dataviz")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+        var data = {
+            a: 9,
+            b: 20,
+            c: 30,
+            d: 8,
+            e: 12
+        };
+
+        var total = d3.sum(d3.values(data));
+
+        var centralText = svg.append("text")
+            .attr("font-size", "28px")
+            .attr("text-anchor", "middle")
+            .text(d3.format(".0%")(data.a / total));
+
+        var color = d3.scaleOrdinal()
+            .domain(data)
+            .range(["yellow",
+                "#ffd700",
+                "#c2a300",
+                "orange",
+                "red"])
+
+        var pie = d3.pie()
+            .value(function (d) {
+                return d.value;
+            })
+        var data_ready = pie(d3.entries(data))
+
+
+        svg
+            .selectAll('whatever')
+            .data(data_ready)
+            .enter()
+            .append('path')
+            .attr('d', normalArc)
+            .attr('fill', function (d) {
+                return (color(d.data.key))
+            })
+            .attr("stroke", "black")
+            .style("stroke-width", "2px")
+            .style("opacity", 0.7)
+            .attr('d', function (d, index) {
+                // If this is the first segment make it a wider arc
+                if (index === 0) {
+                    firstSelected = this;
+                    return biggerArc(d);
+                } else {
+                    return normalArc(d);
+                }
+            }).on("click", function (d) {
+                centralText.text(d3.format(".0%")(d.value / total))
+                if (firstSelected) {
+                    d3.select(firstSelected).attr("d", normalArc)
+                    firstSelected = false;
+                }
+                if (lastSelected) {
+                    d3.select(lastSelected).attr("d", normalArc)
+                }
+                d3.select(this).attr("d", biggerArc)
+                lastSelected = this;
+            })
+
+    }
+
+
+
+    function atualizarGrafico(nomeEmp, idAlerta, dados, myChart) {
+        fetch(`/medidas/tempo-real/${nomeEmp}/${idAlerta}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro) {
+
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log(`Dados atuais do gráfico:`);
+                    console.log(dados);
+
+
+                    if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
+                        console.log("---------------------------------------------------------------")
+                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                        console.log("Horário do novo dado capturado:")
+                        console.log(novoRegistro[0].momento_grafico)
+                        console.log("Horário do último dado capturado:")
+                        console.log(dados.labels[dados.labels.length - 1])
+                        console.log("---------------------------------------------------------------")
+                    } else {
+                        // tirando e colocando valores no gráfico
+                        dados.labels.shift(); // apagar o primeiro
+                        dados.labels.push(novoRegistro[0].momento_grafico.slice(11)); // incluir um novo momento
+
+                        dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+                        dados.datasets[0].data.push(novoRegistro[0].Leitura); // incluir uma nova medida de umidade
+
+                        let metrica = novoRegistro[0].Leitura
+
+                        myChart.update();
+
+
+                        if (idAlerta == 30) {
+                            verificarHorario(metrica)
+                        }
+
+                    }
+
+
+                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                    proximaAtualizacao = setTimeout(() => atualizarGrafico(nomeEmp, idAlerta, dados, myChart), 5000);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                proximaAtualizacao = setTimeout(() => atualizarGrafico(nomeEmp, idAlerta, dados, myChart), 5000);
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+</script>
+
+<!--5-->
+<script>
+    function Logout() {
+        sessionStorage.clear();
+    }
+</script>
+
+<!--6-->
+<script>
+    function alertas(nome, componente, metrica, frase) {
+
+        const options = {
+            method: 'POST',
+            headers: {
+                accept: 'application/json',
+                Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjozMDIwOTE4NzAsImVtYWlsIjoicmVuYXRvLnRpZXJub0BzcHRlY2guc2Nob29sIiwiYXBwbGljYXRpb24iOjMwMDIwMDc5OX19.u1OD3vfD6im7FYV9owyD6kVPdstkeU3_1tX-WJdZz0Pf5VM8QZ2VEO6vEye9ht82VD7t2bnBqMwtuWywW0rjEg',
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                query: `mutation {           createCard(input: {             pipe_id:302621694,             title: "Card",             fields_attributes:[               {field_id: "nome_da_empresa", field_value: "${nome}"},{field_id: "descri_o_do_alerta", field_value: "${componente}"},{field_id: "m_tricas", field_value: " ${frase}${metrica}"}             ],           }) {               card {                 title               }             }           }`
+            })
+        };
+        fetch('https://api.pipefy.com/graphql', options)
+            .then(response => response.json())
+            .then(response => console.log(response))
+            .catch(err => console.error(err));
+    }
+
+
+  // function verificarDisco(metrica) {
+  //   var frase = ""
+  //   // incluir uma nova medida de temperatura
+  //   if (metrica >60 && metrica <= 80) {
+  //     frase = "Alerta: Disco sobrecarregando! Porcentagem de uso: "
+  //     console.log('Cheguei aqui')
+  //     alertas(nome, "Disco", metrica, frase)
+  //   } else if (metrica > 80) {
+  //     frase = "Perigo: Disco sobrecarregado! Porcentagem de uso: "
+  //     alertas(nome, "Disco", metrica, frase)
+  //   }
+  // }
+
+
+</script>

@@ -56,4 +56,12 @@ router.get("/Desempenho/:fkTorre", function (req, res) {
     medidaController.buscarDesempenho(req, res);
 })
 
+router.get("/HorarioPico/:nomeEmp", function (req, res) {
+    medidaController.buscarHorarioPico(req, res);
+})
+
+router.get("/HorarioCHC/:componente", function (req, res) {
+    medidaController.buscarHorarioCHC(req, res);
+})
+
 module.exports = router;

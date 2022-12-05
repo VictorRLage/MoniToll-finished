@@ -259,6 +259,44 @@ function buscarDesempenho(req, res) {
     });
 }
 
+function buscarHorarioPico(req, res) {
+
+    var nomeEmp2 = req.params.nomeEmp;
+
+    console.log(`Recuperando medidas em tempo real`);
+
+    medidaModel.buscarHorarioPico(nomeEmp2).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar registros.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function buscarHorarioCHC(req, res) {
+
+    var componente = req.params.componente;
+
+    console.log(`Recuperando medidas em tempo real`);
+
+    medidaModel.buscarHorarioCHC(componente).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar registros.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 
 
 
@@ -275,6 +313,8 @@ module.exports = {
     buscarMetrica,
     buscarTemperatura,
     buscarPlacaMae,
-    buscarDesempenho
+    buscarDesempenho,
+    buscarHorarioPico,
+    buscarHorarioCHC
 
 }
