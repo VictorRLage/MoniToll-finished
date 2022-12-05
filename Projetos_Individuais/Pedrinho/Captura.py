@@ -6,19 +6,21 @@ import numpy
 import datetime
 import functools
 import operator
-import pyodbc 
+import pyodbc
 import textwrap
+
 
 def Conexao():
 
         # variaveis de conexao
-        driver ='{ODBC Driver 18 for SQL Server}'
+        driver = '{ODBC Driver 18 for SQL Server}'
         server_name = 'montioll'
         database_name = 'Monitoll'
-        server = '{server_name}.database.windows.net,1433'.format(server_name=server_name)
+        server = '{server_name}.database.windows.net,1433'.format(
+            server_name=server_name)
         username = 'Monitoll'
         password = 'Grupo7@123'
-        # definindo banco url 
+        # definindo banco url
         connection_string = textwrap.dedent('''
         Driver={driver};
         Server={server};
@@ -34,9 +36,9 @@ def Conexao():
             database=database_name,
             username=username,
             password=password
-        )) 
+        ))
 
-        cnxn:pyodbc.Connection = pyodbc.connect(connection_string) 
+        cnxn: pyodbc.Connection = pyodbc.connect(connection_string)
 
         global crsr
         crsr = cnxn.cursor()
@@ -47,19 +49,18 @@ def ValidacaoLogin():
 
     records = u_email = input('Seu e-mail: ')
     records2 = u_senha = input('Sua senha: ')
-                    
+
     try:
         crsr.execute('''
     SELECT Nome FROM Usuario WHERE Email = ? and Senha = ?
-    ''',records, records2)
+    ''', records, records2)
         # Executando comando SQL
         print("Fazendo login...")
         usuario = crsr.fetchone()
-        
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
-    
+
     if usuario is not None:
         def convertTuple(tup):
             str = ''
@@ -67,30 +68,28 @@ def ValidacaoLogin():
                 str = str + item
             return str
         str_usuario = convertTuple(usuario)
-        print('Olá,',str_usuario,'!')
+        print('Olá,', str_usuario, '!')
 
-                    
         try:
             crsr.execute('''
         SELECT fkEmpresa FROM Usuario WHERE Email = ? and Senha = ?
-        ''',u_email, u_senha)
+        ''', u_email, u_senha)
             # Executando comando SQL
             global fkEmpresa
             fkEmpresa = crsr.fetchone()
             global int_fkEmpresa
             int_fkEmpresa = sum(fkEmpresa)
             print('fkEmpresa:', fkEmpresa)
-        
 
         except pyodbc.Error as err:
             print("Something went wrong: {}".format(err))
 
         SelectIdTorres(fkEmpresa)
 
-
     else:
         print('Email ou senha incoretos')
         ValidacaoLogin()
+
 
 def EscolherTorres(idTorres):
     maquinas = numpy.asarray(idTorres)
@@ -98,25 +97,26 @@ def EscolherTorres(idTorres):
     global idTorre
     idTorre = input('Qual é esta maquina?')
 
+
 def SelectIdTorres(fkEmpresa):
 
     try:
         crsr.execute('''
     SELECT idTorre FROM Torre WHERE fkEmpresa = ?
-    ''',fkEmpresa)                    
+    ''', fkEmpresa)
         # Executando comando SQL)
         idTorres = crsr.fetchall()
         print(idTorres)
-        
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
-    
+
     EscolherTorres(idTorres)
 
 
 # Bloco pegar serial id
-byte_SerialIdAtual = subprocess.check_output('''sudo dmidecode -s system-serial-number''', shell=True)
+byte_SerialIdAtual = subprocess.check_output(
+    '''sudo dmidecode -s system-serial-number''', shell=True)
 str_SerialIdAtual = byte_SerialIdAtual.decode('UTF-8')
 global strip_SerialIdAtual
 strip_SerialIdAtual = str_SerialIdAtual.strip('\n')
@@ -130,7 +130,8 @@ global strip3_OsAtual
 strip3_OsAtual = strip2_OsAtual.strip('\n')
 
 # Bloco pegar modelo maquina
-byte_MaquinaAtual = subprocess.check_output('''sudo dmidecode -t 1 | grep 'Product Name' | uniq''', shell=True)
+byte_MaquinaAtual = subprocess.check_output(
+    '''sudo dmidecode -t 1 | grep 'Product Name' | uniq''', shell=True)
 str_MaquinaAtual = byte_MaquinaAtual.decode('UTF-8')
 strip_MaquinaAtual = str_MaquinaAtual.strip('\tProduct')
 strip2_MaquinaAtual = strip_MaquinaAtual.strip(' Name: ')
@@ -138,27 +139,30 @@ global strip3_MaquinaAtual
 strip3_MaquinaAtual = strip2_MaquinaAtual.strip('\n')
 
 # Bloco pegar processador
-byte_ProcessadorAtual = subprocess.check_output('''lscpu | grep 'Model name:' | uniq''', shell=True)
+byte_ProcessadorAtual = subprocess.check_output(
+    '''lscpu | grep 'Model name:' | uniq''', shell=True)
 str_ProcessadorAtual = byte_ProcessadorAtual.decode('UTF-8')
 strip_ProcessadorAtual = str_ProcessadorAtual.strip('Model name:')
 global strip2_ProcessadorAtual
 strip2_ProcessadorAtual = strip_ProcessadorAtual.strip('\n')
 
-# Bloco pegar disco 
-byte_DiscoAtual = subprocess.check_output('''sudo lshw -class disk -class storage | grep -B1 'vendor' | head -1''', shell=True)
+# Bloco pegar disco
+byte_DiscoAtual = subprocess.check_output(
+    '''sudo lshw -class disk -class storage | grep -B1 'vendor' | head -1''', shell=True)
 str_DiscoAtual = byte_DiscoAtual.decode('UTF-8')
 strip_DiscoAtual = str_DiscoAtual.strip('\tproduct: ')
 global strip2_DiscoAtual
 strip2_DiscoAtual = strip_DiscoAtual.strip('\n')
 
 # Bloco pegar velocidade da ram
-byte_RamAtual = subprocess.check_output('''sudo dmidecode --type memory | grep -B1 'Type Detail: ' | head -1''', shell=True)
+byte_RamAtual = subprocess.check_output(
+    '''sudo dmidecode --type memory | grep -B1 'Type Detail: ' | head -1''', shell=True)
 str_RamAtual = byte_RamAtual.decode('UTF-8')
 strip_RamAtual = str_RamAtual.strip('\tType: ')
 global strip2_RamAtual
 strip2_RamAtual = strip_RamAtual.strip('\n')
 
-# Bloco pegar temperatura 
+# Bloco pegar temperatura
 data = psutil.sensors_temperatures()
 core = data['coretemp']
 item = core[0]
@@ -178,32 +182,32 @@ def teste():
         global var_leitura
         var_leitura = globals()[strNome]
         if strNome == 'processadores_nucleo_porcentagem':
-            
+
             print(var_leitura)
             global var_leitura2
             var_leitura2 = mean(var_leitura)
             print(var_leitura2)
         elif strNome == 'pacotes_perdidos_porcentagem':
             print('caiu no elif 1')
-            var_leitura2 = round((((pacotes_perdidos_porcentagem[1] - pacotes_perdidos_porcentagem[0])/pacotes_perdidos_porcentagem[1])*100), 1)
+            var_leitura2 = round(
+                (((pacotes_perdidos_porcentagem[1] - pacotes_perdidos_porcentagem[0])/pacotes_perdidos_porcentagem[1])*100), 1)
         elif strNome == 'processadores_nucleo_porcentagem':
             print('caiu no elif 2')
-            var_leitura2 = numpy.mean(var_leitura) 
+            var_leitura2 = numpy.mean(var_leitura)
         elif strNome == 'temperatura':
             print('caiu no elif 3')
-            var_leitura2 = (var_leitura)  
-            teste2()            
+            var_leitura2 = (var_leitura)
+            teste2()
         else:
             print('caiu no else')
             var_leitura2 = var_leitura
         print(var_leitura2)
 
-        
         try:
-            # Executando comando SQL   
+            # Executando comando SQL
             crsr.execute('''
         INSERT INTO Leitura (Leitura, DataHora, fkTorre, fkComponente) VALUES (?, ?, ?, ?)
-        ''',var_leitura2, datahora, idTorre , y)
+        ''', var_leitura2, datahora, idTorre, y)
             # Commit de mudanças no banco de dados
             crsr.commit()
             print("Leitura inserida no banco")
@@ -219,13 +223,13 @@ def teste2():
 
         if (var_leitura > 55 & var_leitura < 64 | var_leitura2 > 55 & var_leitura2 < 64):
             var_leitura2 = 3.5
-        elif(var_leitura >= 65 | var_leitura2 >= 65):
-            var_leitura2 = 7.0    
+        elif (var_leitura >= 65 | var_leitura2 >= 65):
+            var_leitura2 = 7.0
         try:
-            # Executando comando SQL   
+            # Executando comando SQL
             crsr.execute('''
         INSERT INTO Leitura (Leitura, DataHora, fkTorre, fkComponente) VALUES (?, ?, ?, ?)
-        ''',var_leitura2, datahora, 136 , 24)
+        ''', var_leitura2, datahora, 136, 24)
             # Commit de mudanças no banco de dados
             crsr.commit()
             print("Leitura inserida no banco")
@@ -248,11 +252,11 @@ def InserindoLeitura():
                 print("Something went wrong: {}".format(err))
                 print('teste exept')
 
-            fkComponente= crsr.fetchall()
+            fkComponente = crsr.fetchall()
             print(fkComponente)
             vet_fkComponente = numpy.asarray(fkComponente)
             print("Componentes da maquina:", vet_fkComponente)
-            
+
             for x in vet_fkComponente:
                 print(x)
                 global y
@@ -260,45 +264,49 @@ def InserindoLeitura():
                 print(y)
 
                 # PEGAR CODIGO COMPONENTE
-                
+
                 try:
                     crsr.execute('''
                 SELECT Codigo FROM Componente WHERE Componente.idComponente = ?
                 ''', y)
                     # Executing the SQL command
-                    print("Pegando codigo do componente ", y,'...')
+                    print("Pegando codigo do componente ", y, '...')
 
                 except pyodbc.Error as err:
                     print("Something went wrong: {}".format(err))
 
                 Codigo = crsr.fetchone()
-                print("Codigo do componente ",y,":", Codigo)
+                print("Codigo do componente ", y, ":", Codigo)
 
                 def convertTuple(tup):
                     str = functools.reduce(operator.add, (tup))
                     return str
 
                 global strCodigo
-                strCodigo = convertTuple(Codigo)            
+                strCodigo = convertTuple(Codigo)
 
                 # PREGAR NOME COMPONENTE
 
                 try:
                     crsr.execute('''
                 SELECT Nome FROM Componente WHERE Componente.idComponente = ?
-                ''',y)
+                ''', y)
                     # Executing the SQL command
                     print("Pegando nome do componente", y)
 
                 except pyodbc.Error as err:
                     print("Something went wrong: {}".format(err))
 
-                Nome= crsr.fetchone()
-                global strNome
-                strNome = convertTuple(Nome)
-                print("Nome componente ",y,":", strNome)
-                print(strNome + " = " + strCodigo)
-                teste()
+                Nome = crsr.fetchone()
+                if y == 25:
+                    print(f'O componente {y} é em outra API!')
+                else:
+                    global strNome
+                    strNome = convertTuple(Nome)
+                    print("Nome componente ",y,":", strNome)
+                    print(strNome + " = " + strCodigo)
+                    teste()
+
 
 def VerificarDadosMaquina(idTorre):
                     

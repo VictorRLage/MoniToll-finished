@@ -390,6 +390,7 @@
       console.log("ERRO: " + erro);
     })
     setTimeout(() =>
+    ObterDataHora(sessionStorage.ID_TORRE),
       ObterTemperatura(sessionStorage.ID_TORRE),
       ObterPlacaMae(sessionStorage.ID_TORRE),
       ObterDesempenho(sessionStorage.ID_TORRE)
@@ -421,18 +422,16 @@
   var vetor_PercaDesem= []
 
 
-  function ObterPorcentagemPercaPacotes(fkTorre) {
-    fetch(`/medidas/PorcentagemPercaPacotes/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
-      metrica = 15
+  function ObterDataHora(fkTorre) {
+    fetch(`/medidas/DataHora/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-          resposta.reverse();
           console.log(resposta)
+          resposta.reverse();
           resposta.forEach(element => {
-            vetor_PorcentagemPercaPacotes.push(element.PorcentagemPercaPacotes)
+            vetor_DataHora.push(element.DataHora.slice(11))
           });
-
           // PlotarGrafico(resposta, fkTorre);
         });
       } else {
@@ -444,9 +443,9 @@
       });
   }
 
+
   function ObterTemperatura(fkTorre) {
     fetch(`/medidas/Temperatura/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
-      metrica = 49
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -469,7 +468,6 @@
 
   function ObterPlacaMae(fkTorre) {
     fetch(`/medidas/PlacaMae/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
-      metrica = 49
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -492,7 +490,6 @@
 
   function ObterDesempenho(fkTorre) {
     fetch(`/medidas/Desempenho/${fkTorre}`, { cache: 'no-store' }).then(function (response) {
-      metrica = 49
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
