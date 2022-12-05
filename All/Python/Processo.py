@@ -424,15 +424,26 @@ def VerificarToKill(idTorre):
         procesosMatar = crsr.fetchall()
         for x in procesosMatar:
             print(x)
-            MatarProcesso(x)
+            MatarProcesso(x,idTorre)
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
         print("Não foi possivel verificar os processos ToKill da maquina.")
 
-def MatarProcesso(processos):
+def MatarProcesso(processos,idTorre):
     print(processos[1])
-    subprocess.run(["ls"], capture_output=True)
+    nome = processos[1]
+    subprocess.run([f"killall {nome}"], capture_output=True)
+
+    try:
+        crsr.execute('''
+        DELETE FROM ProcessoMorto WHERE Nome = '?' AND fkTorre = ?
+        ''', nome,idTorre)
+        # Executando comando SQL
+
+    except pyodbc.Error as err:
+        print("Something went wrong: {}".format(err))
+        print(f"Não foi possivel matar o processo {nome}.")
 
 
 

@@ -865,6 +865,8 @@
 
       if (resposta.ok) {
         console.log('Inseriu o processo na tabela matar');
+        modal_titulo_aviso.innerHTML = `<h2>Ordem para encerrar processo ${name} emitida!</h2>`
+        modal_container_aviso.classList.add('show');
       } else {
         throw ("Houve um erro ao tentar realizar o cadastro do processo na tabela Matar");
       }
