@@ -21,8 +21,6 @@
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="assets/demo/demo.css" rel="stylesheet" />
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
 </head>
 
 <body onload="ObterDados(sessionStorage.ID_TORRE), ObterAlertasTorre(), ObterAlertasEmpresa(), ObterCriticidadeTorre()"
@@ -254,13 +252,18 @@
   <script src="assets/js/core/bootstrap.min.js"></script>
   <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <!-- Chart JS -->
-  <script src="assets/js/plugins/chartjs.min.js"></script>
+  
   <!--  Notifications Plugin    -->
   <script src="assets/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script>
   <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
   <script src="assets/demo/demo.js"></script>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
 </body>
 
 <script>
@@ -717,82 +720,122 @@
     });
 
 
-    setTimeout(() => atualizarGrafico(data, myChart, idCanva), 15000);
+    setTimeout(() => atualizarGrafico(myChart, idCanva), 15000);
 
   }
 
 
   function PlotarGrafico(vetor, fkTorre, idCanva, label) {
 
-
+console.log(vetor)
     if (idCanva == 'myChartEMPRESA' || idCanva == 'myChartTOTAL') {
 
-      console.log('iniciando plotagem do gráfico...');
+      // console.log('iniciando plotagem do gráfico...');
 
-      // Criando estrutura para plotar gráfico - labels
+      // // Criando estrutura para plotar gráfico - labels
 
-      // Criando estrutura para plotar gráfico - dados
-      const data = {
-        labels: label,
-        datasets: [
-          {
-            label: 'Dataset 1',
-            data: vetor,
-            backgroundColor: ['yellow', 'red', 'green', 'blue', 'purple', 'orange'],
-          }
-        ]
-      };
+      // // Criando estrutura para plotar gráfico - dados
+      // const data = {
+      //   labels: label,
+      //   datasets: [
+      //     {
+      //       label: 'Dataset 1',
+      //       data: vetor,
+      //       backgroundColor: ['yellow', 'red', 'green', 'blue', 'purple', 'orange'],
+      //     }
+      //   ]
+      // };
 
-      console.log('----------------------------------------------')
-      console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-
-
-      // Inserindo valores recebidos em estrutura para plotar o gráfico
+      // console.log('----------------------------------------------')
+      // console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
 
 
-      console.log('----------------------------------------------')
-      console.log('O gráfico será plotado com os respectivos valores:')
-      console.log('Labels:')
-
-      console.log('Dados:')
-      console.log(data)
-      console.log('----------------------------------------------')
+      // // Inserindo valores recebidos em estrutura para plotar o gráfico
 
 
-      const config = {
-        type: 'pie',
-        data: data,
-        options: {
-          responsive: true,
-          plugins: {
-            legend: {
-              position: 'top',
-            },
-            title: {
-              display: true,
+      // console.log('----------------------------------------------')
+      // console.log('O gráfico será plotado com os respectivos valores:')
+      // console.log('Labels:')
 
-            }
-          }
+      // console.log('Dados:')
+      // console.log(data)
+      // console.log('----------------------------------------------')
+
+
+      // const config = {
+      //   type: 'pie',
+      //   data: data,
+      //   options: {
+      //     responsive: true,
+      //     plugins: {
+      //       legend: {
+      //         position: 'top',
+      //       },
+      //       title: {
+      //         display: true,
+
+      //       }
+      //     }
+      //   },
+      // };
+
+
+
+
+
+      // // Adicionando gráfico criado em div na tela
+      // let myChart = new Chart(
+      //   document.getElementById(idCanva),
+      //   config
+      // );
+      var data = [{
+    data: vetor,
+    backgroundColor: [
+      "#4b77a9",
+      "#5f255f",
+      "#d21243",
+      "#B27200"
+    ],
+    borderColor: "#fff"
+  }];
+  
+  var options = {
+
+    plugins: {
+      datalabels: {
+        formatter: (value, ctx) => {
+  
+          let sum = 0;
+                let dataArr = ctx.chart.data.datasets[0].data;
+                dataArr.map(data => {
+                    sum += data;
+                });
+                let percentage = (value*100 / sum).toFixed(2)+"%";
+                return percentage;
         },
-      };
+        color: '#fff',
+      }
+    }
+  };
+  
+  
+  var ctx = document.getElementById(idCanva).getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+    labels: label,
+      datasets: data
+    },
+    options: options
+  });
 
 
-
-
-
-      // Adicionando gráfico criado em div na tela
-      let myChart = new Chart(
-        document.getElementById(idCanva),
-        config
-      );
-
-
-      setTimeout(() => atualizarGrafico(data, myChart, idCanva), 15000);
+      setTimeout(() => atualizarGrafico(myChart, idCanva), 15000);
     }
   }
 
 
-  function atualizarGrafico(data, myChart, idCanva) {
+  function atualizarGrafico(myChart, idCanva) {
 
     if (idCanva == 'myChartTOTAL') {
       myChart.destroy()
@@ -810,6 +853,8 @@
       setTimeout(() => ObterAlertasEmpresa(), 1000);
 
     } else if (idCanva == 'myChartCRITICIDADE') {
+
+      console.log("Cai no destroy criticidade")
       myChart.destroy()
       vetor_alert = []
       vetor_perigo = []
