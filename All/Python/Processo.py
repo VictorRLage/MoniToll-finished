@@ -389,7 +389,7 @@ def VerificarUsoNaoConfiavel(idTorre, naoConfiaveisAtivos, dict_dados):
 
         if contador[l] > 0 and contador[l] < 3:
             alertas('Processo não confiavel aberto consumindo mais de 80% da RAM ou CPU',
-                'Processo', p.name(),l, idTorre, 'Alerta')
+                25, p.name(),l, idTorre, 'Alerta')
         elif contador[l] >= 3 and contador[l] < 6:
             alertas('Processo não confiavel aberto consumindo mais de 80% da RAM ou CPU a 3 leituras',
                 25, p.name(),l, idTorre, 'Perigo')
