@@ -278,10 +278,7 @@ def BuscarMetricas(idComponente, idEmpresa):
         elif idComponente == 12:
             for x in Metricas:
                 m_net.append(x)
-        print(f'''Metricas do componente {idComponente} recebidas do banco
-        Alerta:{Metricas[0][0]}
-        Perigo:{Metricas[0][1]}
-        Critico:{Metricas[0][2]}''')
+        print(f'''Metricas do componente {idComponente} recebidas do banco''')
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
