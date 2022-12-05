@@ -421,7 +421,7 @@ def alertas(frase, componente, Leitura,pid, idTorre, alerta):
         try:
             crsr.execute('''
             INSERT INTO AlertaRenato (nomeEmp, componente, metrica, criticidade, fkTorre) VALUES (?, ?, ?, ?, ?)
-            ''', nomeEmp, componente, alerta, Leitura, idTorre)
+            ''', nomeEmp, componente, Leitura, alerta, idTorre)
             crsr.commit()
             print('Chamado aberto!')
 
@@ -470,7 +470,7 @@ def alertas(frase, componente, Leitura,pid, idTorre, alerta):
         try:
             crsr.execute('''
             INSERT INTO AlertaRenato (nomeEmp, componente, metrica, criticidade, fkTorre) VALUES (?, ?, ?, ?, ?)
-            ''', nomeEmp, componente, alerta, Leitura, idTorre)
+            ''', nomeEmp, componente, Leitura, alerta, idTorre)
             crsr.commit()
             print('Chamado aberto!')
 
@@ -496,7 +496,7 @@ def alertas(frase, componente, Leitura,pid, idTorre, alerta):
         try:
             crsr.execute('''
             INSERT INTO AlertaRenato (nomeEmp, componente, metrica, criticidade, fkTorre) VALUES (?, ?, ?, ?, ?)
-            ''', nomeEmp, componente, alerta, Leitura, idTorre)
+            ''', nomeEmp, componente, Leitura, alerta, idTorre)
             crsr.commit()
             print('Chamado aberto!')
 
