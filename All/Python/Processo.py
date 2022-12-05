@@ -8,6 +8,7 @@ import datetime
 from collections import Counter
 import os
 import signal
+import requests
 
 
 global strip_SerialIdAtual
@@ -16,13 +17,16 @@ global strip3_MaquinaAtual
 global strip2_ProcessadorAtual
 global strip2_DiscoAtual
 global strip2_RamAtual
+
+
 def func(value):
     return ''.join(value.splitlines())
 
 
 try:
     # Bloco pegar serial id
-    byte_SerialIdAtual = subprocess.check_output('''sudo dmidecode -s system-serial-number''', shell=True)
+    byte_SerialIdAtual = subprocess.check_output(
+        '''sudo dmidecode -s system-serial-number''', shell=True)
     str_SerialIdAtual = byte_SerialIdAtual.decode('UTF-8')
     strip_SerialIdAtual = str_SerialIdAtual.strip('\n')
 
@@ -34,26 +38,30 @@ try:
     strip3_OsAtual = strip2_OsAtual.strip('\n')
 
     # Bloco pegar modelo maquina
-    byte_MaquinaAtual = subprocess.check_output('''sudo dmidecode -t 1 | grep 'Product Name' | uniq''', shell=True)
+    byte_MaquinaAtual = subprocess.check_output(
+        '''sudo dmidecode -t 1 | grep 'Product Name' | uniq''', shell=True)
     str_MaquinaAtual = byte_MaquinaAtual.decode('UTF-8')
     strip_MaquinaAtual = str_MaquinaAtual.strip('\tProduct')
     strip2_MaquinaAtual = strip_MaquinaAtual.strip(' Name: ')
     strip3_MaquinaAtual = strip2_MaquinaAtual.strip('\n')
 
     # Bloco pegar processador
-    byte_ProcessadorAtual = subprocess.check_output('''lscpu | grep 'Model name:' | uniq''', shell=True)
+    byte_ProcessadorAtual = subprocess.check_output(
+        '''lscpu | grep 'Model name:' | uniq''', shell=True)
     str_ProcessadorAtual = byte_ProcessadorAtual.decode('UTF-8')
     strip_ProcessadorAtual = str_ProcessadorAtual.strip('Model name:')
     strip2_ProcessadorAtual = strip_ProcessadorAtual.strip('\n')
 
     # Bloco pegar disco
-    byte_DiscoAtual = subprocess.check_output('''sudo lshw -class disk -class storage | grep -B1 'vendor' | head -1''', shell=True)
+    byte_DiscoAtual = subprocess.check_output(
+        '''sudo lshw -class disk -class storage | grep -B1 'vendor' | head -1''', shell=True)
     str_DiscoAtual = byte_DiscoAtual.decode('UTF-8')
     strip_DiscoAtual = str_DiscoAtual.strip('\tproduct: ')
     strip2_DiscoAtual = strip_DiscoAtual.strip('\n')
 
     # Bloco pegar velocidade da ram
-    byte_RamAtual = subprocess.check_output('''sudo dmidecode --type memory | grep -B1 'Type Detail: ' | head -1''', shell=True)
+    byte_RamAtual = subprocess.check_output(
+        '''sudo dmidecode --type memory | grep -B1 'Type Detail: ' | head -1''', shell=True)
     str_RamAtual = byte_RamAtual.decode('UTF-8')
     strip_RamAtual = str_RamAtual.strip('\tType: ')
     strip2_RamAtual = strip_RamAtual.strip('\n')
@@ -64,9 +72,8 @@ except:
     SerialID = direct_output2.decode('UTF-8')
     trim1SerialID = SerialID.strip()
     trim2SerialID = func(trim1SerialID)
-    trim3SerialID = trim2SerialID.strip("SerialNumber") 
+    trim3SerialID = trim2SerialID.strip("SerialNumber")
     strip_SerialIdAtual = trim3SerialID.strip()
-
 
     # CAPTURA OS CMD
     direct_output6 = subprocess.check_output(
@@ -74,10 +81,8 @@ except:
     OSnome = direct_output6.decode('UTF-8')
     trim1OSnome = OSnome.strip()
     trim2OSnome = func(trim1OSnome)
-    trim3OSnome = trim2OSnome.strip("Caption") 
+    trim3OSnome = trim2OSnome.strip("Caption")
     strip3_OsAtual = trim3OSnome.strip()
-
-
 
     # CAPTURA MODELO MAQUINA CMD
     direct_output = subprocess.check_output(
@@ -85,10 +90,8 @@ except:
     modeloPC = direct_output.decode('UTF-8')
     trim1ModeloPC = modeloPC.strip()
     trim2ModeloPC = func(trim1ModeloPC)
-    trim3ModeloPC = trim2ModeloPC.strip("Model") 
+    trim3ModeloPC = trim2ModeloPC.strip("Model")
     strip3_MaquinaAtual = trim3ModeloPC.strip()
-
-
 
     # CAPTURA MODELO PROCESSADOR CMD
     direct_output3 = subprocess.check_output(
@@ -96,10 +99,8 @@ except:
     ModeloCPU = direct_output3.decode('UTF-8')
     trim1ModeloCPU = ModeloCPU.strip()
     trim2ModeloCPU = func(trim1ModeloCPU)
-    trim3ModeloCPU = trim2ModeloCPU.strip("SerialNumber") 
+    trim3ModeloCPU = trim2ModeloCPU.strip("SerialNumber")
     strip2_ProcessadorAtual = trim3ModeloCPU.strip()
-
-
 
     # CAPTURA MODELO DISCO CMD
     direct_output4 = subprocess.check_output(
@@ -107,10 +108,8 @@ except:
     ModeloDR = direct_output4.decode('UTF-8')
     trim1ModeloDR = ModeloDR.strip()
     trim2ModeloDR = func(trim1ModeloDR)
-    trim3ModeloDR = trim2ModeloDR.strip("Model") 
+    trim3ModeloDR = trim2ModeloDR.strip("Model")
     strip2_DiscoAtual = trim3ModeloDR.strip()
-
-
 
     # CAPTURA RAM SPEED CMD
     direct_output5 = subprocess.check_output(
@@ -118,7 +117,7 @@ except:
     ramSpeed = direct_output5.decode('UTF-8')
     trim1ramSpeed = ramSpeed.strip()
     trim2ramSpeed = func(trim1ramSpeed)
-    trim3ramSpeed = trim2ramSpeed.strip("Speed") 
+    trim3ramSpeed = trim2ramSpeed.strip("Speed")
     strip2_RamAtual = trim3ramSpeed.strip()
 
 
@@ -212,6 +211,7 @@ def BuscarTorres(fkEmpresa):
     ''', fkEmpresa)
         # Executando comando SQL)
         idTorres = crsr.fetchall()
+        BuscarNomeEmp(fkEmpresa)
         EscolherTorres(idTorres)
 
     except pyodbc.Error as err:
@@ -220,11 +220,26 @@ def BuscarTorres(fkEmpresa):
         print('Por favor entre em contato conosco atraves do nosso site!')
 
 
+def BuscarNomeEmp(fkEmpresa):
+    try:
+        crsr.execute('''
+    SELECT Nome FROM Empresa WHERE idEmpresa = ?
+    ''', fkEmpresa)
+        # Executando comando SQL)
+        nomeEmpFetch = crsr.fetchone()
+        global nomeEmp
+        nomeEmp = nomeEmpFetch[0]
+
+    except pyodbc.Error as err:
+        print("Something went wrong: {}".format(err))
+
+
 def EscolherTorres(idTorres):
     for x in idTorres:
         print('Maquina:', x[0])
     idTorre = input('Qual é esta maquina? ')
     BuscarComponentes(idTorre)
+
 
 def BuscarComponentes(idTorre):
 
@@ -240,7 +255,8 @@ def BuscarComponentes(idTorre):
                 idProcessos = True
                 VerificarDadosMaquina(idTorre)
         if not idProcessos:
-            print('Você não selecionou a captura de processos como parte do seu plano para esta maquina.')
+            print(
+                'Você não selecionou a captura de processos como parte do seu plano para esta maquina.')
             print('Por favor entre em contato com a gente para aumentar seu plano!')
 
     except pyodbc.Error as err:
@@ -269,7 +285,8 @@ def VerificarDadosMaquina(idTorre):
         print("A torre não possui dados")
         InserirDadosMaquina(strip_SerialIdAtual, strip3_OsAtual, strip3_MaquinaAtual,
                             strip2_ProcessadorAtual, strip2_DiscoAtual, strip2_RamAtual, idTorre)
-        
+
+
 def InserirDadosMaquina(SerialID, OS, Maquina, Processador, Disco, RamSpeed, idTorre):
 
     try:
@@ -305,17 +322,12 @@ def CapturarLeitura(idTorre):
             print("Something went wrong: {}".format(err))
             print("Não foi possivel verificar os processos confiaveis da maquina.")
 
-
-
-
-
         dict_dados = []
         array_pids = []
         naoConfiaveisAtivosDinamico = []
         ConfiaveisAtivos = []
         for proc in psutil.process_iter(['pid']):
             array_pids.append(proc.pid)
-
 
         # print(array_pids)
         # print(len(array_pids))
@@ -330,9 +342,11 @@ def CapturarLeitura(idTorre):
             s = proc.status()
             c = round(float(proc.cpu_percent(interval=1)/nucleos), 2)
             m = round(proc.memory_percent(), 2)
-            d = datetime.datetime.fromtimestamp(proc.create_time()).strftime("%d/%m/%Y %H:%M:%S")
+            d = datetime.datetime.fromtimestamp(
+                proc.create_time()).strftime("%d/%m/%Y %H:%M:%S")
             h = datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')
-            dado = {"name":n, "pid":p, "status":s, "usoCpu":c, "usoRam":m, "dataCriacao":d, "dataHoraCaptura":h}
+            dado = {"name": n, "pid": p, "status": s, "usoCpu": c,
+                    "usoRam": m, "dataCriacao": d, "dataHoraCaptura": h}
             dict_dados.append(dado)
             naoConfiaveisAtivos.append(dado)
             naoConfiaveisAtivosDinamico.append(dado["pid"])
@@ -349,13 +363,16 @@ def CapturarLeitura(idTorre):
                     ConfiaveisAtivos.append(x["pid"])
                     naoConfiaveisAtivos.remove(x)
                     naoConfiaveisAtivosDinamico.remove(x["pid"])
-        print(colorama.Fore.GREEN +"Foram encontrados",len(ConfiaveisAtivos),"processos confiaveis ativos")
-        print(colorama.Fore.RED +"Foram encontrados",len(naoConfiaveisAtivosDinamico),"processos NÃO confiaveis ativos")
+        print(colorama.Fore.GREEN + "Foram encontrados",
+              len(ConfiaveisAtivos), "processos confiaveis ativos")
+        print(colorama.Fore.RED + "Foram encontrados",
+              len(naoConfiaveisAtivosDinamico), "processos NÃO confiaveis ativos")
         print(colorama.Fore.RESET)
-        VerificarUsoNaoConfiavel(idTorre,naoConfiaveisAtivos,dict_dados)
+        VerificarUsoNaoConfiavel(idTorre, naoConfiaveisAtivos, dict_dados)
         time.sleep(30)
 
-def VerificarUsoNaoConfiavel(idTorre,naoConfiaveisAtivos,dict_dados):
+
+def VerificarUsoNaoConfiavel(idTorre, naoConfiaveisAtivos, dict_dados):
     print('Verificando não confiaveis ativos!')
     naoConfiaveisAtivosReptindo = []
     for w in naoConfiaveisAtivos:
@@ -369,12 +386,43 @@ def VerificarUsoNaoConfiavel(idTorre,naoConfiaveisAtivos,dict_dados):
             contador[element] = 0
         contador[element] += 1
     for l in contador:
-        print("Alerta: "+ l)
+        print(f'''Alerta: {str(l)}''')
         if contador[l] >= 3:
-            print('Matar: '+l)
-    InserirDados(idTorre,dict_dados)
-        
-def InserirDados(idTorre,dict_dados):
+            print(f'''Matar: {str(l)}''')
+    InserirDados(idTorre, dict_dados)
+
+
+def alertas(frase, componente, Leitura, idTorre, alertar):
+    if alertar:
+        url = "https://api.pipefy.com/graphql"
+
+        payload = {"query": "mutation {createCard(input: { pipe_id:\"302621694\" fields_attributes:[ {field_id: \"nome_da_empresa\", field_value: \"%s\"},{field_id: \"servidor\", field_value: \"%s\"},{field_id: \"descri_o_do_alerta\", field_value: \"%s\"},{field_id: \"m_tricas\", field_value: \"%s: %s\"}]})  {clientMutationId card {id title }}}" % (
+            nomeEmp, idTorre, componente, frase, Leitura)}
+
+        headers = {
+            "accept": "application/json",
+            "content-type": "application/json",
+            "authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjozMDIwOTE4NzAsImVtYWlsIjoicmVuYXRvLnRpZXJub0BzcHRlY2guc2Nob29sIiwiYXBwbGljYXRpb24iOjMwMDIwMDc5OX19.u1OD3vfD6im7FYV9owyD6kVPdstkeU3_1tX-WJdZz0Pf5VM8QZ2VEO6vEye9ht82VD7t2bnBqMwtuWywW0rjEg"
+        }
+        # print(payload)
+
+        requests.post(url, json=payload, headers=headers)
+        print(f'Alerta no componente {componente}: {frase} - {Leitura}%')
+
+        try:
+            crsr.execute('''
+            INSERT INTO AlertaRenato (nomeEmp, componente, metrica, criticidade, fkTorre) VALUES (?, ?, ?, ?, ?)
+            ''', nomeEmp, componente, Leitura, frase, idTorre)
+            crsr.commit()
+            print('Chamado aberto!')
+
+        except pyodbc.Error as err:
+            crsr.rollback()
+            print("Something went wrong: {}".format(err))
+        print()
+
+
+def InserirDados(idTorre, dict_dados):
     try:
         crsr.execute('''
         delete from ProcessoDinamica where fkTorre = ?
@@ -403,7 +451,7 @@ def InserirDados(idTorre,dict_dados):
         try:
             crsr.execute('''
             insert into ProcessoDinamica values(?,?,?,?,?,?,?,?)
-            ''', nome, pid, status, usoCpu, usoRam, dataCriacao,DataHora, idTorre)
+            ''', nome, pid, status, usoCpu, usoRam, dataCriacao, DataHora, idTorre)
 
             crsr.execute('''
             insert into ProcessoBackup values(?,?,?,?,?,?,?,?)
@@ -419,6 +467,7 @@ def InserirDados(idTorre,dict_dados):
     print("Processos cadastrados!")
     print(f"\r")
 
+
 def VerificarToKill(idTorre):
     try:
         crsr.execute('''
@@ -428,34 +477,26 @@ def VerificarToKill(idTorre):
         procesosMatar = crsr.fetchall()
         if len(procesosMatar) > 0:
             for x in procesosMatar:
-                MatarProcesso(x[2],x[1],idTorre)
+                MatarProcesso(x[2], x[1], idTorre)
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
         print("Não foi possivel verificar os processos ToKill da maquina.")
 
-def MatarProcesso(pid,nome,idTorre):
+
+def MatarProcesso(pid, nome, idTorre):
     try:
         os.kill(pid, signal.SIGKILL)
         crsr.execute('''
         DELETE FROM ProcessoToKill WHERE Nome = ? AND fkTorre = ?
-        ''', nome,idTorre)
+        ''', nome, idTorre)
         # Executando comando SQL
         crsr.commit()
         print(f'Processo {nome} encerrado!')
-        
-
-        
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
         print(f"Não foi possivel matar o processo {nome}.")
 
 
-
 Conexao()
-
-
-
-
-
