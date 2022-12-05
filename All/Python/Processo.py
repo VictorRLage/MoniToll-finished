@@ -437,7 +437,7 @@ def MatarProcesso(pid,nome,idTorre):
 
     try:
         crsr.execute('''
-        DELETE FROM ProcessoMorto WHERE Nome = '?' AND fkTorre = ?
+        DELETE FROM ProcessoMorto WHERE Nome = ? AND fkTorre = ?
         ''', nome,idTorre)
         # Executando comando SQL
         print(f'Processo {nome} encerrado!')

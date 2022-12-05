@@ -569,10 +569,15 @@
     setTimeout(() => createTable(), 3000);
     setTimeout(() => botoes(), 4000);
     setTimeout(() => verificarBotoes(), 5000);
+    setTimeout(() => limpa(), 10000);
+    setTimeout(() => BuscarProc(fkTorre), 30000);
+  }
+  function limpa(){
+    firstFile = [];
   }
 
   function createTable() {
-    console.log(firstFile)
+    // console.log(firstFile)
     var divId = 'dynamic-table';
     var div = document.getElementById(divId);
 
@@ -830,7 +835,7 @@
         if (resposta.ok) {
           return
         } else {
-          console.log(element.Nome)
+          // console.log(element.Nome)
           var botao = document.querySelectorAll(`[id='${element.Nome}']`);
           botao.forEach(element => {
             element.classList.remove('qAdd')
