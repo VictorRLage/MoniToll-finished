@@ -373,12 +373,11 @@ def CapturarLeitura(idTorre):
 
 
 def VerificarUsoNaoConfiavel(idTorre, naoConfiaveisAtivos, dict_dados):
-    print('Verificando não confiaveis ativos!')
     naoConfiaveisAtivosReptindo = []
     for w in naoConfiaveisAtivos:
         name = w["name"]
         pid = w["pid"]
-        if w["usoCpu"] > 80 or w["usoRam"] > 80:
+        if w["usoCpu"] > 80 or w["usoRam"] > 0.20:
             naoConfiaveisAtivosReptindo.append(pid)
     contador = {}
     for element in naoConfiaveisAtivosReptindo:
