@@ -440,6 +440,7 @@ def MatarProcesso(processos,idTorre):
         DELETE FROM ProcessoMorto WHERE Nome = '?' AND fkTorre = ?
         ''', nome,idTorre)
         # Executando comando SQL
+        print(f'Processo {nome} encerrado!')
 
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
