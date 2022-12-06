@@ -157,7 +157,7 @@ nowuiDashboard = {
     navbar_menu_visible: 0
   },
 
-  showNotification: function(from, align) {
+  showNotification: function(from, align, message) {
     color = 'primary';
 
     $.notify({

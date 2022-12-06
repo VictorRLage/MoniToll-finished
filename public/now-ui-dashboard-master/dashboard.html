@@ -20,6 +20,8 @@
   <link href="assets/css/now-ui-dashboard.css" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="assets/demo/demo.css" rel="stylesheet" />
+
+  
 </head>
 
 <body onload="ObterDados(sessionStorage.ID_TORRE)">
@@ -324,6 +326,7 @@
   var vetor_Componentes = []
   var nome = sessionStorage.NOME_USUARIO
   var fkEmp = sessionStorage.FK_EMPRESA
+  var nomeEmp = sessionStorage.NOME_EMPRESA
   function ObterDados(fkTorre) {
 
     var perfil;
@@ -402,7 +405,8 @@
             ObterPorcentagemRAM(sessionStorage.ID_TORRE),
             ObterPorcentagemPercaPacotes(sessionStorage.ID_TORRE),
             ObterPorcentagemCPU(sessionStorage.ID_TORRE),
-            ObterPorcentagemDisco(sessionStorage.ID_TORRE)
+            ObterPorcentagemDisco(sessionStorage.ID_TORRE),
+            buscarMetrica(fkEmpresa,nmrComponente)
             , 5000);
         });
       }
@@ -671,21 +675,7 @@
 
             myChart.update();
 
-            // if (fkComponente == 2) {
-            //   verificarCpu(metrica)
-            // }
-
-            // if (fkComponente == 5) {
-            //   verificarRam(metrica)
-            // }
-
-            // if (fkComponente == 9) {
-            //   verificarDisco(metrica)
-            // }
-
-            // if (fkComponente == 12) {
-            //   verificarInternet(metrica)
-            // }
+            verificar(nomeEmp,metrica,fkComponente,vetor_cpu,vetor_ram,vetor_net)
 
           }
 
@@ -712,102 +702,119 @@
   }
 </script>
 <script>
-  // vetor_cpu = []
-  // vetor_ram = []
-  // vetor_disco = []
-  // vetor_net = []
-  // function buscarMetrica(fkEmpresa, nmrComponente) {
-  //   fetch(`/medidas/Metrica/buscarMetrica/${fkEmpresa}/${nmrComponente}`, { cache: 'no-store' }).then(function (response) {
-  //     metrica = 15
-  //     if (response.ok) {
-  //       response.json().then(function (resposta) {
-  //         console.log(`Metricas recebidos: ${JSON.stringify(resposta)}`);
-  //         resposta.reverse();
-  //         console.log(resposta)
-  //         resposta.forEach(element => {
-  //           if (element.fkComponente == 2) {
-  //             vetor_cpu.push(element.Normall)
-  //             vetor_cpu.push(element.Atencao)
-  //             vetor_cpu.push(element.Critico)
-  //           } else if (element.fkComponente == 5) {
-  //             vetor_ram.push(element.Normall)
-  //             vetor_ram.push(element.Atencao)
-  //             vetor_ram.push(element.Critico)
-  //           } else if (element.fkComponente == 9) {
-  //             vetor_disco.push(element.Normall)
-  //             vetor_disco.push(element.Atencao)
-  //             vetor_disco.push(element.Critico)
-  //           } else if (element.fkComponente == 12) {
-  //             vetor_net.push(element.Normall)
-  //             vetor_net.push(element.Atencao)
-  //             vetor_net.push(element.Critico)
-  //           }
-  //         });
+   vetor_cpu = []
+   vetor_ram = []
+   vetor_disco = []
+   vetor_net = []
+   function buscarMetrica(fkEmpresa, nmrComponente) {
+     fetch(`/medidas/Metrica/buscarMetrica/${fkEmpresa}/${nmrComponente}`, { cache: 'no-store' }).then(function (response) {
+       metrica = 15
+       if (response.ok) {
+         response.json().then(function (resposta) {
+           console.log(`Metricas recebidos: ${JSON.stringify(resposta)}`);
+           resposta.reverse();
+           console.log(resposta)
+           resposta.forEach(element => {
+             if (element.fkComponente == 2) {
+               vetor_cpu.push(element.Normall)
+               vetor_cpu.push(element.Atencao)
+               vetor_cpu.push(element.Critico)
+             } else if (element.fkComponente == 5) {
+               vetor_ram.push(element.Normall)
+               vetor_ram.push(element.Atencao)
+               vetor_ram.push(element.Critico)
+             } else if (element.fkComponente == 9) {
+               vetor_disco.push(element.Normall)
+               vetor_disco.push(element.Atencao)
+               vetor_disco.push(element.Critico)
+             } else if (element.fkComponente == 12) {
+               vetor_net.push(element.Normall)
+               vetor_net.push(element.Atencao)
+               vetor_net.push(element.Critico)
+             }
+           });
 
-  //         // PlotarGrafico(resposta, fkTorre);
-  //       });
-  //     } else {
-  //       console.error('Nenhum dado encontrado ou erro na API metrica');
-  //     }
-  //   })
-  //     .catch(function (error) {
-  //       console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-  //     });
+           
+
+         });
+       } else {
+         console.error('Nenhum dado encontrado ou erro na API metrica');
+       }
+     })
+       .catch(function (error) {
+         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+       });
 
 
 
-  // }
+   }
+   
+  function verificar(nomeEmp,metrica,fkComponente,vetor_cpu,vetor_ram,vetor_net) {
 
-  // function verificarInternet(metrica,) {
-  //   var frase = ""
-  //   // incluir uma nova medida de temperatura
-  //   if (metrica > vetor_net[0] && metrica < vetor_net[0]) {
-  //     frase = "Alerta: Alguns pacotes estão sendo perdidos! Porcentagem de perda de pacotes: "
-  //     console.log('Cheguei aqui')
-  //     alertas(nome, "Pacotes", metrica, frase)
-  //   } else if (metrica > vetor_net[0]) {
-  //     frase = "Perigo: Muitos Pacotes Perdidos! Porcentagem de perda de pacotes: "
-  //     alertas(nome, "Pacotes", metrica, frase)
-  //   }
-  // }
+    let componente = ""
+    let frase = ""
 
-  // function verificarRam(metrica) {
-  //   var frase = ""
-  //   // incluir uma nova medida de temperatura
-  //   if (metrica > vetor_ram[0] && metrica < vetor_ram[1]) {
-  //     frase = "Alerta: RAM sobrecarregando! Porcentagem de uso: "
-  //     console.log('Cheguei aqui')
-  //     alertas(nome, "RAM", metrica, frase)
-  //   } else if (metrica == vetor_ram[2]) {
-  //     frase = "Perigo: RAM está sobrecarregada! Porcentagem de uso: "
-  //     alertas(nome, "RAM", metrica, frase)
-  //   }
-  // }
+    console.log
 
-  // function verificarCpu(metrica) {
-  //   var frase = ""
-  //   // incluir uma nova medida de temperatura
-  //   if (metrica > vetor_cpu[0] && metrica < vetor_cpu[1]) {
-  //     frase = "Alerta: CPU sobrecarregando! Porcentagem de uso: "
-  //     console.log('Cheguei aqui')
-  //     alertas(nome, "CPU", metrica, frase)
-  //   } else if (metrica >= vetor_cpu[2]) {
-  //     frase = "Perigo: CPU sobrecarregada! Porcentagem de uso: "
-  //     alertas(nome, "CPU", metrica, frase)
-  //   }
-  // }
+      if (fkComponente == 2) {
+        componente = "CPU"
+      if (metrica > vetor_cpu[0] && metrica < vetor_cpu[1]) {
+      frase = "Alerta"
+      nowuiDashboard.showNotification('top','right','O componente está em alerta de CPUhyryhhyrhryhrrhyhyr')
+      alert('AAA')
+      } 
+      else if (metrica > vetor_cpu[1] && metrica < vetor_cpu[2]) {
+      frase = "Perigo"
+      alert('BBB')
+    } else if (metrica > vetor_cpu[1] && metrica < vetor_cpu[2]) {
+      frase = "Perigo"
+      alert('CCC')
+    }
+      }
 
-  // function verificarDisco(metrica) {
-  //   var frase = ""
-  //   // incluir uma nova medida de temperatura
-  //   if (metrica > vetor_disco[0] && metrica <= vetor_disco[1]) {
-  //     frase = "Alerta: Disco sobrecarregando! Porcentagem de uso: "
-  //     console.log('Cheguei aqui')
-  //     alertas(nome, "Disco", metrica, frase)
-  //   } else if (metrica > vetor_disco[2]) {
-  //     frase = "Perigo: Disco sobrecarregado! Porcentagem de uso: "
-  //     alertas(nome, "Disco", metrica, frase)
-  //   }
-  // }
+      if (fkComponente == 5) {
+        componente = "RAM"
+      if (metrica > vetor_ram[0] && metrica < vetor_ram[1]) {
+        alert('AAA')
+      frase = "Alerta"
+      } 
+      else if (metrica > vetor_ram[1] && metrica < vetor_ram[2]) {
+      frase = "Perigo"
+      alert('BBB')
+    } else if (metrica > vetor_ram[1] && metrica < vetor_ram[2]) {
+      frase = "Perigo"
+      alert('CCC')
+    }
+  }
+    
+  if (fkComponente == 9) {
+    componente = "Internet"
+  if (metrica > vetor_net[0] && metrica < vetor_net[1]) {
+  
+  frase = "Alerta"
+  } 
+  else if (metrica > vetor_net[1] && metrica < vetor_net[2]) {
+  frase = "Perigo"
+  
+} else if (metrica > vetor_net[1] && metrica < vetor_net[2]) {
+  frase = "Perigo"
+}
+}
+
+if (fkComponente == 12) {
+  componente = "Disco"
+if (metrica > vetor_disco[0] && metrica < vetor_disco[1]) {
+
+frase = "Alerta"
+} 
+else if (metrica > vetor_disco[1] && metrica < vetor_disco[2]) {
+frase = "Perigo"
+
+} else if (metrica > vetor_disco[1] && metrica < vetor_disco[2]) {
+frase = "Perigo"
+}
+}
+  
+}
 
 </script>
