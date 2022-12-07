@@ -1,0 +1,82 @@
+.modal-containerD {
+    z-index: 9999;
+    /* color: black; */
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(19, 19, 70, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+
+.modal-containerD.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+.modalID_metricas {
+    background-color: #a19f9f;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 1px 1px 8px #252525;
+    text-align: center;
+    display: flex;
+    margin: 0%;
+    width: 400px;
+    height: 100px;
+    justify-content: center;
+}
+
+
+.login-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+.login-content .input-div {
+    position: relative;
+    display: grid;
+    grid-template-columns: 7% 93%;
+    margin: 25px 0;
+    padding: 5px 0;
+    border-bottom: 2px solid #d9d9d9;
+}
+
+.login-content .input-div.one {
+    margin-top: 0;
+}
+
+
+.formLogin {
+    width: 360px;
+}
+
+.escrita-metrica {
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 15px;
+    margin: 0;
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding-top: 20px;
+}
+
+.perfil {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}

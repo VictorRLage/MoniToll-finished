@@ -21,6 +21,8 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="assets/demo/demo.css" rel="stylesheet" />
 
+    <link rel="stylesheet" href="assets/css/chamados.css">
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
     <script type="text/javascript"
@@ -207,6 +209,95 @@
 
 
 
+
+    <!-- Alerta -->
+    <div class="modal-containerD" id="Metrica_Alerta_Chamados">
+        <div class="modalID_metricas" style="height: 15rem;">
+
+            <div class="login-content">
+                <br> <br>
+                <div class="formLogin">
+                    <div class="escrita-metrica">
+                        <h2 style="margin: 0; color: yellow;">ALERTA CHAMADOS</h2>
+                    </div>
+                    <p style="font-size: 18px; margin: 0; padding-top: 20px; color:#fff;">Perigo! Muitos chamados neste Horário</p>
+                    <br>
+                    <div class="perfil" style="color: #ffffff; font-size: 6px; padding-bottom: 10px; margin: 0;">
+                        <h1 id="closeMUAlertaChamados" style="cursor: pointer; margin: 0;">Fechar</h1>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alerta Componentes -->
+    <div class="modal-containerD" id="Metrica_Alerta_Componentes">
+        <div class="modalID_metricas" style="height: 15rem;">
+
+            <div class="login-content">
+                <br> <br>
+                <div class="formLogin">
+                    <div class="escrita-metrica">
+                        <h2 style="margin: 0; color: yellow;">ALERTA COMPONENTES</h2>
+                    </div>
+                    <p style="font-size: 18px; margin: 0; padding-top: 20px; color:#fff;">Perigo! Componente apresenta muitos chamados</p>
+                    <br>
+                    <div class="perfil" style="color: #ffffff; font-size: 6px; padding-bottom: 10px; margin: 0;">
+                        <h1 id="closeMUAlertaComponentes" style="cursor: pointer; margin: 0;">Fechar</h1>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Critico Chamados-->
+    <div class="modal-containerD" id="Metrica_Critico_Chamados">
+        <div class="modalID_metricas" style="height:15rem;">
+
+            <div class="login-content">
+                <br> <br>
+                <div class="formLogin">
+                    <div class="escrita-metrica">
+                        <h2 style="margin: 0; color: red;">CRíTICO CHAMADOS</h2>
+                    </div>
+                    <p style="font-size: 18px; margin: 0; padding-top: 20px; color:#fff;">Crítico! Chamados acima do limite esperado neste Horário</p>
+                    <br>
+                    <div class="perfil" style="color: #ffffff; font-size: 6px; padding-bottom: 10px; margin: 0;">
+                        <h1 id="closeMUCriticoChamados" style="cursor: pointer; margin: 0;">Fechar</h1>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Critico Componentes -->
+    <div class="modal-containerD" id="Metrica_Critico_Componentes">
+        <div class="modalID_metricas" style="height:15rem;">
+
+            <div class="login-content">
+                <br> <br>
+                <div class="formLogin">
+                    <div class="escrita-metrica">
+                        <h2 style="margin: 0; color: red;">CRÍTICO COMPONENTES</h2>
+                    </div>
+                    <p style="font-size: 18px; margin: 0; padding-top: 20px; color:#fff;">Crítico! Componente apresenta um número de chamados além do esperado</p>
+                    <br>
+                    <div class="perfil" style="color: #ffffff; font-size: 6px; padding-bottom: 10px; margin: 0;">
+                        <h1 id="closeMUCriticoComponentes" style="cursor: pointer; margin: 0;">Fechar</h1>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
     <!-- modal grafico 1 -->
     <div class="modal-container" id="modal_container">
         <div class="modal-dash">
@@ -249,13 +340,17 @@
     <script src="assets/js/core/bootstrap.min.js"></script>
     <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
     <!-- Chart JS -->
-    <script src="assets/js/plugins/chartjs.min.js"></script>
+
     <!--  Notifications Plugin    -->
     <script src="assets/js/plugins/bootstrap-notify.js"></script>
     <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script>
     <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
     <script src="assets/demo/demo.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
 
 
 </body>
@@ -428,7 +523,7 @@
 
     function AparecerGraficos(vetor_Componentes, nome) {
 
-        lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Chamados Abertos por Hora</h4><canvas style="width: 100%; display: block;" id="myChartHO"></canvas></div>`
+        lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Chamados Abertos por Dia</h4><canvas style="width: 100%; display: block;" id="myChartHO"></canvas></div>`
         setTimeout(() => PlotarGrafico(vetor_HorarioPico, sessionStorage.ID_TORRE, 'myChartHO', 'Quantidade de Chamados'), 2000);
 
         lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 0px;">Chamados por Componente</h4><canvas style="width: 100%; display: block;" id="myChartRO"></canvas></div>`
@@ -436,11 +531,6 @@
 
         lista.innerHTML += `<div class="CardGrafico"><h4 style="margin-top: 10px; margin-bottom: 10px;">Chamados por Componente em %</h4><canvas style="width: 100%; display: block;" id="myChartCHC"></canvas></div>`
         setTimeout(() => PlotarGrafico3(vetor_HorarioCHC, sessionStorage.ID_TORRE, 'myChartCHC', 'Chamados por Componente em %'), 2000);
-
-        lista.innerHTML += `<div class="CardGrafico"><div id="my_dataviz"></div></div>`
-        setTimeout(() => PlotarGrafico4(), 2000);
-
-
 
     }
 </script>
@@ -457,7 +547,7 @@
 
     function ObterHorarioPico(nomeEmp) {
         fetch(`/medidas/HorarioPico/${nomeEmp}`, { cache: 'no-store' }).then(function (response) {
-            // metrica = 50
+
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -481,7 +571,7 @@
 
     function ObterHorarioCHC(componente) {
         fetch(`/medidas/HorarioCHC/${componente}`, { cache: 'no-store' }).then(function (response) {
-            // metrica = 50
+            // metrica2 = 100
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -505,9 +595,12 @@
             });
     }
 
-
     function PlotarGrafico(nomeEmp, vetor, idCanva, label) {
         var vetor_leituras = []
+
+        var corIdeal = "green"
+        var corAlerta = "yellow"
+        var corCritico = "red"
 
         console.log()
         for (i = 0; i < vetor_Quantidade.length; i++) {
@@ -526,8 +619,8 @@
                 label: label,
                 data: [],
                 fill: false,
-                borderColor: 'orange',
-                backgroundColor: 'orange',
+                borderColor: "black",
+                backgroundColor: [],
                 tension: 0.1
             },]
         };
@@ -541,8 +634,11 @@
         for (i = 0; i < vetor_leituras.length; i++) {
             var registro = vetor_leituras[i];
             labels.push(registro.DataHora);
-            dados.datasets[0].data.push(registro.Quantidade);
+            dados.datasets[0].data.push(registro.Quantidade*17);
+            dados.datasets[0].backgroundColor.push(pegarCorMetrica(registro.Quantidade*17));
         }
+
+        console.log("Abobrinha ", dados.datasets[0].backgroundColor)
 
         console.log('----------------------------------------------')
         console.log('O gráfico será plotado com os respectivos valores:')
@@ -569,7 +665,7 @@
         };
 
         // Adicionando gráfico criado em div na tela
-        let myChart = new Chart(
+        let myChart3 = new Chart(
             document.getElementById(idCanva),
             config
         );
@@ -595,8 +691,8 @@
                 label: label,
                 data: [],
                 fill: false,
-                borderColor: "orange",
-                backgroundColor: "orange",
+                borderColor: "black",
+                backgroundColor: [],
                 tension: 0.1
             },]
         };
@@ -609,7 +705,8 @@
         for (i = 0; i < vetor_leituras.length; i++) {
             var registro = vetor_leituras[i];
             labels.push(registro.NomeComp);
-            dados.datasets[0].data.push(registro.Quantidade2);
+            dados.datasets[0].data.push(registro.Quantidade2 * 2);
+            dados.datasets[0].backgroundColor.push(pegarCorMetrica2(registro.Quantidade2 * 2));
         }
 
         console.log('----------------------------------------------')
@@ -654,166 +751,42 @@
 
         console.log('iniciando plotagem do gráfico...');
 
-        // Criando estrutura para plotar gráfico - labels
-        let labels = [];
 
-        let dados = {
-            labels: labels,
-            datasets: [{
-                label: label,
-                data: [],
-                fill: false,
-                borderColor: [
-                    "yellow",
-                    "#ffd700",
-                    "#c2a300",
-                    "orange"
-                ],
-                backgroundColor: [
-                    "yellow",
-                    "#ffd700",
-                    "#c2a300",
-                    "orange"
-                ],
-                tension: 0.1
-            },]
-        };
-
-        console.log('----------------------------------------------')
-        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-        console.log(vetor_leituras)
-
-        let y = dados.datasets[0].data
-
-        console.log("let y abaixo")
-        console.log(y)
-        // Inserindo valores recebidos em estrutura para plotar o gráfico
-        for (i = 0; i < vetor_leituras.length; i++) {
-            var registro = vetor_leituras[i];
-            labels.push(registro.NomeComp);
-            dados.datasets[0].data.push(registro.Quantidade2);
-        }
-
-        console.log('----------------------------------------------')
-        console.log('O gráfico será plotado com os respectivos valores:')
-        console.log('Gráfico 3')
-        console.log('Labels:')
-        console.log(labels)
-        console.log('Dados:')
-        console.log(dados.datasets)
-        console.log('----------------------------------------------')
+        var data = [{
+            data: vetor_Quantidade2,
+            backgroundColor: ["#563444", "#ff3d3d", "#9c5600", "orange"],
+            borderColor: ["#563444", "#ff3d3d", "#9c5600", "orange"]
+        }];
 
         var options = {
-            tooltips: {
-                enabled: false
-            },
+
             plugins: {
                 datalabels: {
                     formatter: (value, ctx) => {
-                        let datasets = ctx.chart.dados.datasets;
-                        if (datasets.indexOf(ctx.dataset) === datasets.length - 1) {
-                            let sum = datasets[0].dados.reduce((a, b) => a + b, 0);
-                            let percentage = Math.round((value / sum) * 100) + '%';
-                            return percentage;
-                        } else {
-                            return percentage;
-                        }
+
+                        let sum = 0;
+                        let dataArr = ctx.chart.data.datasets[0].data;
+                        dataArr.map(data => {
+                            sum += data;
+                        });
+                        let percentage = (value * 100 / sum).toFixed(0) + "%";
+                        return percentage;
                     },
                     color: '#fff',
                 }
             }
         };
-        var ctx = document.getElementById(idCanva).getContext('2d');
 
-        let myChart = new Chart(ctx, {
+
+        var ctx = document.getElementById(idCanva).getContext('2d');
+        var myChart = new Chart(ctx, {
             type: 'doughnut',
-            data: dados,
+            data: {
+                labels: vetor_NomeComp,
+                datasets: data
+            },
             options: options
         });
-
-        // Criando estrutura para plotar gráfico - dados
-        //   let dados = {
-        //     labels: labels,
-        //     datasets: [{
-        //       label: label,
-        //       data: [],
-        //       fill: false,
-        //       borderColor:[
-        //    "yellow",
-        //    "#ffd700",
-        //    "#c2a300",
-        //     "orange"
-        //  ],
-        //       backgroundColor: [
-        //    "yellow",
-        //    "#ffd700",
-        //    "#c2a300",
-        //     "orange"
-        //  ],
-        //       tension: 0.1
-        //     },]
-        //   };
-
-
-
-        //   // Inserindo valores recebidos em estrutura para plotar o gráfico
-        // for (i = 0; i < vetor_leituras.length; i++) {
-        //   var registro = vetor_leituras[i];
-        //   labels.push(registro.NomeComp);
-        //   dados.datasets[0].data.push(registro.Quantidade2);
-        // }
-
-        // var lala = dados
-
-        //   // Criando estrutura para plotar gráfico - config
-        // const config = {
-        //   type: 'doughnut',
-        //   data: lala,
-        //   options: {}
-        // };
-
-        //   // Adicionando gráfico criado em div na tela
-        // let myChart = new Chart(
-        //   document.getElementById(idCanva),
-        //   config
-        // );
-
-    }
-
-    function PlotarGrafico4(componente, vetor, idCanva, label) {
-
-        var vetor_leituras = []
-
-        for (i = 0; i < vetor_Quantidade2.length; i++) {
-            vetor_leituras.push({ NomeComp: vetor_NomeComp[i], Quantidade2: vetor_Quantidade2[i] })
-        }
-
-        console.log('iniciando plotagem do gráfico...');
-
-        // Criando estrutura para plotar gráfico - labels
-        let labels = [];
-
-        let dados = {
-            labels: labels,
-            datasets: [{
-                label: label,
-                data: [],
-                fill: false,
-                borderColor: [
-                    "yellow",
-                    "#ffd700",
-                    "#c2a300",
-                    "orange"
-                ],
-                backgroundColor: [
-                    "yellow",
-                    "#ffd700",
-                    "#c2a300",
-                    "orange"
-                ],
-                tension: 0.1
-            },]
-        };
 
         console.log('----------------------------------------------')
         console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
@@ -834,91 +807,9 @@
         console.log(dados.datasets)
         console.log('----------------------------------------------')
 
-        var lastSelected = "";
-        var firstSelected = "";
-
-        var width = 400
-        height = 400
-        margin = 50
-
-        var radius = Math.min(width, height) / 2 - margin
-
-        var normalArc = d3.arc().outerRadius(radius - 30).innerRadius(radius - 80);
-        var biggerArc = d3.arc().outerRadius(radius - 80).innerRadius(radius - 25);
-
-        var svg = d3.select("#my_dataviz")
-            .append("svg")
-            .attr("width", width)
-            .attr("height", height)
-            .append("g")
-            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-        var data = {
-            a: 9,
-            b: 20,
-            c: 30,
-            d: 8,
-            e: 12
-        };
-
-        var total = d3.sum(d3.values(data));
-
-        var centralText = svg.append("text")
-            .attr("font-size", "28px")
-            .attr("text-anchor", "middle")
-            .text(d3.format(".0%")(data.a / total));
-
-        var color = d3.scaleOrdinal()
-            .domain(data)
-            .range(["yellow",
-                "#ffd700",
-                "#c2a300",
-                "orange",
-                "red"])
-
-        var pie = d3.pie()
-            .value(function (d) {
-                return d.value;
-            })
-        var data_ready = pie(d3.entries(data))
-
-
-        svg
-            .selectAll('whatever')
-            .data(data_ready)
-            .enter()
-            .append('path')
-            .attr('d', normalArc)
-            .attr('fill', function (d) {
-                return (color(d.data.key))
-            })
-            .attr("stroke", "black")
-            .style("stroke-width", "2px")
-            .style("opacity", 0.7)
-            .attr('d', function (d, index) {
-                // If this is the first segment make it a wider arc
-                if (index === 0) {
-                    firstSelected = this;
-                    return biggerArc(d);
-                } else {
-                    return normalArc(d);
-                }
-            }).on("click", function (d) {
-                centralText.text(d3.format(".0%")(d.value / total))
-                if (firstSelected) {
-                    d3.select(firstSelected).attr("d", normalArc)
-                    firstSelected = false;
-                }
-                if (lastSelected) {
-                    d3.select(lastSelected).attr("d", normalArc)
-                }
-                d3.select(this).attr("d", biggerArc)
-                lastSelected = this;
-            })
+        // Criando estrutura para plotar gráfico - config
 
     }
-
-
 
     function atualizarGrafico(nomeEmp, idAlerta, dados, myChart) {
         fetch(`/medidas/tempo-real/${nomeEmp}/${idAlerta}`, { cache: 'no-store' }).then(function (response) {
@@ -946,7 +837,7 @@
                         dados.datasets[0].data.shift();  // apagar o primeiro de umidade
                         dados.datasets[0].data.push(novoRegistro[0].Leitura); // incluir uma nova medida de umidade
 
-                        let metrica = novoRegistro[0].Leitura
+                        let metrica = novoRegistro[0].Quantidade
 
                         myChart.update();
 
@@ -982,38 +873,78 @@
 
 <!--6-->
 <script>
-    function alertas(nome, componente, metrica, frase) {
+    // function alertas(nome, componente, metrica, frase) {
 
-        const options = {
-            method: 'POST',
-            headers: {
-                accept: 'application/json',
-                Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjozMDIwOTE4NzAsImVtYWlsIjoicmVuYXRvLnRpZXJub0BzcHRlY2guc2Nob29sIiwiYXBwbGljYXRpb24iOjMwMDIwMDc5OX19.u1OD3vfD6im7FYV9owyD6kVPdstkeU3_1tX-WJdZz0Pf5VM8QZ2VEO6vEye9ht82VD7t2bnBqMwtuWywW0rjEg',
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                query: `mutation {           createCard(input: {             pipe_id:302621694,             title: "Card",             fields_attributes:[               {field_id: "nome_da_empresa", field_value: "${nome}"},{field_id: "descri_o_do_alerta", field_value: "${componente}"},{field_id: "m_tricas", field_value: " ${frase}${metrica}"}             ],           }) {               card {                 title               }             }           }`
-            })
-        };
-        fetch('https://api.pipefy.com/graphql', options)
-            .then(response => response.json())
-            .then(response => console.log(response))
-            .catch(err => console.error(err));
+
+    // }
+
+
+    const chamadosAlerta = document.getElementById('Metrica_Alerta_Chamados');
+    const componentesAlerta = document.getElementById('Metrica_Alerta_Componentes');
+    const chamadosCritico = document.getElementById('Metrica_Critico_Chamados');
+    const componentesCritico = document.getElementById('Metrica_Critico_Componentes');
+    const chamadosAlertaClose = document.getElementById('closeMUAlertaChamados');
+    const componentesAlertaClose = document.getElementById('closeMUAlertaComponentes');
+    const chamadosCriticoClose = document.getElementById('closeMUCriticoChamados');
+    const componentesCriticoClose = document.getElementById('closeMUCriticoComponentes');
+
+    chamadosAlertaClose.addEventListener('click', () => {
+        chamadosAlerta.classList.remove('show'); 
+    });
+    componentesAlertaClose.addEventListener('click', () => {
+        componentesAlerta.classList.remove('show'); 
+    });
+    chamadosCriticoClose.addEventListener('click', () => {
+        chamadosCritico.classList.remove('show'); 
+    });
+    componentesCriticoClose.addEventListener('click', () => {
+        componentesCritico.classList.remove('show'); 
+    });
+    
+    let verde = "#00e000"
+
+    function pegarCorMetrica(metrica) {
+
+        let cor = "";
+
+        if (metrica >= 0 && metrica < 80) {
+            cor = verde
+      
+        }
+
+        else if (metrica >= 80 && metrica < 100) {
+            cor = "yellow"
+            chamadosAlerta.classList.add('show')
+        }
+
+        else {
+            cor = "red"
+            chamadosCritico.classList.add('show')
+        }
+
+        return cor
     }
 
+    function pegarCorMetrica2(metrica) {
 
-  // function verificarDisco(metrica) {
-  //   var frase = ""
-  //   // incluir uma nova medida de temperatura
-  //   if (metrica >60 && metrica <= 80) {
-  //     frase = "Alerta: Disco sobrecarregando! Porcentagem de uso: "
-  //     console.log('Cheguei aqui')
-  //     alertas(nome, "Disco", metrica, frase)
-  //   } else if (metrica > 80) {
-  //     frase = "Perigo: Disco sobrecarregado! Porcentagem de uso: "
-  //     alertas(nome, "Disco", metrica, frase)
-  //   }
-  // }
+        let cor = "";
+
+        if (metrica >= 0 && metrica < 100) {
+            cor = verde
+        }
+
+        else if (metrica >= 100 && metrica < 200) {
+            cor = "yellow"
+            componentesAlerta.classList.add('show')
+        }
+
+        else {
+            cor = "red"
+            componentesCritico.classList.add('show')
+        }
+
+        return cor
+    }
 
 
 </script>
