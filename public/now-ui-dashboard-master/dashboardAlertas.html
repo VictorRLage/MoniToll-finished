@@ -27,7 +27,7 @@
 
 </head>
 
-<body onload="ObterDados(sessionStorage.ID_TORRE), ObterAlertasTorre(), ObterAlertasEmpresa(), ObterCriticidadeTorre(),gerarWordcloud()"
+<body onload="ObterDados(sessionStorage.ID_TORRE), ObterAlertasTorre(), ObterAlertasEmpresa(), ObterCriticidadeTorre(), gerarWordcloud()"
   class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="orange">
@@ -833,38 +833,71 @@ console.log(vetor)
 
 <script>
   function gerarWordcloud() {
+    let nomeEmp = sessionStorage.NOME_EMPRESA
+    let vetor_palavras = []
+    let vetor_quantidade = []
+    let vetor_data = []
+    fetch("/usuarios/buscarPalavras", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeEmpServer: nomeEmp
+      })
+    }).then(function (resposta) {
 
+      console.log("resposta: ", resposta);
+
+      if (resposta.ok) {
+        console.log("entrei aqui")
+                resposta.json().then(function (resposta) {
+
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+
+                    resposta.forEach(element => {
+                        vetor_palavras.push(element.x)
+                        vetor_quantidade.push(element.value)
+                        vetor_data.push(element)
+                        console.log(vetor_data)
+                    })
+
+                  });
+
+                  wordcloud(vetor_data)
+
+      } else {
+        console.log("Falha ao pegar valores do banco")
+      }
+    }).catch(function (resposta) {
+      console.log(`#ERRO: ${resposta}`);
+    });
+
+    return false;
+
+
+
+  }
+    
+function wordcloud(data) {
   anychart.onDocumentReady(function() {
     
-  var dataCloud = [
-    {"x": "dklsnf", "value": 1090000000, category: "Afro-Asiatic"},
-    {"x": "fjsdanf", "value": 983000000, category: "Indo-European"},
-    {"x": "Hindustani", "value": 544000000, category: "Indo-European"},
-    {"x": "Spanish", "value": 527000000, category: "Indo-European"},
-    {"x": "Arabic", "value": 422000000, category: "Afro-Asiatic"},
-    {"x": "Malay", "value": 281000000, category: "Austronesian"},
-    {"x": "Russian", "value": 267000000, category: "Indo-European"},
-    {"x": "Bengali", "value": 261000000, category: "Indo-European"},
-    {"x": "Portuguese", "value": 229000000, category: "Indo-European"},
-    {"x": "French", "value": 229000000, category: "Indo-European"},
-    {"x": "Hausa", "value": 150000000, category: "Afro-Asiatic"},
-    {"x": "Punjabi", "value": 148000000, category: "Indo-European"},
-    {"x": "Japanese", "value": 129000000, category: "Japonic"},
-    {"x": "German", "value": 129000000, category: "Indo-European"},
-    {"x": "Persian", "value": 121000000, category: "Indo-European"}
-  ];
+  var dataCloud = data;
 
  // create a tag (word) cloud chart
   var chart = anychart.tagCloud(dataCloud);
 
    // set a chart title
-  chart.title('Nível')
+  chart.title('Quantidade de Alertas Por Criticidade de Cada Componente de Todos os Servidores')
   // set an array of angles at which the words will be laid out
   chart.angles([0])
   // enable a color range
-  chart.colorRange(true);
+  // chart.colorRange(true);
   // set the color range length
-  chart.colorRange().length('80%');
+  // chart.colorRange().length('80%');
 
   // display the word cloud chart
 
