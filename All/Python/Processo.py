@@ -564,7 +564,7 @@ def VerificarToKill(idTorre):
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
         print("Não foi possivel verificar os processos ToKill da maquina.")
-
+    time.sleep(5)
 
 def MatarProcesso(pid, nome, idTorre):
     try:
