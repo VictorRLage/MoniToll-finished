@@ -377,7 +377,7 @@ def VerificarUsoNaoConfiavel(idTorre, naoConfiaveisAtivos, dict_dados):
     for w in naoConfiaveisAtivos:
         name = w["name"]
         pid = w["pid"]
-        if w["usoCpu"] > 80 or w["usoRam"] > 0.20:
+        if w["usoCpu"] > 80 or w["usoRam"] > 0.40:
             naoConfiaveisAtivosReptindo.append(pid)
     contador = {}
     for element in naoConfiaveisAtivosReptindo:
@@ -564,7 +564,7 @@ def VerificarToKill(idTorre):
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
         print("Não foi possivel verificar os processos ToKill da maquina.")
-    time.sleep(5)
+    time.sleep(10)
 
 def MatarProcesso(pid, nome, idTorre):
     try:
