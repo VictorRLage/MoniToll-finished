@@ -6062,7 +6062,7 @@ Created using IcoMoon - icomoon.io
   height: 1600px;
 }
 .cardResponsivo-torre {
-  height: 1150px;
+  height: 550px;
 }
 
 
@@ -6074,7 +6074,7 @@ Created using IcoMoon - icomoon.io
   flex-wrap: wrap;
   padding: 20px;
   background-color: #DDDDDD;
-  height: 320px;
+  height: 80px;
   box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.17);
   cursor: pointer;
 }
