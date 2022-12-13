@@ -6055,7 +6055,7 @@ Created using IcoMoon - icomoon.io
 }
 
 .cardResponsivo {
-  height: 800px;
+  height: 830px;
 }
 
 .cardResponsivo2 {
@@ -6372,3 +6372,12 @@ Created using IcoMoon - icomoon.io
   left: 0;
 }
 
+.altura::after{
+  height: 45px;
+}
+.altura::before{
+  height: 45px;
+}
+.altura{
+  height: 45px;
+}
