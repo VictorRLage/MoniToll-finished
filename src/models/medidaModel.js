@@ -156,22 +156,36 @@ function buscarHorarioPico(nomeEmp2) {
     
     instrucaoSql = ''
     
-    instrucaoSql = `SELECT fkTorre, COUNT(idAlerta) AS Quantidade,nomeEmp,FORMAT(DATEADD (HOUR, -3 , DataHora), 'HH:00') AS DataHora FROM AlertaRenato WHERE fkTorre = ${nomeEmp2} GROUP BY fkTorre, nomeEmp,FORMAT(DATEADD (HOUR, -3 , DataHora), 'HH:00')`;
+    instrucaoSql = `SELECT fkTorre, COUNT(idAlerta) AS Quantidade,nomeEmp, FORMAT(max(DataHora), 'dd-MM-yyyy') AS Dia,FORMAT(DATEADD (HOUR, -3 , DataHora), 'HH:00') AS DataHora FROM AlertaRenato WHERE fkTorre = ${nomeEmp2} GROUP BY fkTorre, nomeEmp,FORMAT(DATEADD (HOUR, -3 , DataHora), 'HH:00')
+    UNION
+    SELECT TOP 1 t.* FROM (SELECT fkTorre, COUNT(idAlerta) AS Quantidade,nomeEmp, FORMAT(max(DataHora), 'dd-MM-yyyy') AS Dia,FORMAT(DATEADD (HOUR, -3 , DataHora), 'HH:00') AS DataHora FROM AlertaRenato WHERE fkTorre = ${nomeEmp2} GROUP BY fkTorre, nomeEmp,FORMAT(DATEADD (HOUR, -3 , DataHora), 'HH:00')) t
+    `;
     
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-function buscarHorarioCHC() {
+function buscarHorarioCHC(componente) {
     
     instrucaoSql = ''
     
-    instrucaoSql = `SELECT TOP 4 t.* FROM (SELECT DISTINCT(componente)  as Componente, SUM(qntCHC) AS Quantidade2 FROM Chamado_Comp GROUP BY componente) t
+    instrucaoSql = `SELECT TOP 4 t.* FROM (SELECT DISTINCT(componente)  as Componente, fkTorre,COUNT(componente) AS Quantidade2 FROM AlertaRenato WHERE fkTorre = ${componente} GROUP BY fkTorre, componente) t
     `;
         
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
+function buscarDia(hoje) {
+    
+    instrucaoSql = ''
+    
+    instrucaoSql = `SELECT TOP 1 t.* FROM (SELECT FORMAT(max(DataHora), 'dd-MM-yyyy') AS Dia,FORMAT(DATEADD (HOUR, -3 , DataHora), 'HH:00') AS Hora FROM AlertaRenato WHERE fkTorre = ${hoje} GROUP BY FORMAT(DATEADD (HOUR, -3 , DataHora), 'HH:00')) t`;
+        
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 
 
 
@@ -192,6 +206,6 @@ module.exports = {
     buscarPlacaMae,
     buscarDesempenho,
     buscarHorarioPico,
-    buscarHorarioCHC
-
+    buscarHorarioCHC,
+    buscarDia
 }

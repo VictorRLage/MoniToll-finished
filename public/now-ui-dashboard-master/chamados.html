@@ -168,9 +168,12 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="cardResponsivo card">
-                            <div class="card-header">
+                            <div class="card-header"><h4 id="dia" class="data"></h4>
                                 <h4 id="h4_titulo" class="card-title">
+                                    
+
                                 </h4>
+
                             </div>
                             <div id="lista" class="lista">
                             </div>
@@ -220,7 +223,8 @@
                     <div class="escrita-metrica">
                         <h2 style="margin: 0; color: yellow;">ALERTA CHAMADOS</h2>
                     </div>
-                    <p style="font-size: 18px; margin: 0; padding-top: 20px; color:#fff;">Perigo! Muitos chamados neste Horário</p>
+                    <p style="font-size: 18px; margin: 0; padding-top: 20px; color:#fff;">Perigo! Muitos chamados neste
+                        Horário</p>
                     <br>
                     <div class="perfil" style="color: #ffffff; font-size: 6px; padding-bottom: 10px; margin: 0;">
                         <h1 id="closeMUAlertaChamados" style="cursor: pointer; margin: 0;">Fechar</h1>
@@ -241,7 +245,8 @@
                     <div class="escrita-metrica">
                         <h2 style="margin: 0; color: yellow;">ALERTA COMPONENTES</h2>
                     </div>
-                    <p style="font-size: 18px; margin: 0; padding-top: 20px; color:#fff;">Perigo! Componente apresenta muitos chamados</p>
+                    <p style="font-size: 18px; margin: 0; padding-top: 20px; color:#fff;">Perigo! Componente apresenta
+                        muitos chamados</p>
                     <br>
                     <div class="perfil" style="color: #ffffff; font-size: 6px; padding-bottom: 10px; margin: 0;">
                         <h1 id="closeMUAlertaComponentes" style="cursor: pointer; margin: 0;">Fechar</h1>
@@ -262,7 +267,8 @@
                     <div class="escrita-metrica">
                         <h2 style="margin: 0; color: red;">CRíTICO CHAMADOS</h2>
                     </div>
-                    <p style="font-size: 18px; margin: 0; padding-top: 20px; color:#fff;">Crítico! Chamados acima do limite esperado neste Horário</p>
+                    <p style="font-size: 18px; margin: 0; padding-top: 20px; color:#fff;">Crítico! Chamados acima do
+                        limite esperado neste Horário</p>
                     <br>
                     <div class="perfil" style="color: #ffffff; font-size: 6px; padding-bottom: 10px; margin: 0;">
                         <h1 id="closeMUCriticoChamados" style="cursor: pointer; margin: 0;">Fechar</h1>
@@ -283,7 +289,8 @@
                     <div class="escrita-metrica">
                         <h2 style="margin: 0; color: red;">CRÍTICO COMPONENTES</h2>
                     </div>
-                    <p style="font-size: 18px; margin: 0; padding-top: 20px; color:#fff;">Crítico! Componente apresenta um número de chamados além do esperado</p>
+                    <p style="font-size: 18px; margin: 0; padding-top: 20px; color:#fff;">Crítico! Componente apresenta
+                        um número de chamados além do esperado</p>
                     <br>
                     <div class="perfil" style="color: #ffffff; font-size: 6px; padding-bottom: 10px; margin: 0;">
                         <h1 id="closeMUCriticoComponentes" style="cursor: pointer; margin: 0;">Fechar</h1>
@@ -544,6 +551,7 @@
     var vetor_NomeComp = []
     var vetor_HorarioCHC = []
     var vetor_Quantidade2 = []
+    var vetor_data = []
 
     function ObterHorarioPico(nomeEmp) {
         fetch(`/medidas/HorarioPico/${nomeEmp}`, { cache: 'no-store' }).then(function (response) {
@@ -556,6 +564,7 @@
                     resposta.forEach(element => {
                         vetor_HorarioPico.push(element.DataHora)
                         vetor_Quantidade.push(element.Quantidade)
+                        vetor_data.push(element.Dia)
                     });
                     console.log(vetor_Quantidade, vetor_HorarioPico)
                     // PlotarGrafico(resposta, nomeEmp);
@@ -580,6 +589,7 @@
                     resposta.forEach(element => {
                         vetor_NomeComp.push(element.Componente)
                         vetor_Quantidade2.push(element.Quantidade2)
+
                     });
 
                     console.log(vetor_NomeComp, vetor_Quantidade2)
@@ -597,10 +607,6 @@
 
     function PlotarGrafico(nomeEmp, vetor, idCanva, label) {
         var vetor_leituras = []
-
-        var corIdeal = "green"
-        var corAlerta = "yellow"
-        var corCritico = "red"
 
         console.log()
         for (i = 0; i < vetor_Quantidade.length; i++) {
@@ -634,8 +640,8 @@
         for (i = 0; i < vetor_leituras.length; i++) {
             var registro = vetor_leituras[i];
             labels.push(registro.DataHora);
-            dados.datasets[0].data.push(registro.Quantidade*17);
-            dados.datasets[0].backgroundColor.push(pegarCorMetrica(registro.Quantidade*17));
+            dados.datasets[0].data.push(registro.Quantidade);
+            dados.datasets[0].backgroundColor.push(pegarCorMetrica(registro.Quantidade));
         }
 
         console.log("Abobrinha ", dados.datasets[0].backgroundColor)
@@ -705,8 +711,8 @@
         for (i = 0; i < vetor_leituras.length; i++) {
             var registro = vetor_leituras[i];
             labels.push(registro.NomeComp);
-            dados.datasets[0].data.push(registro.Quantidade2 * 2);
-            dados.datasets[0].backgroundColor.push(pegarCorMetrica2(registro.Quantidade2 * 2));
+            dados.datasets[0].data.push(registro.Quantidade2*12);
+            dados.datasets[0].backgroundColor.push(pegarCorMetrica2(registro.Quantidade2*12));
         }
 
         console.log('----------------------------------------------')
@@ -727,7 +733,7 @@
                     yAxes: [{
                         ticks: {
                             suggestedMin: 0,
-                            suggestedMax: 0
+                            suggestedMax: 100
                         }
                     }]
                 }
@@ -777,7 +783,6 @@
             }
         };
 
-
         var ctx = document.getElementById(idCanva).getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'doughnut',
@@ -793,23 +798,29 @@
         console.log(vetor_leituras)
 
         // Inserindo valores recebidos em estrutura para plotar o gráfico
-        for (i = 0; i < vetor_leituras.length; i++) {
-            var registro = vetor_leituras[i];
-            labels.push(registro.NomeComp);
-            dados.datasets[0].data.push(registro.Quantidade2);
-        }
+
 
         console.log('----------------------------------------------')
         console.log('O gráfico será plotado com os respectivos valores:')
         console.log('Labels:')
-        console.log(labels)
+        console.log(vetor_NomeComp)
         console.log('Dados:')
-        console.log(dados.datasets)
+        console.log(data)
         console.log('----------------------------------------------')
 
         // Criando estrutura para plotar gráfico - config
 
     }
+
+    // Dia()
+    // function Dia() {
+
+    //     dia.innerHTML = vetor_data
+
+    //     console.log('TAMO AQUI NEGO')
+    //     console.log(vetor_data)
+
+    // }
 
     function atualizarGrafico(nomeEmp, idAlerta, dados, myChart) {
         fetch(`/medidas/tempo-real/${nomeEmp}/${idAlerta}`, { cache: 'no-store' }).then(function (response) {
@@ -873,11 +884,6 @@
 
 <!--6-->
 <script>
-    // function alertas(nome, componente, metrica, frase) {
-
-
-    // }
-
 
     const chamadosAlerta = document.getElementById('Metrica_Alerta_Chamados');
     const componentesAlerta = document.getElementById('Metrica_Alerta_Componentes');
@@ -889,18 +895,18 @@
     const componentesCriticoClose = document.getElementById('closeMUCriticoComponentes');
 
     chamadosAlertaClose.addEventListener('click', () => {
-        chamadosAlerta.classList.remove('show'); 
+        chamadosAlerta.classList.remove('show');
     });
     componentesAlertaClose.addEventListener('click', () => {
-        componentesAlerta.classList.remove('show'); 
+        componentesAlerta.classList.remove('show');
     });
     chamadosCriticoClose.addEventListener('click', () => {
-        chamadosCritico.classList.remove('show'); 
+        chamadosCritico.classList.remove('show');
     });
     componentesCriticoClose.addEventListener('click', () => {
-        componentesCritico.classList.remove('show'); 
+        componentesCritico.classList.remove('show');
     });
-    
+
     let verde = "#00e000"
 
     function pegarCorMetrica(metrica) {
@@ -909,7 +915,7 @@
 
         if (metrica >= 0 && metrica < 80) {
             cor = verde
-      
+
         }
 
         else if (metrica >= 80 && metrica < 100) {
@@ -947,4 +953,11 @@
     }
 
 
+</script>
+
+<script language=javascript type="text/javascript">
+    monName = new Array("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
+    now = new Date
+    var hoje = (+ now.getDate() + " - " + monName[now.getMonth()] + " - " + now.getFullYear() +"")
+    dia.innerHTML = hoje
 </script>

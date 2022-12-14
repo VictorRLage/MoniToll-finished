@@ -200,6 +200,29 @@
               </div>
             </div>
           </div>
+          
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">Métricas para Chamados</h4>
+              </div>
+              <div id="m_chamado" class="card-body">
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">Métricas para Componente</h4>
+              </div>
+              <div id="m_componente" class="card-body">
+
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
       <footer class="footer">
@@ -542,6 +565,41 @@
                   </button>
                   <span><b>Crítico entre ${parseInt(vetor_disco[1]) + 1}% e ${vetor_disco[2]}% </b></span>
                 </div>`
+
+                m_chamado.innerHTML = `                
+                <div class="alert alert-warning">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Quantidade ideal entre 0 e 80 </b></span>
+                </div>
+                <div class="alert alert-primary">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Atenção entre 81 e 100 </b></span>
+                </div>
+                <div class="alert alert-danger">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Crítico maior que 100 </b></span>
+                </div>`
+
+                m_componente.innerHTML = `                
+                <div class="alert alert-warning">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Quantidade ideal entre 0 e 50 </b></span>
+                </div>
+                <div class="alert alert-primary">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Atenção entre 51 e 80 </b></span>
+                </div>
+                <div class="alert alert-danger">
+                  <button type="button" aria-hidden="true" class="close">
+                  </button>
+                  <span><b>Crítico maior que 80 </b></span>
+                </div>`
+
 
   }
 </script>
