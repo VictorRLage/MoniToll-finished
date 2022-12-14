@@ -377,7 +377,7 @@ def VerificarUsoNaoConfiavel(idTorre, naoConfiaveisAtivos, dict_dados):
     for w in naoConfiaveisAtivos:
         name = w["name"]
         pid = w["pid"]
-        if w["usoCpu"] > 80 or w["usoRam"] > 0.20:
+        if w["usoCpu"] > 80 or w["usoRam"] > 80:
             naoConfiaveisAtivosReptindo.append(pid)
     contador = {}
     for element in naoConfiaveisAtivosReptindo:
@@ -386,16 +386,16 @@ def VerificarUsoNaoConfiavel(idTorre, naoConfiaveisAtivos, dict_dados):
         contador[element] += 1
     for l in contador:
         p = psutil.Process(l)
-
+        hugo = str(f'Processo-{p.name()}')
         if contador[l] > 0 and contador[l] < 3:
             alertas('Processo não confiavel aberto consumindo mais de 80% da RAM ou CPU',
-                25, p.name(),l, idTorre, 'Alerta')
+                hugo, p.name(),l, idTorre, 'Alerta')
         elif contador[l] >= 3 and contador[l] < 6:
             alertas('Processo não confiavel aberto consumindo mais de 80% da RAM ou CPU a 3 leituras',
-                25, p.name(),l, idTorre, 'Perigo')
+                hugo, p.name(),l, idTorre, 'Perigo')
         elif contador[l] >= 6:
             alertas('Processo não confiavel aberto consumindo mais de 80% da RAM ou CPU a 6 leituras, esse processo será encerrado em instantes, caso que mante-lo adicione ele a lista de confiaveis atraves da nossa dashboard',
-                25, p.name(),l, idTorre, 'Critico')
+                hugo, p.name(),l, idTorre, 'Critico')
     InserirDados(idTorre, dict_dados)
 
 
@@ -564,7 +564,7 @@ def VerificarToKill(idTorre):
     except pyodbc.Error as err:
         print("Something went wrong: {}".format(err))
         print("Não foi possivel verificar os processos ToKill da maquina.")
-
+    time.sleep(10)
 
 def MatarProcesso(pid, nome, idTorre):
     try:

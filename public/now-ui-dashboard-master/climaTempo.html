@@ -160,8 +160,8 @@
             </div>
             <div class="content">
                 <div class="row">
-                    <div class="carda">
-                        <div class="card_1">
+                    <div class="carda" >
+                        <div class="card_1" id="color_bg">
                             <div class="e">
                                 <p class="temp" id="p_temp">
 
@@ -184,7 +184,7 @@
                             <img src="./imagem/Frame (1).png" style="margin-top: 5px; height: 25px;width: 30px; margin-right: 15px;cursor: pointer;"  onclick="obterDadosClima()">
                         </div>
                         <div class="card_2" onclick="obterDadosSemana()">
-                            <div class="a">
+                            <div class="a" id="color_a">
                                 <p id="div_a"> Sabado</p>
                                 <span class="img_s">
                                     <img id="imgClima_a" src="">
@@ -198,7 +198,7 @@
                                     Chuvoso
                                 </p>
                             </div>
-                            <div class="b">
+                            <div class="b" id="color_b">
                                 <p id="div_b">Domingo</p>
                                 <span class="img_s">
                                     <img id="imgClima_b" src="">
@@ -212,7 +212,7 @@
                                     Chuvoso
                                 </p>
                             </div>
-                            <div class="c">
+                            <div class="c" id="color_c">
                                 <p id="div_c">Segunda-Feira</p>
                                 <span class="img_s">
                                     <img id="imgClima_c" src="">
@@ -226,7 +226,7 @@
                                     Chuvoso
                                 </p>
                             </div>
-                            <div class="d">
+                            <div class="d" id="color_d">
                                 <p id="div_d">Terça-Feira</p>
                                 <span class="img_s">
                                     <img id="imgClima_d" src="">
@@ -240,7 +240,7 @@
                                     Chuvoso
                                 </p>
                             </div>
-                            <div class="g">
+                            <div class="g" id="color_g">
                                 <p id="div_g">Quarta-Feira</p>
                                 <span class="img_s">
                                     <img id="imgClima_g" src="">
@@ -498,68 +498,104 @@
 
                     console.log("AAAAAAAAAA", resposta[0].diaSemana)
                     //dia semana
-                    div_a.innerHTML = resposta[0].diaSemana;
-                    div_b.innerHTML = resposta[1].diaSemana;
+                    div_g.innerHTML = resposta[0].diaSemana;
+                    div_d.innerHTML = resposta[1].diaSemana;
                     div_c.innerHTML = resposta[2].diaSemana;
-                    div_d.innerHTML = resposta[3].diaSemana;
-                    div_g.innerHTML = resposta[4].diaSemana;
+                    div_b.innerHTML = resposta[3].diaSemana;
+                    div_a.innerHTML = resposta[4].diaSemana;
+
+                    //metricas
+                    if (resposta[0].climaMax >= 30) {
+                       color_a.style.background ='#ff7272'
+                    }
+                    else if (resposta[0].climaMax >= 25 && resposta[0].climaMax <30) {
+                       color_a.style.background ='#ffd968'
+                    }
+
+                    if (resposta[1].climaMax >= 27) {
+                       color_b.style.background ='#ff7272'
+                    }
+                    else if (resposta[1].climaMax >= 25 && resposta[1].climaMax <27) {
+                       color_b.style.background ='#ffd968'
+                    }
+
+                    if (resposta[2].climaMax >= 27) {
+                       color_c.style.background ='#ff7272'
+                    }
+                    else if (resposta[2].climaMax >= 25 && resposta[2].climaMax <27) {
+                       color_c.style.background ='#ffd968'
+                    }
+
+                    if (resposta[3].climaMax >= 27) {
+                       color_d.style.background ='#ff7272'
+                    }
+                    else if (resposta[3].climaMax >= 25 && resposta[3].climaMax <27) {
+                       color_d.style.background ='#ffd968'
+                    }
+
+                    if (resposta[4].climaMax >= 27) {
+                       color_g.style.background ='#ff7272'
+                    }
+                    else if (resposta[4].climaMax >= 25 && resposta[4].climaMax <27) {
+                       color_g.style.background ='#ffd968'
+                    }
 
                     //temp max
-                    max_a.innerHTML = resposta[0].climaMax + ' máx.';
-                    max_b.innerHTML = resposta[1].climaMax + ' máx.';
+                    max_g.innerHTML = resposta[0].climaMax + ' máx.';
+                    max_d.innerHTML = resposta[1].climaMax + ' máx.';
                     max_c.innerHTML = resposta[2].climaMax + ' máx.';
-                    max_d.innerHTML = resposta[3].climaMax + ' máx.';
-                    max_g.innerHTML = resposta[4].climaMax + ' máx.';
+                    max_b.innerHTML = resposta[3].climaMax + ' máx.';
+                    max_a.innerHTML = resposta[4].climaMax + ' máx.';
 
                     //temp min
-                    min_a.innerHTML = resposta[0].climaMin + ' min.';
-                    min_b.innerHTML = resposta[1].climaMin + ' min.';
+                    min_g.innerHTML = resposta[0].climaMin + ' min.';
+                    min_d.innerHTML = resposta[1].climaMin + ' min.';
                     min_c.innerHTML = resposta[2].climaMin + ' min.';
-                    min_d.innerHTML = resposta[3].climaMin + ' min.';
-                    min_g.innerHTML = resposta[4].climaMin + ' min.';
+                    min_b.innerHTML = resposta[3].climaMin + ' min.';
+                    min_a.innerHTML = resposta[4].climaMin + ' min.';
 
-                    //texto div_a
-                    climatexto_a.innerHTML = resposta[0].climaTexto
+                    //texto div_g
+                    climatexto_g.innerHTML = resposta[0].climaTexto
 
                     if (resposta[0].climaTexto == "Chuvoso" || resposta[0].climaTexto == "Chuva") {
-                        imgClima_a.src = "./imagem/chuvoso.png";
+                        imgClima_g.src = "./imagem/chuvoso.png";
                     }
                     if (resposta[0].climaTexto == "Ensolarado" || resposta[0].climaTexto == "Predominantemente ensolarado") {
-                        imgClima_a.src = "./imagem/ensolarado.png";
+                        imgClima_g.src = "./imagem/ensolarado.png";
                     }
                     if (resposta[0].climaTexto == "Predominantemente nublado, com tempestades" || resposta[0].climaTexto == "Parcialmente nublado, com tempestades") {
-                        imgClima_a.src = "./imagem/parcialmente_temp.png";
+                        imgClima_g.src = "./imagem/parcialmente_temp.png";
                     }
                     if (resposta[0].climaTexto == "Parcialmente ensolarado") {
-                        imgClima_a.src = "./imagem/parcialmente_sol.png"
+                        imgClima_g.src = "./imagem/parcialmente_sol.png"
                     }
                     if (resposta[0].climaTexto == "Tempestade" || resposta[0].climaTexto == "Tempestades") {
-                        imgClima_a.src = "./imagem/tempestade.png"
+                        imgClima_g.src = "./imagem/tempestade.png"
                     }
-                    if(resposta[0].climaTexto == "Nublado" || resposta[0].climaTexto == "Nuvens esparsas") {
+                    if(resposta[0].climaTexto == "Nublado" || resposta[0].climaTexto == "Nuvens esparsas" || resposta[0].climaTexto == "Predominantemente nublado" || resposta[0].climaTexto == "Lúgubre") {
                         imgClima_g.src = "./imagem/nublado.png"
                     }
-                    //texto div_b
-                    climatexto_b.innerHTML = resposta[1].climaTexto
+                    //texto div_d
+                    climatexto_d.innerHTML = resposta[1].climaTexto
 
                     if (resposta[1].climaTexto == "Chuvoso" || resposta[1].climaTexto == "Chuva") {
-                        imgClima_b.src = "./imagem/chuvoso.png";
+                        imgClima_d.src = "./imagem/chuvoso.png";
                     }
                     if (resposta[1].climaTexto == "Ensolarado" || resposta[1].climaTexto == "Predominantemente ensolarado") {
-                        imgClima_b.src = "./imagem/ensolarado.png";
+                        imgClima_d.src = "./imagem/ensolarado.png";
                     }
                     if (resposta[1].climaTexto == "Predominantemente nublado, com tempestades" || resposta[1].climaTexto == "Parcialmente nublado, com tempestades") {
-                        imgClima_b.src = "./imagem/parcialmente_temp.png";
+                        imgClima_d.src = "./imagem/parcialmente_temp.png";
                     }
                     if (resposta[1].climaTexto == "Parcialmente ensolarado") {
-                        imgClima_b.src = "./imagem/parcialmente_sol.png"
+                        imgClima_d.src = "./imagem/parcialmente_sol.png"
                     }
                     if (resposta[1].climaTexto == "Tempestade" || resposta[1].climaTexto == "Tempestades") {
-                        imgClima_b.src = "./imagem/tempestade.png"
+                        imgClima_d.src = "./imagem/tempestade.png"
                     }
 
-                    if(resposta[1].climaTexto == "Nublado" || resposta[1].climaTexto == "Nuvens esparsas") {
-                        imgClima_g.src = "./imagem/nublado.png"
+                    if(resposta[1].climaTexto == "Nublado" || resposta[1].climaTexto == "Nuvens esparsas" || resposta[1].climaTexto == "Predominantemente nublado" || resposta[1].climaTexto == "Lúgubre") {
+                        imgClima_d.src = "./imagem/nublado.png"
                     }
                     //texto div_c
                     climatexto_c.innerHTML = resposta[2].climaTexto
@@ -579,51 +615,51 @@
                     if (resposta[2].climaTexto == "Tempestade" || resposta[2].climaTexto == "Tempestades") {
                         imgClima_c.src = "./imagem/tempestade.png"
                     }
-                    if(resposta[2].climaTexto == "Nublado" || resposta[2].climaTexto == "Nuvens esparsas") {
-                        imgClima_g.src = "./imagem/nublado.png"
+                    if(resposta[2].climaTexto == "Nublado" || resposta[2].climaTexto == "Nuvens esparsas" || resposta[2].climaTexto == "Predominantemente nublado" || resposta[2].climaTexto == "Lúgubre") {
+                        imgClima_c.src = "./imagem/nublado.png"
                     }
-                    //texto div_d
-                    climatexto_d.innerHTML = resposta[3].climaTexto
+                    //texto div_b
+                    climatexto_b.innerHTML = resposta[3].climaTexto
 
                     if (resposta[3].climaTexto == "Chuvoso" || resposta[3].climaTexto == "Chuva") {
-                        imgClima_d.src = "./imagem/chuvoso.png";
+                        imgClima_b.src = "./imagem/chuvoso.png";
                     }
                     if (resposta[3].climaTexto == "Ensolarado" || resposta[3].climaTexto == "Predominantemente ensolarado") {
-                        imgClima_d.src = "./imagem/ensolarado.png";
+                        imgClima_b.src = "./imagem/ensolarado.png";
                     }
                     if (resposta[3].climaTexto == "Predominantemente nublado, com tempestades" || resposta[3].climaTexto == "Parcialmente nublado, com tempestades") {
-                        imgClima_d.src = "./imagem/parcialmente_temp.png";
+                        imgClima_b.src = "./imagem/parcialmente_temp.png";
                     }
                     if (resposta[3].climaTexto == "Parcialmente ensolarado") {
-                        imgClima_d.src = "./imagem/parcialmente_sol.png"
+                        imgClima_b.src = "./imagem/parcialmente_sol.png"
                     }
                     if (resposta[3].climaTexto == "Tempestade" || resposta[3].climaTexto == "Tempestades") {
-                        imgClima_d.src = "./imagem/tempestade.png"
+                        imgClima_b.src = "./imagem/tempestade.png"
                     }
-                    if (resposta[3].climaTexto == "Nublado" || resposta[3].climaTexto == "Nuvens esparsas") {
-                        imgClima_d.src = "./imagem/nublado.png"
+                    if (resposta[3].climaTexto == "Nublado" || resposta[3].climaTexto == "Nuvens esparsas" || resposta[3].climaTexto == "Predominantemente nublado" || resposta[3].climaTexto == "Lúgubre") {
+                        imgClima_b.src = "./imagem/nublado.png"
                     }
 
                     //texto div_g
-                    climatexto_g.innerHTML = resposta[4].climaTexto
+                    climatexto_a.innerHTML = resposta[4].climaTexto
 
                     if (resposta[4].climaTexto == "Chuvoso" || resposta[4].climaTexto == "Chuva") {
-                        imgClima_g.src = "./imagem/chuvoso.png";
+                        imgClima_a.src = "./imagem/chuvoso.png";
                     }
                     if (resposta[4].climaTexto == "Ensolarado" || resposta[4].climaTexto == "Predominantemente ensolarado") {
-                        imgClima_g.src = "./imagem/ensolarado.png";
+                        imgClima_a.src = "./imagem/ensolarado.png";
                     }
                     if (resposta[4].climaTexto == "Predominantemente nublado, com tempestades" || resposta[4].climaTexto == "Parcialmente nublado, com tempestades") {
-                        imgClima_g.src = "./imagem/parcialmente_temp.png";
+                        imgClima_a.src = "./imagem/parcialmente_temp.png";
                     }
                     if (resposta[4].climaTexto == "Parcialmente ensolarado") {
-                        imgClima_g.src = "./imagem/parcialmente_sol.png"
+                        imgClima_a.src = "./imagem/parcialmente_sol.png"
                     }
                     if (resposta[4].climaTexto == "Tempestade" || resposta[4].climaTexto == "Tempestades") {
-                        imgClima_g.src = "./imagem/tempestade.png"
+                        imgClima_a.src = "./imagem/tempestade.png"
                     }
-                    if (resposta[4].climaTexto == "Nublado" || resposta[4].climaTexto == "Nuvens esparsas") {
-                        imgClima_g.src = "./imagem/nublado.png"
+                    if (resposta[4].climaTexto == "Nublado" || resposta[4].climaTexto == "Nuvens esparsas" || resposta[4].climaTexto == "Predominantemente nublado" || resposta[4].climaTexto == "Lúgubre") {
+                        imgClima_a.src = "./imagem/nublado.png"
                     }
 
                 })
@@ -657,21 +693,27 @@
 
                     if (resposta.textoClima == "Chuvoso" || resposta.textoClima == "Chuva") {
                         imgClima.src = "./imagem/chuvoso.png";
+                        color_bg.style.background = 'linear-gradient(90deg, rgba(255,255,255,1) 30%, rgba(237,233,226,1) 42%, rgba(70,126,133,1) 69%)'
                     }
-                    if (resposta.textoClima == "Ensolarado" || resposta.climaTexto == "Predominantemente ensolarado") {
+                    if (resposta.textoClima == "Ensolarado" || resposta.textoClima == "Predominantemente ensolarado") {
                         imgClima.src = "./imagem/ensolarado.png";
+                        color_bg.style.background = 'linear-gradient(90deg, rgba(255,255,255,1) 30%, rgba(255,250,237,1) 42%, rgba(255,193,7,1) 69%)'
                     }
                     if (resposta.textoClima == "Predominantemente nublado, com tempestades" || resposta.textoClima == "Tempestades") {
                         imgClima.src = "./imagem/chuvoso.png";
+                        color_bg.style.background = 'linear-gradient(90deg, rgba(255,255,255,1) 30%, rgba(237,233,226,1) 42%, rgba(226,226,226,1) 69%)'
                     }
                     if (resposta.textoClima == "Parcialmente ensolarado") {
                         imgClima.src = "./imagem/parcialmente_sol.png"
+                        color_bg.style.background = 'linear-gradient(90deg, rgba(255,255,255,1) 30%, rgba(255,255,255,1) 42%, rgba(245,206,137,1) 69%)'
                     }
                     if (resposta.textoClima == "Tempestade" || resposta.textoClima == "Tempestades") {
                         imgClima.src = "./imagem/tempestade.png"
+                        color_bg.style.background = 'linear-gradient(90deg, rgba(255,255,255,1) 30%, rgba(237,233,226,1) 42%, rgba(86,106,108,1) 69%)'
                     }
-                    if(resposta.climaTexto == "Nublado" || resposta.climaTexto == "Nuvens esparsas") {
+                    if(resposta.textoClima == "Nublado" || resposta.textoClima == "Nuvens esparsas" || resposta.textoClima == "Predominantemente nublado" || resposta.textoClima == "Lúgubre") {
                         imgClima_g.src = "./imagem/nublado.png"
+                        color_bg.style = 'linear-gradient(90deg, rgba(255,255,255,1) 30%, rgba(255,255,255,1) 42%, rgba(222,222,222,1) 69%)'
                     }
                     // plotarGrafico(resposta, fkLugar);
                 });

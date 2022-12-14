@@ -112,11 +112,11 @@ function buscarProc(fkTorre) {
     return database.executar(instrucaoSql);
 }
 
-function buscarMetrica(fkEmpresa, nmrComponentes) {
+function buscarMetrica(fkEmpresa, nmrComponente) {
 
     instrucaoSql = ''
 
-    instrucaoSql = `select * from  luigi_Metricas where fkComponente = ${nmrComponentes} and fkEmpresa = ${fkEmpresa}`;
+    instrucaoSql = `select * from  luigi_Metricas where fkComponente = ${nmrComponente} and fkEmpresa = ${fkEmpresa}`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

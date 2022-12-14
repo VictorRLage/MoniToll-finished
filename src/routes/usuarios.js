@@ -96,7 +96,9 @@ router.post("/ObterCriticidadeTorre", function (req, res) {
     usuarioController.ObterCriticidadeTorre(req, res);
 });
 
-
+router.post("/buscarPalavras", function (req, res) {
+    usuarioController.buscarPalavras(req, res);
+});
 
 
 module.exports = router;

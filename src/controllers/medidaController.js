@@ -180,16 +180,16 @@ function buscarProc(req, res) {
 function buscarMetrica(req, res) {
 
     var fkEmpresa = req.params.fkEmpresa;
-    var nmrComponentes = req.params.nmrComponentes;
+    var nmrComponente = req.params.nmrComponente;
 
     if (fkEmpresa.length < 1){
         res.status(300).send("Sem fkEmpresa!")
     }
-    if (nmrComponentes.length < 1){
+    if (nmrComponente.length < 1){
         res.status(300).send("Sem nmrComponentes!")
     }
 
-    medidaModel.buscarMetrica(fkEmpresa, nmrComponentes).then(function (resultado) {
+    medidaModel.buscarMetrica(fkEmpresa, nmrComponente).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {

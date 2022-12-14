@@ -21,9 +21,13 @@
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="assets/demo/demo.css" rel="stylesheet" />
 
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
+
+
 </head>
 
-<body onload="ObterDados(sessionStorage.ID_TORRE), ObterAlertasTorre(), ObterAlertasEmpresa(), ObterCriticidadeTorre()"
+<body onload="ObterDados(sessionStorage.ID_TORRE), ObterAlertasTorre(), ObterAlertasEmpresa(), ObterCriticidadeTorre(), gerarWordcloud()"
   class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="orange">
@@ -179,7 +183,11 @@
                     style="width: 100%; display: flex; height: 500px;" id="myChartCRITICIDADE"></canvas>
                 </div>
               </div>
-
+              
+              <div id="CardGrafico2_Wordcloud" class="CardGrafico2"></div>
+              
+                
+            
             </div>
 
           </div>
@@ -237,6 +245,8 @@
       <button class="modal-close" id="close"><i class="now-ui-icons ui-1_simple-remove"></i></button>
     </div>
   </div>
+
+  
 
   <!-- modal aviso -->
   <div class="modal-container-aviso" id="modal_container_aviso">
@@ -736,64 +746,7 @@
 console.log(vetor)
     if (idCanva == 'myChartEMPRESA' || idCanva == 'myChartTOTAL') {
 
-      // console.log('iniciando plotagem do gráfico...');
-
-      // // Criando estrutura para plotar gráfico - labels
-
-      // // Criando estrutura para plotar gráfico - dados
-      // const data = {
-      //   labels: label,
-      //   datasets: [
-      //     {
-      //       label: 'Dataset 1',
-      //       data: vetor,
-      //       backgroundColor: ['yellow', 'red', 'green', 'blue', 'purple', 'orange'],
-      //     }
-      //   ]
-      // };
-
-      // console.log('----------------------------------------------')
-      // console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-
-
-      // // Inserindo valores recebidos em estrutura para plotar o gráfico
-
-
-      // console.log('----------------------------------------------')
-      // console.log('O gráfico será plotado com os respectivos valores:')
-      // console.log('Labels:')
-
-      // console.log('Dados:')
-      // console.log(data)
-      // console.log('----------------------------------------------')
-
-
-      // const config = {
-      //   type: 'pie',
-      //   data: data,
-      //   options: {
-      //     responsive: true,
-      //     plugins: {
-      //       legend: {
-      //         position: 'top',
-      //       },
-      //       title: {
-      //         display: true,
-
-      //       }
-      //     }
-      //   },
-      // };
-
-
-
-
-
-      // // Adicionando gráfico criado em div na tela
-      // let myChart = new Chart(
-      //   document.getElementById(idCanva),
-      //   config
-      // );
+      
       var data = [{
     data: vetor,
     backgroundColor: [
@@ -875,10 +828,89 @@ console.log(vetor)
 
 
 </script>
+
+
+
+<script>
+  function gerarWordcloud() {
+    let nomeEmp = sessionStorage.NOME_EMPRESA
+    let vetor_palavras = []
+    let vetor_quantidade = []
+    let vetor_data = []
+    fetch("/usuarios/buscarPalavras", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeEmpServer: nomeEmp
+      })
+    }).then(function (resposta) {
+
+      console.log("resposta: ", resposta);
+
+      if (resposta.ok) {
+        console.log("entrei aqui")
+                resposta.json().then(function (resposta) {
+
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+
+                    resposta.forEach(element => {
+                        vetor_palavras.push(element.x)
+                        vetor_quantidade.push(element.value)
+                        vetor_data.push(element)
+                        console.log(vetor_data)
+                    })
+
+                  });
+
+                  wordcloud(vetor_data)
+
+      } else {
+        console.log("Falha ao pegar valores do banco")
+      }
+    }).catch(function (resposta) {
+      console.log(`#ERRO: ${resposta}`);
+    });
+
+    return false;
+
+
+
+  }
+    
+function wordcloud(data) {
+  anychart.onDocumentReady(function() {
+    
+  var dataCloud = data;
+
+ // create a tag (word) cloud chart
+  var chart = anychart.tagCloud(dataCloud);
+
+   // set a chart title
+  chart.title('Quantidade de Alertas Por Criticidade de Cada Componente de Todos os Servidores')
+  // set an array of angles at which the words will be laid out
+  chart.angles([0])
+  // enable a color range
+  // chart.colorRange(true);
+  // set the color range length
+  // chart.colorRange().length('80%');
+
+  // display the word cloud chart
+
+  chart.container("CardGrafico2_Wordcloud");
+  chart.draw();
+});
+  }
+</script>
 <script>
   function Logout() {
     sessionStorage.clear();
   }
+
 </script>
 <script>
 

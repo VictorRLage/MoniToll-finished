@@ -36,7 +36,7 @@ function tempSemana(fkTorre){
 
   if (process.env.AMBIENTE_PROCESSO == "producao") {
       instrucaoSql = 
-      `select top 5 *  from [dbo].[TempSemana] where fkTorre = ${fkTorre} order by idTempSemana asc;`;
+      `select top 5 *  from [dbo].[TempSemana] where fkTorre = ${fkTorre} order by idTempSemana desc;`;
   } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
           instrucaoSql = 
           `select * from tempSemana order by fkLocal limit 4;`
